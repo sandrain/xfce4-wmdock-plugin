@@ -1,8 +1,11 @@
-/* $Id: wmdock.c,v 1.1 2007/07/29 18:35:00 ellguth Exp ellguth $
+/* $Id: wmdock.c,v 1.2 2007/08/29 19:39:46 ellguth Exp ellguth $
  *
  * wmdock xfce4 plugin by Andre Ellguth
  *
  * $Log: wmdock.c,v $
+ * Revision 1.2  2007/08/29 19:39:46  ellguth
+ * No X applications with size greater than  64 pixels will be swallowed.
+ *
  * Revision 1.1  2007/07/29 18:35:00  ellguth
  * Initial revision
  *
@@ -117,7 +120,14 @@ static void wmdock_window_open(WnckScreen * s, WnckWindow * w)
 		wnck_window_get_geometry(w,&xp,&yp,&wi,&he);
   		/* Debug
   		fprintf(fp, "New dockapp %s with xid: %u pid: %u arrived\n", wnck_window_get_name(w), wnck_window_get_xid(w), wnck_window_get_pid(w));
-  		*/	
+  		*/
+  		
+  		if(wi > DEFAULT_DOCKAPP_WIDTH || he > DEFAULT_DOCKAPP_HEIGHT) {
+  			/* It seems to be no dockapp, because the width or the height of the 
+  			 * window a greater than 64 pixels. */
+  			XFree(h);
+  			return;	
+  		}
  
 		dapp = g_new0(DockappNode, 1);
 
@@ -239,7 +249,7 @@ static void wmdock_read_rc_file (XfcePanelPlugin *plugin)
  				gtk_widget_show_all (gtkDlg);
 			}
 			/* Sleep for n microseconds to startup dockapps in the right order. */ 
-			g_usleep(150000);
+			g_usleep(200000);
 
 			g_free(cmds[i]);
 		}

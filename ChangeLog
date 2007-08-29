@@ -1,0 +1,2 @@
+2007-08-29	Andre Ellguth <ellguth at ibh dot de>
+	* No X applications with size greater than 64 pixels will be swallowed.
