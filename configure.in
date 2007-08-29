@@ -1,0 +1,48 @@
+dnl configure.in.in
+dnl
+dnl xfce4-wmdock-plugin - WMdock plugin is a compatibility layer for Window Maker dockapps
+dnl
+dnl
+
+dnl version info
+m4_define([wmdock_version], [0.1.0])
+
+dnl init autoconf
+AC_INIT([xfce4-wmdock-plugin], [wmdock_version])
+AC_PREREQ([2.50])
+
+dnl init automake
+WMDOCK_VERSION=wmdock_version
+AM_INIT_AUTOMAKE([xfce4-wmdock-plugin], [$WMDOCK_VERSION])
+AM_CONFIG_HEADER([config.h])
+AM_MAINTAINER_MODE
+
+dnl check for basic programs
+AC_PROG_CC
+AC_PROG_INSTALL
+AC_PROG_LIBTOOL
+
+dnl check for standard header files
+AC_HEADER_STDC
+AC_CHECK_HEADERS([math.h])
+
+dnl check for math library
+AC_CHECK_LIB([m], [sin])
+
+dnl check for required packages
+XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.6.0])
+XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.6.0])
+XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.90.2])
+XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.3.90.2])
+XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.99.1])
+XDT_CHECK_PACKAGE([LIBWNCK], [libwnck-1.0], [2.8.1])
+
+dnl check for debugging support
+XDT_FEATURE_DEBUG()
+
+AC_OUTPUT([
+Makefile
+panel-plugin/Makefile
+icons/Makefile
+icons/48x48/Makefile
+])

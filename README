@@ -1,0 +1,4 @@
+WMdock plugin is a compatibility layer for Window Maker dockapps for XFCE.
+
+To add a dockapp start it e.g. in xterm.
+At time best practice is, you set your panel size greather than 64 pixels.
