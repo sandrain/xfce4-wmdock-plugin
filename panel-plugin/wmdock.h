@@ -26,6 +26,8 @@ typedef struct {
 	/* Plugin specific definitions */
 	GtkWidget *align;
 	GtkWidget *box;
+	
+	gboolean propDispTile;
 
 	GSList *dapps;
 } WmdockPlugin;

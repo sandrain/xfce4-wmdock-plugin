@@ -4,6 +4,7 @@ plugin_PROGRAMS = xfce4-wmdock-plugin
 xfce4_wmdock_plugin_SOURCES =						\
 	wmdock.h							\
 	xfce4-wmdock-plugin.xpm						\
+	tile.xpm							\
 	wmdock.c
 
 xfce4_wmdock_plugin_CFLAGS =						\

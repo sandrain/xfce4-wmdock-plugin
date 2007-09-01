@@ -1,2 +1,8 @@
 2007-08-29	Andre Ellguth <ellguth at ibh dot de>
 	* No X applications with size greater than 64 pixels will be swallowed.
+
+2007-09-01	Andre Ellguth <ellguth at ibh dot de>
+	* Plugin don't crash anymore if you change the orientation of the panel
+	* Workaround added for wmnet
+	* Background tile will be shown
+	* Dockapps now centered in panel
