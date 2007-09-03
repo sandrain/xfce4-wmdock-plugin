@@ -6,3 +6,6 @@
 	* Workaround added for wmnet
 	* Background tile will be shown
 	* Dockapps now centered in panel
+2007-09-03	Andre Ellguth <ellguth at ibh dot de>
+	* Removed the use of function wnck_window_has_name()
+	* Replace function XKillClient back to XDestroyWindow

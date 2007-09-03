@@ -1,8 +1,12 @@
-/* $Id: wmdock.c,v 1.3 2007/09/01 15:40:24 ellguth Exp ellguth $
+/* $Id: wmdock.c,v 1.4 2007/09/03 18:36:52 ellguth Exp ellguth $
  *
  * wmdock xfce4 plugin by Andre Ellguth
  *
  * $Log: wmdock.c,v $
+ * Revision 1.4  2007/09/03 18:36:52  ellguth
+ * Removed the use of function wnck_window_has_name().
+ * Replace function XKillClient back to XDestroyWindow.
+ *
  * Revision 1.3  2007/09/01 15:40:24  ellguth
  * Plugin don't crash anymore if you change the orientation of the panel.
  * Workaround added for wmnet.
@@ -60,6 +64,7 @@ gboolean has_dockapp_hint(WnckWindow * w)
 	unsigned long int naft;
 	gboolean ret=FALSE;
 	unsigned char *dat;
+	char *wname = NULL;
 	
 	gdk_error_trap_push();
 	if (XGetWindowProperty(
@@ -74,8 +79,9 @@ gboolean has_dockapp_hint(WnckWindow * w)
 	XSync(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),False);
 	
 	/* Workaround for the dockapp wmnet */
-	if(wnck_window_has_name(w)) {
-		if(!g_strcasecmp(wnck_window_get_name(w), "wmnet")) ret = TRUE;
+	wname = (char *) wnck_window_get_name(w);
+	if(wname) {
+		if(!g_strcasecmp(wname, "wmnet")) ret = TRUE;
 	}
 	
 	gdk_error_trap_pop();
@@ -85,8 +91,10 @@ gboolean has_dockapp_hint(WnckWindow * w)
 
 void wmdock_destroy_dockapp(DockappNode *dapp)
 {
-	//XDestroyWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);XDestroyWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);
-	XKillClient(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);
+	XDestroyWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);XDestroyWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);
+	/*
+		XKillClient(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);
+	*/
 }
 
 
