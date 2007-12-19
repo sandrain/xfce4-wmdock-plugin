@@ -1,3 +1,9 @@
+2007-12-19	Andre Ellguth <ellguth at ibh dot de>
+	* The "Display tile in the background" switchs works now correctly
+	* Added missing xfce header files in wmdock.c for hvbox and xfce-arrow
+	* The wmdock startup icon will now be scaled
+	* Code cleanup
+
 2007-08-29	Andre Ellguth <ellguth at ibh dot de>
 	* No X applications with size greater than 64 pixels will be swallowed.
 

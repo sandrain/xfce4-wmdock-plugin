@@ -12,7 +12,6 @@
 typedef struct _dockapp {
 	WnckWindow *w;
 	GtkSocket *s;
-	GtkWidget *frame;
 	GdkNativeWindow i;
 	gchar *name;
 	gchar *cmd;
