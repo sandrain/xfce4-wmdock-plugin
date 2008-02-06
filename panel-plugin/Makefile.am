@@ -31,4 +31,3 @@ EXTRA_DIST =								\
 
 CLEANFILES =								\
 	$(desktop_DATA)
-

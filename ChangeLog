@@ -1,3 +1,7 @@
+2008-02-06	Andre Ellguth <ellguth at ibh dot de>
+	* Improvment of the dockapp detection
+	* The dockapps will be now started cleanly ordered
+
 2007-12-19	Andre Ellguth <ellguth at ibh dot de>
 	* The "Display tile in the background" switchs works now correctly
 	* Added missing xfce header files in wmdock.c for hvbox and xfce-arrow

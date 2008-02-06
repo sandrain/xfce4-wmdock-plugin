@@ -5,7 +5,7 @@ dnl
 dnl
 
 dnl version info
-m4_define([wmdock_version], [0.1.8])
+m4_define([wmdock_version], [0.1.9])
 
 dnl init autoconf
 AC_INIT([xfce4-wmdock-plugin], [wmdock_version])

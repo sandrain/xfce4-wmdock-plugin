@@ -1,5 +1,3 @@
-
-
 #ifndef __WMDOCK_H__
 #define __WMDOCK_H__
 
@@ -10,25 +8,25 @@
 #include <libwnck/libwnck.h>
 
 typedef struct _dockapp {
-	WnckWindow *w;
-	GtkSocket *s;
-	GdkNativeWindow i;
-	gchar *name;
-	gchar *cmd;
+ WnckWindow *w;
+ GtkSocket *s;
+ GdkNativeWindow i;
+ gchar *name;
+ gchar *cmd;
 } DockappNode;
 
 typedef struct {
-	XfcePanelPlugin *plugin;
+ XfcePanelPlugin *plugin;
 
-	GtkWidget *ebox;
+ GtkWidget *ebox;
 	
-	/* Plugin specific definitions */
-	GtkWidget *align;
-	GtkWidget *box;
+ /* Plugin specific definitions */
+ GtkWidget *align;
+ GtkWidget *box;
 	
-	gboolean propDispTile;
+ gboolean propDispTile;
 
-	GSList *dapps;
+ GList *dapps;
 } WmdockPlugin;
 
 #endif /* __WMDOCK_H__ */
