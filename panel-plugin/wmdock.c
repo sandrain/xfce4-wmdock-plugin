@@ -1,8 +1,13 @@
-/* $Id: wmdock.c,v 1.6 2008/02/06 20:44:42 ellguth Exp ellguth $
+/* $Id: wmdock.c,v 1.7 2008/02/10 20:49:39 ellguth Exp ellguth $
  *
  * wmdock xfce4 plugin by Andre Ellguth
  *
  * $Log: wmdock.c,v $
+ * Revision 1.7  2008/02/10 20:49:39  ellguth
+ * Fallback command line detection of the dockapp via pid integrated.
+ * Dockapp preview in the configure dialog.
+ * Code cleanup.
+ *
  * Revision 1.6  2008/02/06 20:44:42  ellguth
  * Improvment of the dockapp detection.
  * The dockapps will be now started cleanly ordered.
@@ -63,7 +68,10 @@
 
 Atom         XfceDockAppAtom;
 GtkWidget    *wmdockIcon = NULL;
-GdkBitmap    *gdkBmTile = NULL;
+GtkWidget    *propDialog = NULL;
+GtkWidget    *propDockappChooser = NULL;
+GtkWidget    *propDockappCommand = NULL;
+GtkWidget    *propDockappImage = NULL;
 GdkPixmap    *gdkPmTile = NULL;
 GdkPixbuf    *gdkPbIcon = NULL;
 WmdockPlugin *wmdock = NULL;
@@ -122,13 +130,66 @@ GdkPixbuf *get_icon_from_xpm_scaled(const char **xpmData, gint width, gint heigh
 }
 
 
+void wmdock_fill_cmbx(DockappNode *dapp, GtkWidget *gtkComboBox)
+{
+
+ if(gtkComboBox) {
+#ifdef DEBUG
+  fprintf(fp, "wmdock: %s append to list\n", dapp->name);
+  fflush(fp);
+#endif
+  gtk_combo_box_append_text (GTK_COMBO_BOX(gtkComboBox), dapp->name); 
+ }
+}
+
+
+void wmdock_refresh_properties_dialog()
+{
+ gint pos = 0;
+ 
+ if(!propDialog || !propDockappChooser || !propDockappCommand) return;
+
+ /* Cleanup the old list */
+ while((pos = gtk_combo_box_get_active (GTK_COMBO_BOX(propDockappChooser))) 
+       != -1) {
+  gtk_combo_box_remove_text(GTK_COMBO_BOX(propDockappChooser), pos);
+  gtk_combo_box_set_active (GTK_COMBO_BOX(propDockappChooser), 0);
+ }
+
+ gtk_combo_box_popdown (GTK_COMBO_BOX(propDockappChooser));
+ if(g_list_length(wmdock->dapps) > 0) {
+  gtk_widget_set_sensitive (propDockappCommand, TRUE);
+
+  g_list_foreach(wmdock->dapps, (GFunc) wmdock_fill_cmbx, propDockappChooser);  
+
+  
+ } else {
+  gtk_combo_box_append_text (GTK_COMBO_BOX(propDockappChooser), 
+			     "No dockapp are running!");
+
+  gtk_widget_set_state(propDockappCommand, GTK_STATE_INSENSITIVE);
+
+  gdkPbIcon = gdk_pixbuf_new_from_xpm_data((const char**) 
+					   xfce4_wmdock_plugin_xpm);
+
+  gtk_image_set_from_pixbuf (GTK_IMAGE(propDockappImage), gdkPbIcon);
+  
+  g_object_unref (G_OBJECT (gdkPbIcon));
+ }
+
+ gtk_combo_box_set_active(GTK_COMBO_BOX(propDockappChooser), 0);
+
+ gtk_widget_show (propDockappImage);
+ gtk_widget_show (propDockappChooser);
+ gtk_widget_show (propDockappCommand);
+}
+
+
 void wmdock_destroy_dockapp(DockappNode *dapp)
 {
  XDestroyWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);
- /*
-   XKillClient(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);
- */
 }
+
 
 void wmdock_redraw_dockapp(DockappNode *dapp)
 {
@@ -156,7 +217,7 @@ void wmdock_redraw_dockapp(DockappNode *dapp)
 }
 
 
-DockappNode *wmdock_find_startup_dockapp(gchar *compCmd)
+DockappNode *wmdock_find_startup_dockapp(const gchar *compCmd)
 {
  GList *dapps;
  DockappNode *dapp = NULL;
@@ -188,13 +249,15 @@ DockappNode *wmdock_find_startup_dockapp(gchar *compCmd)
 void wmdock_dapp_closed(GtkSocket *socket, DockappNode *dapp)
 {
 #ifdef DEBUG 	
- fprintf(fp, "wmdock: closed window signal ! (xid: %u)\n", dapp->i);
+ fprintf(fp, "wmdock: closed window signal ! (window: %s)\n", dapp->name);
  fflush(fp);
 #endif
 
  wmdock->dapps = g_list_remove_all(wmdock->dapps, dapp);
- gtk_widget_destroy(GTK_WIDGET(dapp->s));
 
+ gtk_widget_destroy(GTK_WIDGET(dapp->s));
+ g_free(dapp->name);
+ g_free(dapp->cmd);
  g_free(dapp);
 
  if(g_list_length (wmdock->dapps) == 0) {
@@ -208,14 +271,20 @@ void wmdock_dapp_closed(GtkSocket *socket, DockappNode *dapp)
   gtk_box_pack_start(GTK_BOX(wmdock->box), GTK_WIDGET(wmdockIcon), FALSE, FALSE, 0);
   gtk_widget_show(GTK_WIDGET(wmdockIcon)); 	
  }
+
+ wmdock_refresh_properties_dialog();
 }
 
 
 gchar *wmdock_get_dockapp_cmd(WnckWindow *w)
 {
  gchar *cmd = NULL;
+ int wpid = 0;
  int argc = 0;
+ int fcnt, i;
  char **argv;
+ FILE *procfp = NULL;
+ char buf[BUF_MAX];
 
  XGetCommand(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), 
 	     wnck_window_get_xid(w), &argv, &argc);
@@ -225,6 +294,35 @@ gchar *wmdock_get_dockapp_cmd(WnckWindow *w)
   cmd = g_strjoinv (" ", argv);
   XFreeStringList(argv);
  } else {
+  /* Try to get the command line from the proc fs. */
+  wpid = wnck_window_get_pid (w);
+
+  if(wpid) {
+   sprintf(buf, "/proc/%d/cmdline", wpid);
+
+   procfp = fopen(buf, "r");
+   
+   if(procfp) {
+    fcnt = read(fileno(procfp), buf, BUF_MAX);
+
+    cmd = g_malloc(fcnt+2);
+    if(!cmd) return (NULL);
+
+    for(i = 0; i < fcnt; i++) {
+     if(buf[i] == 0)
+      *(cmd+i) = ' ';
+     else
+      *(cmd+i) = buf[i];
+    }
+    *(cmd+(i-1)) = 0;
+
+    fclose(procfp);
+   }
+  }
+ }
+ 
+ if(!cmd) {
+  /* If nothing helps fallback to the window name. */
   cmd = g_strdup(wnck_window_get_name(w));
  }
 
@@ -251,9 +349,9 @@ static void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 
  if(!h) return;
 	
- /* || has_dockapp_hint(w) */				
  if(h->initial_state == WithdrawnState || 
-    h->flags == (WindowGroupHint | StateHint | IconWindowHint)) {
+    h->flags == (WindowGroupHint | StateHint | IconWindowHint)
+    || has_dockapp_hint(w)) {
 
 #ifdef DEBUG	
   fprintf(fp, "wmdock: new wmapp open\n");
@@ -269,17 +367,17 @@ static void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 #endif
 
   cmd = wmdock_get_dockapp_cmd(w);
+
+  if(!cmd) {
+   XFree(h);
+   return;
+  }
+
 #ifdef DEBUG
   fprintf(fp, "wmdock: found cmd %s for window %s\n",
 	  cmd, wnck_window_get_name(w));
   fflush(fp);
 #endif
-
-  if(!cmd) {
-   g_free(cmd);
-   XFree(h);
-   return;
-  }
 
   if(rcCmds && (dapp = wmdock_find_startup_dockapp(cmd)))
    rcDapp = TRUE;
@@ -362,6 +460,8 @@ static void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 
   if(rcDapp == FALSE)
    wmdock->dapps=g_list_append(wmdock->dapps, dapp);
+
+  wmdock_refresh_properties_dialog();
  }
 
  XFree(h);
@@ -403,7 +503,7 @@ static gboolean wmdock_size_changed (XfcePanelPlugin *plugin, int size)
 }
 
 
-gboolean wmdock_startup_dockapp(gchar *cmd)
+gboolean wmdock_startup_dockapp(const gchar *cmd)
 {
  gboolean r;
  GError **err = NULL;
@@ -528,34 +628,17 @@ static void wmdock_write_rc_file (XfcePanelPlugin *plugin)
 static void wmdock_free_data(XfcePanelPlugin *plugin)
 {
  g_list_foreach(wmdock->dapps, (GFunc)wmdock_destroy_dockapp, NULL);
- gtk_widget_destroy(GTK_WIDGET(wmdock->box));	
+
+ gtk_widget_destroy(GTK_WIDGET(wmdockIcon));
+ gtk_widget_destroy(GTK_WIDGET(wmdock->box));
+ gtk_widget_destroy(GTK_WIDGET(wmdock->align));
+ gtk_widget_destroy(GTK_WIDGET(wmdock->ebox));
  g_list_free(wmdock->dapps);
  g_free(wmdock);
 	
 #ifdef DEBUG
  fclose(fp);
 #endif
-}
-
-
-void wmdock_fill_cmbx(DockappNode *dapp, GtkWidget *gtkComboBox)
-{
-
- if(gtkComboBox) {
-#ifdef DEBUG
-  fprintf(fp, "wmdock: %s append to list\n", dapp->name);
-  fflush(fp);
-#endif
-  gtk_combo_box_append_text (GTK_COMBO_BOX(gtkComboBox), dapp->name); 
- }
-}
-
-
-void wmdock_rebuild_fromlist ()
-{
- if(g_list_length(wmdock->dapps) > 0) {
-
- }
 }
 
 
@@ -634,6 +717,7 @@ void wmdock_properties_savecmd (GtkWidget *gtkTxtCmd, GdkEventKey *event, GtkWid
 void wmdock_properties_changed (GtkWidget *gtkComboBox, GtkWidget *gtkTxtCmd)
 {
  DockappNode *dapp = NULL;
+ GdkPixmap *pm = NULL;
 
  dapp = (DockappNode *) g_list_nth_data(wmdock->dapps, gtk_combo_box_get_active(GTK_COMBO_BOX(gtkComboBox)));
  if(dapp) {
@@ -643,32 +727,60 @@ void wmdock_properties_changed (GtkWidget *gtkComboBox, GtkWidget *gtkTxtCmd)
 #endif
 	
   gtk_entry_set_text(GTK_ENTRY(gtkTxtCmd), dapp->cmd);
- } 
+
+  if(propDockappImage) {
+  
+   pm = gdk_pixmap_foreign_new (dapp->i);
+
+   if(pm) {
+    gtk_image_set_from_pixmap (GTK_IMAGE(propDockappImage), pm, NULL);
+
+    gtk_widget_show(propDockappImage);
+
+    g_object_unref (G_OBJECT(pm));
+   }
+
+   else {
+    gtk_image_set_from_pixmap (GTK_IMAGE(propDockappImage), gdkPmTile, NULL);
+
+    gtk_widget_show(propDockappImage);
+   }
+  }
+ }
 }
 
 
 static void wmdock_properties_dialog_response (GtkWidget  *gtkDlg, gint response)
 {
+ if(!gtkDlg) return;
+
  xfce_panel_plugin_unblock_menu (wmdock->plugin);
-	
  gtk_widget_destroy (gtkDlg);
+
+#ifdef DEBUG
+ fprintf(fp, "wmdock: properties dlg closed\n");
+ fflush(fp);
+#endif
+
+ propDialog = propDockappChooser = propDockappCommand = propDockappImage = NULL;
 }
 
 
 static void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 {
  GtkWidget   *gtkDlg, *gtkVbox, *gtkVbox2, *gtkVboxGeneral, *gtkHbox, 
-  *gtkLblSel, *gtkLblCmd, *gtkLblGeneral, *gtkChkDispTile,
-  *gtkTxtCmd, *gtkComboBox, *gtkImage, *gtkBtnMoveUp, *gtkBtnMoveDown;
+  *gtkLblSel, *gtkLblCmd, *gtkLblGeneral, *gtkChkDispTile, *gtkImageContainer,
+  *gtkImageTile, *gtkTxtCmd, *gtkComboBox, *gtkImage, *gtkBtnMoveUp, 
+  *gtkBtnMoveDown;
 
  xfce_panel_plugin_block_menu (plugin);
 
  /* Create the configure dialog. */
- gtkDlg = xfce_titled_dialog_new_with_buttons (_("WMdock"),
-					       GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
-					       GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
-					       GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
-					       NULL);
+ propDialog = gtkDlg = xfce_titled_dialog_new_with_buttons (_("WMdock"),
+							    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
+							    GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
+							    GTK_STOCK_CLOSE, GTK_RESPONSE_OK,
+							    NULL);
 
  gtk_window_set_position   (GTK_WINDOW (gtkDlg), GTK_WIN_POS_CENTER);
  gtk_window_set_icon_name  (GTK_WINDOW (gtkDlg), "xfce4-settings");
@@ -693,14 +805,21 @@ static void wmdock_properties_dialog(XfcePanelPlugin *plugin)
  gtk_box_pack_start (GTK_BOX (gtkHbox), gtkVbox, FALSE, FALSE, 0);
  gtk_box_pack_start (GTK_BOX (gtkHbox), gtkVbox2, FALSE, FALSE, 0);
 
- gdkPbIcon = get_icon_from_xpm_scaled((const char **) xfce4_wmdock_plugin_xpm, 
-				      DEFAULT_DOCKAPP_HEIGHT, 
-				      DEFAULT_DOCKAPP_WIDTH);
- gtkImage = gtk_image_new_from_pixbuf (gdkPbIcon);
+ gtkImageContainer = gtk_fixed_new();
+
+ gdkPbIcon = gdk_pixbuf_new_from_xpm_data((const char**) 
+					  xfce4_wmdock_plugin_xpm);
+
+ gtkImageTile = gtk_image_new_from_pixmap(gdkPmTile, NULL);
+ propDockappImage = gtkImage = gtk_image_new_from_pixbuf (gdkPbIcon);
+
  g_object_unref (G_OBJECT (gdkPbIcon));
 
- gtk_widget_set_name(gtkImage, "image");
- gtk_box_pack_start (GTK_BOX(gtkVbox), GTK_WIDGET (gtkImage), FALSE, FALSE, 0);
+ gtk_container_add(GTK_CONTAINER(gtkImageContainer), gtkImageTile);
+ gtk_container_add(GTK_CONTAINER(gtkImageContainer), gtkImage);
+
+ gtk_box_pack_start (GTK_BOX(gtkVbox), GTK_WIDGET (gtkImageContainer),
+		     FALSE, FALSE, 0);
 
  gtkBtnMoveUp = xfce_arrow_button_new (GTK_ARROW_UP);
  gtkBtnMoveDown = xfce_arrow_button_new (GTK_ARROW_DOWN);
@@ -713,26 +832,15 @@ static void wmdock_properties_dialog(XfcePanelPlugin *plugin)
  gtk_misc_set_alignment (GTK_MISC (gtkLblSel), 0, 0);
  gtk_box_pack_start (GTK_BOX(gtkVbox2), gtkLblSel, FALSE, FALSE, 0);
 
- gtkComboBox = gtk_combo_box_new_text();
-
- if(g_list_length(wmdock->dapps) > 0) {
-  g_list_foreach(wmdock->dapps, (GFunc) wmdock_fill_cmbx, gtkComboBox);
- } else {
-#ifdef DEBUG
-  fprintf(fp, "wmdock: Draw icon in properties\n");
-  fflush(fp);
-#endif
-  gtk_combo_box_append_text (GTK_COMBO_BOX(gtkComboBox), 
-			     "No dockapp are running!");
- }
- gtk_combo_box_set_active(GTK_COMBO_BOX(gtkComboBox), 0);
+ /* Create the dockapp chooser combobox */
+ propDockappChooser = gtkComboBox = gtk_combo_box_new_text();
 
  gtk_box_pack_start (GTK_BOX (gtkVbox2), gtkComboBox, FALSE, TRUE, 0);
 
  gtkLblCmd = gtk_label_new ("Shell command:");
  gtk_misc_set_alignment (GTK_MISC (gtkLblCmd), 0, 0);
  gtk_box_pack_start (GTK_BOX(gtkVbox2), gtkLblCmd, FALSE, FALSE, 0);
- gtkTxtCmd = gtk_entry_new();
+ propDockappCommand = gtkTxtCmd = gtk_entry_new();
  if(g_list_length(wmdock->dapps) > 0) {
   gtk_editable_set_editable(GTK_EDITABLE(gtkTxtCmd), TRUE);
  } else {
@@ -748,6 +856,9 @@ static void wmdock_properties_dialog(XfcePanelPlugin *plugin)
  gtk_misc_set_alignment (GTK_MISC (gtkChkDispTile), 0, 0);
  gtk_box_pack_start (GTK_BOX(gtkVboxGeneral), gtkLblGeneral, FALSE, FALSE, 0);
  gtk_box_pack_start (GTK_BOX(gtkVboxGeneral), gtkChkDispTile, FALSE, FALSE, 0);
+
+ /* Fill the dockapp chooser with entries. */
+ wmdock_refresh_properties_dialog();
 
  /* Connect some signals to the dialog widgets */
  g_signal_connect(G_OBJECT(gtkComboBox), "changed", G_CALLBACK(wmdock_properties_changed), gtkTxtCmd);
@@ -832,7 +943,7 @@ static void wmdock_construct (XfcePanelPlugin *plugin)
  xfce_panel_plugin_set_expand(plugin, TRUE);
 	
  /* Setup the tile image */    	                                  	
- gdkPmTile = gdk_pixmap_create_from_xpm_d (wmdock->ebox->window, &gdkBmTile,
+ gdkPmTile = gdk_pixmap_create_from_xpm_d (wmdock->ebox->window, NULL,
 					   NULL, tile_xpm);
 
  gdkPbIcon = get_icon_from_xpm_scaled((const char **) xfce4_wmdock_plugin_xpm, 

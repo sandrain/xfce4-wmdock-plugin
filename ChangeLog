@@ -1,3 +1,9 @@
+2008-02-10	Andre Ellguth <ellguth at ibh dot de>
+	* Fallback command line detection of the dockapp via pid integrated
+	* Dockapp preview in the configure dialog
+	* Configure dialog will now refreshing if a dockapp swallow
+	* Code cleanup
+
 2008-02-06	Andre Ellguth <ellguth at ibh dot de>
 	* Improvment of the dockapp detection
 	* The dockapps will be now started cleanly ordered

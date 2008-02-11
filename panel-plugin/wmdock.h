@@ -8,7 +8,6 @@
 #include <libwnck/libwnck.h>
 
 typedef struct _dockapp {
- WnckWindow *w;
  GtkSocket *s;
  GdkNativeWindow i;
  gchar *name;
