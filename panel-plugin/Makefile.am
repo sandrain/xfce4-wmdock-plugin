@@ -8,6 +8,7 @@ xfce4_wmdock_plugin_SOURCES =						\
 	wmdock.c
 
 xfce4_wmdock_plugin_CFLAGS =						\
+	-Wall								\
 	-I$(top_srcdir)							\
 	$(LIBXFCEGUI4_CFLAGS)						\
 	$(LIBXFCE4PANEL_CFLAGS)						\

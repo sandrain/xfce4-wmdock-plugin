@@ -8,24 +8,27 @@
 #include <libwnck/libwnck.h>
 
 typedef struct _dockapp {
- GtkSocket *s;
+ GtkSocket       *s;
  GdkNativeWindow i;
- gchar *name;
- gchar *cmd;
+ GtkWidget       *anchor;
+ gchar           *name;
+ gchar           *cmd;
 } DockappNode;
 
 typedef struct {
  XfcePanelPlugin *plugin;
 
- GtkWidget *ebox;
+ GtkWidget       *eventBox;
 	
  /* Plugin specific definitions */
- GtkWidget *align;
- GtkWidget *box;
+ GtkWidget       *align;
+ GtkWidget       *box;
+ GtkWidget       *panelBox;
 	
- gboolean propDispTile;
+ gboolean        propDispTile;
+ gboolean        propDispPropButton;
 
- GList *dapps;
+ GList           *dapps;
 } WmdockPlugin;
 
 #endif /* __WMDOCK_H__ */
