@@ -10,7 +10,8 @@
 typedef struct _dockapp {
  GtkSocket       *s;
  GdkNativeWindow i;
- GtkWidget       *anchor;
+ GtkWidget       *bg;
+ GtkWidget       *tile;
  gchar           *name;
  gchar           *cmd;
 } DockappNode;
