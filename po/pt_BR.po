@@ -1,0 +1,70 @@
+# Portuguese translations for xfce4-wmdock-plugin package.
+# Copyright (C) 2008 xfce4-wmdock-plugin's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xfce4-wmdock-plugin package.
+# Fábio Nogueira <deb-user-ba@ubuntu.com>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-wmdock-plugin 0.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-24 13:39+0200\n"
+"PO-Revision-Date: 2008-08-24 13:03-0300\n"
+"Last-Translator: Fábio Nogueira <deb-user-ba@ubuntu.com>\n"
+"Language-Team: Brazilian Portuguese <ldp-br@bazar2.conectiva.com.br>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: panel-plugin/wmdock.c:219
+msgid "No dockapp is running!"
+msgstr "Nenhum aplicativo de doca está em execução!"
+
+#: panel-plugin/wmdock.c:639
+#, c-format
+msgid "Failed to start %s!"
+msgstr "Falhou ao iniciar %s!"
+
+#: panel-plugin/wmdock.c:929
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:932
+msgid "Remove dockapp"
+msgstr "Remover o aplicativo de doca"
+
+#: panel-plugin/wmdock.c:948
+msgid "General settings"
+msgstr "Configurações gerais"
+
+#: panel-plugin/wmdock.c:949
+msgid "Dockapp detection"
+msgstr "Detecção de aplicativos de doca"
+
+#: panel-plugin/wmdock.c:997
+msgid "Select dockapp to configure:"
+msgstr "Selecione o aplicativo de doca para configurar:"
+
+#: panel-plugin/wmdock.c:1006
+msgid "Shell command:"
+msgstr "Comando de shell:"
+
+#: panel-plugin/wmdock.c:1017
+msgid "Display tile in the background."
+msgstr "Exibir lado a lado em segundo plano."
+
+#: panel-plugin/wmdock.c:1018
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr ""
+"Exibir separadamente um botão de\n"
+"propriedades do WMdock no painel."
+
+#: panel-plugin/wmdock.c:1019
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr ""
+"Adicionar somente os aplicativo de doca que\n"
+"iniciem com wm* no nome."
