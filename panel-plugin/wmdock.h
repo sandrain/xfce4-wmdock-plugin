@@ -28,6 +28,7 @@ typedef struct {
 	
  gboolean        propDispTile;
  gboolean        propDispPropButton;
+ gboolean        propDispAddOnlyWM;
 
  GList           *dapps;
 } WmdockPlugin;
