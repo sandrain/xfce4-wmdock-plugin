@@ -1,0 +1,66 @@
+# xfce4-wmdock-plugin French language
+# Copyright (C) 2008 Andre Ellguth
+# This file is distributed under the same license as the PACKAGE package.
+# Andre Ellguth <ellguth@ibh.de>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-wmdock-plugin 0.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-24 13:39+0200\n"
+"PO-Revision-Date: 2008-08-24 13:49+0200\n"
+"Last-Translator: Andre Ellguth <ellguth@ibh.de>\n"
+"Language-Team: none <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: panel-plugin/wmdock.c:219
+msgid "No dockapp is running!"
+msgstr "Pas de dockapp marche!"
+
+#: panel-plugin/wmdock.c:639
+#, c-format
+msgid "Failed to start %s!"
+msgstr "Défaut pendant lancer %s!"
+
+#: panel-plugin/wmdock.c:929
+msgid "WMdock"
+msgstr ""
+
+#: panel-plugin/wmdock.c:932
+msgid "Remove dockapp"
+msgstr "Enleve dockapp!"
+
+#: panel-plugin/wmdock.c:948
+msgid "General settings"
+msgstr "Réglages généraux"
+
+#: panel-plugin/wmdock.c:949
+msgid "Dockapp detection"
+msgstr "Apercevoir dockapp!"
+
+#: panel-plugin/wmdock.c:997
+msgid "Select dockapp to configure:"
+msgstr "Choisit dockapp!"
+
+#: panel-plugin/wmdock.c:1006
+msgid "Shell command:"
+msgstr "commandement:"
+
+#: panel-plugin/wmdock.c:1017
+msgid "Display tile in the background."
+msgstr "Marque arrière-plan!"
+
+#: panel-plugin/wmdock.c:1018
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr "Affiche un bouton pour configurer"
+
+#: panel-plugin/wmdock.c:1019
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr "Ajoute seulement des dockapps\n"
+"dont des noms commencent avec wm*"

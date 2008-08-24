@@ -1,3 +1,13 @@
+2008-08-24	Andre Ellguth <ellguth at ibh dot de>
+	* Added i18n support.
+	* Added a new option for the dockapp detection.
+	* Added a remove dockapp button.
+	* Fixed a bug with the dockapp alignment in the tile.
+	* Added a start properties button to the panel.
+	* Fixed a glitch with the xfce session manager.
+	* Preparation for the internationalization.
+	* Fixed a bug, which let the plugin grab the full panel size.
+
 2008-02-10	Andre Ellguth <ellguth at ibh dot de>
 	* Fallback command line detection of the dockapp via pid integrated
 	* Dockapp preview in the configure dialog

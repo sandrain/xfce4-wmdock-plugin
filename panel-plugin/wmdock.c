@@ -216,7 +216,7 @@ static void wmdock_refresh_properties_dialog()
   
  } else {
   gtk_combo_box_append_text (GTK_COMBO_BOX(prop.cbx), 
-			     _("No dockapp are running!"));
+			     _("No dockapp is running!"));
 
   gtk_widget_set_state(prop.txtCmd, GTK_STATE_INSENSITIVE);
 
