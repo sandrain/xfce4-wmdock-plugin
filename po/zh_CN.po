@@ -1,0 +1,66 @@
+# Chinese translations for xfce package.
+# Copyright (C) 2008 THE xfce'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xfce package.
+# Hunt Xu <huntxu@live.cn>", 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce 4-wmdock-plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2008-08-24 13:39+0200\n"
+"PO-Revision-Date: 2008-12-06 17:00+0800\n"
+"Last-Translator: Hunt Xu <huntxu@live.cn>\n"
+"Language-Team: Chinese (simplified)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: panel-plugin/wmdock.c:219
+msgid "No dockapp is running!"
+msgstr "没有 dock 程序正在运行中！"
+
+#: panel-plugin/wmdock.c:639
+#, c-format
+msgid "Failed to start %s!"
+msgstr "启动 %s 失败！"
+
+#: panel-plugin/wmdock.c:929
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:932
+msgid "Remove dockapp"
+msgstr "移除 dock 程序"
+
+#: panel-plugin/wmdock.c:948
+msgid "General settings"
+msgstr "一般设置"
+
+#: panel-plugin/wmdock.c:949
+msgid "Dockapp detection"
+msgstr "检测 dock 程序"
+
+#: panel-plugin/wmdock.c:997
+msgid "Select dockapp to configure:"
+msgstr "选择一个 dock 程序进行配置："
+
+#: panel-plugin/wmdock.c:1006
+msgid "Shell command:"
+msgstr "Shell 命令："
+
+#: panel-plugin/wmdock.c:1017
+msgid "Display tile in the background."
+msgstr "平铺在桌面背景。"
+
+#: panel-plugin/wmdock.c:1018
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr "在面板上显示一个独立的 WMdock 首选项按钮"
+
+#: panel-plugin/wmdock.c:1019
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr "仅能添加以 wm* 开头的 dock 程序。"
+
