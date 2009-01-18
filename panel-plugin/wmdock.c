@@ -1,7 +1,24 @@
-/* $Id$
+/* wmdock xfce4 plugin by Andre Ellguth
  *
- * wmdock xfce4 plugin by Andre Ellguth
+ * $Id$
  *
+ * Authors:
+ *   Andre Ellguth <ellguth@ibh.de>
+ *
+ * License:
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation; either version 2 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this package; if not, write to the Free Software
+ *   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
  */
 
 #include <stdio.h>
@@ -437,13 +454,14 @@ static void wmdock_window_open(WnckScreen *s, WnckWindow *w)
   fflush(fp);
 #endif
 
+  cmd = wmdock_get_dockapp_cmd(w);
+
   if(wmdock->propDispAddOnlyWM == TRUE && 
-     g_str_has_prefix (wnck_window_get_name(w), "wm") == FALSE) {
+     g_str_has_prefix (wnck_window_get_name(w), "wm") == FALSE && 
+        ! (wmdock_find_startup_dockapp(cmd))) {
    XFree(h);
    return;
   }
-
-  cmd = wmdock_get_dockapp_cmd(w);
 
   if(!cmd) {
    XFree(h);
@@ -525,6 +543,7 @@ static void wmdock_window_open(WnckScreen *s, WnckWindow *w)
    dapp->tile = wmdock_create_tile_from_socket(dapp);
 
    gtk_box_pack_start(GTK_BOX(wmdock->box), dapp->tile, FALSE, FALSE, 0);
+
   }
 
   gtk_socket_add_id(dapp->s, dapp->i);
@@ -1092,10 +1111,11 @@ static WmdockPlugin *wmdock_plugin_new (XfcePanelPlugin* plugin)
 
  gtk_box_pack_start(GTK_BOX(wmdock->panelBox), GTK_WIDGET(wmdock->box), 
 		    FALSE, FALSE, 0);
+
  gtk_widget_show(GTK_WIDGET(wmdock->box));
 
  gtk_container_add (GTK_CONTAINER (wmdock->align), wmdock->panelBox);
-	
+ 
  return wmdock;
 }
 
