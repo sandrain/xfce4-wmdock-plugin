@@ -1,3 +1,7 @@
+2009-01-25	Andre Ellguth <ellguth at ibh dot de>
+	* Added drag & drop support for the dockapps.
+	* Dockapps found in the wmdockrc will be added to the panel anyway.
+
 2008-08-24	Andre Ellguth <ellguth at ibh dot de>
 	* Added i18n support.
 	* Added a new option for the dockapp detection.
