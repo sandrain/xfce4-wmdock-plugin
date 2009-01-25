@@ -40,12 +40,10 @@
 #include <libxfce4panel/xfce-arrow-button.h>
 #include <libxfce4panel/xfce-panel-convenience.h>
 
-
-
-
 #include "wmdock.h"
 #include "xfce4-wmdock-plugin.xpm"
 #include "tile.xpm"
+
 
 #define DEFAULT_DOCKAPP_WIDTH 64
 #define DEFAULT_DOCKAPP_HEIGHT 64
@@ -54,15 +52,17 @@
 #define WAITCNT_TIMEOUT 1000000
 #define BUF_MAX 4096
 
+#define _BYTE 8
+
 Atom         XfceDockAppAtom;
-GtkWidget    *wmdockIcon = NULL;
-GtkWidget    *btnProperties = NULL;
+GtkWidget    *wmdockIcon     = NULL;
+GtkWidget    *btnProperties  = NULL;
 DockappNode  *dappProperties = NULL;
-GdkPixmap    *gdkPmTile = NULL;
-GdkPixbuf    *gdkPbIcon = NULL;
-WmdockPlugin *wmdock = NULL;
-gchar        **rcCmds = NULL;
-gint         rcCmdcnt = 0;
+GdkPixmap    *gdkPmTile      = NULL;
+GdkPixbuf    *gdkPbIcon      = NULL;
+WmdockPlugin *wmdock         = NULL;
+gchar        **rcCmds        = NULL;
+gint         rcCmdcnt        = 0;
 
 
 /* Properties dialog */
@@ -80,9 +80,18 @@ static struct {
  GtkWidget *btnMoveUp, *btnMoveDown;
 } prop;
 
+
+static GtkTargetEntry targetList[] = {
+ { "INTEGER", 0, 0 }
+};
+static guint nTargets = G_N_ELEMENTS (targetList);
+
+
 /* Prototypes */
 static void wmdock_properties_dialog_called_from_widget(GtkWidget *, XfcePanelPlugin *);
 static void wmdock_properties_dialog(XfcePanelPlugin *);
+static void wmdock_redraw_dockapp(DockappNode *);
+static void wmdock_destroy_dockapp(DockappNode *);
 
 
 /* #define DEBUG */
@@ -159,6 +168,158 @@ static GdkPixbuf *get_icon_from_xpm_scaled(const char **xpmData, gint width, gin
 	
  return(gdkPbScaled);
 }
+
+
+static void drag_begin_handl (GtkWidget *widget, GdkDragContext *context,
+			      gpointer dapp)
+{
+ gdkPbIcon = get_icon_from_xpm_scaled((const char **) xfce4_wmdock_plugin_xpm, 
+				      DEFAULT_DOCKAPP_WIDTH/2,
+				      DEFAULT_DOCKAPP_HEIGHT/2);
+
+ gtk_drag_set_icon_pixbuf (context, gdkPbIcon, 0, 0);
+
+ g_object_unref (G_OBJECT(gdkPbIcon)); 
+}
+
+
+static gboolean drag_failed_handl(GtkWidget *widget, GdkDragContext *context,
+				  GtkDragResult result, gpointer dapp)
+{
+ GtkWidget *gtkDlg;
+
+ if(result == GTK_DRAG_RESULT_NO_TARGET && dapp) {
+  gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))), 
+				  GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				  GTK_MESSAGE_QUESTION,
+				  GTK_BUTTONS_YES_NO,
+				  _("Do you want remove the dockapp \"%s\"?"),
+				  ((DockappNode *) dapp)->name);
+
+  if(gtk_dialog_run (GTK_DIALOG(gtkDlg)) == GTK_RESPONSE_YES)
+   wmdock_destroy_dockapp((DockappNode *) dapp);
+
+  gtk_widget_destroy (GTK_WIDGET(gtkDlg));
+ }
+#ifdef DEBUG
+ fprintf(fp, "Drag failed of dockapp %s\n", ((DockappNode *) dapp)->name);
+ fflush(fp);
+#endif
+
+ return TRUE;
+}
+
+
+static gboolean drag_drop_handl (GtkWidget *widget, GdkDragContext *context,
+				 gint x, gint y, guint time, gpointer dapp)
+{
+ gboolean        is_valid_drop_site;
+ GdkAtom         target_type;
+
+ is_valid_drop_site = TRUE;
+
+ if (context-> targets)
+  {
+   target_type = GDK_POINTER_TO_ATOM
+    (g_list_nth_data (context-> targets, 0));
+
+   gtk_drag_get_data (widget,context, target_type, time);
+  }
+
+ else
+  {
+   is_valid_drop_site = FALSE;
+  }
+
+ return  is_valid_drop_site;
+}
+
+
+
+static void drag_data_received_handl (GtkWidget *widget,
+				      GdkDragContext *context, gint x, gint y,
+				      GtkSelectionData *selection_data,
+				      guint target_type, guint time,
+				      gpointer dapp)
+{
+ glong *_idata;
+ gboolean dnd_success = FALSE;
+ GList *dappsSrc = NULL;
+ GList *dappsDst = NULL;
+
+ if(target_type == 0) {
+  _idata = (glong*) selection_data-> data;
+#ifdef DEBUG  
+  fprintf(fp, "DnD integer received: %ld\n", *_idata);
+  fflush(fp);
+#endif
+  dnd_success = TRUE;
+
+  if(dapp) {
+   dappsSrc = g_list_nth(wmdock->dapps, *_idata);
+   dappsDst = g_list_find(wmdock->dapps, (DockappNode *) dapp);
+
+   if(dappsSrc->data != dappsDst->data) {
+
+#ifdef DEBUG  
+    fprintf(fp, "DnD src dockapp name: %s\n", 
+	    ((DockappNode *) dappsSrc->data)->name);
+    fprintf(fp, "DnD dst dockapp name: %s\n", 
+	    ((DockappNode *) dapp)->name);
+    fflush(fp);
+#endif
+
+    dappsDst->data = dappsSrc->data;
+    dappsSrc->data = dapp;
+
+#ifdef DEBUG  
+    fprintf(fp, "DnD src index: %d\n", 
+	    g_list_index (wmdock->dapps, dappsSrc->data));
+    fprintf(fp, "DnD dst index: %d\n", 
+	    g_list_index (wmdock->dapps, dappsDst->data));
+    fflush(fp);
+#endif
+    
+    gtk_box_reorder_child(GTK_BOX(wmdock->box), 
+			  GTK_WIDGET(((DockappNode *) dappsSrc->data)->tile), 
+			  g_list_index (wmdock->dapps, dappsSrc->data));
+    gtk_box_reorder_child(GTK_BOX(wmdock->box), 
+			  GTK_WIDGET(((DockappNode *) dappsDst->data)->tile), 
+			  g_list_index (wmdock->dapps, dappsDst->data));
+
+    g_list_foreach(wmdock->dapps, (GFunc)wmdock_redraw_dockapp, NULL);   
+   }
+  }
+
+ }
+
+ gtk_drag_finish (context, dnd_success, FALSE, time);
+
+}
+
+
+
+static void drag_data_get_handl (GtkWidget *widget, GdkDragContext *context,
+				 GtkSelectionData *selection_data, 
+				 guint target_type, guint time, 
+				 gpointer dapp)
+{
+ gint index;
+
+ if(target_type == 0 && dapp) {
+  index = g_list_index (wmdock->dapps, (DockappNode *) dapp);
+
+  gtk_selection_data_set (selection_data, selection_data->target, 
+			  sizeof(index) * _BYTE,
+			  (guchar*) &index, sizeof (index));
+
+#ifdef DEBUG  
+  fprintf(fp, "DnD Integer sent: %ld\n", index);
+  fflush(fp);
+#endif
+ }
+}
+
 
 
 static void wmdock_panel_draw_wmdock_icon (gboolean redraw)
@@ -253,12 +414,44 @@ static void wmdock_refresh_properties_dialog()
 }
 
 
+static void wmdock_setupdnd_dockapp(DockappNode *dapp)
+{
+ /* Make the "well label" a DnD destination. */
+ gtk_drag_dest_set (GTK_WIDGET(dapp->s), GTK_DEST_DEFAULT_MOTION, targetList, 
+		    nTargets, GDK_ACTION_MOVE);
+ 
+ gtk_drag_source_set (GTK_WIDGET(dapp->s), GDK_BUTTON1_MASK, targetList,
+		      nTargets, GDK_ACTION_MOVE);
+
+ g_signal_connect (dapp->s, "drag-begin",
+		   G_CALLBACK (drag_begin_handl), dapp);
+
+ g_signal_connect (dapp->s, "drag-data-get",
+		   G_CALLBACK (drag_data_get_handl), dapp);
+
+ g_signal_connect (dapp->s, "drag-failed",
+		   G_CALLBACK (drag_failed_handl), dapp);
+ 
+ g_signal_connect (dapp->s, "drag-data-received",
+		   G_CALLBACK(drag_data_received_handl), dapp);
+ g_signal_connect (dapp->s, "drag-drop",
+		   G_CALLBACK (drag_drop_handl), dapp);
+
+
+
+#ifdef DEBUG
+ fprintf(fp, "Setup DnD for dockapp %s\n", dapp->name);
+ fflush(fp);
+#endif
+}
+
+
 static void wmdock_destroy_dockapp(DockappNode *dapp)
 {
- #ifdef DEBUG
+#ifdef DEBUG
  fprintf(fp, "Destroy dockapp %s\n", dapp->name);
  fflush(fp);
- #endif
+#endif
  XDestroyWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);
 }
 
@@ -540,10 +733,11 @@ static void wmdock_window_open(WnckScreen *s, WnckWindow *w)
   }
 
   if(rcDapp == FALSE) {
+   XUnmapWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);
+
    dapp->tile = wmdock_create_tile_from_socket(dapp);
 
    gtk_box_pack_start(GTK_BOX(wmdock->box), dapp->tile, FALSE, FALSE, 0);
-
   }
 
   gtk_socket_add_id(dapp->s, dapp->i);
@@ -564,6 +758,9 @@ static void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 
   if(rcDapp == FALSE)
    wmdock->dapps=g_list_append(wmdock->dapps, dapp);
+
+  /* Test DnD */
+  g_list_foreach(wmdock->dapps, (GFunc)wmdock_setupdnd_dockapp, NULL);
 
   wmdock_refresh_properties_dialog();
  }
@@ -1042,9 +1239,7 @@ static void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 			      wmdock->propDispPropButton);
  gtk_toggle_button_set_active((GtkToggleButton *) prop.chkAddOnlyWM, 
 			      wmdock->propDispAddOnlyWM);
- gtk_misc_set_alignment (GTK_MISC (prop.chkDispTile), 0, 0);
- gtk_misc_set_alignment (GTK_MISC (prop.chkPropButton), 0, 0);
- gtk_misc_set_alignment (GTK_MISC (prop.chkAddOnlyWM), 0, 0);
+
  gtk_container_add(GTK_CONTAINER(prop.frmGeneral), prop.vboxGeneral);
  gtk_container_add(GTK_CONTAINER(prop.frmDetect), prop.vboxDetect);
  gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.chkDispTile, 
@@ -1157,7 +1352,8 @@ static void wmdock_construct (XfcePanelPlugin *plugin)
 	
  /* Configure plugin dialog */
  xfce_panel_plugin_menu_show_configure (plugin);
- g_signal_connect (plugin, "configure-plugin", G_CALLBACK (wmdock_properties_dialog), NULL);
+ g_signal_connect (plugin, "configure-plugin",
+		   G_CALLBACK (wmdock_properties_dialog), NULL);
 	
  /* Read the config file and start the dockapps */
  wmdock_read_rc_file(plugin);

@@ -8,51 +8,56 @@ msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2008-08-24 13:39+0200\n"
-"PO-Revision-Date: 2008-08-17 18:05+0200\n"
+"PO-Revision-Date: 2009-01-25 20:04+0200\n"
 "Last-Translator: Andre Ellguth <ellguth@ibh.de>\n"
 "Language-Team: none <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel-plugin/wmdock.c:219
+#: panel-plugin/wmdock.c:196
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "Soll das Dockapp \"%s\" entfernt werden?"
+
+#: panel-plugin/wmdock.c:397
 msgid "No dockapp is running!"
 msgstr "Kein Dockapp ist gestartet!"
 
-#: panel-plugin/wmdock.c:639
+#: panel-plugin/wmdock.c:855
 #, c-format
 msgid "Failed to start %s!"
 msgstr "Fehler beim Starten von %s!"
 
-#: panel-plugin/wmdock.c:929
+#: panel-plugin/wmdock.c:1145
 msgid "WMdock"
 msgstr ""
 
-#: panel-plugin/wmdock.c:932
+#: panel-plugin/wmdock.c:1148
 msgid "Remove dockapp"
 msgstr "Entferne Dockapp"
 
-#: panel-plugin/wmdock.c:948
+#: panel-plugin/wmdock.c:1164
 msgid "General settings"
 msgstr "Allgemeine Einstellungen"
 
-#: panel-plugin/wmdock.c:949
+#: panel-plugin/wmdock.c:1165
 msgid "Dockapp detection"
 msgstr "Dockapp Erkennung"
 
-#: panel-plugin/wmdock.c:997
+#: panel-plugin/wmdock.c:1213
 msgid "Select dockapp to configure:"
 msgstr "Wähle ein Dockapp:"
 
-#: panel-plugin/wmdock.c:1006
+#: panel-plugin/wmdock.c:1222
 msgid "Shell command:"
 msgstr "Shell Kommando:"
 
-#: panel-plugin/wmdock.c:1017
+#: panel-plugin/wmdock.c:1233
 msgid "Display tile in the background."
 msgstr "Kacheln im Hintergrund darstellen"
 
-#: panel-plugin/wmdock.c:1018
+#: panel-plugin/wmdock.c:1234
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
@@ -60,7 +65,7 @@ msgstr ""
 "Extra Konfigurationsknopf\n"
 "im Panel darstellen"
 
-#: panel-plugin/wmdock.c:1019
+#: panel-plugin/wmdock.c:1235
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
