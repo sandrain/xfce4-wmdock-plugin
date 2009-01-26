@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 20:01+0100\n"
+"POT-Creation-Date: 2009-01-26 20:22+0100\n"
 "PO-Revision-Date: 2009-01-25 20:04+0200\n"
 "Last-Translator: Andre Ellguth <ellguth@ibh.de>\n"
 "Language-Team: none <LL@li.org>\n"
@@ -20,44 +20,44 @@ msgstr ""
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "Soll das Dockapp \"%s\" entfernt werden?"
 
-#: panel-plugin/wmdock.c:397
+#: panel-plugin/wmdock.c:398
 msgid "No dockapp is running!"
 msgstr "Kein Dockapp ist gestartet!"
 
-#: panel-plugin/wmdock.c:855
+#: panel-plugin/wmdock.c:858
 #, c-format
 msgid "Failed to start %s!"
 msgstr "Fehler beim Starten von %s!"
 
-#: panel-plugin/wmdock.c:1145
+#: panel-plugin/wmdock.c:1148
 msgid "WMdock"
 msgstr ""
 
-#: panel-plugin/wmdock.c:1148
+#: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
 msgstr "Entferne Dockapp"
 
-#: panel-plugin/wmdock.c:1164
+#: panel-plugin/wmdock.c:1167
 msgid "General settings"
 msgstr "Allgemeine Einstellungen"
 
-#: panel-plugin/wmdock.c:1165
+#: panel-plugin/wmdock.c:1168
 msgid "Dockapp detection"
 msgstr "Dockapp Erkennung"
 
-#: panel-plugin/wmdock.c:1213
+#: panel-plugin/wmdock.c:1216
 msgid "Select dockapp to configure:"
 msgstr "Wähle ein Dockapp:"
 
-#: panel-plugin/wmdock.c:1222
+#: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
 msgstr "Shell Kommando:"
 
-#: panel-plugin/wmdock.c:1233
+#: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
 msgstr "Kacheln im Hintergrund darstellen"
 
-#: panel-plugin/wmdock.c:1234
+#: panel-plugin/wmdock.c:1237
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
@@ -65,7 +65,7 @@ msgstr ""
 "Extra Konfigurationsknopf\n"
 "im Panel darstellen"
 
-#: panel-plugin/wmdock.c:1235
+#: panel-plugin/wmdock.c:1238
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
