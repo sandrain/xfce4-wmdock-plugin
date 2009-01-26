@@ -25,7 +25,7 @@ desktopdir = $(datadir)/xfce4/panel-plugins
 desktop_in_in_files = wmdock.desktop.in.in
 desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
 %.desktop.in: %.desktop.in.in
-        sed -e "s,\@libdir\@,$(libdir),g" < $< > $@
+	sed -e "s,\@libdir\@,$(libdir),g" < $< > $@
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST =								\
