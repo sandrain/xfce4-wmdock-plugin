@@ -22,13 +22,14 @@ xfce4_wmdock_plugin_LDADD =						\
 	$(LIBXFCEGUI4_LIBS)
 
 desktopdir = $(datadir)/xfce4/panel-plugins
-desktop_in_files = wmdock.desktop.in
-%.desktop: %.desktop.in
-	sed -e "s,\@libexecdir\@,$(libexecdir),g" < $< > $@
+desktop_in_in_files = wmdock.desktop.in.in
+desktop_in_files = $(desktop_in_in_files:.desktop.in.in=.desktop.in)
+%.desktop.in: %.desktop.in.in
+        sed -e "s,\@libdir\@,$(libdir),g" < $< > $@
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 EXTRA_DIST =								\
-	$(desktop_in_files)
+	$(desktop_in_in_files)
 
 CLEANFILES =								\
 	$(desktop_DATA)
