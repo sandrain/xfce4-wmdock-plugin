@@ -182,7 +182,7 @@ static void drag_begin_handl (GtkWidget *widget, GdkDragContext *context,
  g_object_unref (G_OBJECT(gdkPbIcon)); 
 }
 
-
+#if (GTK_MAJOR_VERSION >= 2 && GTK_MINOR_VERSION >= 12)
 static gboolean drag_failed_handl(GtkWidget *widget, GdkDragContext *context,
 				  GtkDragResult result, gpointer dapp)
 {
@@ -208,6 +208,7 @@ static gboolean drag_failed_handl(GtkWidget *widget, GdkDragContext *context,
 
  return TRUE;
 }
+#endif
 
 
 static gboolean drag_drop_handl (GtkWidget *widget, GdkDragContext *context,
@@ -429,8 +430,10 @@ static void wmdock_setupdnd_dockapp(DockappNode *dapp)
  g_signal_connect (dapp->s, "drag-data-get",
 		   G_CALLBACK (drag_data_get_handl), dapp);
 
+#if (GTK_MAJOR_VERSION >= 2 && GTK_MINOR_VERSION >= 12)
  g_signal_connect (dapp->s, "drag-failed",
 		   G_CALLBACK (drag_failed_handl), dapp);
+#endif
  
  g_signal_connect (dapp->s, "drag-data-received",
 		   G_CALLBACK(drag_data_received_handl), dapp);
