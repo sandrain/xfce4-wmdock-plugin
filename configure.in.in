@@ -20,6 +20,7 @@ AM_MAINTAINER_MODE
 dnl check for basic programs
 AC_PROG_CC
 AC_PROG_INSTALL
+AC_PROG_INTLTOOL
 AC_PROG_LIBTOOL
 
 dnl check for standard header files
