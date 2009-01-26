@@ -1,7 +1,7 @@
 [Xfce Panel]
 Type=X-XFCE-PanelPlugin
 Encoding=UTF-8
-Name=WMdock
-Comment=Plugin for WindowMaker dockapps
+_Name=WMdock
+_Comment=Plugin for WindowMaker dockapps
 Icon=xfce4-wmdock
 X-XFCE-Exec=@libexecdir@/xfce4/panel-plugins/xfce4-wmdock-plugin
