@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-25 20:01+0100\n"
+"POT-Creation-Date: 2009-01-26 20:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,50 +21,50 @@ msgstr ""
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr ""
 
-#: panel-plugin/wmdock.c:397
+#: panel-plugin/wmdock.c:398
 msgid "No dockapp is running!"
 msgstr ""
 
-#: panel-plugin/wmdock.c:855
+#: panel-plugin/wmdock.c:858
 #, c-format
 msgid "Failed to start %s!"
 msgstr ""
 
-#: panel-plugin/wmdock.c:1145
+#: panel-plugin/wmdock.c:1148
 msgid "WMdock"
 msgstr ""
 
-#: panel-plugin/wmdock.c:1148
+#: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
 msgstr ""
 
-#: panel-plugin/wmdock.c:1164
+#: panel-plugin/wmdock.c:1167
 msgid "General settings"
 msgstr ""
 
-#: panel-plugin/wmdock.c:1165
+#: panel-plugin/wmdock.c:1168
 msgid "Dockapp detection"
 msgstr ""
 
-#: panel-plugin/wmdock.c:1213
+#: panel-plugin/wmdock.c:1216
 msgid "Select dockapp to configure:"
 msgstr ""
 
-#: panel-plugin/wmdock.c:1222
+#: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
 msgstr ""
 
-#: panel-plugin/wmdock.c:1233
+#: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
 msgstr ""
 
-#: panel-plugin/wmdock.c:1234
+#: panel-plugin/wmdock.c:1237
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
 msgstr ""
 
-#: panel-plugin/wmdock.c:1235
+#: panel-plugin/wmdock.c:1238
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
