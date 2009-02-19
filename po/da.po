@@ -1,0 +1,78 @@
+# Danish translation of xfce4-wmdock-plugin.
+# Copyright (C) 2009 Andre Ellguth <ellguth at ibh dot de>
+# This file is distributed under the same license as the xfce4-wmdock-plugin package.
+# Per Kongstad <p_kongstad@op.pl>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-wmdock-plugin 0.3.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-26 20:22+0100\n"
+"PO-Revision-Date: 2009-02-18 13:43+0100\n"
+"Last-Translator: Per Kongstad <p_kongstad@op.pl>\n"
+"Language-Team: Danish <dansk-dansk-gruppen.dk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Danish\n"
+"X-Poedit-Country: DENMARK\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: panel-plugin/wmdock.c:196
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "Vil du fjerne dokprogrammet \"%s\"?"
+
+#: panel-plugin/wmdock.c:398
+msgid "No dockapp is running!"
+msgstr "Intet dokprogram kører!"
+
+#: panel-plugin/wmdock.c:858
+#, c-format
+msgid "Failed to start %s!"
+msgstr "Kunne ikke starte %s!"
+
+#: panel-plugin/wmdock.c:1148
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:1151
+msgid "Remove dockapp"
+msgstr "Fjern dokprogram"
+
+#: panel-plugin/wmdock.c:1167
+msgid "General settings"
+msgstr "Generelle indstillinger"
+
+#: panel-plugin/wmdock.c:1168
+msgid "Dockapp detection"
+msgstr "Dokprogramgenkeldelse"
+
+#: panel-plugin/wmdock.c:1216
+msgid "Select dockapp to configure:"
+msgstr "Vælg dokprogram til at indstille:"
+
+#: panel-plugin/wmdock.c:1225
+msgid "Shell command:"
+msgstr "Skalkommando:"
+
+#: panel-plugin/wmdock.c:1236
+msgid "Display tile in the background."
+msgstr "Vis flise i baggrunden."
+
+#: panel-plugin/wmdock.c:1237
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr ""
+"Vis en separat WMdock-egenskabsknap\n"
+"i panelet."
+
+#: panel-plugin/wmdock.c:1238
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr ""
+"Tilføj kun dokprogrammer som starter med\n"
+"vm* i navnet."
+
