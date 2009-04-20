@@ -1,0 +1,78 @@
+# Galician translation of xfce4-wmdock-plugin
+# Copyright (C) 2008-2009 Leandro Regueiro
+# This file is distributed under the same license as the xfce package.
+#
+# Leandro Regueiro <leandro.regueiro@gmail.com>, 2009.
+#
+# Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
+# colaborar connosco, podes atopar máis información en <http://trasno.net>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-26 20:22+0100\n"
+"PO-Revision-Date: 2009-04-20 11:57+0100\n"
+"Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
+"Language-Team: Galician <proxecto@trasno.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#: panel-plugin/wmdock.c:196
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr ""
+
+#: panel-plugin/wmdock.c:398
+msgid "No dockapp is running!"
+msgstr ""
+
+#: panel-plugin/wmdock.c:858
+#, c-format
+msgid "Failed to start %s!"
+msgstr "Fallo ao iniciar %s!"
+
+#: panel-plugin/wmdock.c:1148
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:1151
+msgid "Remove dockapp"
+msgstr ""
+
+#: panel-plugin/wmdock.c:1167
+msgid "General settings"
+msgstr "Configuración xeral"
+
+#: panel-plugin/wmdock.c:1168
+msgid "Dockapp detection"
+msgstr ""
+
+#: panel-plugin/wmdock.c:1216
+msgid "Select dockapp to configure:"
+msgstr ""
+
+#: panel-plugin/wmdock.c:1225
+msgid "Shell command:"
+msgstr "Comando de shell:"
+
+#: panel-plugin/wmdock.c:1236
+msgid "Display tile in the background."
+msgstr ""
+
+#: panel-plugin/wmdock.c:1237
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr ""
+"Mostra un botón aparte para as\n"
+"propiedades de WMdock no panel."
+
+#: panel-plugin/wmdock.c:1238
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr ""
+
