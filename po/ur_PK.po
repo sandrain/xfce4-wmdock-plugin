@@ -1,0 +1,79 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-wmdock-plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-26 20:22+0100\n"
+"PO-Revision-Date: 2009-05-14 03:29+0500\n"
+"Last-Translator: Muhammad Ali Makki <makki.ma@gmail.com>\n"
+"Language-Team: Urdu <makki.ma@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-Language: Urdu\n"
+"X-Poedit-Country: PAKISTAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: panel-plugin/wmdock.c:196
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "کیا آپ ڈوک ایپ dockapp کو حذف کرنا چاہتے ہیں \"%s\"؟"
+
+#: panel-plugin/wmdock.c:398
+msgid "No dockapp is running!"
+msgstr "کوئی ڈوک ایپ dockapp نہیں چل رہا!"
+
+#: panel-plugin/wmdock.c:858
+#, c-format
+msgid "Failed to start %s!"
+msgstr "%s کو چلانے میں ناکامی!"
+
+#: panel-plugin/wmdock.c:1148
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:1151
+msgid "Remove dockapp"
+msgstr "ڈوک ایپ dockapp حذف کریں"
+
+#: panel-plugin/wmdock.c:1167
+msgid "General settings"
+msgstr "عام ترتیبات"
+
+#: panel-plugin/wmdock.c:1168
+msgid "Dockapp detection"
+msgstr "ڈوک ایپ Dockapp دریافت"
+
+#: panel-plugin/wmdock.c:1216
+msgid "Select dockapp to configure:"
+msgstr "وضع کرنے کے لیے ڈوک ایپ dockapp منتخب کریں:"
+
+#: panel-plugin/wmdock.c:1225
+msgid "Shell command:"
+msgstr "شیل کمانڈ:"
+
+#: panel-plugin/wmdock.c:1236
+msgid "Display tile in the background."
+msgstr "پس منظر میں ٹائل ظاہر کریں"
+
+#: panel-plugin/wmdock.c:1237
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr ""
+"پینل میں الگ WMdock خصوصیات\n"
+"بٹن ظاہر کریں."
+
+#: panel-plugin/wmdock.c:1238
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr ""
+"صرف وہ ڈوک ایپ dockapps شامل کریں جو\n"
+"جو نام میں wm* سے شروع ہوتے ہیں."
+

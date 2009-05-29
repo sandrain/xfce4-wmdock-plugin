@@ -1,0 +1,76 @@
+# xfce4-wmdock-plugin Catalan language
+# Copyright (C) 2008 Andre Ellguth
+# This file is distributed under the same license as the PACKAGE package.
+# Harald Servat <redcrash@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-wmdock-plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-26 20:22+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Harald Servat <redcrash@gmail.com>\n"
+"Language-Team: Harald Servat <redcrash@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Català\n"
+"X-Poedit-Country: Spain\n"
+
+#: panel-plugin/wmdock.c:196
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "Voleu eliminar l'aplicació amarrada \"%s\"?"
+
+#: panel-plugin/wmdock.c:398
+msgid "No dockapp is running!"
+msgstr "No hi ha aplicacions amarrades!"
+
+#: panel-plugin/wmdock.c:858
+#, c-format
+msgid "Failed to start %s!"
+msgstr "No s'ha pogut iniciar %s!"
+
+#: panel-plugin/wmdock.c:1148
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:1151
+msgid "Remove dockapp"
+msgstr "Eliminar l'aplicació amarrada"
+
+#: panel-plugin/wmdock.c:1167
+msgid "General settings"
+msgstr "Configuració general"
+
+#: panel-plugin/wmdock.c:1168
+msgid "Dockapp detection"
+msgstr "Detecció d'aplicacions "
+
+#: panel-plugin/wmdock.c:1216
+msgid "Select dockapp to configure:"
+msgstr "Trieu l'aplicació amarrada per a configurar:"
+
+#: panel-plugin/wmdock.c:1225
+msgid "Shell command:"
+msgstr "Comandes per a l'interpretes de comandes:"
+
+#: panel-plugin/wmdock.c:1236
+msgid "Display tile in the background."
+msgstr "Mostrar un mosaic al fons."
+
+#: panel-plugin/wmdock.c:1237
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr ""
+"Mostrar un botó separat per a les\n"
+"propietats de WMdock al panell."
+
+#: panel-plugin/wmdock.c:1238
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr ""
+"Només afegir aplicacions amarrades que\n"
+"al nom comencin amb wm*."
