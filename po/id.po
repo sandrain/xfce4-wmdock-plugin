@@ -1,38 +1,33 @@
-# Galician translation of xfce4-wmdock-plugin
-# Copyright (C) 2008-2009 Leandro Regueiro
+# Indonesian translations for xfce package.
+# Copyright (C) 2009 THE xfce4-wmdock-plugin'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the xfce package.
-#
-# Leandro Regueiro <leandro.regueiro@gmail.com>, 2009.
-#
-# Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
-# colaborar connosco, podes atopar máis información en <http://trasno.net>
+# Andhika Padmawan <andhika.padmawan@gmail.com>, 2009.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: xfce4-wmdock-plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2009-05-02 16:35+0100\n"
-"Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
-"Language-Team: Galician <proxecto@trasno.net>\n"
+"PO-Revision-Date: 2009-07-09 22:54+0700\n"
+"Last-Translator: Andhika Padmawan <andhika.padmawan@gmail.com>\n"
+"Language-Team: Indonesian <translation-team-id@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: panel-plugin/wmdock.c:196
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr ""
+msgstr "Anda ingin menghapus dockapp \"%s\"?"
 
 #: panel-plugin/wmdock.c:398
 msgid "No dockapp is running!"
-msgstr ""
+msgstr "Tak ada dockapp yang berjalan!"
 
 #: panel-plugin/wmdock.c:858
 #, c-format
 msgid "Failed to start %s!"
-msgstr "Fallo ao iniciar %s!"
+msgstr "Gagal menjalankan %s!"
 
 #: panel-plugin/wmdock.c:1148
 msgid "WMdock"
@@ -40,39 +35,40 @@ msgstr "WMdock"
 
 #: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
-msgstr ""
+msgstr "Hapus dockapp"
 
 #: panel-plugin/wmdock.c:1167
 msgid "General settings"
-msgstr "Configuración xeral"
+msgstr "Pengaturan umum"
 
 #: panel-plugin/wmdock.c:1168
 msgid "Dockapp detection"
-msgstr ""
+msgstr "Deteksi dockapp"
 
 #: panel-plugin/wmdock.c:1216
 msgid "Select dockapp to configure:"
-msgstr ""
+msgstr "Pilih dockapp yang ingin diatur:"
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
-msgstr "Comando de shell:"
+msgstr "Perintah shell:"
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
-msgstr "Mostrar mosaico no fondo."
+msgstr "Tampilkan judul di latar belakang."
 
 #: panel-plugin/wmdock.c:1237
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
 msgstr ""
-"Mostra un botón aparte para as\n"
-"propiedades de WMdock no panel."
+"Tampilkan tombol properti WMdock yang\n"
+"terpisah di panel."
 
 #: panel-plugin/wmdock.c:1238
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
 msgstr ""
-
+"Tambah hanya dockapp yang berjalan\n"
+"dengan nama wm* di dalamnya."
