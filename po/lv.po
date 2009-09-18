@@ -1,0 +1,77 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Rihards Prieditis <rprieditis@gmail.com>, 2009.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-26 20:22+0100\n"
+"PO-Revision-Date: 2009-09-18 23:48+0100\n"
+"Last-Translator: Rihards Prieditis <rprieditis@gmail.com>\n"
+"Language-Team: Latvian <translation-team-lv@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#: panel-plugin/wmdock.c:196
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "Vai vēlaties noņemt enkura lietotni \"%s\"?"
+
+#: panel-plugin/wmdock.c:398
+msgid "No dockapp is running!"
+msgstr "dockapp neskrien!"
+
+#: panel-plugin/wmdock.c:858
+#, c-format
+msgid "Failed to start %s!"
+msgstr "Neizdevās palaist %s!"
+
+#: panel-plugin/wmdock.c:1148
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:1151
+msgid "Remove dockapp"
+msgstr "Noņemt doka lietotni"
+
+#: panel-plugin/wmdock.c:1167
+msgid "General settings"
+msgstr "Vispārējie uzstādījumi"
+
+#: panel-plugin/wmdock.c:1168
+msgid "Dockapp detection"
+msgstr "Doka lietotne atrasta"
+
+#: panel-plugin/wmdock.c:1216
+msgid "Select dockapp to configure:"
+msgstr "Atlasiet konfigurējamo doka lietotni:"
+
+#: panel-plugin/wmdock.c:1225
+msgid "Shell command:"
+msgstr "Čaulas komanda:"
+
+#: panel-plugin/wmdock.c:1236
+msgid "Display tile in the background."
+msgstr "Attēlot virsrakstu fonā."
+
+#: panel-plugin/wmdock.c:1237
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr ""
+"Attēlo atdalīti WMdock rekvizītu\n"
+"pogu uz paneļa."
+
+#: panel-plugin/wmdock.c:1238
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr ""
+"Pievienot doka lietotni, kura sākas ar\n"
+"wm* nosaukumā."
+
