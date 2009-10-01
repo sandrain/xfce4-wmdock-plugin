@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2009-05-02 16:35+0100\n"
+"PO-Revision-Date: 2009-08-19 16:08+0100\n"
 "Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
@@ -21,13 +21,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: panel-plugin/wmdock.c:196
-#, c-format
+#, fuzzy, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr ""
+msgstr "Está seguro de que quere eliminar o grupo '%s'?"
 
 #: panel-plugin/wmdock.c:398
+#, fuzzy
 msgid "No dockapp is running!"
-msgstr ""
+msgstr "o demonio gdesklets está funcionando"
 
 #: panel-plugin/wmdock.c:858
 #, c-format
@@ -39,20 +40,23 @@ msgid "WMdock"
 msgstr "WMdock"
 
 #: panel-plugin/wmdock.c:1151
+#, fuzzy
 msgid "Remove dockapp"
-msgstr ""
+msgstr "Eliminar a configuración"
 
 #: panel-plugin/wmdock.c:1167
 msgid "General settings"
 msgstr "Configuración xeral"
 
 #: panel-plugin/wmdock.c:1168
+#, fuzzy
 msgid "Dockapp detection"
-msgstr ""
+msgstr "Detección térmica"
 
 #: panel-plugin/wmdock.c:1216
+#, fuzzy
 msgid "Select dockapp to configure:"
-msgstr ""
+msgstr "Prema para configurar a rede"
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
@@ -71,8 +75,9 @@ msgstr ""
 "propiedades de WMdock no panel."
 
 #: panel-plugin/wmdock.c:1238
+#, fuzzy
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
-msgstr ""
+msgstr "Engadir só                   cuxo nome comece por wm*."
 
