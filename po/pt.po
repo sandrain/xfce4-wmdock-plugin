@@ -1,0 +1,78 @@
+# Portuguese translation for xfce4-wmdock-plugin package.
+# Copyright (C) 2008 xfce4-wmdock-plugin's COPYRIGHT HOLDER
+# This file is distributed under the same license as the xfce4-wmdock-plugin package.
+# Sérgio Marques <smarquespt@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-wmdock-plugin 0.3.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-26 20:22+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Sergio Marques <smarquespt@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Poedit-Language: Portuguese\n"
+"X-Poedit-Country: Portugal\n"
+
+#: panel-plugin/wmdock.c:196
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "Deseja remover a aplicação dock \"%s\"?"
+
+#: panel-plugin/wmdock.c:398
+msgid "No dockapp is running!"
+msgstr "Nenhuma aplicação dock em execução!"
+
+#: panel-plugin/wmdock.c:858
+#, c-format
+msgid "Failed to start %s!"
+msgstr "Falha ao iniciar %s!"
+
+#: panel-plugin/wmdock.c:1148
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:1151
+msgid "Remove dockapp"
+msgstr "Remover aplicação dock"
+
+#: panel-plugin/wmdock.c:1167
+msgid "General settings"
+msgstr "Definições gerais"
+
+#: panel-plugin/wmdock.c:1168
+msgid "Dockapp detection"
+msgstr "Detecção de aplicação dock"
+
+#: panel-plugin/wmdock.c:1216
+msgid "Select dockapp to configure:"
+msgstr "Seleccione a aplicação dock a configurar:"
+
+#: panel-plugin/wmdock.c:1225
+msgid "Shell command:"
+msgstr "Comando de consola:"
+
+#: panel-plugin/wmdock.c:1236
+msgid "Display tile in the background."
+msgstr "Apresentar título em fundo."
+
+#: panel-plugin/wmdock.c:1237
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr ""
+"Apresentar um botão de propriedades\n"
+"WMdock no painel."
+
+#: panel-plugin/wmdock.c:1238
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr ""
+"Apenas adicionar aplicações dock\n"
+"cujo nome começe por wm*."
+
