@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2009-12-16 14:34+0100\n"
+"PO-Revision-Date: 2009-12-16 18:01+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -18,11 +18,11 @@ msgstr ""
 #: panel-plugin/wmdock.c:196
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr ""
+msgstr "Vill du ta bort dockprogrammet \"%s\"?"
 
 #: panel-plugin/wmdock.c:398
 msgid "No dockapp is running!"
-msgstr ""
+msgstr "Inget dockprogram körs!"
 
 #: panel-plugin/wmdock.c:858
 #, c-format
@@ -35,7 +35,7 @@ msgstr "WMdock"
 
 #: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
-msgstr ""
+msgstr "Ta bort dockprogram"
 
 #: panel-plugin/wmdock.c:1167
 msgid "General settings"
@@ -43,11 +43,11 @@ msgstr "Allmänna inställningar"
 
 #: panel-plugin/wmdock.c:1168
 msgid "Dockapp detection"
-msgstr ""
+msgstr "Identifiera dockprogram"
 
 #: panel-plugin/wmdock.c:1216
 msgid "Select dockapp to configure:"
-msgstr ""
+msgstr "Välj dockprogram att konfigurera:"
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
@@ -55,17 +55,21 @@ msgstr "Skalkommando:"
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
-msgstr ""
+msgstr "Visa bricka i bakgrunden."
 
 #: panel-plugin/wmdock.c:1237
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
 msgstr ""
+"Visa en separat knapp för WMdock-\n"
+"egenskaper i panelen."
 
 #: panel-plugin/wmdock.c:1238
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
 msgstr ""
+"Lägg endast till dockprogram som börjar\n"
+"med wm* i namnet."
 
