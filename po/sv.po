@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2008-12-14 16:20+0100\n"
+"PO-Revision-Date: 2009-12-16 14:34+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -27,11 +27,11 @@ msgstr ""
 #: panel-plugin/wmdock.c:858
 #, c-format
 msgid "Failed to start %s!"
-msgstr ""
+msgstr "Misslyckades med att starta %s!"
 
 #: panel-plugin/wmdock.c:1148
 msgid "WMdock"
-msgstr ""
+msgstr "WMdock"
 
 #: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: panel-plugin/wmdock.c:1167
 msgid "General settings"
-msgstr ""
+msgstr "Allmänna inställningar"
 
 #: panel-plugin/wmdock.c:1168
 msgid "Dockapp detection"
@@ -51,7 +51,7 @@ msgstr ""
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
-msgstr ""
+msgstr "Skalkommando:"
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
@@ -68,3 +68,4 @@ msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
 msgstr ""
+
