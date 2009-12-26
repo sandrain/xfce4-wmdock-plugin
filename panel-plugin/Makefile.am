@@ -19,7 +19,8 @@ xfce4_wmdock_plugin_CFLAGS =						\
 xfce4_wmdock_plugin_LDADD =						\
 	$(LIBXFCE4PANEL_LIBS)						\
 	$(LIBWNCK_LIBS)							\
-	$(LIBXFCEGUI4_LIBS)
+	$(LIBXFCEGUI4_LIBS)						\
+	@X11_LIBS@
 
 #
 # Desktop file
