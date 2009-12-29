@@ -52,6 +52,7 @@ typedef struct {
  gboolean        propDispTile;
  gboolean        propDispPropButton;
  gboolean        propDispAddOnlyWM;
+ gchar           *filterList;
 
  GList           *dapps;
 } WmdockPlugin;
