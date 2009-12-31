@@ -96,9 +96,6 @@ static void wmdock_redraw_dockapp(DockappNode *);
 static void wmdock_destroy_dockapp(DockappNode *);
 
 
-/* #define DEBUG */
-#define DEBUG
-
 #ifdef DEBUG
 /* fp needed for debug */
 FILE           *fp = (FILE *) NULL;
@@ -745,6 +742,13 @@ static void wmdock_window_open(WnckScreen *s, WnckWindow *w)
    XUnmapWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), 
 		wnck_window_get_xid(w));
    dapp->i =h->icon_window;
+   if(h->flags & WindowGroupHint)
+    dapp->i = h->window_group;
+#ifdef DEBUG
+   fprintf(fp, "wmdock: dapp %s has the initial_state WithdrawnState.\n",
+	   wnck_window_get_name(w));
+   fflush(fp);
+#endif
   } else {
    dapp->i = wnck_window_get_xid(w);
   }
