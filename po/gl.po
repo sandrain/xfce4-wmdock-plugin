@@ -1,12 +1,12 @@
 # Galician translation of xfce4-wmdock-plugin
 # Copyright (C) 2008-2009 Leandro Regueiro
 # This file is distributed under the same license as the xfce package.
-#
+# 
 # Leandro Regueiro <leandro.regueiro@gmail.com>, 2009.
-#
+# 
 # Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
 # colaborar connosco, podes atopar máis información en <http://trasno.net>
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -21,14 +21,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: panel-plugin/wmdock.c:196
-#, fuzzy, c-format
+#, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr "Está seguro de que quere eliminar o grupo '%s'?"
+msgstr "Desexa eliminar o ancorábel \"%s\"?"
 
 #: panel-plugin/wmdock.c:398
-#, fuzzy
 msgid "No dockapp is running!"
-msgstr "o demonio gdesklets está funcionando"
+msgstr "Non se está executando ningún ancorábel!"
 
 #: panel-plugin/wmdock.c:858
 #, c-format
@@ -40,23 +39,20 @@ msgid "WMdock"
 msgstr "WMdock"
 
 #: panel-plugin/wmdock.c:1151
-#, fuzzy
 msgid "Remove dockapp"
-msgstr "Eliminar a configuración"
+msgstr "Eliminar o ancorábel"
 
 #: panel-plugin/wmdock.c:1167
 msgid "General settings"
 msgstr "Configuración xeral"
 
 #: panel-plugin/wmdock.c:1168
-#, fuzzy
 msgid "Dockapp detection"
-msgstr "Detección térmica"
+msgstr "Detección de ancorábeis"
 
 #: panel-plugin/wmdock.c:1216
-#, fuzzy
 msgid "Select dockapp to configure:"
-msgstr "Prema para configurar a rede"
+msgstr "Seleccione o ancorábel a configurar:"
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
@@ -75,9 +71,9 @@ msgstr ""
 "propiedades de WMdock no panel."
 
 #: panel-plugin/wmdock.c:1238
-#, fuzzy
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
-msgstr "Engadir só                   cuxo nome comece por wm*."
-
+msgstr ""
+"Engadir só ancorábeis cuxo nome\n"
+"comece por wm*."
