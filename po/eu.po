@@ -1,0 +1,76 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# , 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-26 20:22+0100\n"
+"PO-Revision-Date: 2010-02-09 10:06+0100\n"
+"Last-Translator: \n"
+"Language-Team: Basque <kde-i18n-doc@kde.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: panel-plugin/wmdock.c:196
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "\"%s\" dockapp-a ezabatu nahi al duzu?"
+
+#: panel-plugin/wmdock.c:398
+msgid "No dockapp is running!"
+msgstr "Ez dago dockapp-ik martxan!"
+
+#: panel-plugin/wmdock.c:858
+#, c-format
+msgid "Failed to start %s!"
+msgstr "Huts %s abiaraztean!"
+
+#: panel-plugin/wmdock.c:1148
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:1151
+msgid "Remove dockapp"
+msgstr "Kendu dockapp-a"
+
+#: panel-plugin/wmdock.c:1167
+msgid "General settings"
+msgstr "Ezarpen orokorrak"
+
+#: panel-plugin/wmdock.c:1168
+msgid "Dockapp detection"
+msgstr "dockapp detekzioa"
+
+#: panel-plugin/wmdock.c:1216
+msgid "Select dockapp to configure:"
+msgstr "Hautatu konfiguratu behar den dockapp-a:"
+
+#: panel-plugin/wmdock.c:1225
+msgid "Shell command:"
+msgstr "Shell komandoa:"
+
+#: panel-plugin/wmdock.c:1236
+msgid "Display tile in the background."
+msgstr "Ikusi mosaikoa atzeko planoan."
+
+#: panel-plugin/wmdock.c:1237
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr ""
+"Bistarazi WMdock propietate botoi berezi\n"
+"bat panelean."
+
+#: panel-plugin/wmdock.c:1238
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr ""
+"GEhi bakarrik izen hasiera wm* duten\n"
+"dockapp-ak."
+
