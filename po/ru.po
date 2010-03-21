@@ -1,3 +1,4 @@
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin\n"
@@ -51,7 +52,6 @@ msgid "Shell command:"
 msgstr "Команда оболочки:"
 
 #: panel-plugin/wmdock.c:1236
-#, fuzzy
 msgid "Display tile in the background."
 msgstr "Расположить черепицей на заднем плане."
 
@@ -70,4 +70,3 @@ msgid ""
 msgstr ""
 "Добавить апплеты, названия которых\n"
 "начинаются на wm*."
-
