@@ -2,76 +2,78 @@
 # Copyright (C) 2008 Andre Ellguth
 # This file is distributed under the same license as the PACKAGE package.
 # Andre Ellguth <ellguth@ibh.de>, 2008.
+# Fabian Nowak <timystery@arcor.de>, 2010.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin 0.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2009-01-25 20:04+0200\n"
-"Last-Translator: Andre Ellguth <ellguth@ibh.de>\n"
-"Language-Team: none <LL@li.org>\n"
+"POT-Creation-Date: 2010-03-28 13:01+0200\n"
+"PO-Revision-Date: 2010-03-28 13:04+0200\n"
+"Last-Translator: Fabian Nowak <timystery@arcor.de>\n"
+"Language-Team: German Xfce Translation Team <xfce-i18n-de@xfce.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: panel-plugin/wmdock.c:196
+#: ../panel-plugin/wmdock.c:250
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr "Soll das Dockapp \"%s\" entfernt werden?"
+msgstr "Soll das Dockapp »%s« entfernt werden?"
 
-#: panel-plugin/wmdock.c:398
+#: ../panel-plugin/wmdock.c:452
 msgid "No dockapp is running!"
-msgstr "Kein Dockapp ist gestartet!"
+msgstr "Kein Dockapp gestartet!"
 
-#: panel-plugin/wmdock.c:858
+#: ../panel-plugin/wmdock.c:919
 #, c-format
 msgid "Failed to start %s!"
 msgstr "Fehler beim Starten von %s!"
 
-#: panel-plugin/wmdock.c:1148
+#. Create the configure dialog.
+#: ../panel-plugin/wmdock.c:1223
 msgid "WMdock"
-msgstr ""
+msgstr "Windowmaker-Dock"
 
-#: panel-plugin/wmdock.c:1151
+#: ../panel-plugin/wmdock.c:1226
 msgid "Remove dockapp"
 msgstr "Entferne Dockapp"
 
-#: panel-plugin/wmdock.c:1167
+#: ../panel-plugin/wmdock.c:1242
 msgid "General settings"
 msgstr "Allgemeine Einstellungen"
 
-#: panel-plugin/wmdock.c:1168
+#: ../panel-plugin/wmdock.c:1243
 msgid "Dockapp detection"
-msgstr "Dockapp Erkennung"
+msgstr "Dockapp-Erkennung"
 
-#: panel-plugin/wmdock.c:1216
+#: ../panel-plugin/wmdock.c:1291
 msgid "Select dockapp to configure:"
-msgstr "Wähle ein Dockapp:"
+msgstr "Wählen Sie ein Dockapp aus:"
 
-#: panel-plugin/wmdock.c:1225
+#: ../panel-plugin/wmdock.c:1300
 msgid "Shell command:"
-msgstr "Shell Kommando:"
+msgstr "Shell-Befehl:"
 
-#: panel-plugin/wmdock.c:1236
+#: ../panel-plugin/wmdock.c:1311
 msgid "Display tile in the background."
-msgstr "Kacheln im Hintergrund darstellen"
+msgstr "Kachel im Hintergrund anzeigen"
 
-#: panel-plugin/wmdock.c:1237
+#: ../panel-plugin/wmdock.c:1312
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
 msgstr ""
-"Extra Konfigurationsknopf\n"
-"im Panel darstellen"
+"Zusätzlichen Konfigurationsknopf\n"
+"in der Leiste anzeigen"
 
-#: panel-plugin/wmdock.c:1238
+#: ../panel-plugin/wmdock.c:1313
 msgid ""
 "Add only dockapps which start with\n"
-"wm* in the name."
+"pattern in list. (e.g.: ^wm;^as)"
 msgstr ""
-"Nur Dockapps hinzufügen die mit\n"
-"wm* im Namen beginnen."
+"Nur Dockapps hinzufügen, die mit\n"
+"Muater aus Liste beginnen (z.B. ^wm;^as)."
 
 #~ msgid "General settings:"
 #~ msgstr "Allgemeine Einstellungen:"
