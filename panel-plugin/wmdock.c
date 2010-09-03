@@ -34,11 +34,7 @@
 #include <gtk/gtk.h>
 #include <libxfce4util/libxfce4util.h>
 #include <libxfcegui4/libxfcegui4.h>
-#include <libxfce4panel/xfce-panel-plugin.h>
-#include <libxfce4panel/xfce-panel-window.h>
-#include <libxfce4panel/xfce-hvbox.h>
-#include <libxfce4panel/xfce-arrow-button.h>
-#include <libxfce4panel/xfce-panel-convenience.h>
+#include <libxfce4panel/libxfce4panel.h>
 
 #include "wmdock.h"
 #include "xfce4-wmdock-plugin.xpm"
