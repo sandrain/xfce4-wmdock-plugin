@@ -3,13 +3,12 @@
 # This file is distributed under the same license as the xfce4-wmdock-plugin package.
 # Cristian Marchi <cri.penta@gmail.com>, 2010
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2010-09-06 21:06+0100\n"
 "Last-Translator: Cristian Marchi <cri.penta@gmail.com>\n"
 "Language-Team: Italian Translation Team <xfce-it-translators@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -19,53 +18,58 @@ msgstr ""
 #: panel-plugin/wmdock.c:196
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr ""
+msgstr "Rimuovere la dockapp \"%s\"?"
 
 #: panel-plugin/wmdock.c:398
 msgid "No dockapp is running!"
-msgstr ""
+msgstr "Nessuna dockapp in esecuzione!"
 
 #: panel-plugin/wmdock.c:858
 #, c-format
 msgid "Failed to start %s!"
-msgstr ""
+msgstr "Impossibile avviare %s!"
 
 #: panel-plugin/wmdock.c:1148
 msgid "WMdock"
-msgstr ""
+msgstr "WMdock"
 
 #: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
-msgstr ""
+msgstr "Rimuovi dockapp"
 
 #: panel-plugin/wmdock.c:1167
 msgid "General settings"
-msgstr ""
+msgstr "Impostazioni generali"
 
 #: panel-plugin/wmdock.c:1168
 msgid "Dockapp detection"
-msgstr ""
+msgstr "Ricerca dockapp"
 
 #: panel-plugin/wmdock.c:1216
 msgid "Select dockapp to configure:"
-msgstr ""
+msgstr "Selezionare la dockapp da configurare:"
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
-msgstr ""
+msgstr "Comando della shell:"
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
-msgstr ""
+msgstr "Visualizza il riquadro sullo sfondo."
 
 #: panel-plugin/wmdock.c:1237
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
 msgstr ""
+"Visualizza un pulsante WMdock separato\n"
+"sul pannello per le proprietà"
 
 #: panel-plugin/wmdock.c:1238
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
 msgstr ""
+"Aggiungi solo le dockapp il cui nome\n"
+"inizia per wm*"
+
