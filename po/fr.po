@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: panel-plugin/wmdock.c:196
-#, c-format, fuzzy
+#, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "Voulez-vous enlever l'application \"%s\"?"
 
@@ -30,7 +30,6 @@ msgid "Failed to start %s!"
 msgstr "Défaut pendant lancer %s!"
 
 #: panel-plugin/wmdock.c:1148
-#, fuzzy
 msgid "WMdock"
 msgstr "WMdock"
 
