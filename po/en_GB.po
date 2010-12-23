@@ -2,7 +2,7 @@
 # Copyright (C) 2008 Andre Ellguth
 # This file is distributed under the same license as the PACKAGE package.
 # Andre Ellguth <ellguth@ibh.de>, 2008.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin 0.2.0\n"
@@ -18,53 +18,57 @@ msgstr ""
 #: panel-plugin/wmdock.c:196
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr ""
+msgstr "Do you want remove the dockapp \"%s\"?"
 
 #: panel-plugin/wmdock.c:398
 msgid "No dockapp is running!"
-msgstr ""
+msgstr "No dockapp is running!"
 
 #: panel-plugin/wmdock.c:858
 #, c-format
 msgid "Failed to start %s!"
-msgstr ""
+msgstr "Failed to start %s!"
 
 #: panel-plugin/wmdock.c:1148
 msgid "WMdock"
-msgstr ""
+msgstr "WMdock"
 
 #: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
-msgstr ""
+msgstr "Remove dockapp"
 
 #: panel-plugin/wmdock.c:1167
 msgid "General settings"
-msgstr ""
+msgstr "General settings"
 
 #: panel-plugin/wmdock.c:1168
 msgid "Dockapp detection"
-msgstr ""
+msgstr "Dockapp detection"
 
 #: panel-plugin/wmdock.c:1216
 msgid "Select dockapp to configure:"
-msgstr ""
+msgstr "Select dockapp to configure:"
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
-msgstr ""
+msgstr "Shell command:"
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
-msgstr ""
+msgstr "Display tile in the background."
 
 #: panel-plugin/wmdock.c:1237
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
 msgstr ""
+"Display a separate WMdock properties\n"
+"button in the panel."
 
 #: panel-plugin/wmdock.c:1238
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
 msgstr ""
+"Add only dockapps which start with\n"
+"wm* in the name."
