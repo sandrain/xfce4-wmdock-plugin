@@ -1,3 +1,4 @@
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin\n"
@@ -16,11 +17,11 @@ msgstr ""
 #: panel-plugin/wmdock.c:196
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr ""
+msgstr "Θέλετε αφαιρέσετε το την προσάρτηση \"%s\";"
 
 #: panel-plugin/wmdock.c:398
 msgid "No dockapp is running!"
-msgstr ""
+msgstr "Δεν τρέχει κάποια προσάρτηση!"
 
 #: panel-plugin/wmdock.c:858
 #, c-format
@@ -33,37 +34,40 @@ msgstr "WMdock"
 
 #: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
-msgstr ""
+msgstr "Αφαίρεση προσάρτησης"
 
 #: panel-plugin/wmdock.c:1167
 msgid "General settings"
-msgstr ""
+msgstr "Γενικές ρυθμίσεις"
 
 #: panel-plugin/wmdock.c:1168
 msgid "Dockapp detection"
-msgstr ""
+msgstr "Ανίχνευση προσαρτήσεων"
 
 #: panel-plugin/wmdock.c:1216
 msgid "Select dockapp to configure:"
-msgstr ""
+msgstr "Επιλέξτε "
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
-msgstr ""
+msgstr "Εντολή κελύφους:"
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
-msgstr ""
+msgstr "Εμφάνιση στο παρασκήνιο."
 
 #: panel-plugin/wmdock.c:1237
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
 msgstr ""
+"Εμφάνιση ξεχωριστού κουμπιού ιδιοτήτων\n"
+"του WMdock στο ταμπλό."
 
 #: panel-plugin/wmdock.c:1238
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
 msgstr ""
-
+"Προσθήκη μόνο προσαρτήσεων που αρχίζουν με \n"
+"wm* στο όνομα."
