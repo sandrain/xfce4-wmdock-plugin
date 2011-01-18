@@ -56,7 +56,7 @@ msgstr "Seleccione o ancorábel a configurar:"
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
-msgstr "Comando de shell:"
+msgstr "Orde de shell:"
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
