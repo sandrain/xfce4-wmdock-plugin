@@ -853,7 +853,6 @@ static gboolean wmdock_startup_dockapp(const gchar *cmd)
  GError *err = NULL;
 
  ret = xfce_exec(cmd, FALSE, FALSE, &err);
- /* ret = g_spawn_command_line_async(cmd, &err); */
 
  /* Errors will be evaluate in a later version. */
  if(err) g_clear_error (&err);
