@@ -1,3 +1,7 @@
+2011-04-29	Andre Ellguth <ellguth at ibh dot de>
+	* New editable dockapp filter.
+	* Added build support for XFCE 4.8.
+
 2009-01-26	Andre Ellguth <ellguth at ibh dot de>
 	* Added build support for Debian Etch.
 
