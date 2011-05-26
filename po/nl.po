@@ -1,0 +1,77 @@
+# Dutch translation of the xfce4-wmdock-plugin package.
+# Copyright (C) The Xfce development team.
+# This file is distributed under the same license as the 
+# xfce4-wmdock-plugin package.
+# Pjotr, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-wmdock-plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-05-25 11:02+0200\n"
+"PO-Revision-Date: 2011-05-25 11:34+0200\n"
+"Last-Translator: Pjotr\n"
+"Language-Team: Dutch (Flemish)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: panel-plugin/wmdock.c:196
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "Wilt u de doktoepassing \"%s\" verwijderen?"
+
+#: panel-plugin/wmdock.c:398
+msgid "No dockapp is running!"
+msgstr "Er draait geen doktoepassing!"
+
+#: panel-plugin/wmdock.c:858
+#, c-format
+msgid "Failed to start %s!"
+msgstr "Kon %s niet starten!"
+
+#: panel-plugin/wmdock.c:1148
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:1151
+msgid "Remove dockapp"
+msgstr "Verwijder doktoepassing"
+
+#: panel-plugin/wmdock.c:1167
+msgid "General settings"
+msgstr "Algemene instellingen"
+
+#: panel-plugin/wmdock.c:1168
+msgid "Dockapp detection"
+msgstr "Detectie van doktoepassing"
+
+#: panel-plugin/wmdock.c:1216
+msgid "Select dockapp to configure:"
+msgstr "Kies doktoepassing om in te stellen:"
+
+#: panel-plugin/wmdock.c:1225
+msgid "Shell command:"
+msgstr "Opdracht voor gebruikersschil:"
+
+#: panel-plugin/wmdock.c:1236
+msgid "Display tile in the background."
+msgstr "Toon titel in de achtergrond"
+
+#: panel-plugin/wmdock.c:1237
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr ""
+"Toon een afzonderlijke knop voor\n"
+"WMdock-eigenschappen in de werkbalk."
+
+#: panel-plugin/wmdock.c:1238
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr ""
+"Voeg alleen doktoepassingen toe\n"
+"waarvan de naam begint met wm*."
