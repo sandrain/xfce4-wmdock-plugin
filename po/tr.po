@@ -30,7 +30,7 @@ msgstr ""
 #: panel-plugin/wmdock.c:858
 #, c-format
 msgid "Failed to start %s!"
-msgstr ""
+msgstr "%s başlatılamadı!"
 
 #: panel-plugin/wmdock.c:1148
 msgid "WMdock"
@@ -53,9 +53,8 @@ msgid "Select dockapp to configure:"
 msgstr ""
 
 #: panel-plugin/wmdock.c:1225
-#, fuzzy
 msgid "Shell command:"
-msgstr "Shell komutu:"
+msgstr "Kabuk komutu:"
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
