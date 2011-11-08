@@ -1,16 +1,17 @@
 # Chinese translations for xfce package.
-# Copyright (C) 2008 THE xfce'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the xfce package.
+# Copyright (C) 2008 THE xfce4-wmdock-plugin'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the xfce4-wmdock-plugin.
 # Hunt Xu <huntxu@live.cn>, 2008, 2009.
-#
+# Chipong Luo <chipong_l@yahoo.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-26 20:22+0100\n"
 "PO-Revision-Date: 2009-06-20 12:15+0800\n"
-"Last-Translator: Hunt Xu <huntxu@live.cn>\n"
-"Language-Team: Chinese (simplified)\n"
+"Last-Translator: Chipong Luo <chipong_l@yahoo.com>\n"
+"Language-Team: Chinese (simplified) <xfce-i18n@xfce.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,55 +19,55 @@ msgstr ""
 #: panel-plugin/wmdock.c:196
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr "您要移除 dock 程序“%s”吗？"
+msgstr "您要移除 Dockapp 窗口管理器 “%s” 吗？"
 
 #: panel-plugin/wmdock.c:398
 msgid "No dockapp is running!"
-msgstr "没有 dock 程序正在运行！"
+msgstr "没有 Dockapp 窗口管理器在运行！"
 
 #: panel-plugin/wmdock.c:858
 #, c-format
 msgid "Failed to start %s!"
-msgstr "启动 %s 失败！"
+msgstr "无法启动 %s！"
 
 #: panel-plugin/wmdock.c:1148
 msgid "WMdock"
-msgstr "WMdock"
+msgstr "WMdock 窗口管理器插件"
 
 #: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
-msgstr "移除 dock 程序"
+msgstr "移除 Dockapp 窗口管理器"
 
 #: panel-plugin/wmdock.c:1167
 msgid "General settings"
-msgstr "常规设置"
+msgstr "一般设置"
 
 #: panel-plugin/wmdock.c:1168
 msgid "Dockapp detection"
-msgstr "检测 dock 程序"
+msgstr "检测 Dockapp 窗口管理器"
 
 #: panel-plugin/wmdock.c:1216
 msgid "Select dockapp to configure:"
-msgstr "选择一个 dock 程序进行配置:"
+msgstr "选择 Dockapp 窗口管理器来配置："
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
-msgstr "Shell 命令:"
+msgstr "Shell 命令："
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
-msgstr "平铺在桌面背景。"
+msgstr "平铺在桌面背景中。"
 
 #: panel-plugin/wmdock.c:1237
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
-msgstr ""
-"在面板上显示一个独立的 WMdock 属性按钮"
+msgstr "在面板上显示一个独立的 WMdock 属性按钮。"
 
 #: panel-plugin/wmdock.c:1238
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
 msgstr ""
-"仅能添加以 wm* 开头的 dock 程序。"
+"仅能添加以 wm* 开头的 \n"
+"Dockapp 窗口管理器。"
