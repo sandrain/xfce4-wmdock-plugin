@@ -32,7 +32,7 @@ msgstr "无法启动 %s！"
 
 #: panel-plugin/wmdock.c:1148
 msgid "WMdock"
-msgstr "WMdock 窗口管理器插件"
+msgstr "WMdock 窗口管理器"
 
 #: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
