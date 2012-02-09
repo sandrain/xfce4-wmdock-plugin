@@ -3,7 +3,7 @@
 # This file is distributed under the same license as
 # the xfce4-wmdock-plugin package.
 # Hunt Xu <huntxu@live.cn>, 2008, 2009.
-# Chipong Luo <chipong_l@yahoo.com>, 2011.
+# Chipong Luo <chipong.luo@yahoo.com>, 2011, 2012.
 #
 msgid ""
 msgstr ""
@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-01-26 20:22+0100\n"
 "PO-Revision-Date: 2009-06-20 12:15+0800\n"
-"Last-Translator: Chipong Luo <chipong_l@yahoo.com>\n"
+"Last-Translator: Chipong Luo <chipong.luo@yahoo.com>\n"
 "Language-Team: Chinese (Simplified) <xfce-i18n@xfce.org>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -21,11 +21,11 @@ msgstr ""
 #: panel-plugin/wmdock.c:196
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr "您要移除 Dockapp 窗口管理器 “%s” 吗？"
+msgstr "您要移除 Dockapp “%s” 吗？"
 
 #: panel-plugin/wmdock.c:398
 msgid "No dockapp is running!"
-msgstr "没有 Dockapp 窗口管理器在运行！"
+msgstr "无 Dockapp 在运行！"
 
 #: panel-plugin/wmdock.c:858
 #, c-format
@@ -34,11 +34,11 @@ msgstr "无法启动 %s！"
 
 #: panel-plugin/wmdock.c:1148
 msgid "WMdock"
-msgstr "WMdock 窗口管理器"
+msgstr "WMdock"
 
 #: panel-plugin/wmdock.c:1151
 msgid "Remove dockapp"
-msgstr "移除 Dockapp 窗口管理器"
+msgstr "移除 Dockapp"
 
 #: panel-plugin/wmdock.c:1167
 msgid "General settings"
@@ -46,11 +46,11 @@ msgstr "一般设置"
 
 #: panel-plugin/wmdock.c:1168
 msgid "Dockapp detection"
-msgstr "检测 Dockapp 窗口管理器"
+msgstr "检测 Dockapp"
 
 #: panel-plugin/wmdock.c:1216
 msgid "Select dockapp to configure:"
-msgstr "选择 Dockapp 窗口管理器来配置："
+msgstr "选择 Dockapp 来配置："
 
 #: panel-plugin/wmdock.c:1225
 msgid "Shell command:"
@@ -58,18 +58,20 @@ msgstr "Shell 命令："
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
-msgstr "平铺在桌面背景中。"
+msgstr "在桌面背景中显示马赛克。"
 
 #: panel-plugin/wmdock.c:1237
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
-msgstr "在面板上显示一个独立的 WMdock 属性按钮。"
+msgstr ""
+"在面板上显示一个独立的\n"
+"WMdock 属性按钮。"
 
 #: panel-plugin/wmdock.c:1238
 msgid ""
 "Add only dockapps which start with\n"
 "wm* in the name."
 msgstr ""
-"仅能添加以 wm* 开头的 \n"
-"Dockapp 窗口管理器。"
+"添加仅在名称中以 wm*\n"
+"开头的 Dockapp。"
