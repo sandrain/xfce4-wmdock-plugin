@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin.master\n"
 "Report-Msgid-Bugs-To: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge.net>\n"
 "POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2012-02-21 04:27+0900\n"
+"PO-Revision-Date: 2012-02-21 14:44+0900\n"
 "Last-Translator: Seong-ho, Cho <darkcircle.0426@gmail.com>\n"
 "Language-Team: xfce4-users-kr-i18n <xfce4-users-kr-i18n@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgstr "셸 명령:"
 
 #: panel-plugin/wmdock.c:1236
 msgid "Display tile in the background."
-msgstr "배경화면에 타일을 보입니다."
+msgstr "배경에 타일을 보입니다."
 
 #: panel-plugin/wmdock.c:1237
 msgid ""
