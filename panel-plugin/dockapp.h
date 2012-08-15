@@ -49,6 +49,7 @@ struct _dockapp {
  DockappNode     *glue[GLUE_MAX];
 };
 
+#define DOCKAPP_DUMMY_TITLE "_dummy_"
 #define DOCKAPP(__dapp) ((DockappNode *) __dapp)
 
 gboolean wmdock_startup_dockapp(const gchar *);

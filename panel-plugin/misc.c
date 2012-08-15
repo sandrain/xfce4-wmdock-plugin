@@ -34,6 +34,7 @@
 
 #include "extern.h"
 #include "wmdock.h"
+#include "dockapp.h"
 #include "misc.h"
 
 #include "xfce4-wmdock-plugin.xpm"
@@ -159,8 +160,22 @@ gboolean has_dockapp_hint(WnckWindow *w)
 }
 
 
+/**
+ * Function which interacts with the wmdock icon.
+ *
+ * @param icon The wmdock icon widget.
+ */
+static void wmdock_icon_pressed(GtkWidget *icon)
+{
+	if( IS_PANELOFF(wmdock) )
+		g_list_foreach(wmdock->dapps, (GFunc) wmdock_dockapp_tofront, NULL);
+}
+
+
 void wmdock_panel_draw_wmdock_icon (gboolean redraw)
 {
+	static GtkWidget *eventBox = NULL;
+
 	gdkPbIcon = get_icon_from_xpm_scaled((const char **) xfce4_wmdock_plugin_xpm,
 			xfce_panel_plugin_get_size (wmdock->plugin) - 2,
 			xfce_panel_plugin_get_size (wmdock->plugin) - 2);
@@ -168,12 +183,19 @@ void wmdock_panel_draw_wmdock_icon (gboolean redraw)
 		gtk_image_set_from_pixbuf (GTK_IMAGE(wmdockIcon), gdkPbIcon);
 	} else {
 		if(wmdockIcon) gtk_widget_destroy(wmdockIcon);
-		wmdockIcon = gtk_image_new_from_pixbuf (gdkPbIcon);
+		if(eventBox) gtk_widget_destroy(eventBox);
+		eventBox = gtk_event_box_new();
 
-		gtk_box_pack_start(GTK_BOX(wmdock->box), GTK_WIDGET(wmdockIcon),
+		wmdockIcon = gtk_image_new_from_pixbuf (gdkPbIcon);
+		gtk_container_add(GTK_CONTAINER(eventBox), wmdockIcon);
+
+		gtk_box_pack_start(GTK_BOX(wmdock->box), GTK_WIDGET(eventBox),
 				FALSE, FALSE, 0);
 	}
 	g_object_unref (G_OBJECT (gdkPbIcon));
 
-	gtk_widget_show(GTK_WIDGET(wmdockIcon));
+	if( IS_PANELOFF(wmdock) )
+		g_signal_connect (G_OBJECT(eventBox), "button_press_event", G_CALLBACK (wmdock_icon_pressed), NULL);
+
+	gtk_widget_show_all(GTK_WIDGET(eventBox));
 }

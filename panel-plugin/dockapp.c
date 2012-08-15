@@ -123,7 +123,7 @@ static void wmdock_insert_dummy(DockappNode *dapp)
 
 	if(!dummy) {
 		dummy = g_new0(DockappNode, 1);
-		dummy->name = g_strdup("dummy");
+		dummy->name = g_strdup(DOCKAPP_DUMMY_TITLE);
 		dummy->tile = wmdock_create_dummy();
 	}
 
@@ -144,6 +144,10 @@ static void wmdock_destroy_dummy()
 {
 	if(!dummy)
 		return;
+
+	/* Kick all dummy dockapps in list. */
+	if(g_list_find(wmdock->dapps, dummy))
+		wmdock->dapps = g_list_remove(wmdock->dapps, dummy);
 
 	gtk_widget_destroy(dummy->tile);
 	g_free(dummy->name);

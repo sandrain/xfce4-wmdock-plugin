@@ -238,9 +238,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 						(DOCKAPP(g_list_first(wmdock->dapps)->data) != dapp && _dapps) ?
 								DOCKAPP(g_list_previous(_dapps)->data) : NULL);
 
-				/* Workaround to display the tile background. */
-				if(wmdock->propDispTile == TRUE)
-					wmdock_redraw_dockapp(dapp);
+				wmdock_order_dockapps(DOCKAPP(g_list_first(wmdock->dapps)->data));
 			}
 
 			/* Setup the event handler for the window. */
