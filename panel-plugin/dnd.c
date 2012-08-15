@@ -1,8 +1,6 @@
 /* wmdock xfce4 plugin by Andre Ellguth
  * Drag & Drop functions.
  *
- * $Id: dnd.c 23 2012-08-09 19:39:15Z ellguth $
- *
  * Authors:
  *   Andre Ellguth <ellguth@ibh.de>
  *

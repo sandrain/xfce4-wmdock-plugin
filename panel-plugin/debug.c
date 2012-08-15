@@ -1,8 +1,6 @@
 /* wmdock xfce4 plugin by Andre Ellguth
  * Debug output.
  *
- * $Id: debug.c 10 2012-05-29 06:29:21Z ellguth $
- *
  * Authors:
  *   Andre Ellguth <ellguth@ibh.de>
  *

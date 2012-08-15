@@ -1,8 +1,6 @@
 /* wmdock xfce4 plugin by Andre Ellguth
  * extern.h
  *
- * $Id: extern.h 18 2012-08-06 21:00:29Z ellguth $
- *
  * Authors:
  *   Andre Ellguth <ellguth@ibh.de>
  *

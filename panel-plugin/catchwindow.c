@@ -1,8 +1,6 @@
 /* wmdock xfce4 plugin by Andre Ellguth
  * Catch the window if is a dockapp.
  *
- * $Id: catchwindow.c 26 2012-08-11 21:04:14Z ellguth $
- *
  * Authors:
  *   Andre Ellguth <ellguth@ibh.de>
  *

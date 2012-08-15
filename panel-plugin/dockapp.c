@@ -1,8 +1,6 @@
 /* wmdock xfce4 plugin by Andre Ellguth
  * Dockapp handling.
  *
- * $Id: dockapp.c 28 2012-08-12 12:31:28Z ellguth $
- *
  * Authors:
  *   Andre Ellguth <ellguth@ibh.de>
  *

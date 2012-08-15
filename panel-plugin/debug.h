@@ -1,8 +1,6 @@
 /* wmdock xfce4 plugin by Andre Ellguth
  * debug.h
  *
- * $Id: debug.h 5 2012-05-23 18:16:58Z ellguth $
- *
  * Authors:
  *   Andre Ellguth <ellguth@ibh.de>
  *

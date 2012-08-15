@@ -1,8 +1,6 @@
 /* wmdock xfce4 plugin by Andre Ellguth
  * catchwindow.h
  *
- * $Id: catchwindow.h 11 2012-05-29 19:45:56Z ellguth $
- *
  * Authors:
  *   Andre Ellguth <ellguth@ibh.de>
  *

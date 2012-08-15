@@ -1,8 +1,6 @@
 /* wmdock xfce4 plugin by Andre Ellguth
  * misc.h
  *
- * $Id: misc.h 4 2012-05-23 12:45:49Z ellguth $
- *
  * Authors:
  *   Andre Ellguth <ellguth@ibh.de>
  *
