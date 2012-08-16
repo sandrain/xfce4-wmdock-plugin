@@ -149,17 +149,38 @@ static WmdockPlugin *wmdock_plugin_new (XfcePanelPlugin* plugin)
 static void wmdock_construct (XfcePanelPlugin *plugin)
 {
 	WnckScreen  *s;
+	GtkWidget   *gtkDlg;
 
 	init_debug();
 
 	s = wnck_screen_get(0);
 
+#ifdef HAVE_CONFIG_H
 	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
+#endif /* HAVE_CONFIG_H */
 
 	XfceDockAppAtom=XInternAtom(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),
 			"_XFCE4_DOCKAPP",False);
 
 	wmdock = wmdock_plugin_new (plugin);
+
+	if(wmdock_get_instance_count() > 1) {
+		gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
+				GTK_DIALOG_DESTROY_WITH_PARENT,
+				GTK_MESSAGE_ERROR,
+				GTK_BUTTONS_OK,
+#ifdef HAVE_CONFIG_H
+				_("Only a single instance of `%s' can run."),
+				GETTEXT_PACKAGE);
+#else
+				_("Only a single instance of `xfce4-wmdock-plugin' can run."));
+#endif /* HAVE_CONFIG_H */
+
+		g_signal_connect (gtkDlg, "response", G_CALLBACK (wmdock_error_dialog_response), NULL);
+		gtk_dialog_run (GTK_DIALOG(gtkDlg));
+
+		exit(EXIT_SUCCESS);
+	}
 
 	g_signal_connect(s, "window_opened", G_CALLBACK(wmdock_window_open), NULL);
 	g_signal_connect (plugin, "size-changed", G_CALLBACK (wmdock_size_changed), NULL);

@@ -34,6 +34,7 @@
 
 #include "extern.h"
 #include "wmdock.h"
+#include "debug.h"
 #include "dockapp.h"
 #include "misc.h"
 
@@ -169,6 +170,50 @@ static void wmdock_icon_pressed(GtkWidget *icon)
 {
 	if( IS_PANELOFF(wmdock) )
 		g_list_foreach(wmdock->dapps, (GFunc) wmdock_dockapp_tofront, NULL);
+}
+
+
+/**
+ * Function get the number of xfce4-wmdock-instances are running.
+ *
+ * @return int Process count of wmdock-plugin.
+ */
+int wmdock_get_instance_count()
+{
+	int count = 0;
+
+#ifdef __linux__
+	int i;
+	FILE *fp = NULL;
+	char buf[BUF_MAX], username[BUF_MAX];
+
+#ifdef HAVE_CONFIG_H
+	snprintf(buf, BUF_MAX, "ps -C %s -ouser=", GETTEXT_PACKAGE);
+#else
+	snprintf(cmd, BUF_MAX, "ps -C xfce4-wmdock-plugin -ouser=");
+#endif /* HAVE_CONFIG_H */
+
+	fp = popen(buf, "r");
+	if(!fp)
+		return(-1);
+
+	strncpy(username, (const char *) g_get_user_name(), BUF_MAX);
+	while(!feof(fp)) {
+		buf[0] = 0;
+		fgets(buf, BUF_MAX, fp);
+		/* Remove all newline and carriage returns. */
+		for(i = 0; i < BUF_MAX; i++)
+			buf[i] = (buf[i] == 0xA || buf[i] == 0xD) ? 0 : buf[i];
+
+		if(!strncmp(buf, username, BUF_MAX))
+			count++;
+	}
+	pclose(fp);
+#endif /* __linux__ */
+
+	debug("misc.c: Instance count: %d", count);
+
+	return count;
 }
 
 

@@ -29,5 +29,6 @@ gboolean has_dockapp_hint(WnckWindow *);
 gboolean comp_dockapp_with_filterlist(const gchar *);
 gboolean comp_str_with_pattern(const gchar *, gchar *, gsize);
 void wmdock_panel_draw_wmdock_icon (gboolean redraw);
+int wmdock_get_instance_count();
 
 #endif /* __MISC_H__ */
