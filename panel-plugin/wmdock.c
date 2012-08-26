@@ -179,7 +179,7 @@ static void wmdock_construct (XfcePanelPlugin *plugin)
 		g_signal_connect (gtkDlg, "response", G_CALLBACK (wmdock_error_dialog_response), NULL);
 		gtk_dialog_run (GTK_DIALOG(gtkDlg));
 
-		exit(EXIT_SUCCESS);
+		xfce_panel_plugin_remove(plugin);
 	}
 
 	g_signal_connect(s, "window_opened", G_CALLBACK(wmdock_window_open), NULL);
