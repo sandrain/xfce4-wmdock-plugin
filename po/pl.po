@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Piotr Strębski <strebski@o2.pl>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xfce4-wmdock-plugin 1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-01-26 20:22+0100\n"
+"PO-Revision-Date: 2013-01-08 21:54+0100\n"
+"Last-Translator: Piotr Strębski <strebski@o2.pl>\n"
+"Language-Team: Xfce PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"Language: pl\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: panel-plugin/wmdock.c:196
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "Czy chcesz usunąć program doku \"%s\"?"
+
+#: panel-plugin/wmdock.c:398
+msgid "No dockapp is running!"
+msgstr "Nie jest uruchomiony żaden program doku!"
+
+#: panel-plugin/wmdock.c:858
+#, c-format
+msgid "Failed to start %s!"
+msgstr "Błąd przy uruchamianiu %s!"
+
+#: panel-plugin/wmdock.c:1148
+msgid "WMdock"
+msgstr "WMdock"
+
+#: panel-plugin/wmdock.c:1151
+msgid "Remove dockapp"
+msgstr "Usuń program doku"
+
+#: panel-plugin/wmdock.c:1167
+msgid "General settings"
+msgstr "Ustawienia ogólne"
+
+#: panel-plugin/wmdock.c:1168
+msgid "Dockapp detection"
+msgstr "Wykrycie programu doku"
+
+#: panel-plugin/wmdock.c:1216
+msgid "Select dockapp to configure:"
+msgstr "Wskaż program doku do konfiguracji:"
+
+#: panel-plugin/wmdock.c:1225
+msgid "Shell command:"
+msgstr "Komenda powłoki:"
+
+#: panel-plugin/wmdock.c:1236
+msgid "Display tile in the background."
+msgstr "Wyświetlaj kafelki w tle."
+
+#: panel-plugin/wmdock.c:1237
+msgid ""
+"Display a separate WMdock properties\n"
+"button in the panel."
+msgstr ""
+"Wyświetlaj w panelu oddzielny przycisk\n"
+"właściwości WMdock"
+
+#: panel-plugin/wmdock.c:1238
+msgid ""
+"Add only dockapps which start with\n"
+"wm* in the name."
+msgstr ""
+"Dodaj tylko programy doku, których nazwa\n"
+"zaczyna się od wm*"
