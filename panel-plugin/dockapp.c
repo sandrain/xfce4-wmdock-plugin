@@ -248,7 +248,7 @@ gboolean wmdock_startup_dockapp(const gchar *cmd)
 void wmdock_destroy_dockapp(DockappNode *dapp)
 {
 	debug("dockapp.c: Destroy dockapp %s", dapp->name);
-	XDestroyWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);
+	XDestroyWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), dapp->i);
 }
 
 

@@ -65,7 +65,7 @@ void set_xsmp_support(WnckWindow *w)
 	XTextProperty tp;
 	static Atom _XA_SM_CLIENT_ID = None;
 
-	_XA_SM_CLIENT_ID = XInternAtom (GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), "SM_CLIENT_ID", False);
+	_XA_SM_CLIENT_ID = XInternAtom (GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), "SM_CLIENT_ID", False);
 
 
 	tp.value = (unsigned char *) strdup("SM_CLIENT_ID");
@@ -73,7 +73,7 @@ void set_xsmp_support(WnckWindow *w)
 	tp.format = 8;
 	tp.nitems = 1;
 
-	XSetTextProperty(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),
+	XSetTextProperty(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
 			wnck_window_get_xid(w),
 			&tp, _XA_SM_CLIENT_ID);
 
@@ -145,7 +145,7 @@ gboolean has_dockapp_hint(WnckWindow *w)
 
 	gdk_error_trap_push();
 	if (XGetWindowProperty(
-			GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),
+			GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
 			wnck_window_get_xid(w), XfceDockAppAtom, 0, 1, False,
 			XA_CARDINAL, &atype, &afmt, &nitems, &naft, &dat) == Success) {
 		if (nitems==1 && ((long int *) dat)[0]==1) {
@@ -153,11 +153,25 @@ gboolean has_dockapp_hint(WnckWindow *w)
 		}
 		XFree(dat);
 	}
-	XSync(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),False);
+	XSync(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),False);
 
 	gdk_error_trap_pop();
 
 	return (r);
+}
+
+
+/**
+ * Returns the current GdkDisplay.
+ *
+ * @return current GdkDisplay
+ */
+GdkDisplay *get_current_gdkdisplay()
+{
+	if(!wmdock || !wmdock->plugin)
+		return gdk_display_get_default();
+
+	return gdk_window_get_display(gtk_widget_get_toplevel(GTK_WIDGET(wmdock->plugin))->window);
 }
 
 

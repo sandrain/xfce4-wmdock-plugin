@@ -55,7 +55,7 @@ static gchar *wmdock_get_dockapp_cmd(WnckWindow *w)
 	FILE *procfp = NULL;
 	char buf[BUF_MAX];
 
-	XGetCommand(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),
+	XGetCommand(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
 			wnck_window_get_xid(w), &argv, &argc);
 	if(argc > 0) {
 		argv = (char **) realloc(argv, sizeof(char *) * (argc + 1));
@@ -112,7 +112,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 	gdk_error_trap_push();
 	gdk_flush();
 
-	h = XGetWMHints(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),
+	h = XGetWMHints(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
 			wnck_window_get_xid(w));
 
 	if(!h) return;
@@ -152,14 +152,14 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 		}
 
 		if(h->initial_state == WithdrawnState && h->icon_window) {
-			XUnmapWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),
+			XUnmapWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
 					wnck_window_get_xid(w));
 			dapp->i =h->icon_window;
 		} else {
 			dapp->i = wnck_window_get_xid(w);
 		}
 
-		if(!XGetWindowAttributes(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),
+		if(!XGetWindowAttributes(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
 				dapp->i, &attr)) {
 			wi = DEFAULT_DOCKAPP_WIDTH;
 			he = DEFAULT_DOCKAPP_HEIGHT;
@@ -171,7 +171,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 		if(wi > DEFAULT_DOCKAPP_WIDTH || he > DEFAULT_DOCKAPP_HEIGHT) {
 			/* It seems to be no dockapp, because the width or the height of the
 			 * window a greater than 64 pixels. */
-			XMapWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),
+			XMapWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
 					wnck_window_get_xid(w));
 			gtk_widget_destroy(GTK_WIDGET(dapp->s));
 			g_free(cmd);
@@ -198,7 +198,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 		}
 
 		/* Cleanly unmap the original window. */
-		XUnmapWindow(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()), dapp->i);
+		XUnmapWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), dapp->i);
 
 		if(rcDapp == FALSE) {
 			dapp->tile = wmdock_create_tile_from_socket(dapp);

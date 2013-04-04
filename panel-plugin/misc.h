@@ -24,6 +24,7 @@
 
 /* Prototypes */
 GdkPixbuf *get_icon_from_xpm_scaled(const char **, gint, gint);
+GdkDisplay *get_current_gdkdisplay();
 void set_xsmp_support(WnckWindow *);
 gboolean has_dockapp_hint(WnckWindow *);
 gboolean comp_dockapp_with_filterlist(const gchar *);

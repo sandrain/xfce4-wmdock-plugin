@@ -159,7 +159,7 @@ static void wmdock_construct (XfcePanelPlugin *plugin)
 	xfce_textdomain(GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
 #endif /* HAVE_CONFIG_H */
 
-	XfceDockAppAtom=XInternAtom(GDK_DISPLAY_XDISPLAY(gdk_display_get_default()),
+	XfceDockAppAtom=XInternAtom(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
 			"_XFCE4_DOCKAPP",False);
 
 	wmdock = wmdock_plugin_new (plugin);
