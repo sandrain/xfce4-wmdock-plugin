@@ -1,72 +1,75 @@
-# xfce4-wmdock-plugin French language
-# Copyright (C) 2008 Andre Ellguth
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Andre Ellguth <ellguth@ibh.de>, 2008.
 # 
+# Translators:
+# Andre Ellguth <ellguth@ibh.de>, 2008
+# jc1 <jc1.quebecos@gmail.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-wmdock-plugin 0.2.0\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2008-08-24 13:49+0200\n"
-"Last-Translator: Andre Ellguth <ellguth@ibh.de>\n"
-"Language-Team: none <LL@li.org>\n"
+"POT-Creation-Date: 2013-07-13 22:15+0200\n"
+"PO-Revision-Date: 2013-07-14 17:04+0000\n"
+"Last-Translator: jc1 <jc1.quebecos@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/projects/p/xfce/language/fr/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: panel-plugin/wmdock.c:196
+#: ../panel-plugin/wmdock.c:246
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr "Voulez-vous enlever l'application \"%s\"?"
+msgstr "Voulez-vous enlever l'application ancrable « %s » "
 
-#: panel-plugin/wmdock.c:398
+#: ../panel-plugin/wmdock.c:448
 msgid "No dockapp is running!"
-msgstr "Pas de dockapp marche!"
+msgstr "Pas d'application ancrable en fonctionnement !"
 
-#: panel-plugin/wmdock.c:858
+#: ../panel-plugin/wmdock.c:907
 #, c-format
 msgid "Failed to start %s!"
 msgstr "Défaut pendant lancer %s!"
 
-#: panel-plugin/wmdock.c:1148
+#. Create the configure dialog.
+#: ../panel-plugin/wmdock.c:1211
 msgid "WMdock"
 msgstr "WMdock"
 
-#: panel-plugin/wmdock.c:1151
+#: ../panel-plugin/wmdock.c:1214
 msgid "Remove dockapp"
-msgstr "Enleve dockapp!"
+msgstr "Enlever l'application ancrable !"
 
-#: panel-plugin/wmdock.c:1167
+#: ../panel-plugin/wmdock.c:1230
 msgid "General settings"
 msgstr "Réglages généraux"
 
-#: panel-plugin/wmdock.c:1168
+#: ../panel-plugin/wmdock.c:1231
 msgid "Dockapp detection"
-msgstr "Apercevoir dockapp!"
+msgstr "Détection d'applications ancrables !"
 
-#: panel-plugin/wmdock.c:1216
+#: ../panel-plugin/wmdock.c:1279
 msgid "Select dockapp to configure:"
-msgstr "Choisit dockapp!"
+msgstr "Sélectionner l'application ancrable à configurer :"
 
-#: panel-plugin/wmdock.c:1225
+#: ../panel-plugin/wmdock.c:1288
 msgid "Shell command:"
-msgstr "commandement:"
+msgstr "Commande Shell :"
 
-#: panel-plugin/wmdock.c:1236
+#: ../panel-plugin/wmdock.c:1299
 msgid "Display tile in the background."
-msgstr "Marque arrière-plan!"
+msgstr "Afficher les carreaux en arrière-plan."
 
-#: panel-plugin/wmdock.c:1237
+#: ../panel-plugin/wmdock.c:1300
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
-msgstr "Affiche un bouton pour configurer"
+msgstr "Afficher les propriétés d'un WMdock séparés\nbouton dans le panneau."
 
-#: panel-plugin/wmdock.c:1238
+#: ../panel-plugin/wmdock.c:1301
 msgid ""
 "Add only dockapps which start with\n"
-"wm* in the name."
-msgstr ""
-"Ajoute seulement des dockapps\n"
-"dont des noms commencent avec wm*"
+"pattern in list. (e.g.: ^wm;^as)"
+msgstr "Ajouter seulement des dockapps qui commencent par\nun modèle dans la liste. (par exemple : ^wm; ^as)"
