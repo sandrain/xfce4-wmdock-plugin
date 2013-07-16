@@ -1,78 +1,75 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# Саша Петровић <salepetronije@gmail.com>, 2013.
-#
+# 
+# Translators:
+# salepetronije <salepetronije@gmail.com>, 2013
+# salepetronije <salepetronije@gmail.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: master\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2013-03-22 17:00+0100\n"
-"Last-Translator: Саша Петровић <salepetronije@gmail.com>\n"
-"Language-Team: српски <српски <xfce-i18n@xfce.org>>\n"
+"POT-Creation-Date: 2013-07-13 22:15+0200\n"
+"PO-Revision-Date: 2013-07-15 23:21+0000\n"
+"Last-Translator: salepetronije <salepetronije@gmail.com>\n"
+"Language-Team: Serbian (http://www.transifex.com/projects/p/xfce/language/sr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2) \n"
-"X-Generator: Gtranslator 2.91.6\n"
+"Language: sr\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: panel-plugin/wmdock.c:196
+#: ../panel-plugin/wmdock.c:246
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "Да ли желите да уклоните док програм„%s“?"
 
-#: panel-plugin/wmdock.c:398
+#: ../panel-plugin/wmdock.c:448
 msgid "No dockapp is running!"
 msgstr "Нема покренутих док програма!"
 
-#: panel-plugin/wmdock.c:858
+#: ../panel-plugin/wmdock.c:907
 #, c-format
 msgid "Failed to start %s!"
 msgstr "Нисам успео да покренем %s!"
 
-#: panel-plugin/wmdock.c:1148
+#. Create the configure dialog.
+#: ../panel-plugin/wmdock.c:1211
 msgid "WMdock"
 msgstr "ВМдок"
 
-#: panel-plugin/wmdock.c:1151
+#: ../panel-plugin/wmdock.c:1214
 msgid "Remove dockapp"
 msgstr "Уклони док програм"
 
-#: panel-plugin/wmdock.c:1167
+#: ../panel-plugin/wmdock.c:1230
 msgid "General settings"
 msgstr "Опште поставке"
 
-#: panel-plugin/wmdock.c:1168
+#: ../panel-plugin/wmdock.c:1231
 msgid "Dockapp detection"
 msgstr "Препознавање док програма"
 
-#: panel-plugin/wmdock.c:1216
+#: ../panel-plugin/wmdock.c:1279
 msgid "Select dockapp to configure:"
 msgstr "Изаберите док програм за подешавање:"
 
-#: panel-plugin/wmdock.c:1225
+#: ../panel-plugin/wmdock.c:1288
 msgid "Shell command:"
 msgstr "Наредба љуске:"
 
-#: panel-plugin/wmdock.c:1236
+#: ../panel-plugin/wmdock.c:1299
 msgid "Display tile in the background."
 msgstr "Приказуј наслов у позадини."
 
-#: panel-plugin/wmdock.c:1237
+#: ../panel-plugin/wmdock.c:1300
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
-msgstr ""
-"Приказује посебно дугме ВМдок\n"
-"поставки на полици"
+msgstr "Приказује посебно дугме ВМдок\nпоставки на полици"
 
-#: panel-plugin/wmdock.c:1238
+#: ../panel-plugin/wmdock.c:1301
 msgid ""
 "Add only dockapps which start with\n"
-"wm* in the name."
-msgstr ""
-"Додај само док програме чија имена почињу\n"
-" са wm* ."
+"pattern in list. (e.g.: ^wm;^as)"
+msgstr "Додаје само док програме који почињу са\nобрасцем у спику (нпр. ^wm;^as)"
