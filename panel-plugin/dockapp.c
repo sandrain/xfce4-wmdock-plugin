@@ -49,8 +49,6 @@ static GtkTargetEntry targetList[] = {
 		{ "INTEGER", 0, 0 }
 };
 static guint nTargets = G_N_ELEMENTS (targetList);
-static DockappNode *dummy = NULL;
-
 
 /**
  * Get the x coordinate child dockapp.
@@ -70,8 +68,7 @@ static void wmdock_dockapp_child_pos(DockappNode *prevDapp, gint gluepos, gint *
 
 	/* Get the position of the previous DockApp if is accessable. */
 	gtk_window_get_position(
-			GTK_WINDOW (GTK_WIDGET (prevDapp->tile)),
-			&prevx, &prevy);
+			GTK_WINDOW (GTK_WIDGET (prevDapp->tile)), &prevx, &prevy);
 
 	switch(gluepos) {
 	case GLUE_T:
@@ -111,53 +108,103 @@ static void wmdock_dockapp_child_pos(DockappNode *prevDapp, gint gluepos, gint *
 	}
 }
 
-
 /**
- * Insert a dummy and move dockapp and replace the other dockapps.
+ * Calculate the next snapable postion of the moving DockApp.
  *
- * @param dapp Position for dummy placement.
+ * @parm dapp The moving DockApp.
+ * @parm gluepos Pointer to the glue position of the determined DockApp.
+ * @return The determined DockApp or NULL.
  */
-static void wmdock_insert_dummy(DockappNode *dapp)
+static DockappNode *wmdock_determine_snapable_dockapp(DockappNode *dapp, gint *gluepos)
 {
-	gint i, x, y;
+	#define SNAPDELTA (DEFAULT_DOCKAPP_HEIGHT/2)-1
+	gint posx, posy, gluex, gluey;
+	GList *dapps;
+	DockappNode *_dapp = NULL;
 
-	if(!dummy) {
-		dummy = g_new0(DockappNode, 1);
-		dummy->name = g_strdup(DOCKAPP_DUMMY_TITLE);
-		dummy->tile = wmdock_create_dummy();
+	gtk_window_get_position(
+			GTK_WINDOW (GTK_WIDGET (dapp->tile)), &posx, &posy);
+
+	dapps = g_list_first(wmdock->dapps);
+
+	while(dapps) {
+		if((_dapp = DOCKAPP(dapps->data))) {
+			for(*gluepos = 0; *gluepos < GLUE_MAX; *gluepos=*gluepos+1) {
+				if(!_dapp->glue[*gluepos] || !g_strcmp0(_dapp->glue[*gluepos]->name, DOCKAPP_DUMMY_TITLE)) {
+					wmdock_dockapp_child_pos(_dapp, *gluepos, &gluex, &gluey);
+					if(posx >= gluex-SNAPDELTA && posy >= gluey-SNAPDELTA &&
+							posx <= gluex+SNAPDELTA && posy <= gluey+SNAPDELTA)
+						return _dapp;
+				}
+			}
+		}
+
+		dapps = g_list_next(dapps);
 	}
 
-	for(i = 0; i < GLUE_MAX; i++)
-		dummy->glue[i] = dapp->glue[i];
-
-	gtk_widget_show(dummy->tile);
-
-	gtk_window_get_position(GTK_WINDOW(dapp->tile), &x, &y);
-	debug("dockapp.c: Move dummy dockapp to x: %d, y: %d", x, y);
-	gtk_window_move(GTK_WINDOW(dummy->tile), x, y);
-
-	wmdock_order_dockapps(dummy);
+	return NULL;
 }
 
 
-static void wmdock_destroy_dummy()
+/**
+ * Remove anchors of dummy DockApp.
+ */
+static void wmdock_remove_anchors_tile_dummy()
 {
-	if(!dummy)
-		return;
+	gint i;
+	GList *dapps;
+	DockappNode *_dapp = NULL;
 
-	/* Kick all dummy dockapps in list. */
-	if(g_list_find(wmdock->dapps, dummy))
-		wmdock->dapps = g_list_remove(wmdock->dapps, dummy);
+	dapps = g_list_first(wmdock->dapps);
+	while(dapps) {
+		if((_dapp = DOCKAPP(dapps->data))) {
+			for(i = 0; i < GLUE_MAX; i++) {
+				if(_dapp->glue[i] && !g_strcmp0(_dapp->glue[i]->name, DOCKAPP_DUMMY_TITLE)) {
+					_dapp->glue[i] = NULL;
+				}
+			}
+		}
 
-	gtk_widget_destroy(dummy->tile);
-	g_free(dummy->name);
-	g_free(dummy);
-
-	dummy = NULL;
-
-	wmdock_order_dockapps(DOCKAPP(g_list_first(wmdock->dapps)->data));
+		dapps = g_list_next(dapps);
+	}
 }
 
+
+/**
+ * Replace dummy DockApp with the moved DockApp.
+ *
+ * @param dapp Replacement Dockapp.
+ * @return TRUE if dummy tile is replaced else FALSE.
+ */
+static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
+{
+	gint i;
+	GList *dapps;
+	DockappNode *_dapp = NULL;
+
+	dapps = g_list_first(wmdock->dapps);
+	while(dapps) {
+		if((_dapp = DOCKAPP(dapps->data))) {
+			for(i = 0; i < GLUE_MAX; i++) {
+				if(_dapp->glue[i] && !g_strcmp0(_dapp->glue[i]->name, DOCKAPP_DUMMY_TITLE)) {
+					g_list_foreach(wmdock->dapps, (GFunc) wmdock_remove_anchor_dockapp, dapp);
+					_dapp->glue[i] = dapp;
+					for(i = 0; i < GLUE_MAX; i++) {
+						if(dapp->glue[i] == _dapp) {
+							/* Remove old anchor itself. */
+							dapp->glue[i] = NULL;
+						}
+					}
+					return TRUE;
+				}
+			}
+		}
+
+		dapps = g_list_next(dapps);
+	}
+
+	return FALSE;
+}
 
 /**
  * Event handler for the tile in panel off mode.
@@ -168,52 +215,103 @@ static void wmdock_destroy_dummy()
  */
 void wmdock_dockapp_paneloff_handler(GtkWidget *tile, GdkEvent *ev, DockappNode *dapp)
 {
-	static DockappNode *dappOnMove = NULL;
+	static DockappNode *dappOnMove = NULL, *dappDummy = NULL;
+	DockappNode *dappSnap = NULL;
+	gint gluepos;
 
 	debug("dockapp.c: Window event: %d. (dapp: %s), dappOnMove: %s", ev->type, dapp->name,
 			dappOnMove ? "Yes": "No");
 
 	switch(ev->type) {
 	case GDK_CONFIGURE: /* Movement. */
-		if(dappOnMove)
-			break;
+		if(dappOnMove) {
+			wmdock_remove_anchors_tile_dummy();
+			dappSnap = wmdock_determine_snapable_dockapp(dapp, &gluepos);
+			if(dappSnap) {
+				debug("dockapp.c: Snapable dockapp `%s' for dockapp `%s', glue: %d.", dappSnap->name, dapp->name, gluepos);
+				if(!dappDummy) {
+					dappDummy = g_new0(DockappNode, 1);
+					dappDummy->name = g_strdup(DOCKAPP_DUMMY_TITLE);
+					dappDummy->tile = wmdock_create_tile_dummy();
+				}
+
+				dappSnap->glue[gluepos] = dappDummy;
+				wmdock_order_dockapps(dappDummy);
+				gtk_widget_show_all(dappDummy->tile);
+			} else if(dappDummy) {
+				gtk_widget_hide(dappDummy->tile);
+			}
+		}
 		break;
 	case GDK_BUTTON_PRESS:
 	case GDK_KEY_PRESS:
 		dappOnMove = dapp;
-
 		break;
 	case GDK_BUTTON_RELEASE:
 	case GDK_KEY_RELEASE:
-		debug("dockapp.c: Window event button release on %s.", dapp->name);
-		wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
+		debug("dockapp.c: Window event button release on `%s'.", dapp->name);
+		if(wmdock_replace_tile_dummy(dapp) == TRUE) {
+			debug("dockapp.c: Replaceable dummy tile found.");
+			wmdock_order_dockapps(DOCKAPP(g_list_first(wmdock->dapps)->data));
+		} else {
+			wmdock_remove_anchors_tile_dummy();
+			wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
+		}
+		if(dappDummy) {
+			gtk_widget_hide(dappDummy->tile);
+		}
 		dappOnMove = NULL;
-		wmdock_destroy_dummy();
+
 		break;
 	case GDK_FOCUS_CHANGE:
 		if(ev->focus_change.in == TRUE) {
 			/* `in' is true if window window got the focus. */
 			g_list_foreach(wmdock->dapps, (GFunc) wmdock_dockapp_tofront, NULL);
 		}
-
+		if(dappOnMove) {
+			wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
+		}
 		break;
 	case GDK_VISIBILITY_NOTIFY:
-		if(dappOnMove) {
-			if(dapp == dappOnMove)
-				break;
-
-			if(ev->visibility.state == GDK_VISIBILITY_PARTIAL ||
-					ev->visibility.state == GDK_VISIBILITY_FULLY_OBSCURED) {
-				// wmdock_insert_dummy(dapp);
-			}
-		} else {
-			wmdock_redraw_dockapp(dapp);
-			wmdock_destroy_dummy();
-		}
+		wmdock_redraw_dockapp(dapp);
 		break;
 	default:
 		break;
 	}
+}
+
+
+/**
+ * Creates a dummy tile without any dockapp in it.
+ *
+ * @return A GTK window widget.
+ */
+GtkWidget *wmdock_create_tile_dummy()
+{
+	GtkWidget *dummy = NULL;
+
+	dummy = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+
+	gtk_window_set_default_size(GTK_WINDOW(dummy), DEFAULT_DOCKAPP_WIDTH,
+			DEFAULT_DOCKAPP_HEIGHT);
+	gtk_container_set_border_width(GTK_CONTAINER(dummy), 0);
+
+	/* Disable window shrinking resizing and growing. */
+	gtk_window_set_policy (GTK_WINDOW(dummy), FALSE, FALSE, FALSE);
+	gtk_window_set_decorated(GTK_WINDOW(dummy), FALSE);
+	gtk_window_set_resizable(GTK_WINDOW(dummy), FALSE);
+	/* Window visible on all workspaces. */
+	gtk_window_stick(GTK_WINDOW(dummy));
+	gtk_window_set_focus_on_map(GTK_WINDOW(dummy), FALSE);
+	/* Hide window from the taskbar and the pager. */
+	gtk_window_set_skip_taskbar_hint(GTK_WINDOW(dummy), TRUE);
+	gtk_window_set_skip_pager_hint(GTK_WINDOW(dummy), TRUE);
+	gtk_window_set_opacity(GTK_WINDOW(dummy), 0.6);
+	gtk_widget_set_size_request(dummy, DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
+	gtk_window_set_keep_below(GTK_WINDOW(dummy), TRUE);
+	gtk_window_set_type_hint(GTK_WINDOW(dummy), GDK_WINDOW_TYPE_HINT_DND);
+
+	return (dummy);
 }
 
 
@@ -288,7 +386,7 @@ DockappNode *wmdock_find_startup_dockapp(const gchar *compCmd)
 	GList *dapps;
 	DockappNode *dapp = NULL;
 
-	dapps = wmdock->dapps;
+	dapps = g_list_first(wmdock->dapps);
 
 	while(dapps) {
 		dapp = DOCKAPP(dapps->data);
@@ -513,38 +611,6 @@ void wmdock_set_tile_background(DockappNode *dapp, GdkPixbuf *pb)
 
 	if(dapp->s)
 		wmdock_update_tile_background(dapp);
-}
-
-
-/**
- * Creates a dummy tile without any dockapp in it.
- *
- * @return A GTK window widget.
- */
-GtkWidget *wmdock_create_dummy()
-{
-	GtkWidget *dummy = NULL;
-
-	dummy = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-
-	gtk_window_set_default_size(GTK_WINDOW(dummy), DEFAULT_DOCKAPP_WIDTH,
-			DEFAULT_DOCKAPP_HEIGHT);
-	gtk_container_set_border_width(GTK_CONTAINER(dummy), 0);
-
-	/* Disable window shrinking resizing and growing. */
-	gtk_window_set_policy (GTK_WINDOW(dummy), FALSE, FALSE, FALSE);
-	gtk_window_set_decorated(GTK_WINDOW(dummy), FALSE);
-	gtk_window_set_resizable(GTK_WINDOW(dummy), FALSE);
-	/* Window visible on all workspaces. */
-	gtk_window_stick(GTK_WINDOW(dummy));
-	gtk_window_set_focus_on_map(GTK_WINDOW(dummy), FALSE);
-	/* Hide window from the taskbar and the pager. */
-	gtk_window_set_skip_taskbar_hint(GTK_WINDOW(dummy), TRUE);
-	gtk_window_set_skip_pager_hint(GTK_WINDOW(dummy), TRUE);
-	gtk_window_set_opacity(GTK_WINDOW(dummy), 0.6);
-	gtk_widget_set_size_request(dummy, DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
-
-	return (dummy);
 }
 
 

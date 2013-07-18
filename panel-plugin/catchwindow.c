@@ -122,7 +122,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 			|| has_dockapp_hint(w)) {
 
 		debug("catchwindow.c: new wmapp open");
-		debug("catchwindow.c: New dockapp %s with xid:%u pid:%u arrived sessid:%s",
+		debug("catchwindow.c: New dockapp %s with xid: 0x%x pid: %u arrived sessid: %s",
 				wnck_window_get_name(w), wnck_window_get_xid(w),
 				wnck_window_get_pid(w), wnck_window_get_session_id(w));
 

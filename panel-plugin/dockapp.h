@@ -49,7 +49,7 @@ struct _dockapp {
  DockappNode     *glue[GLUE_MAX];
 };
 
-#define DOCKAPP_DUMMY_TITLE "_dummy_"
+#define DOCKAPP_DUMMY_TITLE "__WMDOCK_dummy__"
 #define DOCKAPP(__dapp) ((DockappNode *) __dapp)
 
 gboolean wmdock_startup_dockapp(const gchar *);
@@ -70,6 +70,6 @@ void wmdock_dockapp_tofront(DockappNode *dapp);
 void wmdock_dockapp_paneloff_handler(GtkWidget *, GdkEvent *, DockappNode *);
 void wmdock_remove_anchor_dockapp(DockappNode *, DockappNode *);
 void wmdock_order_dockapps(DockappNode *);
-GtkWidget *wmdock_create_dummy();
+GtkWidget *wmdock_create_tile_dummy();
 
 #endif /* __DOCKAPP_H__ */
