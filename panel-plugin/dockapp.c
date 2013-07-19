@@ -115,7 +115,7 @@ static void wmdock_dockapp_child_pos(DockappNode *prevDapp, gint gluepos, gint *
  * @parm gluepos Pointer to the glue position of the determined DockApp.
  * @return The determined DockApp or NULL.
  */
-static DockappNode *wmdock_determine_snapable_dockapp(DockappNode *dapp, gint *gluepos)
+static DockappNode *wmdock_get_snapable_dockapp(DockappNode *dapp, gint *gluepos)
 {
 	#define SNAPDELTA (DEFAULT_DOCKAPP_HEIGHT/2)-1
 	gint posx, posy, gluex, gluey;
@@ -140,6 +140,50 @@ static DockappNode *wmdock_determine_snapable_dockapp(DockappNode *dapp, gint *g
 		}
 
 		dapps = g_list_next(dapps);
+	}
+
+	return NULL;
+}
+
+
+/**
+ * Determine the main anchor DockApp.
+ *
+ * @return DockappNode which is the main anchor otherwise NULL.
+ */
+static DockappNode *wmdock_get_primary_anchor_dockapp()
+{
+	gint i;
+	GList *dapps1, *dapps2;
+	DockappNode *dapp1 = NULL, *dapp2 = NULL;
+
+	dapps1 = g_list_first(wmdock->dapps);
+
+	while(dapps1) {
+		if(!(dapp1 = DOCKAPP(dapps1->data)))
+			continue;
+
+		dapps2 = g_list_first(wmdock->dapps);
+		while(dapps2) {
+			if(!(dapp2 = DOCKAPP(dapps2->data)))
+				continue;
+
+			for(i = 0; i < GLUE_MAX; i++) {
+				if(dapp2->glue[i] == dapp1)
+					break;
+			}
+			if(dapp2->glue[i] == dapp1)
+				break;
+
+			dapps2 = g_list_next(dapps2);
+		}
+		/* Main anchor DockApp found. */
+		if(!dapps2) {
+			debug("dockapp.c: Found primary dockapp `%s'", dapp1->name);
+			return(dapp1);
+		}
+
+		dapps1 = g_list_next(dapps1);
 	}
 
 	return NULL;
@@ -206,6 +250,7 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 	return FALSE;
 }
 
+
 /**
  * Event handler for the tile in panel off mode.
  *
@@ -218,15 +263,20 @@ void wmdock_dockapp_paneloff_handler(GtkWidget *tile, GdkEvent *ev, DockappNode 
 	static DockappNode *dappOnMove = NULL, *dappDummy = NULL;
 	DockappNode *dappSnap = NULL;
 	gint gluepos;
+	GdkModifierType gdkmodtype;
 
-	debug("dockapp.c: Window event: %d. (dapp: %s), dappOnMove: %s", ev->type, dapp->name,
+	debug("dockapp.c: Window event after: %d. (dapp: %s), dappOnMove: %s", ev->type, dapp->name,
 			dappOnMove ? "Yes": "No");
 
 	switch(ev->type) {
+	case GDK_BUTTON_PRESS:
+	case GDK_KEY_PRESS:
+		dappOnMove = dapp;
+		break;
 	case GDK_CONFIGURE: /* Movement. */
 		if(dappOnMove) {
 			wmdock_remove_anchors_tile_dummy();
-			dappSnap = wmdock_determine_snapable_dockapp(dapp, &gluepos);
+			dappSnap = wmdock_get_snapable_dockapp(dapp, &gluepos);
 			if(dappSnap) {
 				debug("dockapp.c: Snapable dockapp `%s' for dockapp `%s', glue: %d.", dappSnap->name, dapp->name, gluepos);
 				if(!dappDummy) {
@@ -242,17 +292,17 @@ void wmdock_dockapp_paneloff_handler(GtkWidget *tile, GdkEvent *ev, DockappNode 
 				gtk_widget_hide(dappDummy->tile);
 			}
 		}
-		break;
-	case GDK_BUTTON_PRESS:
-	case GDK_KEY_PRESS:
-		dappOnMove = dapp;
-		break;
+
+		gdk_window_get_pointer(tile->window, NULL, NULL, &gdkmodtype);
+		if(!(dappOnMove && gdkmodtype && !(gdkmodtype & GDK_BUTTON1_MASK)))
+			break;
+		/* No break if DockApp is moved and mouse btn released. */
 	case GDK_BUTTON_RELEASE:
 	case GDK_KEY_RELEASE:
 		debug("dockapp.c: Window event button release on `%s'.", dapp->name);
 		if(wmdock_replace_tile_dummy(dapp) == TRUE) {
 			debug("dockapp.c: Replaceable dummy tile found.");
-			wmdock_order_dockapps(DOCKAPP(g_list_first(wmdock->dapps)->data));
+			wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp() ? wmdock_get_primary_anchor_dockapp() : dapp);
 		} else {
 			wmdock_remove_anchors_tile_dummy();
 			wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
@@ -269,7 +319,7 @@ void wmdock_dockapp_paneloff_handler(GtkWidget *tile, GdkEvent *ev, DockappNode 
 			g_list_foreach(wmdock->dapps, (GFunc) wmdock_dockapp_tofront, NULL);
 		}
 		if(dappOnMove) {
-			wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
+			//wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
 		}
 		break;
 	case GDK_VISIBILITY_NOTIFY:

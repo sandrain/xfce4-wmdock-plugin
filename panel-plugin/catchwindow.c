@@ -242,8 +242,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 			}
 
 			/* Setup the event handler for the window. */
-			g_signal_connect(dapp->tile, "event-after", G_CALLBACK(wmdock_dockapp_paneloff_handler),
-					dapp);
+			g_signal_connect(dapp->tile, "event-after", G_CALLBACK(wmdock_dockapp_paneloff_handler), dapp);
 		}
 		/* Clear the noisy background. */
 		wmdock_redraw_dockapp(dapp);
