@@ -75,24 +75,8 @@ static void wmdock_dockapp_child_pos(DockappNode *prevDapp, gint gluepos, gint *
 		*x = prevx;
 		*y = prevy - DEFAULT_DOCKAPP_HEIGHT;
 		break;
-	case GLUE_TL:
-		*x = prevx - DEFAULT_DOCKAPP_WIDTH;
-		*y = prevy - DEFAULT_DOCKAPP_HEIGHT;
-		break;
-	case GLUE_TR:
-		*x = prevx + DEFAULT_DOCKAPP_WIDTH;
-		*y = prevy - DEFAULT_DOCKAPP_HEIGHT;
-		break;
 	case GLUE_B:
 		*x = prevx;
-		*y = prevy + DEFAULT_DOCKAPP_HEIGHT;
-		break;
-	case GLUE_BL:
-		*x = prevx - DEFAULT_DOCKAPP_WIDTH;
-		*y = prevy + DEFAULT_DOCKAPP_HEIGHT;
-		break;
-	case GLUE_BR:
-		*x = prevx + DEFAULT_DOCKAPP_WIDTH;
 		*y = prevy + DEFAULT_DOCKAPP_HEIGHT;
 		break;
 	case GLUE_L:
@@ -106,43 +90,6 @@ static void wmdock_dockapp_child_pos(DockappNode *prevDapp, gint gluepos, gint *
 	default:
 		break;
 	}
-}
-
-/**
- * Calculate the next snapable postion of the moving DockApp.
- *
- * @parm dapp The moving DockApp.
- * @parm gluepos Pointer to the glue position of the determined DockApp.
- * @return The determined DockApp or NULL.
- */
-static DockappNode *wmdock_get_snapable_dockapp(DockappNode *dapp, gint *gluepos)
-{
-	#define SNAPDELTA (DEFAULT_DOCKAPP_HEIGHT/2)-1
-	gint posx, posy, gluex, gluey;
-	GList *dapps;
-	DockappNode *_dapp = NULL;
-
-	gtk_window_get_position(
-			GTK_WINDOW (GTK_WIDGET (dapp->tile)), &posx, &posy);
-
-	dapps = g_list_first(wmdock->dapps);
-
-	while(dapps) {
-		if((_dapp = DOCKAPP(dapps->data))) {
-			for(*gluepos = 0; *gluepos < GLUE_MAX; *gluepos=*gluepos+1) {
-				if(!_dapp->glue[*gluepos] || !g_strcmp0(_dapp->glue[*gluepos]->name, DOCKAPP_DUMMY_TITLE)) {
-					wmdock_dockapp_child_pos(_dapp, *gluepos, &gluex, &gluey);
-					if(posx >= gluex-SNAPDELTA && posy >= gluey-SNAPDELTA &&
-							posx <= gluex+SNAPDELTA && posy <= gluey+SNAPDELTA)
-						return _dapp;
-				}
-			}
-		}
-
-		dapps = g_list_next(dapps);
-	}
-
-	return NULL;
 }
 
 
@@ -191,6 +138,73 @@ static DockappNode *wmdock_get_primary_anchor_dockapp()
 
 
 /**
+ * Calculate the next snapable postion of the moving DockApp.
+ *
+ * @parm dapp The moving DockApp.
+ * @parm gluepos Pointer to the glue position of the determined DockApp.
+ * @return The determined DockApp or NULL.
+ */
+static DockappNode *wmdock_get_snapable_dockapp(DockappNode *dapp, gint *gluepos)
+{
+	#define SNAPDELTA (DEFAULT_DOCKAPP_HEIGHT/2)-1
+	gint posx, posy, gluex, gluey;
+	gint possible = GLUE_T | GLUE_B | GLUE_L | GLUE_R;
+	gboolean prim;
+	GList *dapps;
+	DockappNode *_dapp = NULL;
+
+	prim = (dapp == wmdock_get_primary_anchor_dockapp()) ? TRUE : FALSE;
+
+	switch(wmdock->anchorPos) {
+	/* Remove not possible snap positions. */
+	case XFCE_SCREEN_POSITION_NW_H:
+	case XFCE_SCREEN_POSITION_N:
+	case XFCE_SCREEN_POSITION_NE_H:
+		possible^= prim == TRUE ? GLUE_T : 0;
+		break;
+	case XFCE_SCREEN_POSITION_SW_H:
+	case XFCE_SCREEN_POSITION_S:
+	case XFCE_SCREEN_POSITION_SE_H:
+		possible^= prim == TRUE ? GLUE_B : 0;
+		break;
+	case XFCE_SCREEN_POSITION_NW_V:
+	case XFCE_SCREEN_POSITION_W:
+	case XFCE_SCREEN_POSITION_SW_V:
+		possible^= prim == TRUE ? GLUE_T : 0;
+		break;
+	case XFCE_SCREEN_POSITION_NE_V:
+	case XFCE_SCREEN_POSITION_E:
+	case XFCE_SCREEN_POSITION_SE_V:
+		possible^= prim == TRUE ? GLUE_T : 0;
+		break;
+	}
+
+	gtk_window_get_position(
+			GTK_WINDOW (GTK_WIDGET (dapp->tile)), &posx, &posy);
+
+	dapps = g_list_first(wmdock->dapps);
+
+	while(dapps) {
+		if((_dapp = DOCKAPP(dapps->data))) {
+			for(*gluepos = 0; *gluepos < GLUE_MAX; *gluepos=*gluepos+1) {
+				if((!_dapp->glue[*gluepos] || !g_strcmp0(_dapp->glue[*gluepos]->name, DOCKAPP_DUMMY_TITLE))
+						&& (possible & *gluepos)) {
+					wmdock_dockapp_child_pos(_dapp, *gluepos, &gluex, &gluey);
+					if(posx >= gluex-SNAPDELTA && posy >= gluey-SNAPDELTA &&
+							posx <= gluex+SNAPDELTA && posy <= gluey+SNAPDELTA)
+						return _dapp;
+				}
+			}
+		}
+
+		dapps = g_list_next(dapps);
+	}
+
+	return NULL;
+}
+
+
+/**
  * Remove anchors of dummy DockApp.
  */
 static void wmdock_remove_anchors_tile_dummy()
@@ -223,8 +237,11 @@ static void wmdock_remove_anchors_tile_dummy()
 static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 {
 	gint i;
+	gboolean prim;
 	GList *dapps;
 	DockappNode *_dapp = NULL;
+
+	prim = (dapp == wmdock_get_primary_anchor_dockapp()) ? TRUE : FALSE;
 
 	dapps = g_list_first(wmdock->dapps);
 	while(dapps) {
@@ -234,8 +251,8 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 					g_list_foreach(wmdock->dapps, (GFunc) wmdock_remove_anchor_dockapp, dapp);
 					_dapp->glue[i] = dapp;
 					for(i = 0; i < GLUE_MAX; i++) {
-						if(dapp->glue[i] == _dapp) {
-							/* Remove old anchor itself. */
+						if((dapp->glue[i] == _dapp) || prim == TRUE) {
+							/* Remove old anchor itself or all anchors it was the first anchor. */
 							dapp->glue[i] = NULL;
 						}
 					}
@@ -471,7 +488,7 @@ void wmdock_remove_anchor_dockapp(DockappNode *anchor, DockappNode *dapp)
 
 	for(i = 0; i < GLUE_MAX; i++) {
 		if(anchor->glue[i] == dapp) {
-			debug("Remove glue from parent: %s", anchor->name);
+			debug("Remove dockapp `%s' from the parent: `%s'", anchor->glue[i]->name, anchor->name);
 			anchor->glue[i] = NULL;
 		}
 	}
@@ -778,6 +795,7 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 		case XFCE_SCREEN_POSITION_N:
 		case XFCE_SCREEN_POSITION_NE_H:
 			if(!prevDapp) {
+				/* From the top to the bottom. */
 				x = gdk_screen_width() - DEFAULT_DOCKAPP_WIDTH;
 				y = panelx == 0 ? xfce_panel_plugin_get_size(wmdock->plugin) : 0;
 			} else {
@@ -790,6 +808,7 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 		case XFCE_SCREEN_POSITION_S:
 		case XFCE_SCREEN_POSITION_SE_H:
 			if(!prevDapp) {
+				/* From the bottom to the top. */
 				x = gdk_screen_width() - DEFAULT_DOCKAPP_WIDTH;
 				y = panelx == 0 ? panely - DEFAULT_DOCKAPP_HEIGHT : gdk_screen_height() - DEFAULT_DOCKAPP_HEIGHT;
 			} else {
@@ -801,6 +820,7 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 		case XFCE_SCREEN_POSITION_W:
 		case XFCE_SCREEN_POSITION_SW_V:
 			if(!prevDapp) {
+				/* From the top to the bottom. */
 				x = panely == 0 ? xfce_panel_plugin_get_size(wmdock->plugin) : 0;
 				y = 0;
 			} else {
@@ -812,6 +832,7 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 		case XFCE_SCREEN_POSITION_E:
 		case XFCE_SCREEN_POSITION_SE_V:
 			if(!prevDapp) {
+				/* From the top to the bottom. */
 				x = panely == 0 ? gdk_screen_width() - xfce_panel_plugin_get_size(wmdock->plugin) - DEFAULT_DOCKAPP_WIDTH : gdk_screen_width() - DEFAULT_DOCKAPP_WIDTH;
 				y = 0;
 			} else {

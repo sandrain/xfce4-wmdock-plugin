@@ -30,10 +30,6 @@ enum GluePosition {
 	GLUE_B    = 2,
 	GLUE_L    = 4,
 	GLUE_R    = 8,
-	GLUE_TL   = GLUE_T | GLUE_L,
-	GLUE_TR   = GLUE_T | GLUE_R,
-	GLUE_BL   = GLUE_B | GLUE_L,
-	GLUE_BR   = GLUE_B | GLUE_R,
 	GLUE_MAX
 };
 
