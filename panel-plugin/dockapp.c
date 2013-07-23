@@ -236,12 +236,12 @@ static void wmdock_remove_anchors_tile_dummy()
  */
 static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 {
-	gint i;
-	gboolean prim;
+	gint i, j;
 	GList *dapps;
-	DockappNode *_dapp = NULL;
+	DockappNode *_dapp = NULL, *parent = NULL, *_parent = NULL;
 
-	prim = (dapp == wmdock_get_primary_anchor_dockapp()) ? TRUE : FALSE;
+	parent = wmdock_get_parent_dockapp(dapp);
+	debug("dockapp.c: Parent DockApp of `%s' is `%s'", dapp->name, parent ? parent->name : "<none>");
 
 	dapps = g_list_first(wmdock->dapps);
 	while(dapps) {
@@ -249,13 +249,19 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 			for(i = 0; i < GLUE_MAX; i++) {
 				if(_dapp->glue[i] && !g_strcmp0(_dapp->glue[i]->name, DOCKAPP_DUMMY_TITLE)) {
 					g_list_foreach(wmdock->dapps, (GFunc) wmdock_remove_anchor_dockapp, dapp);
-					_dapp->glue[i] = dapp;
-					for(i = 0; i < GLUE_MAX; i++) {
-						if((dapp->glue[i] == _dapp) || prim == TRUE) {
-							/* Remove old anchor itself or all anchors it was the first anchor. */
-							dapp->glue[i] = NULL;
+					for(j = 0; j < GLUE_MAX; j++) {
+						if(parent) {
+							/* Transfer all connected DockApps to the parent. */
+							_parent = parent;
+							while(_parent->glue[j])
+								_parent = _parent->glue[j];
+							_parent->glue[j] = dapp->glue[j];
 						}
+						/* Remove old anchor itself or all anchors it was the first anchor. */
+						dapp->glue[j] = NULL;
 					}
+					_dapp->glue[i] = dapp;
+					debug("dockapp.c: Connect `%s' to `%s' with glue.", dapp->name, _dapp->name);
 					return TRUE;
 				}
 			}
@@ -457,9 +463,7 @@ DockappNode *wmdock_find_startup_dockapp(const gchar *compCmd)
 	dapps = g_list_first(wmdock->dapps);
 
 	while(dapps) {
-		dapp = DOCKAPP(dapps->data);
-
-		if(dapp) {
+		if((dapp = DOCKAPP(dapps->data))) {
 			if(!dapp->name && dapp->cmd) {
 				if(!g_ascii_strcasecmp(dapp->cmd, compCmd)) {
 					debug("dockapp.c: found startup dockapp with cmd %s", compCmd);
@@ -507,8 +511,7 @@ void wmdock_free_dockapp(DockappNode *dapp)
 	DockappNode *_dapp = NULL;
 
 	if( IS_PANELOFF(wmdock) ) {
-		_dapp = wmdock_get_parent_dockapp(dapp);
-		if(_dapp) {
+		if((_dapp = wmdock_get_parent_dockapp(dapp))) {
 			/* Remove the glue of dapp from the parent. */
 			wmdock_remove_anchor_dockapp(_dapp, dapp);
 
@@ -518,7 +521,7 @@ void wmdock_free_dockapp(DockappNode *dapp)
 					if(!_dapp->glue[i]) {
 						_dapp->glue[i] = dapp->glue[i];
 					} else {
-						// TODO: Verify this code, maybe broken?
+						/* TODO: Verify this code, maybe broken? */
 
 						/* If another glue is on the parent destroy the others. */
 						wmdock_destroy_dockapp(dapp->glue[i]);
