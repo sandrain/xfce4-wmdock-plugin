@@ -176,6 +176,19 @@ GdkDisplay *get_current_gdkdisplay()
 
 
 /**
+ * Return the current GdkScreen.
+ *
+ * @return current GdkScreen
+ */
+GdkScreen *get_current_gdkscreen()
+{
+	if(!wmdock || !wmdock->plugin)
+		return gdk_screen_get_default();
+
+	return gdk_window_get_screen(gtk_widget_get_toplevel(GTK_WIDGET(wmdock->plugin))->window);
+}
+
+/**
  * Function which interacts with the wmdock icon.
  *
  * @param icon The wmdock icon widget.
