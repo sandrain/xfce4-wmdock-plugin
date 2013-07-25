@@ -784,9 +784,8 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 	gint panelx, panely, plugx, plugy;
 	gint x, y, i, gluepos = GLUE_MAX;
 
-	if(!IS_PANELOFF(wmdock)) {
+	if(!IS_PANELOFF(wmdock))
 		return;
-	}
 
 	/* Setup the position of the first dockapp. */
 	panelx = panely = plugx = plugy = x = y = 0;
