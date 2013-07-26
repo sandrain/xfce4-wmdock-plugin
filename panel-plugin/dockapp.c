@@ -54,44 +54,83 @@ static guint nTargets = G_N_ELEMENTS (targetList);
  * Get the x coordinate child dockapp.
  *
  * @param dapp Parent dockapp.
- * @param prevDapp Child dockapp.
+ * @param prevDapp Child dockapp or NULL if is the first dockapp.
  * @param gluepos Orientation of the child dockapp.
  * @param x Pointer to x.
  * @param y Pointer to y.
  */
 static void wmdock_dockapp_child_pos(DockappNode *prevDapp, gint gluepos, gint *x, gint *y)
 {
-	gint prevx, prevy;
+	gint prevx, prevy, panelx, panely;
 
 	/* Setup the position of the first dockapp. */
-	prevx = prevy = 0;
+	prevx = prevy = panelx = panely = 0;
 
-	if(!prevDapp)
-		return;
+	if(prevDapp) {
+		/* Get the position of the previous DockApp if is accessable. */
+		gtk_window_get_position(
+				GTK_WINDOW (GTK_WIDGET (prevDapp->tile)), &prevx, &prevy);
 
-	/* Get the position of the previous DockApp if is accessable. */
-	gtk_window_get_position(
-			GTK_WINDOW (GTK_WIDGET (prevDapp->tile)), &prevx, &prevy);
+		switch(gluepos) {
+		case GLUE_T:
+			*x = prevx;
+			*y = prevy - DEFAULT_DOCKAPP_HEIGHT;
+			break;
+		case GLUE_B:
+			*x = prevx;
+			*y = prevy + DEFAULT_DOCKAPP_HEIGHT;
+			break;
+		case GLUE_L:
+			*x = prevx - DEFAULT_DOCKAPP_WIDTH;
+			*y = prevy;
+			break;
+		case GLUE_R:
+			*x = prevx + DEFAULT_DOCKAPP_WIDTH;
+			*y = prevy;
+			break;
+		default:
+			break;
+		}
+	} else {
+		/* The anchor is the XFCE4 panel. */
+		gtk_window_get_position(
+				GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))),
+				&panelx, &panely);
 
-	switch(gluepos) {
-	case GLUE_T:
-		*x = prevx;
-		*y = prevy - DEFAULT_DOCKAPP_HEIGHT;
-		break;
-	case GLUE_B:
-		*x = prevx;
-		*y = prevy + DEFAULT_DOCKAPP_HEIGHT;
-		break;
-	case GLUE_L:
-		*x = prevx - DEFAULT_DOCKAPP_WIDTH;
-		*y = prevy;
-		break;
-	case GLUE_R:
-		*x = prevx + DEFAULT_DOCKAPP_WIDTH;
-		*y = prevy;
-		break;
-	default:
-		break;
+		switch(gluepos) {
+		case XFCE_SCREEN_POSITION_NW_H:
+		case XFCE_SCREEN_POSITION_N:
+		case XFCE_SCREEN_POSITION_NE_H:
+			/* From the top to the bottom. */
+			*x = wmdock->anchorPos == XFCE_SCREEN_POSITION_NW_H ? gdk_screen_get_width(get_current_gdkscreen()) - DEFAULT_DOCKAPP_WIDTH : 0;
+			*y = panelx == 0 ? xfce_panel_plugin_get_size(wmdock->plugin) : 0;
+			break;
+		case XFCE_SCREEN_POSITION_SW_H:
+		case XFCE_SCREEN_POSITION_S:
+		case XFCE_SCREEN_POSITION_SE_H:
+			/* From the bottom to the top. */
+			*x = wmdock->anchorPos == XFCE_SCREEN_POSITION_SW_H ? gdk_screen_get_width(get_current_gdkscreen()) - DEFAULT_DOCKAPP_WIDTH : 0;
+			*y = panelx == 0 ? panely - DEFAULT_DOCKAPP_HEIGHT : gdk_screen_get_height(get_current_gdkscreen()) - DEFAULT_DOCKAPP_HEIGHT;
+			break;
+		case XFCE_SCREEN_POSITION_NW_V:
+		case XFCE_SCREEN_POSITION_W:
+		case XFCE_SCREEN_POSITION_SW_V:
+			/* From the left to the right. */
+			*x = panely == 0 ? xfce_panel_plugin_get_size(wmdock->plugin) : 0;
+			*y = panely == 0 ? 0 : gdk_screen_get_height(get_current_gdkscreen()) - DEFAULT_DOCKAPP_HEIGHT;
+			break;
+		case XFCE_SCREEN_POSITION_NE_V:
+		case XFCE_SCREEN_POSITION_E:
+		case XFCE_SCREEN_POSITION_SE_V:
+			/* From the top to the bottom. */
+			*x = panely == 0 ? gdk_screen_get_width(get_current_gdkscreen()) - xfce_panel_plugin_get_size(wmdock->plugin) - DEFAULT_DOCKAPP_WIDTH : gdk_screen_get_width(get_current_gdkscreen()) - DEFAULT_DOCKAPP_WIDTH;
+			*y = panely == 0 ? 0 : gdk_screen_get_height(get_current_gdkscreen()) - DEFAULT_DOCKAPP_HEIGHT;
+			break;
+		default:
+			debug("dockapp.c: Can not determine panel position x = y = 0.");
+			*x = *y = 0;
+			break;
+		}
 	}
 }
 
@@ -149,7 +188,7 @@ static DockappNode *wmdock_get_primary_anchor_dockapp()
  */
 static DockappNode *wmdock_get_snapable_dockapp(DockappNode *dapp, gint *gluepos)
 {
-	#define SNAPDELTA (DEFAULT_DOCKAPP_HEIGHT/2)-1
+#define SNAPDELTA (DEFAULT_DOCKAPP_HEIGHT/2)-1
 	gint posx, posy, gluex, gluey;
 	gint possible = GLUE_T | GLUE_B | GLUE_L | GLUE_R;
 	gboolean prim;
@@ -398,7 +437,7 @@ GtkWidget *wmdock_create_tile_dummy()
 	gtk_window_set_skip_pager_hint(GTK_WINDOW(dummy), TRUE);
 	gtk_window_set_opacity(GTK_WINDOW(dummy), 0.6);
 	gtk_widget_set_size_request(dummy, DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
-//	gtk_window_set_type_hint(GTK_WINDOW(dummy), GDK_WINDOW_TYPE_HINT_DND);
+	//	gtk_window_set_type_hint(GTK_WINDOW(dummy), GDK_WINDOW_TYPE_HINT_DND);
 
 	return (dummy);
 }
@@ -781,97 +820,61 @@ GtkWidget *wmdock_create_tile_from_socket(DockappNode *dapp)
  */
 void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 {
-	gint panelx, panely, plugx, plugy;
-	gint x, y, i, gluepos = GLUE_MAX;
+	gint x, y, gluepos = GLUE_MAX;
 
 	if(!IS_PANELOFF(wmdock))
 		return;
 
 	/* Setup the position of the first dockapp. */
-	panelx = panely = plugx = plugy = x = y = 0;
-
-	gtk_window_get_position(
-			GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))),
-			&panelx, &panely);
-	gdk_window_get_position (GDK_WINDOW (GTK_WIDGET (wmdock->plugin)->window), &plugx, &plugy);
+	x = y = 0;
 
 	/* Initial define the position of the first anchor dockapp. */
-	if(wmdock->anchorPos == -1)
+	if(wmdock->anchorPos == -1) {
 		wmdock->anchorPos = xfce_panel_plugin_get_screen_position(wmdock->plugin);
+	}
 
 	if(prevDapp) {
-		for(i = 0; i < GLUE_MAX; i++) {
-			if(prevDapp->glue[i] == dapp) {
-				gluepos = i;
+		for(gluepos = 0; gluepos < GLUE_MAX; gluepos++) {
+			if(prevDapp->glue[gluepos] == dapp)
 				break;
-			}
 		}
 	}
 
-	if(gluepos != GLUE_MAX) {
-		wmdock_dockapp_child_pos(prevDapp, gluepos, &x, &y);
-	} else {
+	if(gluepos == GLUE_MAX) {
 		/* Determine the initial dockapp position. */
 		switch(wmdock->anchorPos) {
 		case XFCE_SCREEN_POSITION_NW_H:
 		case XFCE_SCREEN_POSITION_N:
 		case XFCE_SCREEN_POSITION_NE_H:
-			if(!prevDapp) {
-				/* From the top to the bottom. */
-				x = wmdock->anchorPos == XFCE_SCREEN_POSITION_NW_H ? gdk_screen_get_width(get_current_gdkscreen()) - DEFAULT_DOCKAPP_WIDTH : 0;
-				y = panelx == 0 ? xfce_panel_plugin_get_size(wmdock->plugin) : 0;
-			} else {
-				wmdock_dockapp_child_pos(prevDapp, GLUE_B, &x, &y);
-				prevDapp->glue[GLUE_B] = dapp;
-			}
+			gluepos = GLUE_B;
 			break;
-
 		case XFCE_SCREEN_POSITION_SW_H:
 		case XFCE_SCREEN_POSITION_S:
 		case XFCE_SCREEN_POSITION_SE_H:
-			if(!prevDapp) {
-				/* From the bottom to the top. */
-				x = wmdock->anchorPos == XFCE_SCREEN_POSITION_SW_H ? gdk_screen_get_width(get_current_gdkscreen()) - DEFAULT_DOCKAPP_WIDTH : 0;
-				y = panelx == 0 ? panely - DEFAULT_DOCKAPP_HEIGHT : gdk_screen_get_height(get_current_gdkscreen()) - DEFAULT_DOCKAPP_HEIGHT;
-			} else {
-				wmdock_dockapp_child_pos(prevDapp, GLUE_T, &x, &y);
-				prevDapp->glue[GLUE_T] = dapp;
-			}
+			gluepos = GLUE_T;
 			break;
 		case XFCE_SCREEN_POSITION_NW_V:
 		case XFCE_SCREEN_POSITION_W:
 		case XFCE_SCREEN_POSITION_SW_V:
-			if(!prevDapp) {
-				/* From the left to the right. */
-				x = panely == 0 ? xfce_panel_plugin_get_size(wmdock->plugin) : 0;
-				y = panely == 0 ? 0 : gdk_screen_get_height(get_current_gdkscreen()) - DEFAULT_DOCKAPP_HEIGHT;
-			} else {
-				wmdock_dockapp_child_pos(prevDapp, GLUE_R, &x, &y);
-				prevDapp->glue[GLUE_R] = dapp;
-			}
+			gluepos = GLUE_R;
 			break;
 		case XFCE_SCREEN_POSITION_NE_V:
 		case XFCE_SCREEN_POSITION_E:
 		case XFCE_SCREEN_POSITION_SE_V:
-			if(!prevDapp) {
-				/* From the top to the bottom. */
-				x = panely == 0 ? gdk_screen_get_width(get_current_gdkscreen()) - xfce_panel_plugin_get_size(wmdock->plugin) - DEFAULT_DOCKAPP_WIDTH : gdk_screen_get_width(get_current_gdkscreen()) - DEFAULT_DOCKAPP_WIDTH;
-				y = panely == 0 ? 0 : gdk_screen_get_height(get_current_gdkscreen()) - DEFAULT_DOCKAPP_HEIGHT;
-			} else {
-				wmdock_dockapp_child_pos(prevDapp, GLUE_L, &x, &y);
-				prevDapp->glue[GLUE_L] = dapp;
-			}
+			gluepos = GLUE_L;
 			break;
 		default:
-			debug("dockapp.c: Can not determine panel position x = y = 0.");
-			x = y = 0;
 			break;
 		}
+
+		if(prevDapp)
+			prevDapp->glue[gluepos] = dapp;
 	}
+	wmdock_dockapp_child_pos(prevDapp, prevDapp ? gluepos : wmdock->anchorPos, &x, &y);
 	gtk_window_move(GTK_WINDOW(dapp->tile), x, y);
 
-	debug("dockapp.c: %d, Panel posx: %d, Panel posy: %d, Plug posx: %d, Plug posy: %d, prevDapp: %s, movex: %d, movey: %d",
-			g_list_length(wmdock->dapps), panelx, panely, plugx, plugy, prevDapp ? prevDapp->name : "NO", x, y);
+	debug("dockapp.c: %d, prevDapp: %s, movex: %d, movey: %d",
+			g_list_length(wmdock->dapps), prevDapp ? prevDapp->name : "NO", x, y);
 
 }
 
