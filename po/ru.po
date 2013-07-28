@@ -1,72 +1,74 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # 
+# Translators:
+# shlyapugin <shlyapugin@gmail.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-wmdock-plugin\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: \n"
-"Last-Translator: Andriy Kovtun <kovtunos@yandex.ru>\n"
-"Language-Team: Russian <xfce4-dev@xfce.org>\n"
+"POT-Creation-Date: 2013-07-13 22:15+0200\n"
+"PO-Revision-Date: 2013-07-28 05:08+0000\n"
+"Last-Translator: shlyapugin <shlyapugin@gmail.com>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/xfce/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Russian\n"
-"X-Poedit-Country: Russian Federation\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: panel-plugin/wmdock.c:196
+#: ../panel-plugin/wmdock.c:246
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "Вы хотите удалить апплет \"%s\"?"
 
-#: panel-plugin/wmdock.c:398
+#: ../panel-plugin/wmdock.c:448
 msgid "No dockapp is running!"
 msgstr "Апплеты не запущены!"
 
-#: panel-plugin/wmdock.c:858
+#: ../panel-plugin/wmdock.c:907
 #, c-format
 msgid "Failed to start %s!"
 msgstr "Ошибка запуска %s!"
 
-#: panel-plugin/wmdock.c:1148
+#. Create the configure dialog.
+#: ../panel-plugin/wmdock.c:1211
 msgid "WMdock"
 msgstr "WMdock"
 
-#: panel-plugin/wmdock.c:1151
+#: ../panel-plugin/wmdock.c:1214
 msgid "Remove dockapp"
 msgstr "Удалить апплет"
 
-#: panel-plugin/wmdock.c:1167
+#: ../panel-plugin/wmdock.c:1230
 msgid "General settings"
 msgstr "Основные настройки"
 
-#: panel-plugin/wmdock.c:1168
+#: ../panel-plugin/wmdock.c:1231
 msgid "Dockapp detection"
 msgstr "Обнаружение апплетов"
 
-#: panel-plugin/wmdock.c:1216
+#: ../panel-plugin/wmdock.c:1279
 msgid "Select dockapp to configure:"
 msgstr "Выберите апплет для настройки:"
 
-#: panel-plugin/wmdock.c:1225
+#: ../panel-plugin/wmdock.c:1288
 msgid "Shell command:"
 msgstr "Команда оболочки:"
 
-#: panel-plugin/wmdock.c:1236
+#: ../panel-plugin/wmdock.c:1299
 msgid "Display tile in the background."
 msgstr "Расположить черепицей на заднем плане."
 
-#: panel-plugin/wmdock.c:1237
+#: ../panel-plugin/wmdock.c:1300
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
-msgstr ""
-"Показать отдельную кнопку WMdock\n"
-"на панели."
+msgstr "Показать отдельную кнопку WMdock\nна панели."
 
-#: panel-plugin/wmdock.c:1238
+#: ../panel-plugin/wmdock.c:1301
 msgid ""
 "Add only dockapps which start with\n"
-"wm* in the name."
-msgstr ""
-"Добавить апплеты, названия которых\n"
-"начинаются на wm*."
+"pattern in list. (e.g.: ^wm;^as)"
+msgstr "Добавить только те апплеты, начало\nназваний которых соответствует шаблону\nиз списка (например: ^wm;^as)."
