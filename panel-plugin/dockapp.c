@@ -260,6 +260,8 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 			for(i = 0; i < GLUE_MAX; i++) {
 				if(_dapp->glue[i] && !g_strcmp0(_dapp->glue[i]->name, DOCKAPP_DUMMY_TITLE)) {
 					g_list_foreach(wmdock->dapps, (GFunc) wmdock_remove_anchor_dockapp, dapp);
+					_dapp->glue[i] = dapp;
+					debug("dockapp.c: Connect `%s' to `%s' with glue.", dapp->name, _dapp->name);
 					for(j = 0; j < GLUE_MAX; j++) {
 						if(parent) {
 							if(parent == dapp->glue[j])
@@ -267,16 +269,19 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 
 							/* Transfer all connected DockApps to the parent. */
 							_parent = parent;
-							while(_parent->glue[j]) {
+							while(_parent->glue[j] && _parent->glue[j] != dapp->glue[j]) {
 								_parent = _parent->glue[j];
+							}
+							if(dapp->glue[j] && _parent->glue[j] == dapp->glue[j]) {
+								debug("dockapp.c: Parent_Connect `%s' to `%s' with glue.", dapp->glue[j]->name, _parent->name);
+								continue;
 							}
 							_parent->glue[j] = dapp->glue[j];
 						}
 						/* Remove old anchor itself or all anchors it was the first anchor. */
 						dapp->glue[j] = NULL;
 					}
-					_dapp->glue[i] = dapp;
-					debug("dockapp.c: Connect `%s' to `%s' with glue.", dapp->name, _dapp->name);
+
 					return TRUE;
 				}
 			}
