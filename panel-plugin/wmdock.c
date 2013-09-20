@@ -119,7 +119,7 @@ static WmdockPlugin *wmdock_plugin_new (XfcePanelPlugin* plugin)
 	/* TODO: Set panel off to FALSE. */
 	wmdock->propPanelOff       = TRUE;
 	wmdock->filterList         = g_strdup(DOCKAPP_FILTER_PATTERN);
-	wmdock->anchorPos          = -1;
+	wmdock->anchorPos          = ANCHOR_BR;
 
 	wmdock->eventBox = gtk_event_box_new ();
 	gtk_widget_show(GTK_WIDGET(wmdock->eventBox));

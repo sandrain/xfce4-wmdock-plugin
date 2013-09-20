@@ -43,10 +43,11 @@
 static struct {
 	GtkWidget *dlg;
 	GtkWidget *vbox, *vbox2, *vboxGeneral, *vboxDetect;
-	GtkWidget *hbox;
-	GtkWidget *frmGeneral, *frmDetect;
+	GtkWidget *hbox, *hboxPanelOffOpts;
+	GtkWidget *frmGeneral, *frmDetect, *frmPanelOffOpts;
 	GtkWidget *lblSel, *lblCmd;
 	GtkWidget *chkDispTile, *chkPropButton, *chkAddOnlyWM, *chkPanelOff;
+	GtkWidget *radioPanelOffTL, *radioPanelOffTR, *radioPanelOffBL, *radioPanelOffBR;
 	GtkWidget *imageContainer, *container;
 	GtkWidget *imageTile, *image;
 	GtkWidget *txtCmd;
@@ -107,11 +108,14 @@ static void wmdock_properties_chkpaneloff(GtkToggleButton *gtkChkPanelOff, gpoin
 {
 	GtkWidget *gtkDlg;
 
-	rcPanelOff = gtk_toggle_button_get_active(gtkChkPanelOff);
+	if((rcPanelOff = gtk_toggle_button_get_active(gtkChkPanelOff)) == TRUE) {
+		wmdock->anchorPos = xfce_panel_plugin_get_screen_position(wmdock->plugin);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.frmPanelOffOpts), TRUE);
+	} else {
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.frmPanelOffOpts), FALSE);
+	}
 
 	if(g_list_length(wmdock->dapps)) {
-		if(rcPanelOff == TRUE)
-			wmdock->anchorPos = xfce_panel_plugin_get_screen_position(wmdock->plugin);
 
 		gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))),
 				GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -380,6 +384,7 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 
 	prop.frmGeneral = gtk_frame_new(_("General settings"));
 	prop.frmDetect = gtk_frame_new(_("Dockapp detection"));
+	prop.frmPanelOffOpts = gtk_frame_new(_("Alignment options"));
 	prop.vboxGeneral = gtk_vbox_new(FALSE, 6);
 	prop.vboxDetect = gtk_vbox_new(FALSE, 6);
 
@@ -397,13 +402,15 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 	gtk_box_pack_start (GTK_BOX (prop.hbox), prop.vbox, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (prop.hbox), prop.vbox2, FALSE, FALSE, 0);
 
-
 	prop.imageContainer = gtk_alignment_new(0.5, 0.5, 0, 0);
 	gtk_widget_set_size_request(GTK_WIDGET(prop.imageContainer),
 			DEFAULT_DOCKAPP_WIDTH,
 			DEFAULT_DOCKAPP_HEIGHT);
 	prop.container =  gtk_fixed_new();
 
+	prop.hboxPanelOffOpts = gtk_hbox_new(FALSE, 4);
+
+	/* Create the GTK widget objects. */
 	gdkPbIcon = gdk_pixbuf_new_from_xpm_data((const char**)
 			xfce4_wmdock_plugin_xpm);
 
@@ -470,7 +477,10 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 
 	gtk_container_add(GTK_CONTAINER(prop.frmGeneral), prop.vboxGeneral);
 	gtk_container_add(GTK_CONTAINER(prop.frmDetect), prop.vboxDetect);
+
 	gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.chkPanelOff,
+			FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.frmPanelOffOpts,
 			FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.chkDispTile,
 			FALSE, FALSE, 0);
@@ -481,6 +491,21 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 	gtk_box_pack_start (GTK_BOX(prop.vboxDetect), prop.txtPatterns,
 			FALSE, FALSE, 0);
 
+	/* Setup advanced panel off mode options frame. */
+	prop.radioPanelOffTL = gtk_radio_button_new_with_label(NULL, _("Top left"));
+	prop.radioPanelOffTR = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(prop.radioPanelOffTL), _("Top right"));
+	prop.radioPanelOffBL = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(prop.radioPanelOffTL), _("Bottom left"));
+	prop.radioPanelOffBR = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(prop.radioPanelOffTL), _("Bottom right"));
+
+	gtk_container_add(GTK_CONTAINER(prop.frmPanelOffOpts), prop.hboxPanelOffOpts);
+	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffTL,
+				FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffTR,
+				FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffBL,
+				FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffBR,
+				FALSE, FALSE, 0);
 
 	/* Fill the dockapp chooser with entries. */
 	wmdock_refresh_properties_dialog();

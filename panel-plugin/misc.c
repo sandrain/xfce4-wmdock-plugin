@@ -189,6 +189,50 @@ GdkScreen *get_current_gdkscreen()
 }
 
 /**
+ * Returns the default anchor postion for the XFCE panel.
+ *
+ * @return default anchor postion
+ */
+AnchorPostion get_default_anchor_postion()
+{
+	AnchorPostion anchorPos = ANCHOR_BR;
+
+	if(!wmdock || !wmdock->plugin)
+		return anchorPos;
+
+	switch(xfce_panel_plugin_get_screen_position(wmdock->plugin)) {
+	case XFCE_SCREEN_POSITION_NW_H:
+	case XFCE_SCREEN_POSITION_N:
+	case XFCE_SCREEN_POSITION_NE_H:
+		anchorPos = ANCHOR_TR;
+		break;
+
+	case XFCE_SCREEN_POSITION_SW_H:
+	case XFCE_SCREEN_POSITION_S:
+	case XFCE_SCREEN_POSITION_SE_H:
+		anchorPos = ANCHOR_BR;
+		break;
+
+	case XFCE_SCREEN_POSITION_NW_V:
+	case XFCE_SCREEN_POSITION_W:
+	case XFCE_SCREEN_POSITION_SW_V:
+		anchorPos = ANCHOR_TL;
+		break;
+
+	case XFCE_SCREEN_POSITION_NE_V:
+	case XFCE_SCREEN_POSITION_E:
+	case XFCE_SCREEN_POSITION_SE_V:
+		anchorPos = ANCHOR_TR;
+		break;
+
+	default:
+		break;
+	}
+
+	return anchorPos;
+}
+
+/**
  * Function which interacts with the wmdock icon.
  *
  * @param icon The wmdock icon widget.

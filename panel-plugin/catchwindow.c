@@ -236,7 +236,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 				_dapps = g_list_find(wmdock->dapps, (gconstpointer) dapp);
 				wmdock_set_autoposition_dockapp( dapp,
 						(DOCKAPP(g_list_first(wmdock->dapps)->data) != dapp && _dapps) ?
-								DOCKAPP(g_list_previous(_dapps)->data) : NULL);
+								DOCKAPP(((GList *) g_list_previous(_dapps))->data) : NULL);
 
 				wmdock_order_dockapps(DOCKAPP(g_list_first(wmdock->dapps)->data));
 			}

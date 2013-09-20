@@ -28,6 +28,13 @@
 #define WNCK_I_KNOW_THIS_IS_UNSTABLE
 #include <libwnck/libwnck.h>
 
+typedef enum {
+	ANCHOR_TL,
+	ANCHOR_TR,
+	ANCHOR_BL,
+	ANCHOR_BR
+} AnchorPostion;
+
 typedef struct {
  XfcePanelPlugin     *plugin;
 
@@ -42,7 +49,7 @@ typedef struct {
  gboolean            propDispPropButton;
  gboolean            propDispAddOnlyWM;
  gboolean            propPanelOff;
- gint                anchorPos;
+ AnchorPostion       anchorPos;
  gchar               *filterList;
 
  GList               *dapps;
