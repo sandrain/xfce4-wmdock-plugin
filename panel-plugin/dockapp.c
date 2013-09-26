@@ -287,13 +287,53 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 
 
 /**
- * Event handler for the tile in panel off mode.
+ * Event handle for the tile in panel off mode (button_press)
+ *
+ * @param tile The window of the event.
+ * @param ev GdkEventButton.
+ * @param dapp DockAppNode of the event.
+ */
+void wmdock_dockapp_button_press_handler(GtkWidget *tile, GdkEventButton *ev, DockappNode *dapp)
+{
+	debug("dockapp.c: Window button press event (dapp: `%s')", dapp->name);
+}
+
+
+/**
+ * Event handle for the tile in panel off mode (button_release)
+ *
+ * @param tile The window of the event.
+ * @param ev GdkEventButton.
+ * @param dapp DockAppNode of the event.
+ */
+void wmdock_dockapp_button_release_handler(GtkWidget *tile, GdkEventButton *ev, DockappNode *dapp)
+{
+	debug("dockapp.c: Window button release event (dapp: `%s')", dapp->name);
+}
+
+
+/**
+ * Event handle for the tile in panel off mode (motion_notify)
+ *
+ * @param tile The window of the event.
+ * @param ev GdkEventButton.
+ * @param dapp DockAppNode of the event.
+ */
+void wmdock_dockapp_motion_notify_handler(GtkWidget *tile, GdkEventMotion *ev, DockappNode *dapp)
+{
+	debug("dockapp.c: Window motion notify event (dapp: `%s')", dapp->name);
+}
+
+
+
+/**
+ * Event handler for the tile in panel off mode (event_after).
  *
  * @param tile The window of the event.
  * @param ev Event informations.
  * @param dapp DockappNode of the event.
  */
-void wmdock_dockapp_paneloff_handler(GtkWidget *tile, GdkEvent *ev, DockappNode *dapp)
+void wmdock_dockapp_event_after_handler(GtkWidget *tile, GdkEvent *ev, DockappNode *dapp)
 {
 	static DockappNode *dappOnMove = NULL, *dappDummy = NULL;
 	DockappNode *dappSnap = NULL;
@@ -591,17 +631,16 @@ void wmdock_redraw_dockapp(DockappNode *dapp)
  */
 void wmdock_update_tile_background(DockappNode *dapp)
 {
-	gtk_widget_realize(GTK_WIDGET(dapp->s));
+	gtk_widget_realize(GTK_WIDGET(dapp->bg));
 
 	if (!dapp->bgimg)
 		return;
 
-	gtk_widget_set_app_paintable(GTK_WIDGET(dapp->s), TRUE);
-	gdk_window_set_back_pixmap(GTK_WIDGET(dapp->s)->window, dapp->bgimg, FALSE);
+	gtk_widget_set_app_paintable(GTK_WIDGET(dapp->bg), TRUE);
+	gdk_window_set_back_pixmap(GTK_WIDGET(dapp->bg)->window, dapp->bgimg, FALSE);
 
-	if (GTK_WIDGET_FLAGS(GTK_WIDGET(dapp->s)) & GTK_MAPPED)
-		gtk_widget_queue_draw(GTK_WIDGET(dapp->s));
-
+	if (GTK_WIDGET_FLAGS(GTK_WIDGET(dapp->bg)) & GTK_MAPPED)
+		gtk_widget_queue_draw(GTK_WIDGET(dapp->bg));
 }
 
 
@@ -659,11 +698,7 @@ DockappNode *wmdock_get_parent_dockapp(DockappNode *dapp) {
  */
 void wmdock_set_tile_background(DockappNode *dapp, GdkPixbuf *pb)
 {
-	GtkFixed *fixed = NULL;
 	GdkGC * gc = NULL;
-
-	if(!(fixed = (GtkFixed *) gtk_widget_get_ancestor(GTK_WIDGET(dapp->s), GTK_TYPE_FIXED)))
-		return;
 
 	if(wmdock->propDispTile == FALSE) {
 		if(!dapp->bg)
@@ -679,23 +714,33 @@ void wmdock_set_tile_background(DockappNode *dapp, GdkPixbuf *pb)
 		return;
 	}
 
-	debug("dockapp.c: Setup background image (wmdock_set_tile_background).");
-	gtk_widget_realize(GTK_WIDGET(dapp->tile));
+	debug("dockapp.c: Setup background image for dapp `%s' (wmdock_set_tile_background).", dapp->name);
+	gtk_widget_realize(GTK_WIDGET(dapp->bg));
 
 	dapp->bgimg = gdk_pixmap_new(GTK_WIDGET(dapp->tile)->window,
 			DEFAULT_DOCKAPP_WIDTH,DEFAULT_DOCKAPP_HEIGHT, -1);
 
-	gc = gdk_gc_new(GTK_WIDGET(dapp->tile)->window);
+	gdk_window_clear(GTK_WIDGET(dapp->bg)->window);
+	gc = gdk_gc_new(GTK_WIDGET(dapp->bg)->window);
 	gdk_draw_pixbuf(dapp->bgimg, gc,
 			pb, 0, 0, 0, 0, DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT,
 			GDK_RGB_DITHER_NONE, 0, 0);
 	gdk_gc_unref(gc);
 
-	gtk_image_clear(GTK_IMAGE(dapp->bg));
-	gtk_image_set_from_pixmap(GTK_IMAGE(dapp->bg),dapp->bgimg,NULL);
-
-	if(dapp->s)
+	if(dapp->bg)
 		wmdock_update_tile_background(dapp);
+
+}
+
+
+void wmdock_set_socket_postion(DockappNode *dapp, int x, int y)
+{
+	GtkFixed *fixed = NULL;
+
+	if(!(fixed = (GtkFixed *) gtk_widget_get_ancestor(GTK_WIDGET(dapp->s), GTK_TYPE_FIXED)))
+		return;
+
+	gtk_fixed_move(fixed, GTK_WIDGET(dapp->s), x, y);
 }
 
 
@@ -733,8 +778,7 @@ GtkWidget *wmdock_create_tile_from_socket(DockappNode *dapp)
 		tile = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
 		gtk_window_set_title(GTK_WINDOW(tile), dapp->name);
-		gtk_window_set_default_size(GTK_WINDOW(tile), DEFAULT_DOCKAPP_WIDTH,
-				DEFAULT_DOCKAPP_HEIGHT);
+		gtk_window_set_default_size(GTK_WINDOW(tile), DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
 		gtk_container_set_border_width(GTK_CONTAINER(tile), 0);
 
 		/* Disable window shrinking resizing and growing. */
@@ -748,27 +792,29 @@ GtkWidget *wmdock_create_tile_from_socket(DockappNode *dapp)
 		gtk_window_set_skip_taskbar_hint(GTK_WINDOW(tile), TRUE);
 		gtk_window_set_skip_pager_hint(GTK_WINDOW(tile), TRUE);
 
-		/* Add the background tile. */
-		dapp->bg = gtk_image_new();
-		gtk_fixed_put(GTK_FIXED(fixed), dapp->bg, 0, 0);
+		/* Create an eventbox to catch all click and motion events. */
+		dapp->evbox = gtk_event_box_new();
+		gtk_event_box_set_above_child(GTK_EVENT_BOX(dapp->evbox), TRUE);
+		gtk_widget_set_size_request(GTK_WIDGET(dapp->evbox), DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
 
-		/* Center Dockapp in the window. */
-		align = gtk_alignment_new(0.5, 0.5, 0, 0);
-		gtk_widget_set_size_request(GTK_WIDGET(align), DEFAULT_DOCKAPP_WIDTH,
-				DEFAULT_DOCKAPP_HEIGHT);
-		gtk_window_set_default_size(GTK_WINDOW(tile), DEFAULT_DOCKAPP_WIDTH,
-				DEFAULT_DOCKAPP_HEIGHT);
-		gtk_container_add(GTK_CONTAINER(align), GTK_WIDGET(dapp->s));
-		/* Add the alignment container to the window. */
-		gtk_fixed_put(GTK_FIXED(fixed), align, 0, 0);
+		/* Add the background tile. */
+		dapp->bg = gtk_image_new_from_pixbuf(gdkPbTileDefault);
+		gtk_widget_set_size_request(GTK_WIDGET(dapp->bg), DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
+		gtk_container_add(GTK_CONTAINER(dapp->evbox), dapp->bg);
+
+		/* Add the eventbox to the window. */
+		gtk_fixed_put(GTK_FIXED(fixed), dapp->evbox, 0, 0);
+
+		/* Add the GtkSocket with the dockapp fixed and centered. */
+		gtk_fixed_put(GTK_FIXED(fixed), GTK_WIDGET(dapp->s),
+				(DEFAULT_DOCKAPP_WIDTH - dapp->width) / 2, (DEFAULT_DOCKAPP_HEIGHT - dapp->height) / 2);
 
 		gtk_container_add(GTK_CONTAINER(tile), fixed);
 
-		gtk_widget_show(align);
+		gtk_widget_show(fixed);
 	}
 	return (tile);
 }
-
 
 /**
  * Calculate the position of the DockApp if the PanelOff mode is active.

@@ -35,14 +35,17 @@ enum GluePosition {
 
 typedef struct _dockapp DockappNode;
 struct _dockapp {
- GtkSocket       *s;
- GdkNativeWindow i;
- GtkWidget       *bg;
- GdkPixmap       *bgimg;
- GtkWidget       *tile;
- gchar           *name;
- gchar           *cmd;
- DockappNode     *glue[GLUE_MAX];
+	GtkSocket       *s;
+	GdkNativeWindow i;
+	int             width;
+	int             height;
+	GtkWidget       *bg;
+	GdkPixmap       *bgimg;
+	GtkWidget       *evbox;
+	GtkWidget       *tile;
+	gchar           *name;
+	gchar           *cmd;
+	DockappNode     *glue[GLUE_MAX];
 };
 
 #define DOCKAPP_DUMMY_TITLE "__WMDOCK_dummy__"
@@ -56,6 +59,7 @@ void wmdock_free_dockapp(DockappNode *);
 void wmdock_dapp_closed(GtkSocket *, DockappNode *);
 DockappNode *wmdock_find_startup_dockapp(const gchar *);
 GtkWidget *wmdock_create_tile_from_socket(DockappNode *);
+void wmdock_set_socket_postion(DockappNode *, int, int);
 void wmdock_set_autoposition_dockapp(DockappNode *, DockappNode *);
 void wmdock_refresh_bg(GtkWidget *widget);
 void wmdock_set_tile_background(DockappNode *, GdkPixbuf *);
@@ -63,7 +67,10 @@ void wmdock_update_tile_background(DockappNode *);
 gboolean wmdock_is_first_dockapp(DockappNode *);
 DockappNode *wmdock_get_parent_dockapp(DockappNode *);
 void wmdock_dockapp_tofront(DockappNode *dapp);
-void wmdock_dockapp_paneloff_handler(GtkWidget *, GdkEvent *, DockappNode *);
+void wmdock_dockapp_event_after_handler(GtkWidget *, GdkEvent *, DockappNode *);
+void wmdock_dockapp_button_press_handler(GtkWidget *, GdkEventButton *, DockappNode *);
+void wmdock_dockapp_button_release_handler(GtkWidget *, GdkEventButton *, DockappNode *);
+void wmdock_dockapp_motion_notify_handler(GtkWidget *, GdkEventMotion *, DockappNode *);
 void wmdock_remove_anchor_dockapp(DockappNode *, DockappNode *);
 void wmdock_order_dockapps(DockappNode *);
 GtkWidget *wmdock_create_tile_dummy();

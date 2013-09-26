@@ -140,9 +140,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 			return;
 		}
 		debug("catchwindow.c: found cmd %s for window %s", cmd, wnck_window_get_name(w));
-
-		if(rcCmds && (dapp = wmdock_find_startup_dockapp(cmd)))
-			rcDapp = TRUE;
+		rcDapp = rcCmds && (dapp = wmdock_find_startup_dockapp(cmd)) ? TRUE : FALSE;
 
 		if(rcDapp == FALSE) {
 			debug("catchwindow.c: Create a new dapp window %s", wnck_window_get_name(w));
@@ -152,15 +150,13 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 		}
 
 		if(h->initial_state == WithdrawnState && h->icon_window) {
-			XUnmapWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
-					wnck_window_get_xid(w));
+			XUnmapWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), wnck_window_get_xid(w));
 			dapp->i =h->icon_window;
 		} else {
 			dapp->i = wnck_window_get_xid(w);
 		}
 
-		if(!XGetWindowAttributes(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
-				dapp->i, &attr)) {
+		if(!XGetWindowAttributes(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), dapp->i, &attr)) {
 			wi = DEFAULT_DOCKAPP_WIDTH;
 			he = DEFAULT_DOCKAPP_HEIGHT;
 		} else {
@@ -191,6 +187,8 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 
 		dapp->name = g_strdup(wnck_window_get_name(w));
 		dapp->cmd = cmd;
+		dapp->width = wi;
+		dapp->height = he;
 
 		if(wmdockIcon && !IS_PANELOFF(wmdock)) {
 			gtk_widget_destroy(wmdockIcon);
@@ -214,6 +212,9 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 				wmdock_set_autoposition_dockapp(dapp,
 						g_list_last(wmdock->dapps) ? g_list_last(wmdock->dapps)->data : NULL);
 			}
+		} else {
+			/* Change the postion of the DockApp with the newly determined width and height. of the window */
+			wmdock_set_socket_postion(dapp, (DEFAULT_DOCKAPP_WIDTH - wi) / 2, (DEFAULT_DOCKAPP_HEIGHT - he) / 2);
 		}
 
 		gtk_socket_add_id(dapp->s, dapp->i);
@@ -234,15 +235,17 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 		if( IS_PANELOFF(wmdock) ) {
 			if(rcDapp == TRUE) {
 				_dapps = g_list_find(wmdock->dapps, (gconstpointer) dapp);
-				wmdock_set_autoposition_dockapp( dapp,
-						(DOCKAPP(g_list_first(wmdock->dapps)->data) != dapp && _dapps) ?
+				wmdock_set_autoposition_dockapp( dapp, (DOCKAPP(g_list_first(wmdock->dapps)->data) != dapp && _dapps) ?
 								DOCKAPP(((GList *) g_list_previous(_dapps))->data) : NULL);
 
 				wmdock_order_dockapps(DOCKAPP(g_list_first(wmdock->dapps)->data));
 			}
 
 			/* Setup the event handler for the window. */
-			g_signal_connect(dapp->tile, "event-after", G_CALLBACK(wmdock_dockapp_paneloff_handler), dapp);
+			g_signal_connect(G_OBJECT(dapp->tile), "event-after", G_CALLBACK(wmdock_dockapp_event_after_handler), dapp);
+			g_signal_connect(G_OBJECT(dapp->tile), "motion_notify_event", G_CALLBACK(wmdock_dockapp_motion_notify_handler), dapp);
+			g_signal_connect(G_OBJECT(dapp->tile), "button_press_event", G_CALLBACK(wmdock_dockapp_button_press_handler), dapp);
+			g_signal_connect(G_OBJECT(dapp->tile), "button_release_event", G_CALLBACK(wmdock_dockapp_button_release_handler), dapp);
 		}
 		/* Clear the noisy background. */
 		wmdock_redraw_dockapp(dapp);
