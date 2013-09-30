@@ -187,8 +187,8 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 
 		dapp->name = g_strdup(wnck_window_get_name(w));
 		dapp->cmd = cmd;
-		dapp->width = wi;
-		dapp->height = he;
+		dapp->width = (gint) wi;
+		dapp->height = (gint) he;
 
 		if(wmdockIcon && !IS_PANELOFF(wmdock)) {
 			gtk_widget_destroy(wmdockIcon);

@@ -37,8 +37,8 @@ typedef struct _dockapp DockappNode;
 struct _dockapp {
 	GtkSocket       *s;
 	GdkNativeWindow i;
-	int             width;
-	int             height;
+	gint            width;
+	gint            height;
 	GtkWidget       *bg;
 	GdkPixmap       *bgimg;
 	GtkWidget       *evbox;

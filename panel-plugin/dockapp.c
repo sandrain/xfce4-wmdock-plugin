@@ -49,7 +49,8 @@ static GtkTargetEntry targetList[] = {
 		{ "INTEGER", 0, 0 }
 };
 static guint nTargets = G_N_ELEMENTS (targetList);
-static DockappNode *dappOnMotion = NULL, *dappDummy = NULL;;
+static DockappNode *dappOnMotion = NULL, *dappDummy = NULL;
+static gint motionstartx = 0, motionstarty = 0;
 
 /**
  * Get the x coordinate child dockapp.
@@ -298,6 +299,8 @@ void wmdock_dockapp_button_press_handler(GtkWidget *tile, GdkEventButton *ev, Do
 {
 	debug("dockapp.c: Window button press event (dapp: `%s')", dapp->name);
 	dappOnMotion = dapp;
+	motionstartx = (gint) ev->x;
+	motionstarty = (gint) ev->y;
 	gtk_window_set_keep_above(GTK_WINDOW(dapp->tile), TRUE);
 }
 
@@ -337,15 +340,18 @@ void wmdock_dockapp_button_release_handler(GtkWidget *tile, GdkEventButton *ev, 
  */
 void wmdock_dockapp_motion_notify_handler(GtkWidget *tile, GdkEventMotion *ev, DockappNode *dapp)
 {
-	gint gluepos;
+	gint gluepos, x, y, posx, posy;
 	DockappNode *dappSnap = NULL;
 	GdkModifierType m;
 
 	debug("dockapp.c: Window motion notify event (dapp: `%s')", dapp->name);
 
-	gdk_window_get_pointer(tile->window, NULL, NULL, &m);
-	if(tile && (m & GDK_BUTTON1_MASK)) {
-
+	gdk_window_get_pointer(dapp->tile->window, &x, &y, &m);
+	if(tile && dappOnMotion && (m & GDK_BUTTON1_MASK)) {
+		gtk_window_get_position(GTK_WINDOW(dapp->tile), &posx, &posy);
+		debug("dockapp.c: Mouse x: %d,  Mouse y: %d,  Dapp x: %d, Dapp y: %d,  Msx: %d,  Msy: %d",
+				x, y, posx, posy, motionstartx, motionstarty);
+		gtk_window_move(GTK_WINDOW(dapp->tile), posx - (motionstartx - x), posy - (motionstarty - y));
 	}
 
 	if(dappOnMotion == dapp) {
@@ -643,10 +649,14 @@ void wmdock_update_tile_background(DockappNode *dapp)
 		return;
 
 	gtk_widget_set_app_paintable(GTK_WIDGET(dapp->evbox), TRUE);
+	gtk_widget_set_app_paintable(GTK_WIDGET(dapp->bg), TRUE);
 	gdk_window_set_back_pixmap(GTK_WIDGET(dapp->evbox)->window, dapp->bgimg, FALSE);
+	gdk_window_set_back_pixmap(GTK_WIDGET(dapp->bg)->window, dapp->bgimg, FALSE);
 
 	if (GTK_WIDGET_FLAGS(GTK_WIDGET(dapp->evbox)) & GTK_MAPPED)
 		gtk_widget_queue_draw(GTK_WIDGET(dapp->evbox));
+	if (GTK_WIDGET_FLAGS(GTK_WIDGET(dapp->bg)) & GTK_MAPPED)
+		gtk_widget_queue_draw(GTK_WIDGET(dapp->bg));
 }
 
 
