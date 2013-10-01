@@ -99,50 +99,6 @@ static void wmdock_dockapp_child_pos(DockappNode *prevDapp, gint gluepos, gint *
 
 
 /**
- * Determine the main anchor DockApp.
- *
- * @return DockappNode which is the main anchor otherwise NULL.
- */
-static DockappNode *wmdock_get_primary_anchor_dockapp()
-{
-	gint i;
-	GList *dapps1, *dapps2;
-	DockappNode *dapp1 = NULL, *dapp2 = NULL;
-
-	dapps1 = g_list_first(wmdock->dapps);
-
-	while(dapps1) {
-		if(!(dapp1 = DOCKAPP(dapps1->data)))
-			continue;
-
-		dapps2 = g_list_first(wmdock->dapps);
-		while(dapps2) {
-			if(!(dapp2 = DOCKAPP(dapps2->data)))
-				continue;
-
-			for(i = 0; i < GLUE_MAX; i++) {
-				if(dapp2->glue[i] == dapp1)
-					break;
-			}
-			if(dapp2->glue[i] == dapp1)
-				break;
-
-			dapps2 = g_list_next(dapps2);
-		}
-		/* Main anchor DockApp found. */
-		if(!dapps2) {
-			debug("dockapp.c: Found primary dockapp `%s'", dapp1->name);
-			return(dapp1);
-		}
-
-		dapps1 = g_list_next(dapps1);
-	}
-
-	return NULL;
-}
-
-
-/**
  * Calculate the next snapable postion of the moving DockApp.
  *
  * @parm dapp The moving DockApp.
@@ -285,6 +241,50 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 	}
 
 	return FALSE;
+}
+
+
+/**
+ * Determine the main anchor DockApp.
+ *
+ * @return DockappNode which is the main anchor otherwise NULL.
+ */
+DockappNode *wmdock_get_primary_anchor_dockapp()
+{
+	gint i;
+	GList *dapps1, *dapps2;
+	DockappNode *dapp1 = NULL, *dapp2 = NULL;
+
+	dapps1 = g_list_first(wmdock->dapps);
+
+	while(dapps1) {
+		if(!(dapp1 = DOCKAPP(dapps1->data)))
+			continue;
+
+		dapps2 = g_list_first(wmdock->dapps);
+		while(dapps2) {
+			if(!(dapp2 = DOCKAPP(dapps2->data)))
+				continue;
+
+			for(i = 0; i < GLUE_MAX; i++) {
+				if(dapp2->glue[i] == dapp1)
+					break;
+			}
+			if(dapp2->glue[i] == dapp1)
+				break;
+
+			dapps2 = g_list_next(dapps2);
+		}
+		/* Main anchor DockApp found. */
+		if(!dapps2) {
+			debug("dockapp.c: Found primary dockapp `%s'", dapp1->name);
+			return(dapp1);
+		}
+
+		dapps1 = g_list_next(dapps1);
+	}
+
+	return NULL;
 }
 
 
@@ -661,24 +661,6 @@ void wmdock_update_tile_background(DockappNode *dapp)
 
 
 /**
- * Get the information if the dockapp the first one.
- *
- * @param dapp DockappNode to check.
- * @return gboolean TRUE if is the first dockapp otherwise false.
- */
-gboolean wmdock_is_first_dockapp(DockappNode *dapp)
-{
-	if(!dapp)
-		return FALSE;
-
-	if(DOCKAPP(g_list_first(wmdock->dapps)->data) == dapp)
-		return TRUE;
-
-	return FALSE;
-}
-
-
-/**
  * Get parent dockapp.
  *
  * @param dapp Child dockapp.
@@ -826,7 +808,7 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 	gint x, y, i, offsetx, offsety, gluepos = GLUE_MAX;
 	XfceScreenPosition xfceScrPos;
 
-	if(!IS_PANELOFF(wmdock))
+	if(! IS_PANELOFF(wmdock) || !dapp )
 		return;
 
 	/* Setup the position of the first dockapp. */
@@ -952,7 +934,7 @@ void wmdock_order_dockapps(DockappNode *dapp)
 {
 	gint i;
 
-	if(! IS_PANELOFF(wmdock) || !dapp)
+	if(! IS_PANELOFF(wmdock) || !dapp )
 		return;
 
 	for(i = 0; i < GLUE_MAX; i++) {

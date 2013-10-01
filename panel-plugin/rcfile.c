@@ -116,9 +116,10 @@ void wmdock_write_rc_file (XfcePanelPlugin *plugin)
 {
 	gchar       *file;
 	XfceRc      *rc;
-	gchar       **cmds;
+	gchar       **cmds = NULL;
+	GList       *dapps;
 	DockappNode *dapp = NULL;
-	gint        i;
+	gint        i = 0;
 
 	if (!(file = xfce_panel_plugin_save_location (plugin, TRUE))) return;
 
@@ -128,17 +129,15 @@ void wmdock_write_rc_file (XfcePanelPlugin *plugin)
 	if (!rc) return;
 
 	if(g_list_length (wmdock->dapps) > 0) {
-		cmds = g_malloc(sizeof (gchar *) * (g_list_length (wmdock->dapps) + 1));
+		cmds = g_malloc0(sizeof (gchar *) * (g_list_length (wmdock->dapps) + 1));
 
-		for(i = 0; i < g_list_length(wmdock->dapps); i++) {
-			dapp = DOCKAPP(g_list_nth_data(wmdock->dapps, i));
-			if(dapp) {
-				if(dapp->name && dapp->cmd)
-					cmds[i] = g_strdup(dapp->cmd);
-			}
+		dapps = g_list_first(wmdock->dapps);
+		while(dapps) {
+			dapp = DOCKAPP(dapps->data);
+			if(dapp && dapp->cmd)
+				cmds[i++] = g_strdup(dapp->cmd);
+			dapps = g_list_next(dapps);
 		}
-		/* Workaround for a xfce bug in xfce_rc_read_list_entry */
-		cmds[i] = NULL;
 
 		xfce_rc_write_list_entry(rc, "cmds", cmds, ";");
 

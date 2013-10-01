@@ -212,19 +212,17 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 				wmdock_set_autoposition_dockapp(dapp,
 						g_list_last(wmdock->dapps) ? g_list_last(wmdock->dapps)->data : NULL);
 			}
+
+			wmdock->dapps=g_list_append(wmdock->dapps, dapp);
 		} else {
-			/* Change the postion of the DockApp with the newly determined width and height. of the window */
+			/* Change the postion of the DockApp with the newly determined width and height of the window. */
 			wmdock_set_socket_postion(dapp, (DEFAULT_DOCKAPP_WIDTH - wi) / 2, (DEFAULT_DOCKAPP_HEIGHT - he) / 2);
 		}
 
 		gtk_socket_add_id(dapp->s, dapp->i);
-
 		gtk_widget_show_all(GTK_WIDGET(dapp->tile));
 
 		g_signal_connect(dapp->s, "plug-removed", G_CALLBACK(wmdock_dapp_closed), dapp);
-
-		if(rcDapp == FALSE)
-			wmdock->dapps=g_list_append(wmdock->dapps, dapp);
 
 		/* Setup drag & drop for the dockapps. */
 		g_list_foreach(wmdock->dapps, (GFunc) wmdock_setupdnd_dockapp, NULL);
@@ -234,11 +232,14 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 
 		if( IS_PANELOFF(wmdock) ) {
 			if(rcDapp == TRUE) {
-				_dapps = g_list_find(wmdock->dapps, (gconstpointer) dapp);
-				wmdock_set_autoposition_dockapp( dapp, (DOCKAPP(g_list_first(wmdock->dapps)->data) != dapp && _dapps) ?
-								DOCKAPP(((GList *) g_list_previous(_dapps))->data) : NULL);
+				if(!wmdock_get_parent_dockapp(dapp)) {
+					_dapps = g_list_find(wmdock->dapps, (gconstpointer) dapp);
 
-				wmdock_order_dockapps(DOCKAPP(g_list_first(wmdock->dapps)->data));
+					wmdock_set_autoposition_dockapp( dapp ,
+							(DOCKAPP(g_list_first(wmdock->dapps)->data) != dapp && _dapps) ? DOCKAPP(((GList *) g_list_previous(_dapps))->data) : NULL);
+				}
+
+				wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
 			}
 
 			/* Setup the event handler for the window. */
