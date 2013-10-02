@@ -74,9 +74,9 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 		g_usleep(5 * G_USEC_PER_SEC);
 
 		for (i = 0; i <= rcCmdcnt; i++) {
-			debug("rcfile.c: config will start: %s\n", rcCmds[i]);
-
 			if(!rcCmds[i]) continue;
+			debug("rcfile.c: Setup `%s'\n", rcCmds[i]);
+
 			if(wmdock_startup_dockapp(rcCmds[i]) != TRUE) {
 				gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
 						GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -90,7 +90,6 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 				/* Create some dummy widget entries to locate the right position on
 				 * window swallow up.
 				 */
-
 				dapp = g_new0(DockappNode, 1);
 				dapp->name = NULL;
 				dapp->cmd = rcCmds[i];
@@ -98,12 +97,18 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 				dapp->s = GTK_SOCKET(gtk_socket_new());
 				dapp->tile = wmdock_create_tile_from_socket(dapp);
 
-				if( ! IS_PANELOFF(wmdock) ) {
-					gtk_box_pack_start(GTK_BOX(wmdock->box), GTK_WIDGET(dapp->tile),
-							FALSE, FALSE, 0);
-				}
+				wmdock->dapps = g_list_append(wmdock->dapps, dapp);
 
-				wmdock->dapps=g_list_append(wmdock->dapps, dapp);
+				if( ! IS_PANELOFF(wmdock) ) {
+					gtk_box_pack_start(GTK_BOX(wmdock->box), GTK_WIDGET(dapp->tile), FALSE, FALSE, 0);
+				} else  {
+					/* If is possible, restore the old position of the dockapps in panel off mode. */
+					if(! wmdock_get_parent_dockapp(dapp) ) {
+						if(g_list_previous(g_list_last(wmdock->dapps))) {
+							DOCKAPP(((GList *) g_list_previous(g_list_last(wmdock->dapps)))->data)->glue[wmdock_get_default_gluepos()] = dapp;
+						}
+					}
+				}
 			}
 		}
 	}

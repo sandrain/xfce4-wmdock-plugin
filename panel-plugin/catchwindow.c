@@ -105,7 +105,6 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 	XWMHints *h            = NULL;
 	XWindowAttributes attr;
 	DockappNode *dapp      = NULL;
-	GList *_dapps          = NULL;
 	gchar *cmd             = NULL;
 	gboolean rcDapp        = FALSE;
 
@@ -231,16 +230,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 		g_list_foreach(wmdock->dapps, (GFunc) wmdock_dockapp_tofront, NULL);
 
 		if( IS_PANELOFF(wmdock) ) {
-			if(rcDapp == TRUE) {
-				if(!wmdock_get_parent_dockapp(dapp)) {
-					_dapps = g_list_find(wmdock->dapps, (gconstpointer) dapp);
-
-					wmdock_set_autoposition_dockapp( dapp ,
-							(DOCKAPP(g_list_first(wmdock->dapps)->data) != dapp && _dapps) ? DOCKAPP(((GList *) g_list_previous(_dapps))->data) : NULL);
-				}
-
-				wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
-			}
+			wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
 
 			/* Setup the event handler for the window. */
 			g_signal_connect(G_OBJECT(dapp->tile), "event-after", G_CALLBACK(wmdock_dockapp_event_after_handler), dapp);

@@ -666,7 +666,8 @@ void wmdock_update_tile_background(DockappNode *dapp)
  * @param dapp Child dockapp.
  * @return DockAppNode Parent dockapp or null.
  */
-DockappNode *wmdock_get_parent_dockapp(DockappNode *dapp) {
+DockappNode *wmdock_get_parent_dockapp(DockappNode *dapp)
+{
 	gint i;
 	GList *dapps;
 	DockappNode *_dapp;
@@ -685,6 +686,20 @@ DockappNode *wmdock_get_parent_dockapp(DockappNode *dapp) {
 	}
 
 	return NULL;
+}
+
+
+/**
+ * Get the default glue position of the dockapps.
+ *
+ * @return Default glue postion.
+ */
+gint wmdock_get_default_gluepos()
+{
+	if(wmdock->anchorPos == ANCHOR_TL || wmdock->anchorPos == ANCHOR_TR)
+		return (GLUE_B);
+	else
+		return (GLUE_T);
 }
 
 
@@ -833,10 +848,7 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 		/* Align a new dockapp. */
 		if(prevDapp) {
 			/* If a parent dockapp already exists. */
-			if(wmdock->anchorPos == ANCHOR_TL || wmdock->anchorPos == ANCHOR_TR)
-				gluepos = GLUE_B;
-			else
-				gluepos = GLUE_T;
+			gluepos = wmdock_get_default_gluepos();
 
 			wmdock_dockapp_child_pos(prevDapp, gluepos, &x, &y);
 			prevDapp->glue[gluepos] = dapp;

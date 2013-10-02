@@ -74,5 +74,6 @@ void wmdock_dockapp_motion_notify_handler(GtkWidget *, GdkEventMotion *, Dockapp
 void wmdock_remove_anchor_dockapp(DockappNode *, DockappNode *);
 void wmdock_order_dockapps(DockappNode *);
 GtkWidget *wmdock_create_tile_dummy();
+gint wmdock_get_default_gluepos();
 
 #endif /* __DOCKAPP_H__ */
