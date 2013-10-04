@@ -1,77 +1,75 @@
-# Hungarian translation of xfce4-wmdock-plugin
-# Copyright (C) 2009, Free Software Foundation, Inc.
-# This file is distributed under the same license as the xfce4-wmdock-plugin package.
-#
-# Gabor Kelemen <kelemeng at gnome dot hu>, 2009.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Nucleo <nucleo@indamail.hu>, 2013
+# Gabor Kelemen <kelemeng at gnome dot hu>, 2009
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-wmdock-plugin\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2009-06-04 01:28+0200\n"
-"Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
-"Language-Team: Hungarian <gnome at gnome dot hu>\n"
+"POT-Creation-Date: 2013-07-13 22:15+0200\n"
+"PO-Revision-Date: 2013-10-04 01:23+0000\n"
+"Last-Translator: Nucleo <nucleo@indamail.hu>\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/xfce/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
-"Plural-Forms:  nplurals=2; plural=(n != 1);\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: panel-plugin/wmdock.c:196
+#: ../panel-plugin/wmdock.c:246
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "El kívánja távolítani ezt a dokkalkalmazást: „%s”?"
 
-#: panel-plugin/wmdock.c:398
+#: ../panel-plugin/wmdock.c:448
 msgid "No dockapp is running!"
 msgstr "Nem fut dokkalkalmazás!"
 
-#: panel-plugin/wmdock.c:858
+#: ../panel-plugin/wmdock.c:907
 #, c-format
 msgid "Failed to start %s!"
 msgstr "A(z) %s indítása meghiúsult"
 
-#: panel-plugin/wmdock.c:1148
+#. Create the configure dialog.
+#: ../panel-plugin/wmdock.c:1211
 msgid "WMdock"
 msgstr "WMdock"
 
-#: panel-plugin/wmdock.c:1151
+#: ../panel-plugin/wmdock.c:1214
 msgid "Remove dockapp"
 msgstr "Dokkalkalmazás eltávolítása"
 
-#: panel-plugin/wmdock.c:1167
+#: ../panel-plugin/wmdock.c:1230
 msgid "General settings"
 msgstr "Általános beállítások"
 
-#: panel-plugin/wmdock.c:1168
+#: ../panel-plugin/wmdock.c:1231
 msgid "Dockapp detection"
 msgstr "Dokkalkalmazás észlelése"
 
-#: panel-plugin/wmdock.c:1216
+#: ../panel-plugin/wmdock.c:1279
 msgid "Select dockapp to configure:"
 msgstr "Válassza ki a beállítandó dokkalkalmazást:"
 
-#: panel-plugin/wmdock.c:1225
+#: ../panel-plugin/wmdock.c:1288
 msgid "Shell command:"
 msgstr "Parancs:"
 
-#: panel-plugin/wmdock.c:1236
+#: ../panel-plugin/wmdock.c:1299
 msgid "Display tile in the background."
 msgstr "Csempe megjelenítése a háttérben."
 
-#: panel-plugin/wmdock.c:1237
+#: ../panel-plugin/wmdock.c:1300
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
-msgstr ""
-"Önálló WMdock tulajdonságok gomb\n"
-"megjelenítése a panelen."
+msgstr "Önálló WMdock tulajdonságok gomb\nmegjelenítése a panelen."
 
-#: panel-plugin/wmdock.c:1238
+#: ../panel-plugin/wmdock.c:1301
 msgid ""
 "Add only dockapps which start with\n"
-"wm* in the name."
-msgstr ""
-"Csak a wm*-mel kezdődő nevű\n"
-"dokkalkalmazások felvétele."
-
+"pattern in list. (e.g.: ^wm;^as)"
+msgstr "Csak a mintával kezdődő dokkalkalmazások\nhozzáadása a listából. (pld.: ^wm;^as)"
