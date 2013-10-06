@@ -75,5 +75,7 @@ void wmdock_remove_anchor_dockapp(DockappNode *, DockappNode *);
 void wmdock_order_dockapps(DockappNode *);
 GtkWidget *wmdock_create_tile_dummy();
 gint wmdock_get_default_gluepos();
+gint get_glue_position(gchar const *);
+const gchar *get_glue_name(const gint);
 
 #endif /* __DOCKAPP_H__ */

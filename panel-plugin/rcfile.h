@@ -23,6 +23,16 @@
 #ifndef __RCFILE_H__
 #define __RCFILE_H__
 
+#define RCKEY_CMDLIST       (const gchar *) "cmds"
+#define RCKEY_CMDCNT        (const gchar *) "cmdcnt"
+#define RCKEY_DISPTILE      (const gchar *) "disptile"
+#define RCKEY_DISPPROPBTN   (const gchar *) "disppropbtn"
+#define RCKEY_DISPADDONLYWM (const gchar *) "dispaddonlywm"
+#define RCKEY_PANELOFF      (const gchar *) "paneloff"
+#define RCKEY_DAFILTER      (const gchar *) "dafilter"
+#define RCKEY_ANCHORPOS     (const gchar *) "anchorpos"
+#define RCKEY_GLUELIST      (const gchar *) "glues"
+
 /* Prototypes */
 void wmdock_read_rc_file (XfcePanelPlugin *);
 void wmdock_write_rc_file (XfcePanelPlugin *);

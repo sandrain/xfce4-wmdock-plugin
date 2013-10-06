@@ -117,17 +117,21 @@ static DockappNode *wmdock_get_snapable_dockapp(DockappNode *dapp, gint *gluepos
 	prim = (dapp == wmdock_get_primary_anchor_dockapp()) ? TRUE : FALSE;
 
 	switch(wmdock->anchorPos) {
-	/* Remove not possible snap positions for the first dockapp. */
+	/* Remove not possible snap positions for the dragging dockapp. */
 	case ANCHOR_TR:
+		possible^= (GLUE_T | GLUE_L);
 		possible^= prim == TRUE ? (GLUE_T | GLUE_L | GLUE_R) : 0;
 		break;
 	case ANCHOR_BR:
+		possible^= (GLUE_B | GLUE_R);
 		possible^= prim == TRUE ? (GLUE_B | GLUE_L | GLUE_R): 0;
 		break;
 	case ANCHOR_TL:
+		possible^= (GLUE_T | GLUE_R);
 		possible^= prim == TRUE ? (GLUE_T | GLUE_L | GLUE_R) : 0;
 		break;
 	case ANCHOR_BL:
+		possible^= (GLUE_B | GLUE_L);
 		possible^= prim == TRUE ? (GLUE_B | GLUE_L | GLUE_R) : 0;
 		break;
 	}
@@ -241,6 +245,55 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 	}
 
 	return FALSE;
+}
+
+
+/* Return the translation from glue int postion to glue name.
+ *
+ * @param gluePos Position to be translated.
+ * @return String representation of the postion.
+ */
+const gchar *get_glue_name(const gint glusPos)
+{
+	static gchar ret[10];
+
+	switch(glusPos) {
+	case GLUE_B:
+		g_strlcpy(ret, "GLUE_B", sizeof(ret));
+		break;
+	case GLUE_L:
+		g_strlcpy(ret, "GLUE_L", sizeof(ret));
+		break;
+	case GLUE_R:
+		g_strlcpy(ret, "GLUE_R", sizeof(ret));
+		break;
+	case GLUE_T:
+		g_strlcpy(ret, "GLUE_T", sizeof(ret));
+		break;
+	default:
+		return NULL;
+	}
+
+	return (ret);
+}
+
+/* Return the translation from the glue name to the postion.
+ *
+ * @param name The name to be translated to a number.
+ * @return The position as integer. On error -1 is returned.
+ */
+gint get_glue_position(gchar const *name)
+{
+	if(!g_ascii_strcasecmp(name, "GLUE_B"))
+		return GLUE_B;
+	else if(!g_ascii_strcasecmp(name, "GLUE_L"))
+		return GLUE_L;
+	else if(!g_ascii_strcasecmp(name, "GLUE_R"))
+		return GLUE_R;
+	else if(!g_ascii_strcasecmp(name, "GLUE_T"))
+		return GLUE_T;
+
+	return -1;
 }
 
 

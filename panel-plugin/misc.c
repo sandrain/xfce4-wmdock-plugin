@@ -188,6 +188,7 @@ GdkScreen *get_current_gdkscreen()
 	return gdk_window_get_screen(gtk_widget_get_toplevel(GTK_WIDGET(wmdock->plugin))->window);
 }
 
+
 /**
  * Returns the default anchor postion for the XFCE panel.
  *

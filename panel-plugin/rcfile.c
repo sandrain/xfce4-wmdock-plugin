@@ -40,6 +40,7 @@
 #include "wmdock.h"
 #include "debug.h"
 #include "dockapp.h"
+#include "misc.h"
 #include "props.h"
 
 
@@ -58,16 +59,16 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 
 	if(!rc) return;
 
-	rcCmds                     = xfce_rc_read_list_entry(rc, "cmds", ";");
-	rcCmdcnt                   = xfce_rc_read_int_entry(rc, "cmdcnt", 0);
-	wmdock->propDispTile       = xfce_rc_read_bool_entry (rc, "disptile", TRUE);
-	wmdock->propDispPropButton = xfce_rc_read_bool_entry (rc, "disppropbtn", FALSE);
-	wmdock->propDispAddOnlyWM  = xfce_rc_read_bool_entry (rc, "dispaddonlywm", TRUE);
+	rcCmds                     = xfce_rc_read_list_entry(rc, RCKEY_CMDLIST, ";");
+	rcCmdcnt                   = xfce_rc_read_int_entry(rc, RCKEY_CMDCNT, 0);
+	wmdock->propDispTile       = xfce_rc_read_bool_entry (rc, RCKEY_DISPTILE, TRUE);
+	wmdock->propDispPropButton = xfce_rc_read_bool_entry (rc, RCKEY_DISPPROPBTN, FALSE);
+	wmdock->propDispAddOnlyWM  = xfce_rc_read_bool_entry (rc, RCKEY_DISPADDONLYWM, TRUE);
 	if(wmdock->filterList) g_free(wmdock->filterList);
-	wmdock->filterList         = g_strdup(xfce_rc_read_entry (rc, "dafilter", DOCKAPP_FILTER_PATTERN));
+	wmdock->filterList         = g_strdup(xfce_rc_read_entry (rc, RCKEY_DAFILTER, DOCKAPP_FILTER_PATTERN));
 	/* TODO: Set panel off to FALSE. */
-	rcPanelOff = wmdock->propPanelOff = xfce_rc_read_bool_entry (rc, "paneloff", TRUE);
-	wmdock->anchorPos          = xfce_rc_read_int_entry(rc, "anchorpos", -1);
+	rcPanelOff = wmdock->propPanelOff = xfce_rc_read_bool_entry (rc, RCKEY_PANELOFF, TRUE);
+	wmdock->anchorPos          = xfce_rc_read_int_entry(rc, RCKEY_ANCHORPOS, -1);
 
 	if(G_LIKELY(rcCmds != NULL)) {
 		/* Wait 5 seconds as workaround for double XMap problems. */
@@ -111,7 +112,7 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 				}
 			}
 		}
-	}
+	} /* rcCmds != NULL */
 
 	xfce_rc_close (rc);
 }
@@ -119,12 +120,14 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 
 void wmdock_write_rc_file (XfcePanelPlugin *plugin)
 {
-	gchar       *file;
+	gchar       *file = NULL, *p = NULL;
 	XfceRc      *rc;
-	gchar       **cmds = NULL;
+	gchar       **cmdList = NULL;
+	gchar       **glueList = NULL;
+	gchar       buf[BUF_MAX];
 	GList       *dapps;
 	DockappNode *dapp = NULL;
-	gint        i = 0;
+	gint        i = 0, gluePos = 0, j = 0;
 
 	if (!(file = xfce_panel_plugin_save_location (plugin, TRUE))) return;
 
@@ -134,27 +137,47 @@ void wmdock_write_rc_file (XfcePanelPlugin *plugin)
 	if (!rc) return;
 
 	if(g_list_length (wmdock->dapps) > 0) {
-		cmds = g_malloc0(sizeof (gchar *) * (g_list_length (wmdock->dapps) + 1));
+		cmdList = g_malloc0(sizeof (gchar *) * (g_list_length (wmdock->dapps) + 1));
+		if ( IS_PANELOFF(wmdock) )
+			glueList = g_malloc0(sizeof (gchar *) * (g_list_length (wmdock->dapps) + 1));
 
-		dapps = g_list_first(wmdock->dapps);
-		while(dapps) {
+		for(dapps = g_list_first(wmdock->dapps) ; dapps; dapps = g_list_next(dapps)) {
 			dapp = DOCKAPP(dapps->data);
-			if(dapp && dapp->cmd)
-				cmds[i++] = g_strdup(dapp->cmd);
-			dapps = g_list_next(dapps);
+			if((i = g_list_index(wmdock->dapps, (gconstpointer) dapp)) == -1)
+				continue;
+			cmdList[i] = dapp->cmd ? g_strdup(dapp->cmd) : NULL;
+			if( IS_PANELOFF(wmdock) ) {
+				buf[0] = '\0';
+				for(gluePos = 0; gluePos < GLUE_MAX; gluePos++) {
+					if(dapp->glue[gluePos] && (j = g_list_index(wmdock->dapps, (gconstpointer) dapp->glue[gluePos])) != -1) {
+						/* ChildIndex1(j):position,ChildIndex2:postion,... */
+						if(strlen((const char *) buf) > 0)
+							p = g_strdup_printf(",%d:%s", j, get_glue_name(gluePos));
+						else
+							p = g_strdup_printf("%d:%s", j, get_glue_name(gluePos));
+						g_strlcat(buf, p, sizeof(buf));
+						g_free(p);
+					}
+				}
+				glueList[i] = g_strdup(buf);
+			}
 		}
 
-		xfce_rc_write_list_entry(rc, "cmds", cmds, ";");
+		xfce_rc_write_list_entry(rc, RCKEY_CMDLIST, cmdList, ";");
+		g_strfreev(cmdList);
 
-		g_strfreev(cmds);
+		if( IS_PANELOFF(wmdock) ) {
+			xfce_rc_write_list_entry(rc, RCKEY_GLUELIST, glueList, ";");
+			g_strfreev(glueList);
+		}
 
-		xfce_rc_write_int_entry (rc, "cmdcnt", g_list_length (wmdock->dapps));
-		xfce_rc_write_bool_entry (rc, "disptile", wmdock->propDispTile);
-		xfce_rc_write_bool_entry (rc, "disppropbtn", wmdock->propDispPropButton);
-		xfce_rc_write_bool_entry (rc, "dispaddonlywm", wmdock->propDispAddOnlyWM);
-		xfce_rc_write_bool_entry (rc, "paneloff", rcPanelOff);
-		xfce_rc_write_entry(rc, "dafilter", wmdock->filterList);
-		xfce_rc_write_int_entry (rc, "anchorpos", wmdock->anchorPos);
+		xfce_rc_write_int_entry (rc, RCKEY_CMDCNT, g_list_length (wmdock->dapps));
+		xfce_rc_write_bool_entry (rc, RCKEY_DISPTILE, wmdock->propDispTile);
+		xfce_rc_write_bool_entry (rc, RCKEY_DISPPROPBTN, wmdock->propDispPropButton);
+		xfce_rc_write_bool_entry (rc, RCKEY_DISPADDONLYWM, wmdock->propDispAddOnlyWM);
+		xfce_rc_write_bool_entry (rc, RCKEY_PANELOFF, rcPanelOff);
+		xfce_rc_write_entry(rc, RCKEY_DAFILTER, wmdock->filterList);
+		xfce_rc_write_int_entry (rc, RCKEY_ANCHORPOS, wmdock->anchorPos);
 	}
 
 	xfce_rc_close(rc);
