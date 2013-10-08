@@ -31,7 +31,6 @@ extern GdkPixbuf    *gdkPbTileDefault;
 extern GtkWidget    *wmdockIcon;
 extern Atom         XfceDockAppAtom;
 extern gchar        **rcCmds;
-extern gint         rcCmdcnt;
 extern gboolean     rcPanelOff;
 
 #endif /* __EXTERN_H__ */

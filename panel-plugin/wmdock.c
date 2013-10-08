@@ -56,7 +56,6 @@ GdkPixbuf    *gdkPbTileDefault = NULL;
 GdkPixbuf    *gdkPbIcon        = NULL;
 WmdockPlugin *wmdock           = NULL;
 gchar        **rcCmds          = NULL;
-gint         rcCmdcnt          = 0;
 /* TODO: Set panel off to FALSE. */
 gboolean     rcPanelOff        = TRUE;
 

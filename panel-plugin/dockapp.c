@@ -253,7 +253,7 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
  * @param gluePos Position to be translated.
  * @return String representation of the postion.
  */
-const gchar *get_glue_name(const gint glusPos)
+const gchar *wmdock_get_glue_name(const gint glusPos)
 {
 	static gchar ret[10];
 
@@ -282,7 +282,7 @@ const gchar *get_glue_name(const gint glusPos)
  * @param name The name to be translated to a number.
  * @return The position as integer. On error -1 is returned.
  */
-gint get_glue_position(gchar const *name)
+gint wmdock_get_glue_position(gchar const *name)
 {
 	if(!g_ascii_strcasecmp(name, "GLUE_B"))
 		return GLUE_B;
