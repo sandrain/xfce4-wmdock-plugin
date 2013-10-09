@@ -120,19 +120,19 @@ static DockappNode *wmdock_get_snapable_dockapp(DockappNode *dapp, gint *gluepos
 	/* Remove not possible snap positions for the dragging dockapp. */
 	case ANCHOR_TR:
 		possible^= (GLUE_T | GLUE_L);
-		possible^= prim == TRUE ? (GLUE_T | GLUE_L | GLUE_R) : 0;
+		possible^= prim == TRUE ? GLUE_R : 0;
 		break;
 	case ANCHOR_BR:
 		possible^= (GLUE_B | GLUE_R);
-		possible^= prim == TRUE ? (GLUE_B | GLUE_L | GLUE_R): 0;
+		possible^= prim == TRUE ? GLUE_L: 0;
 		break;
 	case ANCHOR_TL:
 		possible^= (GLUE_T | GLUE_R);
-		possible^= prim == TRUE ? (GLUE_T | GLUE_L | GLUE_R) : 0;
+		possible^= prim == TRUE ? GLUE_L : 0;
 		break;
 	case ANCHOR_BL:
 		possible^= (GLUE_B | GLUE_L);
-		possible^= prim == TRUE ? (GLUE_B | GLUE_L | GLUE_R) : 0;
+		possible^= prim == TRUE ? GLUE_R : 0;
 		break;
 	}
 

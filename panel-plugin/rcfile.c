@@ -55,7 +55,7 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 	DockappNode *dapp = NULL;
 	DockappNode **launched = NULL;
 	gchar     **glueList = NULL;
-	gchar     **tokens = NULL;
+	gchar     **glueInfo = NULL;
 
 	if (!(file = xfce_panel_plugin_lookup_rc_file (plugin))) return;
 
@@ -122,25 +122,29 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 			}
 		}
 
-		if( IS_PANELOFF(wmdock ) && g_strv_length(rcCmds) == g_strv_length(glueList) ) {
+		if( IS_PANELOFF( wmdock ) && g_strv_length(rcCmds) == g_strv_length(glueList) ) {
 			for (i = 0; glueList[i]; i++) {
-				if(!launched[i] || glueList[i][0] == '\0' || !(tokens = g_strsplit(glueList[i], ",", 0)))
+				if(!launched[i] || glueList[i][0] == '\0' || !(glueInfo = g_strsplit(glueList[i], ",", 0)))
 					continue;
 
-				for (j = 0; tokens[j]; j++) {
-					n = g_ascii_strtoll(tokens[j], &glueName, 10);
-					if(n > G_MAXINT || n < 0 || n > g_strv_length(rcCmds)-1 || glueName == tokens[j])
+				for (j = 0; glueInfo[j]; j++) {
+					n = g_ascii_strtoll(glueInfo[j], &glueName, 10);
+					if(n > G_MAXINT || n < 0 || n > g_strv_length(rcCmds)-1 || glueName == glueInfo[j] || glueName[0] != ':')
 						continue;
-					if((gluePos = wmdock_get_glue_position(glueName) == -1))
+					if((gluePos = wmdock_get_glue_position(&glueName[1])) == -1)
 						continue;
+					if(j == 0) /* Cleanup the default anchors. */
+						memset(launched[i]->glue, 0, sizeof(DockappNode *) * GLUE_MAX);
 
 					launched[i]->glue[gluePos] = launched[(gint) n];
+					debug("rcfile.c: Restored panel off position. (`%s', %s = %d)", launched[i]->cmd, &glueName[1], gluePos);
 				}
-				g_strfreev(tokens);
+				g_strfreev(glueInfo);
 			}
 
 			g_strfreev(glueList);
 		}
+
 		g_free(launched);
 	} /* rcCmds != NULL */
 }
