@@ -69,6 +69,20 @@ static void wmdock_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation 
 }
 
 
+static void wmdock_resolution_changed (GdkScreen *screen, gpointer data)
+{
+	if( IS_PANELOFF(wmdock) )
+		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
+}
+
+
+static void wmdock_monitors_changed (GdkScreen *screen, gpointer data)
+{
+	if( IS_PANELOFF(wmdock) )
+		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
+}
+
+
 static gboolean wmdock_size_changed (XfcePanelPlugin *plugin, int size)
 {
 	if (xfce_panel_plugin_get_orientation (plugin) ==
@@ -185,6 +199,8 @@ static void wmdock_construct (XfcePanelPlugin *plugin)
 	g_signal_connect (plugin, "size-changed", G_CALLBACK (wmdock_size_changed), NULL);
 	g_signal_connect (plugin, "orientation-changed", G_CALLBACK (wmdock_orientation_changed), NULL);
 	g_signal_connect (plugin, "free-data", G_CALLBACK (wmdock_free_data), NULL);
+	g_signal_connect(get_current_gdkscreen(), "size-changed", G_CALLBACK(wmdock_resolution_changed), NULL);
+	g_signal_connect(get_current_gdkscreen(), "monitors-changed", G_CALLBACK(wmdock_monitors_changed), NULL);
 
 	gtk_container_add (GTK_CONTAINER (plugin), wmdock->eventBox);
 
