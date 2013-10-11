@@ -33,6 +33,9 @@
 #define RCKEY_ANCHORPOS     (const gchar *) "anchorpos"
 #define RCKEY_GLUELIST      (const gchar *) "glues"
 
+#define RC_LIST_DELIMITER   (const gchar *) ";"
+#define RC_GLUE_DELIMITER   (const gchar *) ","
+
 /* Prototypes */
 void wmdock_read_rc_file (XfcePanelPlugin *);
 void wmdock_write_rc_file (XfcePanelPlugin *);

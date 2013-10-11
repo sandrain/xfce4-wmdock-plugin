@@ -248,6 +248,95 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 }
 
 
+/**
+ * Event handle for the tile in panel off mode (button_press)
+ *
+ * @param tile The window of the event.
+ * @param ev GdkEventButton.
+ * @param dapp DockAppNode of the event.
+ */
+static void wmdock_dockapp_button_press_handler(GtkWidget *window, GdkEventButton *ev, DockappNode *dapp)
+{
+	debug("dockapp.c: Window button press event (dapp: `%s')", dapp->name);
+	dappOnMotion = dapp;
+	motionstartx = (gint) ev->x;
+	motionstarty = (gint) ev->y;
+	gtk_window_set_keep_above(GTK_WINDOW(dapp->tile), TRUE);
+	gtk_window_set_keep_below(GTK_WINDOW(dapp->tile), FALSE);
+}
+
+
+/**
+ * Event handle for the tile in panel off mode (button_release)
+ *
+ * @param tile The window of the event.
+ * @param ev GdkEventButton.
+ * @param dapp DockAppNode of the event.
+ */
+static void wmdock_dockapp_button_release_handler(GtkWidget *window, GdkEventButton *ev, DockappNode *dapp)
+{
+	debug("dockapp.c: Window button release event (dapp: `%s')", dapp->name);
+	if(wmdock_replace_tile_dummy(dapp) == TRUE) {
+		debug("dockapp.c: Replaceable dummy tile found.");
+		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp() ? wmdock_get_primary_anchor_dockapp() : dapp);
+	} else {
+		wmdock_remove_anchors_tile_dummy();
+		wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
+	}
+	if(dappDummy) {
+		gtk_widget_hide(dappDummy->tile);
+	}
+
+	dappOnMotion = NULL;
+	gtk_window_set_keep_above(GTK_WINDOW(dapp->tile), FALSE);
+	gtk_window_set_keep_below(GTK_WINDOW(dapp->tile), TRUE);
+}
+
+
+/**
+ * Event handle for the tile in panel off mode (motion_notify)
+ *
+ * @param tile The window of the event.
+ * @param ev GdkEventButton.
+ * @param dapp DockAppNode of the event.
+ */
+static void wmdock_dockapp_motion_notify_handler(GtkWidget *window, GdkEventMotion *ev, DockappNode *dapp)
+{
+	gint gluepos, x, y, posx, posy;
+	DockappNode *dappSnap = NULL;
+	GdkModifierType m;
+
+	debug("dockapp.c: Window motion notify event (dapp: `%s')", dapp->name);
+
+	gdk_window_get_pointer(dapp->tile->window, &x, &y, &m);
+	if(window && dappOnMotion && (m & GDK_BUTTON1_MASK)) {
+		gtk_window_get_position(GTK_WINDOW(dapp->tile), &posx, &posy);
+		debug("dockapp.c: Mouse x: %d,  Mouse y: %d,  Dapp x: %d, Dapp y: %d,  Msx: %d,  Msy: %d",
+				x, y, posx, posy, motionstartx, motionstarty);
+		gtk_window_move(GTK_WINDOW(dapp->tile), posx - (motionstartx - x), posy - (motionstarty - y));
+	}
+
+	if(dappOnMotion == dapp) {
+		wmdock_remove_anchors_tile_dummy();
+		dappSnap = wmdock_get_snapable_dockapp(dapp, &gluepos);
+		if(dappSnap) {
+			debug("dockapp.c: Snapable dockapp `%s' for dockapp `%s', glue: %d.", dappSnap->name, dapp->name, gluepos);
+			if(!dappDummy) {
+				dappDummy = g_new0(DockappNode, 1);
+				dappDummy->name = g_strdup(DOCKAPP_DUMMY_TITLE);
+				dappDummy->tile = wmdock_create_tile_dummy();
+			}
+
+			dappSnap->glue[gluepos] = dappDummy;
+			wmdock_order_dockapps(dappDummy);
+			gtk_widget_show_all(dappDummy->tile);
+		} else if(dappDummy) {
+			gtk_widget_hide(dappDummy->tile);
+		}
+	}
+}
+
+
 /* Return the translation from glue int postion to glue name.
  *
  * @param gluePos Position to be translated.
@@ -342,122 +431,17 @@ DockappNode *wmdock_get_primary_anchor_dockapp()
 
 
 /**
- * Event handle for the tile in panel off mode (button_press)
- *
- * @param tile The window of the event.
- * @param ev GdkEventButton.
- * @param dapp DockAppNode of the event.
- */
-void wmdock_dockapp_button_press_handler(GtkWidget *tile, GdkEventButton *ev, DockappNode *dapp)
-{
-	debug("dockapp.c: Window button press event (dapp: `%s')", dapp->name);
-	dappOnMotion = dapp;
-	motionstartx = (gint) ev->x;
-	motionstarty = (gint) ev->y;
-	gtk_window_set_keep_above(GTK_WINDOW(dapp->tile), TRUE);
-}
-
-
-/**
- * Event handle for the tile in panel off mode (button_release)
- *
- * @param tile The window of the event.
- * @param ev GdkEventButton.
- * @param dapp DockAppNode of the event.
- */
-void wmdock_dockapp_button_release_handler(GtkWidget *tile, GdkEventButton *ev, DockappNode *dapp)
-{
-	debug("dockapp.c: Window button release event (dapp: `%s')", dapp->name);
-	if(wmdock_replace_tile_dummy(dapp) == TRUE) {
-		debug("dockapp.c: Replaceable dummy tile found.");
-		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp() ? wmdock_get_primary_anchor_dockapp() : dapp);
-	} else {
-		wmdock_remove_anchors_tile_dummy();
-		wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
-	}
-	if(dappDummy) {
-		gtk_widget_hide(dappDummy->tile);
-	}
-
-	dappOnMotion = NULL;
-	gtk_window_set_keep_above(GTK_WINDOW(dapp->tile), FALSE);
-}
-
-
-/**
- * Event handle for the tile in panel off mode (motion_notify)
- *
- * @param tile The window of the event.
- * @param ev GdkEventButton.
- * @param dapp DockAppNode of the event.
- */
-void wmdock_dockapp_motion_notify_handler(GtkWidget *tile, GdkEventMotion *ev, DockappNode *dapp)
-{
-	gint gluepos, x, y, posx, posy;
-	DockappNode *dappSnap = NULL;
-	GdkModifierType m;
-
-	debug("dockapp.c: Window motion notify event (dapp: `%s')", dapp->name);
-
-	gdk_window_get_pointer(dapp->tile->window, &x, &y, &m);
-	if(tile && dappOnMotion && (m & GDK_BUTTON1_MASK)) {
-		gtk_window_get_position(GTK_WINDOW(dapp->tile), &posx, &posy);
-		debug("dockapp.c: Mouse x: %d,  Mouse y: %d,  Dapp x: %d, Dapp y: %d,  Msx: %d,  Msy: %d",
-				x, y, posx, posy, motionstartx, motionstarty);
-		gtk_window_move(GTK_WINDOW(dapp->tile), posx - (motionstartx - x), posy - (motionstarty - y));
-	}
-
-	if(dappOnMotion == dapp) {
-		wmdock_remove_anchors_tile_dummy();
-		dappSnap = wmdock_get_snapable_dockapp(dapp, &gluepos);
-		if(dappSnap) {
-			debug("dockapp.c: Snapable dockapp `%s' for dockapp `%s', glue: %d.", dappSnap->name, dapp->name, gluepos);
-			if(!dappDummy) {
-				dappDummy = g_new0(DockappNode, 1);
-				dappDummy->name = g_strdup(DOCKAPP_DUMMY_TITLE);
-				dappDummy->tile = wmdock_create_tile_dummy();
-			}
-
-			dappSnap->glue[gluepos] = dappDummy;
-			wmdock_order_dockapps(dappDummy);
-			gtk_widget_show_all(dappDummy->tile);
-		} else if(dappDummy) {
-			gtk_widget_hide(dappDummy->tile);
-		}
-	}
-}
-
-
-
-/**
  * Event handler for the tile in panel off mode (event_after).
  *
  * @param tile The window of the event.
  * @param ev Event informations.
  * @param dapp DockappNode of the event.
  */
-void wmdock_dockapp_event_after_handler(GtkWidget *tile, GdkEvent *ev, DockappNode *dapp)
+void wmdock_dockapp_event_after_handler(GtkWidget *window, GdkEvent *ev, DockappNode *dapp)
 {
-	GdkModifierType m;
-
-	debug("dockapp.c: Window event after: %d. (dapp: `%s'), dappOnMove: %s", ev->type, dapp->name,
+	debug("dockapp.c: Window event-after: %d. (dapp: `%s'), dappOnMove: %s", ev->type, dapp->name,
 			dappOnMotion ? "Yes": "No");
 	switch(ev->type) {
-	case GDK_CONFIGURE:
-		gdk_window_get_pointer(tile->window, NULL, NULL, &m);
-		if(!dappOnMotion && (m & GDK_BUTTON1_MASK)) {
-			dappOnMotion = dapp;
-			gtk_window_set_keep_above(GTK_WINDOW(dapp->tile), TRUE);
-		}
-		wmdock_dockapp_motion_notify_handler(NULL, &ev->motion, dapp);
-
-		if(!(dappOnMotion && !(m & GDK_BUTTON1_MASK)))
-			break;
-		/* No break if DockApp is moved and mouse btn released. */
-	case GDK_BUTTON_RELEASE:
-	case GDK_KEY_RELEASE:
-		wmdock_dockapp_button_release_handler(NULL, &ev->button, dapp);
-		break;
 	case GDK_FOCUS_CHANGE:
 		if(ev->focus_change.in == TRUE) {
 			/* `in' is true if window window got the focus. */
@@ -500,7 +484,6 @@ GtkWidget *wmdock_create_tile_dummy()
 	gtk_window_set_skip_pager_hint(GTK_WINDOW(dummy), TRUE);
 	gtk_window_set_opacity(GTK_WINDOW(dummy), 0.6);
 	gtk_widget_set_size_request(dummy, DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
-	//	gtk_window_set_type_hint(GTK_WINDOW(dummy), GDK_WINDOW_TYPE_HINT_DND);
 
 	return (dummy);
 }
@@ -516,8 +499,10 @@ void wmdock_dockapp_tofront(DockappNode *dapp) {
 		return;
 
 	if ( IS_PANELOFF(wmdock) ) {
+		gtk_window_set_keep_below(GTK_WINDOW(dapp->tile), FALSE);
 		gdk_window_raise(dapp->tile->window);
 		gtk_window_set_keep_above(GTK_WINDOW(dapp->tile), FALSE);
+		gtk_window_set_keep_below(GTK_WINDOW(dapp->tile), TRUE);
 	}
 }
 
@@ -814,25 +799,30 @@ void wmdock_set_socket_postion(DockappNode *dapp, int x, int y)
 GtkWidget *wmdock_create_tile_from_socket(DockappNode *dapp)
 {
 	GtkWidget *tile = NULL;
-	GtkWidget *fixed = NULL;
+	GtkWidget *_fixed = NULL;
+	GtkWidget *_evbox = NULL;
 
-	tile = fixed = gtk_fixed_new();
-	gtk_container_set_border_width(GTK_CONTAINER(fixed), 0);
+	tile = _fixed = gtk_fixed_new();
+	gtk_container_set_border_width(GTK_CONTAINER(_fixed), 0);
 
-	/* Create an eventbox to catch all click and motion events. */
+	/* Create an internal eventbox to catch click events outside the socket. */
+	_evbox = gtk_event_box_new();
+	gtk_widget_set_size_request(GTK_WIDGET(_evbox), DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
+	gtk_fixed_put(GTK_FIXED(_fixed), _evbox, 0, 0);
+
+	/* Create an eventbox to catch to click and motion events inside the socket. */
 	dapp->evbox = gtk_event_box_new();
 	gtk_event_box_set_above_child(GTK_EVENT_BOX(dapp->evbox), FALSE);
 
 	/* Add the GtkSocket with the dockapp fixed and centered. */
 	gtk_container_add(GTK_CONTAINER(dapp->evbox), GTK_WIDGET(dapp->s));
-	gtk_fixed_put(GTK_FIXED(fixed), GTK_WIDGET(dapp->evbox),
+	gtk_fixed_put(GTK_FIXED(_fixed), GTK_WIDGET(dapp->evbox),
 			(DEFAULT_DOCKAPP_WIDTH - dapp->width) / 2, (DEFAULT_DOCKAPP_HEIGHT - dapp->height) / 2);
 
 	/* Add the background tile. */
 	dapp->bg = wmdock->propDispTile == TRUE ? gtk_image_new_from_pixbuf(gdkPbTileDefault) : gtk_image_new();
 	gtk_widget_set_size_request(GTK_WIDGET(dapp->bg), DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
-	gtk_fixed_put(GTK_FIXED(fixed), dapp->bg, 0, 0);
-
+	gtk_container_add(GTK_CONTAINER(_evbox), GTK_WIDGET(dapp->bg));
 
 	if( IS_PANELOFF(wmdock) ) {
 		/* If propDispPanelOff is true create a separate window with the
@@ -844,6 +834,10 @@ GtkWidget *wmdock_create_tile_from_socket(DockappNode *dapp)
 		gtk_window_set_title(GTK_WINDOW(tile), dapp->name);
 		gtk_window_set_default_size(GTK_WINDOW(tile), DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
 		gtk_container_set_border_width(GTK_CONTAINER(tile), 0);
+		/* To disable dragging by alt key. */
+		gtk_window_set_type_hint(GTK_WINDOW(tile), GDK_WINDOW_TYPE_HINT_DOCK);
+		gtk_window_set_keep_below(GTK_WINDOW(tile), TRUE);
+		gtk_window_set_keep_above(GTK_WINDOW(tile), FALSE);
 
 		/* Disable window shrinking resizing and growing. */
 		gtk_window_set_policy (GTK_WINDOW(tile), FALSE, FALSE, FALSE);
@@ -856,10 +850,14 @@ GtkWidget *wmdock_create_tile_from_socket(DockappNode *dapp)
 		gtk_window_set_skip_taskbar_hint(GTK_WINDOW(tile), TRUE);
 		gtk_window_set_skip_pager_hint(GTK_WINDOW(tile), TRUE);
 
-		gtk_container_add(GTK_CONTAINER(tile), fixed);
+		gtk_container_add(GTK_CONTAINER(tile), _fixed);
+
+		g_signal_connect(G_OBJECT(tile), "motion_notify_event", G_CALLBACK(wmdock_dockapp_motion_notify_handler), dapp);
+		g_signal_connect(G_OBJECT(tile), "button_press_event", G_CALLBACK(wmdock_dockapp_button_press_handler), dapp);
+		g_signal_connect(G_OBJECT(tile), "button_release_event", G_CALLBACK(wmdock_dockapp_button_release_handler), dapp);
 	}
 
-	gtk_widget_show(fixed);
+	gtk_widget_show(_fixed);
 
 	return (tile);
 }

@@ -232,11 +232,8 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 		if( IS_PANELOFF(wmdock) ) {
 			wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
 
-			/* Setup the event handler for the window. */
+			/* Setup the event-after handler for the window. */
 			g_signal_connect(G_OBJECT(dapp->tile), "event-after", G_CALLBACK(wmdock_dockapp_event_after_handler), dapp);
-			g_signal_connect(G_OBJECT(dapp->tile), "motion_notify_event", G_CALLBACK(wmdock_dockapp_motion_notify_handler), dapp);
-			g_signal_connect(G_OBJECT(dapp->tile), "button_press_event", G_CALLBACK(wmdock_dockapp_button_press_handler), dapp);
-			g_signal_connect(G_OBJECT(dapp->tile), "button_release_event", G_CALLBACK(wmdock_dockapp_button_release_handler), dapp);
 		}
 		/* Clear the noisy background. */
 		wmdock_redraw_dockapp(dapp);
