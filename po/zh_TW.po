@@ -1,76 +1,74 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Walter Cheuk <wwycheuk@gmail.com>, 2013
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-wmdock-plugin master\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2012-01-15 21:06+0800\n"
-"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
-"Language-Team: chinese-l10n <chinese-l10n@googlegroups.com>\n"
+"POT-Creation-Date: 2013-07-13 22:15+0200\n"
+"PO-Revision-Date: 2013-10-13 00:33+0000\n"
+"Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
+"Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/xfce/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: panel-plugin/wmdock.c:196
+#: ../panel-plugin/wmdock.c:246
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "您想要移除 dockapp「%s」嗎？"
 
-#: panel-plugin/wmdock.c:398
+#: ../panel-plugin/wmdock.c:448
 msgid "No dockapp is running!"
 msgstr "沒有執行中的 dockapp！"
 
-#: panel-plugin/wmdock.c:858
+#: ../panel-plugin/wmdock.c:907
 #, c-format
 msgid "Failed to start %s!"
 msgstr "無法啟動 %s！"
 
-#: panel-plugin/wmdock.c:1148
+#. Create the configure dialog.
+#: ../panel-plugin/wmdock.c:1211
 msgid "WMdock"
 msgstr "WMdock"
 
-#: panel-plugin/wmdock.c:1151
+#: ../panel-plugin/wmdock.c:1214
 msgid "Remove dockapp"
 msgstr "移除 dockapp"
 
-#: panel-plugin/wmdock.c:1167
+#: ../panel-plugin/wmdock.c:1230
 msgid "General settings"
 msgstr "通用設定值"
 
-#: panel-plugin/wmdock.c:1168
+#: ../panel-plugin/wmdock.c:1231
 msgid "Dockapp detection"
 msgstr "Dockapp 偵測"
 
-#: panel-plugin/wmdock.c:1216
+#: ../panel-plugin/wmdock.c:1279
 msgid "Select dockapp to configure:"
 msgstr "選取要設定的 Dockapp："
 
-#: panel-plugin/wmdock.c:1225
+#: ../panel-plugin/wmdock.c:1288
 msgid "Shell command:"
 msgstr "Shell 指令："
 
-#: panel-plugin/wmdock.c:1236
+#: ../panel-plugin/wmdock.c:1299
 msgid "Display tile in the background."
 msgstr "於背景顯示標題。"
 
-#: panel-plugin/wmdock.c:1237
+#: ../panel-plugin/wmdock.c:1300
 msgid ""
 "Display a separate WMdock properties\n"
 "button in the panel."
-msgstr ""
-"在面板顯示個別的 WMdock\n"
-"屬性按鈕。"
+msgstr "在面板顯示個別的 WMdock\n屬性按鈕。"
 
-#: panel-plugin/wmdock.c:1238
+#: ../panel-plugin/wmdock.c:1301
 msgid ""
 "Add only dockapps which start with\n"
-"wm* in the name."
-msgstr ""
-"僅加入名稱開頭為 wm* 的 \n"
-"dockapp。"
-
+"pattern in list. (e.g.: ^wm;^as)"
+msgstr "僅加入使用以下式樣開首的 dockapp\n(例如: ^wm;^as)"
