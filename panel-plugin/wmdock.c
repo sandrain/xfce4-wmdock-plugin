@@ -66,6 +66,9 @@ static void wmdock_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation 
 	xfce_hvbox_set_orientation ((XfceHVBox *) wmdock->box, orientation);
 	gtk_widget_show(GTK_WIDGET(wmdock->panelBox));
 	gtk_widget_show(GTK_WIDGET(wmdock->box));
+
+	if( IS_PANELOFF(wmdock) )
+		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
 }
 
 
@@ -92,9 +95,10 @@ static gboolean wmdock_size_changed (XfcePanelPlugin *plugin, int size)
 		gtk_widget_set_size_request (GTK_WIDGET (plugin), size, -1);
 	}
 
-	if(wmdockIcon) {
+	if(wmdockIcon)
 		wmdock_panel_draw_wmdock_icon(TRUE);
-	}
+	if( IS_PANELOFF(wmdock) )
+		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
 
 	return TRUE;
 }
@@ -131,8 +135,10 @@ static WmdockPlugin *wmdock_plugin_new (XfcePanelPlugin* plugin)
 	wmdock->propDispAddOnlyWM  = TRUE;
 	/* TODO: Set panel off to FALSE. */
 	wmdock->propPanelOff       = TRUE;
+	wmdock->propPanelOffIgnoreOffset = FALSE;
+	wmdock->propPanelOffKeepAbove    = FALSE;
 	wmdock->filterList         = g_strdup(DOCKAPP_FILTER_PATTERN);
-	wmdock->anchorPos          = ANCHOR_BR;
+	wmdock->anchorPos          = get_default_anchor_postion();
 
 	wmdock->eventBox = gtk_event_box_new ();
 	gtk_widget_show(GTK_WIDGET(wmdock->eventBox));

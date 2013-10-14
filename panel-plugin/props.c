@@ -41,18 +41,19 @@
 
 /* Properties dialog */
 static struct {
-	GtkWidget *dlg;
-	GtkWidget *vbox, *vbox2, *vboxGeneral, *vboxDetect;
-	GtkWidget *hbox, *hboxPanelOffOpts;
-	GtkWidget *frmGeneral, *frmDetect, *frmPanelOffOpts;
-	GtkWidget *lblSel, *lblCmd;
-	GtkWidget *chkDispTile, *chkPropButton, *chkAddOnlyWM, *chkPanelOff;
-	GtkWidget *radioPanelOffTL, *radioPanelOffTR, *radioPanelOffBL, *radioPanelOffBR;
-	GtkWidget *imageContainer, *container;
-	GtkWidget *imageTile, *image;
-	GtkWidget *txtCmd;
-	GtkWidget *cbx;
-	GtkWidget *btnMoveUp, *btnMoveDown, *txtPatterns;
+	GtkWidget *dlg; /* Dialogs */
+	GtkWidget *vbox, *vbox2, *vboxGeneral, *vboxDetect, *vboxPanelOffOpts; /* Vertical boxes */
+	GtkWidget *hbox, *hboxPanelOffOpts; /* Horizontal boxes */
+	GtkWidget *frmGeneral, *frmDetect, *frmPanelOffOpts; /* Frames */
+	GtkWidget *lblSel, *lblCmd, *lblPanelOffPlacement; /* Labels */
+	GtkWidget *chkDispTile, *chkPropButton, *chkAddOnlyWM, *chkPanelOff, *chkPanelOffIgnoreOffset, *chkPanelOffKeepAbove; /* Check boxes */
+	GtkWidget *radioPanelOffTL, *radioPanelOffTR, *radioPanelOffBL, *radioPanelOffBR; /* Radio buttons */
+	GtkWidget *imageContainer, *container; /* Misc. containers */
+	GtkWidget *tblPanelOff; /* Layout tables */
+	GtkWidget *imageTile, *image; /* Images */
+	GtkWidget *txtCmd, *txtPatterns; /* Text boxes */
+	GtkWidget *cbx; /* Combo boxes */
+	GtkWidget *btnMoveUp, *btnMoveDown; /* Misc. buttons */
 } prop;
 
 static GtkWidget *btnProperties = NULL;
@@ -104,19 +105,59 @@ static void wmdock_properties_chkaddonlywm(GtkToggleButton *gtkChkAddOnlyWM, gpo
 }
 
 
+static void wmdock_properties_chkpaneloffignoreoffset(GtkToggleButton *gtkChkPanelOffIgnoreOffset, gpointer user_data)
+{
+	wmdock->propPanelOffIgnoreOffset = gtk_toggle_button_get_active(gtkChkPanelOffIgnoreOffset);
+	wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
+}
+
+
+static void wmdock_properties_chkpaneloffkeepabove(GtkToggleButton *gtkChkPanelOffKeepAbove, gpointer user_data)
+{
+	wmdock->propPanelOffKeepAbove = gtk_toggle_button_get_active(gtkChkPanelOffKeepAbove);
+	g_list_foreach(wmdock->dapps, (GFunc) wmdock_dockapp_tofront, NULL);
+}
+
+
+static void wmdock_properties_radiopaneloff(GtkRadioButton *gtkRadioPanelOff, gpointer user_data)
+{
+	gint _anchorPos = wmdock->anchorPos;
+
+	if(gtkRadioPanelOff == GTK_RADIO_BUTTON(prop.radioPanelOffTL))
+		_anchorPos = ANCHOR_TL;
+	else if(gtkRadioPanelOff == GTK_RADIO_BUTTON(prop.radioPanelOffTR))
+		_anchorPos = ANCHOR_TR;
+	else if(gtkRadioPanelOff == GTK_RADIO_BUTTON(prop.radioPanelOffBL))
+		_anchorPos = ANCHOR_BL;
+	else if(gtkRadioPanelOff == GTK_RADIO_BUTTON(prop.radioPanelOffBR))
+		_anchorPos = ANCHOR_BR;
+
+	wmdock_set_new_anchorpos(_anchorPos);
+	wmdock->anchorPos = _anchorPos;
+	wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
+}
+
+
 static void wmdock_properties_chkpaneloff(GtkToggleButton *gtkChkPanelOff, gpointer user_data)
 {
 	GtkWidget *gtkDlg;
 
 	if((rcPanelOff = gtk_toggle_button_get_active(gtkChkPanelOff)) == TRUE) {
-		wmdock->anchorPos = xfce_panel_plugin_get_screen_position(wmdock->plugin);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.frmPanelOffOpts), TRUE);
+		wmdock->anchorPos = get_default_anchor_postion();
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBL), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBR), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTL), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTR), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffPlacement), TRUE);
 	} else {
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.frmPanelOffOpts), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBL), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBR), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTL), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTR), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffPlacement), FALSE);
 	}
 
 	if(g_list_length(wmdock->dapps)) {
-
 		gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))),
 				GTK_DIALOG_DESTROY_WITH_PARENT,
 				GTK_MESSAGE_INFO,
@@ -384,16 +425,17 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 
 	prop.frmGeneral = gtk_frame_new(_("General settings"));
 	prop.frmDetect = gtk_frame_new(_("Dockapp detection"));
-	prop.frmPanelOffOpts = gtk_frame_new(_("Alignment options"));
+	prop.frmPanelOffOpts = gtk_frame_new(_("Mode settings"));
 	prop.vboxGeneral = gtk_vbox_new(FALSE, 6);
 	prop.vboxDetect = gtk_vbox_new(FALSE, 6);
+	prop.vboxPanelOffOpts = gtk_vbox_new(FALSE, 6);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (prop.dlg)->vbox), prop.frmGeneral,
-			FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (prop.dlg)->vbox), prop.frmDetect,
-			FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (prop.dlg)->vbox), prop.frmGeneral, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (prop.dlg)->vbox), prop.frmDetect, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (prop.dlg)->vbox), prop.frmPanelOffOpts, FALSE, FALSE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (prop.vboxGeneral), 4);
 	gtk_container_set_border_width (GTK_CONTAINER (prop.vboxDetect), 4);
+	gtk_container_set_border_width (GTK_CONTAINER (prop.vboxPanelOffOpts), 4);
 
 	prop.vbox = gtk_vbox_new(FALSE, 4);
 	prop.vbox2 = gtk_vbox_new(FALSE, 4);
@@ -403,16 +445,13 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 	gtk_box_pack_start (GTK_BOX (prop.hbox), prop.vbox2, FALSE, FALSE, 0);
 
 	prop.imageContainer = gtk_alignment_new(0.5, 0.5, 0, 0);
-	gtk_widget_set_size_request(GTK_WIDGET(prop.imageContainer),
-			DEFAULT_DOCKAPP_WIDTH,
-			DEFAULT_DOCKAPP_HEIGHT);
+	gtk_widget_set_size_request(GTK_WIDGET(prop.imageContainer), DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
 	prop.container =  gtk_fixed_new();
 
 	prop.hboxPanelOffOpts = gtk_hbox_new(FALSE, 4);
 
 	/* Create the GTK widget objects. */
-	gdkPbIcon = gdk_pixbuf_new_from_xpm_data((const char**)
-			xfce4_wmdock_plugin_xpm);
+	gdkPbIcon = gdk_pixbuf_new_from_xpm_data((const char**) xfce4_wmdock_plugin_xpm);
 
 	prop.imageTile = gtk_image_new_from_pixbuf(gdkPbTileDefault);
 	prop.image = gtk_image_new_from_pixbuf (gdkPbIcon);
@@ -423,18 +462,14 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 	gtk_container_add(GTK_CONTAINER(prop.container), prop.imageTile);
 	gtk_container_add(GTK_CONTAINER(prop.container), prop.imageContainer);
 
-
-	gtk_box_pack_start (GTK_BOX(prop.vbox), GTK_WIDGET (prop.container),
-			FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(prop.vbox), GTK_WIDGET (prop.container), FALSE, FALSE, 0);
 
 	prop.btnMoveUp = xfce_arrow_button_new (GTK_ARROW_UP);
 	prop.btnMoveDown = xfce_arrow_button_new (GTK_ARROW_DOWN);
 
 	if(!IS_PANELOFF(wmdock)) {
-		gtk_box_pack_start (GTK_BOX(prop.vbox), GTK_WIDGET (prop.btnMoveUp), FALSE,
-				FALSE, 0);
-		gtk_box_pack_start (GTK_BOX(prop.vbox), GTK_WIDGET (prop.btnMoveDown), FALSE,
-				FALSE, 0);
+		gtk_box_pack_start (GTK_BOX(prop.vbox), GTK_WIDGET (prop.btnMoveUp), FALSE, FALSE, 0);
+		gtk_box_pack_start (GTK_BOX(prop.vbox), GTK_WIDGET (prop.btnMoveDown), FALSE, FALSE, 0);
 	}
 
 	prop.lblSel = gtk_label_new (_("Select dockapp to configure:"));
@@ -457,76 +492,101 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 	}
 	gtk_box_pack_start (GTK_BOX(prop.vbox2), prop.txtCmd, FALSE, FALSE, 0);
 
-	prop.chkDispTile   = gtk_check_button_new_with_label(_("Display tile in the background."));
-	prop.chkPropButton = gtk_check_button_new_with_label(_("Display a separate WMdock properties\nbutton in the panel."));
-	prop.chkAddOnlyWM  = gtk_check_button_new_with_label(_("Add only dockapps which start with\npattern in list. (e.g.: ^wm;^as)"));
-	prop.chkPanelOff   = gtk_check_button_new_with_label(_("Don't use the XFCE panel for the dockapps."));
-	prop.txtPatterns   = gtk_entry_new();
+	prop.chkDispTile             = gtk_check_button_new_with_label(_("Display tile in the background."));
+	prop.chkPropButton           = gtk_check_button_new_with_label(_("Display a separate WMdock properties button in the panel."));
+	prop.chkAddOnlyWM            = gtk_check_button_new_with_label(_("Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"));
+	prop.chkPanelOff             = gtk_check_button_new_with_label(_("Display dockapps in separate windows and not in the panel."));
+	prop.chkPanelOffIgnoreOffset = gtk_check_button_new_with_label(_("Don't use panel size as offset for the first dockapp."));
+	prop.chkPanelOffKeepAbove    = gtk_check_button_new_with_label(_("Keep dockapp windows on top."));
+	prop.txtPatterns    = gtk_entry_new();
 	gtk_entry_set_text(GTK_ENTRY(prop.txtPatterns), wmdock->filterList);
-	gtk_widget_set_sensitive (GTK_WIDGET (prop.txtPatterns),
-			wmdock->propDispAddOnlyWM);
+	gtk_widget_set_sensitive (GTK_WIDGET (prop.txtPatterns), wmdock->propDispAddOnlyWM);
 
-	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkDispTile,
-			wmdock->propDispTile);
-	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkPropButton,
-			wmdock->propDispPropButton);
-	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkAddOnlyWM,
-			wmdock->propDispAddOnlyWM);
-	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkPanelOff,
-			rcPanelOff);
+	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkDispTile, wmdock->propDispTile);
+	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkPropButton, wmdock->propDispPropButton);
+	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkAddOnlyWM, wmdock->propDispAddOnlyWM);
+	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkPanelOff, rcPanelOff);
+	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkPanelOffIgnoreOffset, wmdock->propPanelOffIgnoreOffset);
+	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkPanelOffKeepAbove, wmdock->propPanelOffKeepAbove);
 
 	gtk_container_add(GTK_CONTAINER(prop.frmGeneral), prop.vboxGeneral);
 	gtk_container_add(GTK_CONTAINER(prop.frmDetect), prop.vboxDetect);
+	gtk_container_add(GTK_CONTAINER(prop.frmPanelOffOpts), prop.vboxPanelOffOpts);
 
-	gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.chkPanelOff,
-			FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.frmPanelOffOpts,
-			FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.chkDispTile,
-			FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.chkPropButton,
-			FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX(prop.vboxDetect), prop.chkAddOnlyWM,
-			FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX(prop.vboxDetect), prop.txtPatterns,
-			FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.frmPanelOffOpts, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.chkDispTile, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(prop.vboxGeneral), prop.chkPropButton, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(prop.vboxDetect), prop.chkAddOnlyWM, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(prop.vboxDetect), prop.txtPatterns, FALSE, FALSE, 0);
 
-	/* Setup advanced panel off mode options frame. */
+	/* Setup panel off mode options frame. */
+	gtk_box_pack_start (GTK_BOX(prop.vboxPanelOffOpts), prop.chkPanelOff, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.vboxPanelOffOpts), prop.chkPanelOffKeepAbove, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.vboxPanelOffOpts), prop.chkPanelOffIgnoreOffset, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX(prop.vboxPanelOffOpts), prop.hboxPanelOffOpts, FALSE, FALSE, 0);
+
+	prop.tblPanelOff = gtk_table_new(2, 2, TRUE);
+	prop.lblPanelOffPlacement = gtk_label_new (_("Startup placement:"));
+	gtk_misc_set_alignment (GTK_MISC (prop.lblPanelOffPlacement), 0, 0);
 	prop.radioPanelOffTL = gtk_radio_button_new_with_label(NULL, _("Top left"));
 	prop.radioPanelOffTR = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(prop.radioPanelOffTL), _("Top right"));
 	prop.radioPanelOffBL = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(prop.radioPanelOffTL), _("Bottom left"));
 	prop.radioPanelOffBR = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(prop.radioPanelOffTL), _("Bottom right"));
 
-	gtk_container_add(GTK_CONTAINER(prop.frmPanelOffOpts), prop.hboxPanelOffOpts);
-	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffTL,
-				FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffTR,
-				FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffBL,
-				FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffBR,
-				FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.lblPanelOffPlacement, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.tblPanelOff, FALSE, FALSE, 0);
+	gtk_table_attach_defaults(GTK_TABLE(prop.tblPanelOff), prop.radioPanelOffTL, 0, 1, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(prop.tblPanelOff), prop.radioPanelOffTR, 1, 2, 0, 1);
+	gtk_table_attach_defaults(GTK_TABLE(prop.tblPanelOff), prop.radioPanelOffBL, 0, 1, 1, 2);
+	gtk_table_attach_defaults(GTK_TABLE(prop.tblPanelOff), prop.radioPanelOffBR, 1, 2, 1, 2);
+	/*
+	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffTL, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffTR, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffBL, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffBR, FALSE, FALSE, 0);
+	*/
+	switch(wmdock->anchorPos) {
+	case ANCHOR_TL:
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prop.radioPanelOffTL), TRUE);
+		break;
+	case ANCHOR_TR:
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prop.radioPanelOffTR), TRUE);
+		break;
+	case ANCHOR_BL:
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prop.radioPanelOffBL), TRUE);
+		break;
+	default:
+		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prop.radioPanelOffBR), TRUE);
+		break;
+	}
+
+	if ( ! IS_PANELOFF(wmdock) ) {
+		/* Disable advanced panel options is the panel used. */
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBL), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBR), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTL), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTR), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffPlacement), FALSE);
+	}
 
 	/* Fill the dockapp chooser with entries. */
 	wmdock_refresh_properties_dialog();
 
 	/* Connect some signals to the dialog widgets */
-	g_signal_connect(G_OBJECT(prop.cbx), "changed",
-			G_CALLBACK(wmdock_properties_changed), prop.txtCmd);
-	g_signal_connect(G_OBJECT(prop.txtCmd), "key-release-event",
-			G_CALLBACK(wmdock_properties_savecmd), prop.cbx);
-	g_signal_connect(G_OBJECT(prop.btnMoveUp), "pressed",
-			G_CALLBACK(wmdock_properties_moveup), prop.cbx);
-	g_signal_connect(G_OBJECT(prop.btnMoveDown), "pressed",
-			G_CALLBACK(wmdock_properties_movedown), prop.cbx);
-	g_signal_connect(G_OBJECT(prop.chkDispTile), "toggled",
-			G_CALLBACK(wmdock_properties_chkdisptile), NULL);
-	g_signal_connect(G_OBJECT(prop.chkPanelOff), "toggled",
-			G_CALLBACK(wmdock_properties_chkpaneloff), NULL);
-	g_signal_connect(G_OBJECT(prop.chkPropButton), "toggled",
-			G_CALLBACK(wmdock_properties_chkpropbtn), NULL);
-	g_signal_connect(G_OBJECT(prop.chkAddOnlyWM), "toggled",
-			G_CALLBACK(wmdock_properties_chkaddonlywm), NULL);
+	g_signal_connect(G_OBJECT(prop.cbx), "changed", G_CALLBACK(wmdock_properties_changed), prop.txtCmd);
+	g_signal_connect(G_OBJECT(prop.txtCmd), "key-release-event", G_CALLBACK(wmdock_properties_savecmd), prop.cbx);
+	g_signal_connect(G_OBJECT(prop.btnMoveUp), "pressed", G_CALLBACK(wmdock_properties_moveup), prop.cbx);
+	g_signal_connect(G_OBJECT(prop.btnMoveDown), "pressed", G_CALLBACK(wmdock_properties_movedown), prop.cbx);
+	g_signal_connect(G_OBJECT(prop.chkDispTile), "toggled", G_CALLBACK(wmdock_properties_chkdisptile), NULL);
+	g_signal_connect(G_OBJECT(prop.chkPanelOff), "toggled", G_CALLBACK(wmdock_properties_chkpaneloff), NULL);
+	g_signal_connect(G_OBJECT(prop.chkPanelOffIgnoreOffset), "toggled", G_CALLBACK(wmdock_properties_chkpaneloffignoreoffset), NULL);
+	g_signal_connect(G_OBJECT(prop.chkPanelOffKeepAbove), "toggled", G_CALLBACK(wmdock_properties_chkpaneloffkeepabove), NULL);
+	g_signal_connect(G_OBJECT(prop.radioPanelOffTL), "toggled", G_CALLBACK(wmdock_properties_radiopaneloff), NULL);
+	g_signal_connect(G_OBJECT(prop.radioPanelOffTR), "toggled", G_CALLBACK(wmdock_properties_radiopaneloff), NULL);
+	g_signal_connect(G_OBJECT(prop.radioPanelOffBL), "toggled", G_CALLBACK(wmdock_properties_radiopaneloff), NULL);
+	g_signal_connect(G_OBJECT(prop.radioPanelOffBR), "toggled", G_CALLBACK(wmdock_properties_radiopaneloff), NULL);
+	g_signal_connect(G_OBJECT(prop.chkPropButton), "toggled", G_CALLBACK(wmdock_properties_chkpropbtn), NULL);
+	g_signal_connect(G_OBJECT(prop.chkAddOnlyWM), "toggled", G_CALLBACK(wmdock_properties_chkaddonlywm), NULL);
 
 	g_timeout_add (500, wmdock_properties_refresh_dapp_icon, NULL);
 

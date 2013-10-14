@@ -23,15 +23,17 @@
 #ifndef __RCFILE_H__
 #define __RCFILE_H__
 
-#define RCKEY_CMDLIST       (const gchar *) "cmds"
-#define RCKEY_CMDCNT        (const gchar *) "cmdcnt"
-#define RCKEY_DISPTILE      (const gchar *) "disptile"
-#define RCKEY_DISPPROPBTN   (const gchar *) "disppropbtn"
-#define RCKEY_DISPADDONLYWM (const gchar *) "dispaddonlywm"
-#define RCKEY_PANELOFF      (const gchar *) "paneloff"
-#define RCKEY_DAFILTER      (const gchar *) "dafilter"
-#define RCKEY_ANCHORPOS     (const gchar *) "anchorpos"
-#define RCKEY_GLUELIST      (const gchar *) "glues"
+#define RCKEY_CMDLIST              (const gchar *) "cmds"
+#define RCKEY_CMDCNT               (const gchar *) "cmdcnt"
+#define RCKEY_DISPTILE             (const gchar *) "disptile"
+#define RCKEY_DISPPROPBTN          (const gchar *) "disppropbtn"
+#define RCKEY_DISPADDONLYWM        (const gchar *) "dispaddonlywm"
+#define RCKEY_PANELOFF             (const gchar *) "paneloff"
+#define RCKEY_PANELOFFIGNOREOFFSET (const gchar *) "paneloffignoreoffset"
+#define RCKEY_PANELOFFKEEPABOVE    (const gchar *) "paneloffkeepabove"
+#define RCKEY_DAFILTER             (const gchar *) "dafilter"
+#define RCKEY_ANCHORPOS            (const gchar *) "anchorpos"
+#define RCKEY_GLUELIST             (const gchar *) "glues"
 
 #define RC_LIST_DELIMITER   (const gchar *) ";"
 #define RC_GLUE_DELIMITER   (const gchar *) ","

@@ -49,6 +49,8 @@ typedef struct {
  gboolean            propDispPropButton;
  gboolean            propDispAddOnlyWM;
  gboolean            propPanelOff;
+ gboolean            propPanelOffIgnoreOffset;
+ gboolean            propPanelOffKeepAbove;
  AnchorPostion       anchorPos;
  gchar               *filterList;
 

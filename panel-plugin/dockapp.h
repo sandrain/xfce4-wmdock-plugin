@@ -70,6 +70,7 @@ void wmdock_dockapp_tofront(DockappNode *dapp);
 void wmdock_dockapp_event_after_handler(GtkWidget *, GdkEvent *, DockappNode *);
 void wmdock_remove_anchor_dockapp(DockappNode *, DockappNode *);
 void wmdock_order_dockapps(DockappNode *);
+void wmdock_set_new_anchorpos(AnchorPostion);
 GtkWidget *wmdock_create_tile_dummy();
 gint wmdock_get_default_gluepos();
 gint wmdock_get_glue_position(gchar const *);

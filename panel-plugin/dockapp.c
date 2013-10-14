@@ -51,6 +51,7 @@ static GtkTargetEntry targetList[] = {
 static guint nTargets = G_N_ELEMENTS (targetList);
 static DockappNode *dappOnMotion = NULL, *dappDummy = NULL;
 static gint motionstartx = 0, motionstarty = 0;
+static gboolean blockDappReorder = FALSE;
 
 /**
  * Get the x coordinate child dockapp.
@@ -68,7 +69,7 @@ static void wmdock_dockapp_child_pos(DockappNode *prevDapp, gint gluepos, gint *
 	/* Setup the position of the first dockapp. */
 	prevx = prevy = 0;
 
-	if(!prevDapp)
+	if(! IS_PANELOFF(wmdock) || !prevDapp)
 		return;
 
 	/* Get the position of the previous DockApp if is accessable. */
@@ -114,12 +115,15 @@ static DockappNode *wmdock_get_snapable_dockapp(DockappNode *dapp, gint *gluepos
 	GList *dapps;
 	DockappNode *_dapp = NULL;
 
+	if( ! IS_PANELOFF(wmdock) )
+		return NULL;
+
 	prim = (dapp == wmdock_get_primary_anchor_dockapp()) ? TRUE : FALSE;
 
 	switch(wmdock->anchorPos) {
 	/* Remove not possible snap positions for the dragging dockapp. */
 	case ANCHOR_TR:
-		possible^= (GLUE_T | GLUE_L);
+		possible^= (GLUE_T | GLUE_R);
 		possible^= prim == TRUE ? GLUE_R : 0;
 		break;
 	case ANCHOR_BR:
@@ -127,7 +131,7 @@ static DockappNode *wmdock_get_snapable_dockapp(DockappNode *dapp, gint *gluepos
 		possible^= prim == TRUE ? GLUE_L: 0;
 		break;
 	case ANCHOR_TL:
-		possible^= (GLUE_T | GLUE_R);
+		possible^= (GLUE_T | GLUE_L);
 		possible^= prim == TRUE ? GLUE_L : 0;
 		break;
 	case ANCHOR_BL:
@@ -170,6 +174,9 @@ static void wmdock_remove_anchors_tile_dummy()
 	GList *dapps;
 	DockappNode *_dapp = NULL;
 
+	if( ! IS_PANELOFF(wmdock) )
+		return;
+
 	dapps = g_list_first(wmdock->dapps);
 	while(dapps) {
 		if((_dapp = DOCKAPP(dapps->data))) {
@@ -196,6 +203,9 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
 	gint i, j;
 	GList *dapps;
 	DockappNode *_dapp = NULL, *parent = NULL, *_parent = NULL;
+
+	if( ! IS_PANELOFF(wmdock) )
+		return FALSE;
 
 	parent = wmdock_get_parent_dockapp(dapp);
 	if(!parent && wmdock_get_primary_anchor_dockapp() == dapp) {
@@ -257,6 +267,9 @@ static gboolean wmdock_replace_tile_dummy(DockappNode *dapp)
  */
 static void wmdock_dockapp_button_press_handler(GtkWidget *window, GdkEventButton *ev, DockappNode *dapp)
 {
+	if( ! IS_PANELOFF(wmdock) )
+		return;
+
 	debug("dockapp.c: Window button press event (dapp: `%s')", dapp->name);
 	dappOnMotion = dapp;
 	motionstartx = (gint) ev->x;
@@ -275,6 +288,9 @@ static void wmdock_dockapp_button_press_handler(GtkWidget *window, GdkEventButto
  */
 static void wmdock_dockapp_button_release_handler(GtkWidget *window, GdkEventButton *ev, DockappNode *dapp)
 {
+	if( ! IS_PANELOFF(wmdock) )
+		return;
+
 	debug("dockapp.c: Window button release event (dapp: `%s')", dapp->name);
 	if(wmdock_replace_tile_dummy(dapp) == TRUE) {
 		debug("dockapp.c: Replaceable dummy tile found.");
@@ -289,7 +305,7 @@ static void wmdock_dockapp_button_release_handler(GtkWidget *window, GdkEventBut
 
 	dappOnMotion = NULL;
 	gtk_window_set_keep_above(GTK_WINDOW(dapp->tile), FALSE);
-	gtk_window_set_keep_below(GTK_WINDOW(dapp->tile), TRUE);
+	gtk_window_set_keep_below(GTK_WINDOW(dapp->tile), wmdock->propPanelOffKeepAbove == TRUE ? FALSE : TRUE);
 }
 
 
@@ -305,6 +321,9 @@ static void wmdock_dockapp_motion_notify_handler(GtkWidget *window, GdkEventMoti
 	gint gluepos, x, y, posx, posy;
 	DockappNode *dappSnap = NULL;
 	GdkModifierType m;
+
+	if( ! IS_PANELOFF(wmdock) )
+		return;
 
 	debug("dockapp.c: Window motion notify event (dapp: `%s')", dapp->name);
 
@@ -397,6 +416,9 @@ DockappNode *wmdock_get_primary_anchor_dockapp()
 	GList *dapps1, *dapps2;
 	DockappNode *dapp1 = NULL, *dapp2 = NULL;
 
+	if( ! IS_PANELOFF(wmdock) )
+		return NULL;
+
 	dapps1 = g_list_first(wmdock->dapps);
 
 	while(dapps1) {
@@ -439,8 +461,11 @@ DockappNode *wmdock_get_primary_anchor_dockapp()
  */
 void wmdock_dockapp_event_after_handler(GtkWidget *window, GdkEvent *ev, DockappNode *dapp)
 {
-	debug("dockapp.c: Window event-after: %d. (dapp: `%s'), dappOnMove: %s", ev->type, dapp->name,
-			dappOnMotion ? "Yes": "No");
+	if( ! IS_PANELOFF(wmdock) )
+		return;
+
+	debug("dockapp.c: Window event-after: %d. (dapp: `%s'), dappOnMove: %s", ev->type, dapp->name, dappOnMotion ? "Yes": "No");
+
 	switch(ev->type) {
 	case GDK_FOCUS_CHANGE:
 		if(ev->focus_change.in == TRUE) {
@@ -465,6 +490,9 @@ void wmdock_dockapp_event_after_handler(GtkWidget *window, GdkEvent *ev, Dockapp
 GtkWidget *wmdock_create_tile_dummy()
 {
 	GtkWidget *dummy = NULL;
+
+	if( ! IS_PANELOFF(wmdock) )
+		return NULL;
 
 	dummy = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
@@ -499,10 +527,10 @@ void wmdock_dockapp_tofront(DockappNode *dapp) {
 		return;
 
 	if ( IS_PANELOFF(wmdock) ) {
-		gtk_window_set_keep_below(GTK_WINDOW(dapp->tile), FALSE);
+		gtk_window_set_keep_below(GTK_WINDOW(dapp->tile), wmdock->propPanelOffKeepAbove == TRUE ? FALSE : TRUE);
 		gdk_window_raise(dapp->tile->window);
 		gtk_window_set_keep_above(GTK_WINDOW(dapp->tile), FALSE);
-		gtk_window_set_keep_below(GTK_WINDOW(dapp->tile), TRUE);
+		gtk_window_set_keep_below(GTK_WINDOW(dapp->tile), wmdock->propPanelOffKeepAbove == TRUE ? FALSE : TRUE);
 	}
 }
 
@@ -530,7 +558,7 @@ void wmdock_destroy_dockapp(DockappNode *dapp)
 
 void wmdock_setupdnd_dockapp(DockappNode *dapp)
 {
-	if( ! IS_PANELOFF(wmdock)) {
+	if( ! IS_PANELOFF(wmdock) ) {
 		/* Make the "well label" a DnD destination. */
 		gtk_drag_dest_set (GTK_WIDGET(dapp->s), GTK_DEST_DEFAULT_MOTION, targetList,
 				nTargets, GDK_ACTION_MOVE);
@@ -646,10 +674,9 @@ void wmdock_free_dockapp(DockappNode *dapp)
 		wmdock_panel_draw_wmdock_icon(FALSE);
 	}
 
-	if( IS_PANELOFF(wmdock) && g_list_first(wmdock->dapps))
-		wmdock_order_dockapps(DOCKAPP(g_list_first(wmdock->dapps)->data));
-
 	wmdock_refresh_properties_dialog();
+	if ( IS_PANELOFF(wmdock) )
+		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
 }
 
 
@@ -709,6 +736,9 @@ DockappNode *wmdock_get_parent_dockapp(DockappNode *dapp)
 	gint i;
 	GList *dapps;
 	DockappNode *_dapp;
+
+	if (! IS_PANELOFF(wmdock) )
+		return NULL;
 
 	dapps = g_list_first(wmdock->dapps);
 
@@ -836,7 +866,7 @@ GtkWidget *wmdock_create_tile_from_socket(DockappNode *dapp)
 		gtk_container_set_border_width(GTK_CONTAINER(tile), 0);
 		/* To disable dragging by alt key. */
 		gtk_window_set_type_hint(GTK_WINDOW(tile), GDK_WINDOW_TYPE_HINT_DOCK);
-		gtk_window_set_keep_below(GTK_WINDOW(tile), TRUE);
+		gtk_window_set_keep_below(GTK_WINDOW(tile), wmdock->propPanelOffKeepAbove == TRUE ? FALSE : TRUE);
 		gtk_window_set_keep_above(GTK_WINDOW(tile), FALSE);
 
 		/* Disable window shrinking resizing and growing. */
@@ -874,7 +904,7 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 	gint x, y, i, offsetx, offsety, gluepos = GLUE_MAX;
 	XfceScreenPosition xfceScrPos;
 
-	if(! IS_PANELOFF(wmdock) || !dapp )
+	if(! IS_PANELOFF(wmdock) || !dapp || blockDappReorder == TRUE)
 		return;
 
 	/* Setup the position of the first dockapp. */
@@ -910,14 +940,16 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 			offsetx = offsety = 0;
 			switch(wmdock->anchorPos) {
 			case ANCHOR_TL:
-				if(xfceScrPos == XFCE_SCREEN_POSITION_NW_V ||
+				if((xfceScrPos == XFCE_SCREEN_POSITION_NW_V ||
 						xfceScrPos == XFCE_SCREEN_POSITION_W ||
-						xfceScrPos == XFCE_SCREEN_POSITION_SW_V) {
+						xfceScrPos == XFCE_SCREEN_POSITION_SW_V) &&
+						wmdock->propPanelOffIgnoreOffset == FALSE) {
 					offsetx = panelx == 0 ? xfce_panel_plugin_get_size(wmdock->plugin) + 1 : 0;
 					offsety = 0;
-				} else if (xfceScrPos == XFCE_SCREEN_POSITION_NW_H ||
+				} else if ((xfceScrPos == XFCE_SCREEN_POSITION_NW_H ||
 						xfceScrPos == XFCE_SCREEN_POSITION_N ||
-						xfceScrPos == XFCE_SCREEN_POSITION_NE_H) {
+						xfceScrPos == XFCE_SCREEN_POSITION_NE_H) &&
+						wmdock->propPanelOffIgnoreOffset == FALSE) {
 					offsetx = 0;
 					offsety = panely == 0 ? xfce_panel_plugin_get_size(wmdock->plugin) + 1 : 0;
 				}
@@ -926,14 +958,16 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 				y = 0 + offsety;
 				break;
 			case ANCHOR_TR:
-				if(xfceScrPos == XFCE_SCREEN_POSITION_NE_V ||
+				if((xfceScrPos == XFCE_SCREEN_POSITION_NE_V ||
 						xfceScrPos == XFCE_SCREEN_POSITION_E ||
-						xfceScrPos == XFCE_SCREEN_POSITION_SE_V) {
+						xfceScrPos == XFCE_SCREEN_POSITION_SE_V) &&
+						wmdock->propPanelOffIgnoreOffset == FALSE) {
 					offsetx = xfce_panel_plugin_get_size(wmdock->plugin) + 1;
 					offsety = 0;
-				} else if (xfceScrPos == XFCE_SCREEN_POSITION_NW_H ||
+				} else if ((xfceScrPos == XFCE_SCREEN_POSITION_NW_H ||
 						xfceScrPos == XFCE_SCREEN_POSITION_N ||
-						xfceScrPos == XFCE_SCREEN_POSITION_NE_H) {
+						xfceScrPos == XFCE_SCREEN_POSITION_NE_H) &&
+						wmdock->propPanelOffIgnoreOffset == FALSE) {
 					offsetx = 0;
 					offsety = panely == 0 ? xfce_panel_plugin_get_size(wmdock->plugin) + 1 : 0;
 				}
@@ -942,14 +976,16 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 				y = 0 + offsety;
 				break;
 			case ANCHOR_BL:
-				if(xfceScrPos == XFCE_SCREEN_POSITION_NW_V ||
+				if((xfceScrPos == XFCE_SCREEN_POSITION_NW_V ||
 						xfceScrPos == XFCE_SCREEN_POSITION_W ||
-						xfceScrPos == XFCE_SCREEN_POSITION_SW_V) {
+						xfceScrPos == XFCE_SCREEN_POSITION_SW_V) &&
+						wmdock->propPanelOffIgnoreOffset == FALSE) {
 					offsetx = panelx == 0 ? xfce_panel_plugin_get_size(wmdock->plugin) + 1 : 0;
 					offsety = 0;
-				} else if (xfceScrPos == XFCE_SCREEN_POSITION_SW_H ||
+				} else if ((xfceScrPos == XFCE_SCREEN_POSITION_SW_H ||
 						xfceScrPos == XFCE_SCREEN_POSITION_S ||
-						xfceScrPos == XFCE_SCREEN_POSITION_SE_H) {
+						xfceScrPos == XFCE_SCREEN_POSITION_SE_H) &&
+						wmdock->propPanelOffIgnoreOffset == FALSE) {
 					offsetx = 0;
 					offsety = xfce_panel_plugin_get_size(wmdock->plugin) + 1;
 				}
@@ -958,14 +994,16 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 				y = gdk_screen_get_height(get_current_gdkscreen()) - DEFAULT_DOCKAPP_HEIGHT - offsety;
 				break;
 			case ANCHOR_BR:
-				if(xfceScrPos == XFCE_SCREEN_POSITION_NE_V ||
+				if((xfceScrPos == XFCE_SCREEN_POSITION_NE_V ||
 						xfceScrPos == XFCE_SCREEN_POSITION_E ||
-						xfceScrPos == XFCE_SCREEN_POSITION_SE_V) {
+						xfceScrPos == XFCE_SCREEN_POSITION_SE_V) &&
+						wmdock->propPanelOffIgnoreOffset == FALSE) {
 					offsetx = xfce_panel_plugin_get_size(wmdock->plugin) + 1;
 					offsety = 0;
-				} else if (xfceScrPos == XFCE_SCREEN_POSITION_SW_H ||
+				} else if ((xfceScrPos == XFCE_SCREEN_POSITION_SW_H ||
 						xfceScrPos == XFCE_SCREEN_POSITION_S ||
-						xfceScrPos == XFCE_SCREEN_POSITION_SE_H) {
+						xfceScrPos == XFCE_SCREEN_POSITION_SE_H) &&
+						wmdock->propPanelOffIgnoreOffset == FALSE) {
 					offsetx = 0;
 					offsety = xfce_panel_plugin_get_size(wmdock->plugin) + 1;
 				}
@@ -980,6 +1018,7 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 			}
 		} /* else */
 	}
+
 	gtk_window_move(GTK_WINDOW(dapp->tile), x, y);
 
 	debug("dockapp.c: %d, Panel posx: %d, Panel posy: %d, Plug posx: %d, Plug posy: %d, prevDapp: %s, movex: %d, movey: %d",
@@ -997,7 +1036,7 @@ void wmdock_order_dockapps(DockappNode *dapp)
 {
 	gint i;
 
-	if(! IS_PANELOFF(wmdock) || !dapp )
+	if(! IS_PANELOFF(wmdock) || !dapp || blockDappReorder == TRUE)
 		return;
 
 	for(i = 0; i < GLUE_MAX; i++) {
@@ -1008,4 +1047,72 @@ void wmdock_order_dockapps(DockappNode *dapp)
 		if(dapp->glue[i])
 			wmdock_order_dockapps(dapp->glue[i]);
 	}
+}
+
+
+/**
+ * Function swap all anchors for the new startup position.
+ *
+ * @param AnchorPostion The new postion startup anchor postion.
+ */
+void wmdock_set_new_anchorpos(AnchorPostion newAnchorPos)
+{
+	GList *dapps = NULL;
+	DockappNode *_dapp = NULL, *_glue = NULL;
+	gboolean swapLeftRight = FALSE, swapTopBottom = FALSE;
+
+	if (! IS_PANELOFF(wmdock) || newAnchorPos == wmdock->anchorPos)
+		return;
+
+	blockDappReorder = TRUE; /* Temporary disable dockapp reordering. */
+	for(dapps = g_list_first(wmdock->dapps); dapps; dapps = g_list_next(dapps)) {
+		_dapp = DOCKAPP(dapps->data);
+		switch(newAnchorPos) {
+		case ANCHOR_TL:
+			if(wmdock->anchorPos == ANCHOR_TR || wmdock->anchorPos == ANCHOR_BR)
+				/* Swap from left to right. */
+				swapLeftRight = TRUE;
+			if(wmdock->anchorPos == ANCHOR_BL || wmdock->anchorPos == ANCHOR_BR)
+				/* Swap from bottom to top. */
+				swapTopBottom = TRUE;
+			break;
+		case ANCHOR_TR:
+			if(wmdock->anchorPos == ANCHOR_TL || wmdock->anchorPos == ANCHOR_BL)
+				/* Swap from left to right. */
+				swapLeftRight = TRUE;
+			if(wmdock->anchorPos == ANCHOR_BL || wmdock->anchorPos == ANCHOR_BR)
+				/* Swap from bottom to top. */
+				swapTopBottom = TRUE;
+			break;
+		case ANCHOR_BL:
+			if(wmdock->anchorPos == ANCHOR_TR || wmdock->anchorPos == ANCHOR_BR)
+				/* Swap from left to right. */
+				swapLeftRight = TRUE;
+			if(wmdock->anchorPos == ANCHOR_TL || wmdock->anchorPos == ANCHOR_TR)
+				/* Swap from bottom to top. */
+				swapTopBottom = TRUE;
+			break;
+		default: /* ANCHOR_BR */
+			if(wmdock->anchorPos == ANCHOR_TL || wmdock->anchorPos == ANCHOR_BL)
+				/* Swap from left to right. */
+				swapLeftRight = TRUE;
+			if(wmdock->anchorPos == ANCHOR_TL || wmdock->anchorPos == ANCHOR_TR)
+				/* Swap from bottom to top. */
+				swapTopBottom = TRUE;
+			break;
+		}
+
+		if(swapLeftRight == TRUE) {
+			_glue = _dapp->glue[GLUE_L];
+			_dapp->glue[GLUE_L] = _dapp->glue[GLUE_R];
+			_dapp->glue[GLUE_R] = _glue;
+		}
+		if(swapTopBottom == TRUE) {
+			_glue = _dapp->glue[GLUE_T];
+			_dapp->glue[GLUE_T] = _dapp->glue[GLUE_B];
+			_dapp->glue[GLUE_B] = _glue;
+		}
+	}
+
+	blockDappReorder = FALSE;
 }
