@@ -560,29 +560,23 @@ void wmdock_setupdnd_dockapp(DockappNode *dapp)
 {
 	if( ! IS_PANELOFF(wmdock) ) {
 		/* Make the "well label" a DnD destination. */
-		gtk_drag_dest_set (GTK_WIDGET(dapp->s), GTK_DEST_DEFAULT_MOTION, targetList,
+		gtk_drag_dest_set (GTK_WIDGET(dapp->tile), GTK_DEST_DEFAULT_MOTION, targetList,
 				nTargets, GDK_ACTION_MOVE);
 
-		gtk_drag_source_set (GTK_WIDGET(dapp->s), GDK_BUTTON1_MASK, targetList,
+		gtk_drag_source_set (GTK_WIDGET(dapp->tile), GDK_BUTTON1_MASK, targetList,
 				nTargets, GDK_ACTION_MOVE);
 
-		g_signal_connect (dapp->s, "drag-begin",
-				G_CALLBACK (drag_begin_handl), dapp);
-
-		g_signal_connect (dapp->s, "drag-data-get",
-				G_CALLBACK (drag_data_get_handl), dapp);
+		g_signal_connect (dapp->tile, "drag-begin", G_CALLBACK (drag_begin_handl), dapp);
+		g_signal_connect (dapp->tile, "drag-data-get", G_CALLBACK (drag_data_get_handl), dapp);
 
 #if (GTK_MAJOR_VERSION >= 2 && GTK_MINOR_VERSION >= 12)
-		g_signal_connect (dapp->s, "drag-failed",
-				G_CALLBACK (drag_failed_handl), dapp);
+		g_signal_connect (dapp->tile, "drag-failed", G_CALLBACK (drag_failed_handl), dapp);
 #endif
 
-		g_signal_connect (dapp->s, "drag-data-received",
-				G_CALLBACK(drag_data_received_handl), dapp);
-		g_signal_connect (dapp->s, "drag-drop",
-				G_CALLBACK (drag_drop_handl), dapp);
+		g_signal_connect (dapp->tile, "drag-data-received", G_CALLBACK(drag_data_received_handl), dapp);
+		g_signal_connect (dapp->tile, "drag-drop", G_CALLBACK (drag_drop_handl), dapp);
 
-		debug("dockapp.c: Setup DnD for dockapp %s", dapp->name);
+		debug("dockapp.c: Setup DnD for dockapp `%s'", dapp->name);
 	}
 }
 

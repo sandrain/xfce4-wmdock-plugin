@@ -51,7 +51,6 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 	gint      i = 0, j = 0, gluePos = 0;
 	gint64    n = 0;
 	gchar     *glueName = NULL;
-	GtkWidget *gtkDlg;
 	DockappNode *dapp = NULL;
 	DockappNode **launched = NULL;
 	gchar     **glueList = NULL;
@@ -89,14 +88,7 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 
 			if(wmdock_startup_dockapp(rcCmds[i]) != TRUE) {
 				launched[i] = NULL;
-				gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
-						GTK_DIALOG_DESTROY_WITH_PARENT,
-						GTK_MESSAGE_ERROR,
-						GTK_BUTTONS_OK,
-						_("Failed to start %s!"),
-						rcCmds[i]);
-				g_signal_connect (gtkDlg, "response", G_CALLBACK (wmdock_error_dialog_response), NULL);
-				gtk_widget_show_all (gtkDlg);
+				wmdock_msg_dialog(GTK_MESSAGE_ERROR, _("Failed to start `%s'!"), rcCmds[i]);
 			} else {
 				/* Create some dummy widget entries to locate the right position on
 				 * window swallow up.

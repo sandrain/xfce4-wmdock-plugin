@@ -47,20 +47,25 @@
 void drag_begin_handl (GtkWidget *widget, GdkDragContext *context,
 		gpointer dapp)
 {
-	gdkPbIcon = get_icon_from_xpm_scaled((const char **) xfce4_wmdock_plugin_xpm,
-			DEFAULT_DOCKAPP_WIDTH/2,
-			DEFAULT_DOCKAPP_HEIGHT/2);
+	GdkPixbuf *gdkPb = NULL, *gdkPbScaled = NULL;
+	gint width = 0, height = 0;
 
-	gtk_drag_set_icon_pixbuf (context, gdkPbIcon, 0, 0);
+	gtk_widget_get_size_request(GTK_WIDGET(DOCKAPP(dapp)->s), &width, &height);
+	if((gdkPb = gdk_pixbuf_get_from_drawable (NULL, GTK_WIDGET(DOCKAPP(dapp)->s)->window,
+			NULL, 0, 0, 0, 0, width, height))) {
+		gdkPbScaled = gdk_pixbuf_scale_simple(gdkPb, DEFAULT_DOCKAPP_WIDTH / 2, DEFAULT_DOCKAPP_HEIGHT / 2, GDK_INTERP_BILINEAR);
+		gtk_drag_set_icon_pixbuf (context, gdkPbScaled ? gdkPbScaled : gdkPb, 0, 0);
 
-	g_object_unref (G_OBJECT(gdkPbIcon));
+		g_object_unref (G_OBJECT(gdkPb));
+		g_object_unref (G_OBJECT(gdkPbScaled));
+	}
 }
 
 #if (GTK_MAJOR_VERSION >= 2 && GTK_MINOR_VERSION >= 12)
 gboolean drag_failed_handl(GtkWidget *widget, GdkDragContext *context,
 		GtkDragResult result, gpointer dapp)
 {
-	GtkWidget *gtkDlg;
+	GtkWidget *gtkDlg = NULL;
 
 	if(result == GTK_DRAG_RESULT_NO_TARGET && dapp) {
 		gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))),

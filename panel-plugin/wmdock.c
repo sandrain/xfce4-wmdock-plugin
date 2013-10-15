@@ -168,7 +168,6 @@ static WmdockPlugin *wmdock_plugin_new (XfcePanelPlugin* plugin)
 static void wmdock_construct (XfcePanelPlugin *plugin)
 {
 	WnckScreen  *s;
-	GtkWidget   *gtkDlg;
 
 	init_debug();
 
@@ -184,19 +183,14 @@ static void wmdock_construct (XfcePanelPlugin *plugin)
 	wmdock = wmdock_plugin_new (plugin);
 
 	if(wmdock_get_instance_count() > 1) {
-		gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
-				GTK_DIALOG_DESTROY_WITH_PARENT,
+		wmdock_msg_dialog(
 				GTK_MESSAGE_ERROR,
-				GTK_BUTTONS_OK,
 #ifdef HAVE_CONFIG_H
 				_("Only a single instance of `%s' can run."),
 				GETTEXT_PACKAGE);
 #else
 				_("Only a single instance of `xfce4-wmdock-plugin' can run."));
 #endif /* HAVE_CONFIG_H */
-
-		g_signal_connect (gtkDlg, "response", G_CALLBACK (wmdock_error_dialog_response), NULL);
-		gtk_dialog_run (GTK_DIALOG(gtkDlg));
 
 		xfce_panel_plugin_remove(plugin);
 	}

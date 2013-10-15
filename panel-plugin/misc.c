@@ -233,17 +233,6 @@ AnchorPostion get_default_anchor_postion()
 	return anchorPos;
 }
 
-/**
- * Function which interacts with the wmdock icon.
- *
- * @param icon The wmdock icon widget.
- */
-static void wmdock_icon_pressed(GtkWidget *icon)
-{
-	if( IS_PANELOFF(wmdock) )
-		g_list_foreach(wmdock->dapps, (GFunc) wmdock_dockapp_tofront, NULL);
-}
-
 
 /**
  * Function get the number of xfce4-wmdock-instances are running.
@@ -291,8 +280,6 @@ int wmdock_get_instance_count()
 
 void wmdock_panel_draw_wmdock_icon (gboolean redraw)
 {
-	static GtkWidget *eventBox = NULL;
-
 	gdkPbIcon = get_icon_from_xpm_scaled((const char **) xfce4_wmdock_plugin_xpm,
 			xfce_panel_plugin_get_size (wmdock->plugin) - 2,
 			xfce_panel_plugin_get_size (wmdock->plugin) - 2);
@@ -300,21 +287,13 @@ void wmdock_panel_draw_wmdock_icon (gboolean redraw)
 		gtk_image_set_from_pixbuf (GTK_IMAGE(wmdockIcon), gdkPbIcon);
 	} else {
 		if(wmdockIcon) gtk_widget_destroy(wmdockIcon);
-		if(eventBox) gtk_widget_destroy(eventBox);
-		eventBox = gtk_event_box_new();
 
 		wmdockIcon = gtk_image_new_from_pixbuf (gdkPbIcon);
-		gtk_container_add(GTK_CONTAINER(eventBox), wmdockIcon);
-
-		gtk_box_pack_start(GTK_BOX(wmdock->box), GTK_WIDGET(eventBox),
-				FALSE, FALSE, 0);
+		gtk_box_pack_start(GTK_BOX(wmdock->box), GTK_WIDGET(wmdockIcon), FALSE, FALSE, 0);
 	}
 	g_object_unref (G_OBJECT (gdkPbIcon));
 
-	if( IS_PANELOFF(wmdock) )
-		g_signal_connect (G_OBJECT(eventBox), "button_press_event", G_CALLBACK (wmdock_icon_pressed), NULL);
-
-	gtk_widget_show_all(GTK_WIDGET(eventBox));
+	gtk_widget_show_all(GTK_WIDGET(wmdockIcon));
 }
 
 
@@ -322,7 +301,7 @@ void wmdock_panel_draw_wmdock_icon (gboolean redraw)
  * Function destroys the info dialog.
  *
  */
-static void wmdock_info_dialog_response (GtkWidget  *gtkDlg, gint response)
+static void wmdock_msg_dialog_response (GtkWidget  *gtkDlg, gint response)
 {
 	gtk_widget_destroy (gtkDlg);
 }
@@ -333,15 +312,18 @@ static void wmdock_info_dialog_response (GtkWidget  *gtkDlg, gint response)
  *
  * @param msg The info message as null terminated string.
  */
-void wmdock_info_dialog(const gchar *msg)
+void wmdock_msg_dialog(GtkMessageType type, const gchar *fmt, ...)
 {
+	va_list args;
+	gchar msg[BUF_MAX];
 	GtkWidget *gtkDlg = NULL;
 
+	va_start(args, fmt);
+	vsnprintf((char *) msg, BUF_MAX, (const char *) fmt, args);
+	va_end(args);
+
 	gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))),
-			GTK_DIALOG_DESTROY_WITH_PARENT,
-			GTK_MESSAGE_INFO,
-			GTK_BUTTONS_OK,
-			msg);
-	g_signal_connect (gtkDlg, "response", G_CALLBACK (wmdock_info_dialog_response), NULL);
-	gtk_widget_show_all (gtkDlg);
+			GTK_DIALOG_DESTROY_WITH_PARENT, type, GTK_BUTTONS_OK, msg);
+	g_signal_connect (gtkDlg, "response", G_CALLBACK (wmdock_msg_dialog_response), NULL);
+	gtk_dialog_run (GTK_DIALOG(gtkDlg));
 }
