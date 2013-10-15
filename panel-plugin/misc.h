@@ -33,5 +33,6 @@ gboolean comp_str_with_pattern(const gchar *, gchar *, gsize);
 void wmdock_panel_draw_wmdock_icon (gboolean redraw);
 int wmdock_get_instance_count();
 AnchorPostion get_default_anchor_postion();
+void wmdock_info_dialog(const gchar *);
 
 #endif /* __MISC_H__ */

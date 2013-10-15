@@ -316,3 +316,32 @@ void wmdock_panel_draw_wmdock_icon (gboolean redraw)
 
 	gtk_widget_show_all(GTK_WIDGET(eventBox));
 }
+
+
+/**
+ * Function destroys the info dialog.
+ *
+ */
+static void wmdock_info_dialog_response (GtkWidget  *gtkDlg, gint response)
+{
+	gtk_widget_destroy (gtkDlg);
+}
+
+
+/**
+ * Function shows an info message (msg) in a dialog box.
+ *
+ * @param msg The info message as null terminated string.
+ */
+void wmdock_info_dialog(const gchar *msg)
+{
+	GtkWidget *gtkDlg = NULL;
+
+	gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))),
+			GTK_DIALOG_DESTROY_WITH_PARENT,
+			GTK_MESSAGE_INFO,
+			GTK_BUTTONS_OK,
+			msg);
+	g_signal_connect (gtkDlg, "response", G_CALLBACK (wmdock_info_dialog_response), NULL);
+	gtk_widget_show_all (gtkDlg);
+}

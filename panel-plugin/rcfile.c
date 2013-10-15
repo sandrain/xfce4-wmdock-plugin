@@ -208,6 +208,8 @@ void wmdock_write_rc_file (XfcePanelPlugin *plugin)
 		if( IS_PANELOFF(wmdock) ) {
 			xfce_rc_write_list_entry(rc, RCKEY_GLUELIST, glueList, RC_LIST_DELIMITER);
 			g_strfreev(glueList);
+		} else if ( ! IS_PANELOFF(wmdock) || rcPanelOff == FALSE ) {
+			xfce_rc_delete_entry(rc, RCKEY_GLUELIST, TRUE);
 		}
 
 		xfce_rc_write_bool_entry (rc, RCKEY_DISPTILE, wmdock->propDispTile);
@@ -216,8 +218,8 @@ void wmdock_write_rc_file (XfcePanelPlugin *plugin)
 		xfce_rc_write_bool_entry (rc, RCKEY_PANELOFF, rcPanelOff);
 		xfce_rc_write_bool_entry (rc, RCKEY_PANELOFFIGNOREOFFSET, wmdock->propPanelOffIgnoreOffset);
 		xfce_rc_write_bool_entry (rc, RCKEY_PANELOFFKEEPABOVE, wmdock->propPanelOffKeepAbove);
-		xfce_rc_write_entry(rc, RCKEY_DAFILTER, wmdock->filterList);
 		xfce_rc_write_int_entry (rc, RCKEY_ANCHORPOS, wmdock->anchorPos);
+		xfce_rc_write_entry(rc, RCKEY_DAFILTER, wmdock->filterList);
 	}
 
 	xfce_rc_close(rc);

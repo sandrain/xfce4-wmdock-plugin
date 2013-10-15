@@ -59,12 +59,6 @@ static struct {
 static GtkWidget *btnProperties = NULL;
 
 
-static void wmdock_info_dialog_response (GtkWidget  *gtkDlg, gint response)
-{
-	gtk_widget_destroy (gtkDlg);
-}
-
-
 static void wmdock_properties_fillcmbx(DockappNode *dapp, GtkWidget *gtkComboBox)
 {
 
@@ -81,6 +75,9 @@ static void wmdock_properties_chkdisptile(GtkToggleButton *gtkChkDispTile, gpoin
 
 	g_list_foreach(wmdock->dapps, (GFunc)wmdock_redraw_dockapp, NULL);
 	gtk_widget_show_all(GTK_WIDGET(wmdock->box));
+
+	if( ! IS_PANELOFF(wmdock) )
+		wmdock_info_dialog(_("Changes maybe not work properly until you restart XFCE!"));
 }
 
 
@@ -140,8 +137,6 @@ static void wmdock_properties_radiopaneloff(GtkRadioButton *gtkRadioPanelOff, gp
 
 static void wmdock_properties_chkpaneloff(GtkToggleButton *gtkChkPanelOff, gpointer user_data)
 {
-	GtkWidget *gtkDlg;
-
 	if((rcPanelOff = gtk_toggle_button_get_active(gtkChkPanelOff)) == TRUE) {
 		wmdock->anchorPos = get_default_anchor_postion();
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBL), TRUE);
@@ -158,13 +153,7 @@ static void wmdock_properties_chkpaneloff(GtkToggleButton *gtkChkPanelOff, gpoin
 	}
 
 	if(g_list_length(wmdock->dapps)) {
-		gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))),
-				GTK_DIALOG_DESTROY_WITH_PARENT,
-				GTK_MESSAGE_INFO,
-				GTK_BUTTONS_OK,
-				_("Changes will take effect when you restart XFCE!"));
-		g_signal_connect (gtkDlg, "response", G_CALLBACK (wmdock_info_dialog_response), NULL);
-		gtk_widget_show_all (gtkDlg);
+		wmdock_info_dialog(_("Changes will take effect when you restart XFCE!"));
 	} else {
 		/* If no dockapp is started enable/disable panel off mode. */
 		wmdock->propPanelOff = rcPanelOff;
@@ -539,12 +528,7 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 	gtk_table_attach_defaults(GTK_TABLE(prop.tblPanelOff), prop.radioPanelOffTR, 1, 2, 0, 1);
 	gtk_table_attach_defaults(GTK_TABLE(prop.tblPanelOff), prop.radioPanelOffBL, 0, 1, 1, 2);
 	gtk_table_attach_defaults(GTK_TABLE(prop.tblPanelOff), prop.radioPanelOffBR, 1, 2, 1, 2);
-	/*
-	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffTL, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffTR, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffBL, FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (prop.hboxPanelOffOpts), prop.radioPanelOffBR, FALSE, FALSE, 0);
-	*/
+
 	switch(wmdock->anchorPos) {
 	case ANCHOR_TL:
 		gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prop.radioPanelOffTL), TRUE);

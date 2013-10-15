@@ -461,8 +461,8 @@ DockappNode *wmdock_get_primary_anchor_dockapp()
  */
 void wmdock_dockapp_event_after_handler(GtkWidget *window, GdkEvent *ev, DockappNode *dapp)
 {
-	if( ! IS_PANELOFF(wmdock) )
-		return;
+//	if( ! IS_PANELOFF(wmdock) )
+//		return;
 
 	debug("dockapp.c: Window event-after: %d. (dapp: `%s'), dappOnMove: %s", ev->type, dapp->name, dappOnMotion ? "Yes": "No");
 
@@ -806,6 +806,12 @@ void wmdock_set_tile_background(DockappNode *dapp, GdkPixbuf *pb)
 	gdk_draw_pixbuf(dapp->bgimg, gc,
 			pb, 0, 0, 0, 0, DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT,
 			GDK_RGB_DITHER_NONE, 0, 0);
+	if( ! IS_PANELOFF(wmdock) ) {
+		gdk_window_clear(GTK_WIDGET(dapp->evbox)->window);
+		gdk_draw_pixbuf(GTK_WIDGET(dapp->evbox)->window, gc,
+				pb, 0, 0, 0, 0, DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT,
+				GDK_RGB_DITHER_NONE, 0, 0);
+	}
 	gdk_gc_unref(gc);
 
 	if(dapp->bg)
