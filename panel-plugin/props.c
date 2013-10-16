@@ -46,7 +46,7 @@ static struct {
 	GtkWidget *hbox, *hboxPanelOffOpts; /* Horizontal boxes */
 	GtkWidget *frmGeneral, *frmDetect, *frmPanelOffOpts; /* Frames */
 	GtkWidget *lblSel, *lblCmd, *lblPanelOffPlacement, *lblPanelOffHint; /* Labels */
-	GtkWidget *chkDispTile, *chkPropButton, *chkAddOnlyWM, *chkPanelOff, *chkPanelOffIgnoreOffset, *chkPanelOffKeepAbove; /* Check boxes */
+	GtkWidget *chkDispTile, *chkPropButton, *chkAddOnlyWM, *chkPanelOff, *chkPanelOffIgnoreOffset, *chkPanelOffKeepAbove, *chkPanelOffFreePositioning; /* Check boxes */
 	GtkWidget *radioPanelOffTL, *radioPanelOffTR, *radioPanelOffBL, *radioPanelOffBR; /* Radio buttons */
 	GtkWidget *imageContainer, *container; /* Misc. containers */
 	GtkWidget *tblPanelOff; /* Layout tables */
@@ -76,8 +76,7 @@ static void wmdock_properties_chkdisptile(GtkToggleButton *gtkChkDispTile, gpoin
 	g_list_foreach(wmdock->dapps, (GFunc)wmdock_redraw_dockapp, NULL);
 	gtk_widget_show_all(GTK_WIDGET(wmdock->box));
 
-	if( ! IS_PANELOFF(wmdock) )
-		wmdock_msg_dialog(GTK_MESSAGE_INFO, _("Changes maybe not work properly until you restart XFCE!"));
+	wmdock_msg_dialog(GTK_MESSAGE_INFO, _("Changes maybe not work properly until you restart XFCE!"));
 }
 
 
@@ -143,6 +142,9 @@ static void wmdock_properties_chkpaneloff(GtkToggleButton *gtkChkPanelOff, gpoin
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBR), TRUE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTL), TRUE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTR), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffKeepAbove), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffFreePositioning), TRUE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffIgnoreOffset), TRUE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffPlacement), TRUE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffHint), TRUE);
 	} else {
@@ -150,6 +152,9 @@ static void wmdock_properties_chkpaneloff(GtkToggleButton *gtkChkPanelOff, gpoin
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBR), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTL), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTR), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffKeepAbove), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffFreePositioning), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffIgnoreOffset), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffPlacement), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffHint), FALSE);
 	}
@@ -488,12 +493,13 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 	}
 	gtk_box_pack_start (GTK_BOX(prop.vbox2), prop.txtCmd, FALSE, FALSE, 0);
 
-	prop.chkDispTile             = gtk_check_button_new_with_label(_("Display tile in the background."));
-	prop.chkPropButton           = gtk_check_button_new_with_label(_("Display a separate WMdock properties button in the panel."));
-	prop.chkAddOnlyWM            = gtk_check_button_new_with_label(_("Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"));
-	prop.chkPanelOff             = gtk_check_button_new_with_label(_("Display dockapps in separate windows and not in the panel."));
-	prop.chkPanelOffIgnoreOffset = gtk_check_button_new_with_label(_("Don't use panel size as offset for the first dockapp."));
-	prop.chkPanelOffKeepAbove    = gtk_check_button_new_with_label(_("Keep dockapp windows on top."));
+	prop.chkDispTile                = gtk_check_button_new_with_label(_("Display tile in the background."));
+	prop.chkPropButton              = gtk_check_button_new_with_label(_("Display a separate WMdock properties button in the panel."));
+	prop.chkAddOnlyWM               = gtk_check_button_new_with_label(_("Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"));
+	prop.chkPanelOff                = gtk_check_button_new_with_label(_("Display dockapps in separate windows and not in the panel."));
+	prop.chkPanelOffIgnoreOffset    = gtk_check_button_new_with_label(_("Don't use panel size as offset for the first dockapp."));
+	prop.chkPanelOffKeepAbove       = gtk_check_button_new_with_label(_("Keep dockapp windows on top."));
+	prop.chkPanelOffFreePositioning = gtk_check_button_new_with_label(_("Enable free positioning of the first dockapp on the screen."));
 	prop.txtPatterns    = gtk_entry_new();
 	gtk_entry_set_text(GTK_ENTRY(prop.txtPatterns), wmdock->filterList);
 	gtk_widget_set_sensitive (GTK_WIDGET (prop.txtPatterns), wmdock->propDispAddOnlyWM);
@@ -519,6 +525,7 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 	gtk_box_pack_start (GTK_BOX(prop.vboxPanelOffOpts), prop.chkPanelOff, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (prop.vboxPanelOffOpts), prop.chkPanelOffKeepAbove, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (prop.vboxPanelOffOpts), prop.chkPanelOffIgnoreOffset, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (prop.vboxPanelOffOpts), prop.chkPanelOffFreePositioning, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX(prop.vboxPanelOffOpts), prop.hboxPanelOffOpts, FALSE, FALSE, 0);
 	prop.lblPanelOffHint = gtk_label_new (_("Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\nto this panel to correct this problem."));
 	gtk_box_pack_start (GTK_BOX(prop.vboxPanelOffOpts), prop.lblPanelOffHint, FALSE, FALSE, 0);
@@ -559,6 +566,9 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBR), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTL), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTR), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffKeepAbove), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffFreePositioning), FALSE);
+		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffIgnoreOffset), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffPlacement), FALSE);
 		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffHint), FALSE);
 	}

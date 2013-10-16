@@ -51,6 +51,7 @@ typedef struct {
  gboolean            propPanelOff;
  gboolean            propPanelOffIgnoreOffset;
  gboolean            propPanelOffKeepAbove;
+ gboolean            propPanelOffFreePositioning;
  AnchorPostion       anchorPos;
  gchar               *filterList;
 

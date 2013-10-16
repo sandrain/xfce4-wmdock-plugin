@@ -1043,7 +1043,9 @@ void wmdock_order_dockapps(DockappNode *dapp)
 		return;
 
 	for(i = 0; i < GLUE_MAX; i++) {
-		wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
+		if(wmdock->propPanelOffFreePositioning == FALSE ||
+				(wmdock->propPanelOffFreePositioning == TRUE && dapp != wmdock_get_primary_anchor_dockapp()))
+			wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
 
 		debug("dockapp.c: Order dockapp %s", dapp->name);
 		/* Recurse calling wmdock_order_dockapps, to walk the hole tree. */

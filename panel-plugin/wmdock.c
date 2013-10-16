@@ -137,6 +137,7 @@ static WmdockPlugin *wmdock_plugin_new (XfcePanelPlugin* plugin)
 	wmdock->propPanelOff       = TRUE;
 	wmdock->propPanelOffIgnoreOffset = FALSE;
 	wmdock->propPanelOffKeepAbove    = FALSE;
+	wmdock->propPanelOffFreePositioning = FALSE;
 	wmdock->filterList         = g_strdup(DOCKAPP_FILTER_PATTERN);
 	wmdock->anchorPos          = get_default_anchor_postion();
 
