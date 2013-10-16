@@ -2,7 +2,7 @@
  * Drag & Drop functions.
  *
  * Authors:
- *   Andre Ellguth <ellguth@ibh.de>
+ *   Andre Ellguth <andre@ellguth.com>
  *
  * License:
  *   This program is free software; you can redistribute it and/or modify
@@ -39,8 +39,6 @@
 #include "dockapp.h"
 #include "misc.h"
 #include "dnd.h"
-
-#include "xfce4-wmdock-plugin.xpm"
 
 #define _BYTE 8
 

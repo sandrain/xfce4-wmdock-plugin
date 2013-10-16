@@ -2,7 +2,7 @@
  * Properties dialog.
  *
  * Authors:
- *   Andre Ellguth <ellguth@ibh.de>
+ *   Andre Ellguth <andre@ellguth.com>
  *
  * License:
  *   This program is free software; you can redistribute it and/or modify
