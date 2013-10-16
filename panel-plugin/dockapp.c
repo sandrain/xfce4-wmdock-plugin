@@ -879,6 +879,9 @@ GtkWidget *wmdock_create_tile_from_socket(DockappNode *dapp)
 		/* Hide window from the taskbar and the pager. */
 		gtk_window_set_skip_taskbar_hint(GTK_WINDOW(tile), TRUE);
 		gtk_window_set_skip_pager_hint(GTK_WINDOW(tile), TRUE);
+		/* Set the background style of the tile window like the XFCE panel. */
+		gtk_widget_set_style(GTK_WIDGET(dapp->evbox), gtk_widget_get_style(GTK_WIDGET(wmdock->plugin)));
+		gtk_widget_set_style(GTK_WIDGET(_evbox), gtk_widget_get_style(GTK_WIDGET(wmdock->plugin)));
 
 		gtk_container_add(GTK_CONTAINER(tile), _fixed);
 
