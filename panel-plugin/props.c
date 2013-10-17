@@ -59,6 +59,20 @@ static struct {
 static GtkWidget *btnProperties = NULL;
 
 
+static void wmdock_set_prop_paneloff(gboolean enabled)
+{
+	gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBL), enabled);
+	gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBR), enabled);
+	gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTL), enabled);
+	gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTR), enabled);
+	gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffKeepAbove), enabled);
+	gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffFreePositioning), enabled);
+	gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffIgnoreOffset), enabled);
+	gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffPlacement), enabled);
+	gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffHint), enabled);
+}
+
+
 static void wmdock_properties_fillcmbx(DockappNode *dapp, GtkWidget *gtkComboBox)
 {
 
@@ -115,6 +129,14 @@ static void wmdock_properties_chkpaneloffkeepabove(GtkToggleButton *gtkChkPanelO
 }
 
 
+static void wmdock_properties_chkpanelofffreepositioning(GtkToggleButton *gtkChkPanelOffFreePositioning, gpointer user_data)
+{
+	wmdock->propPanelOffFreePositioning = gtk_toggle_button_get_active(gtkChkPanelOffFreePositioning);
+	wmdock->panelOffFpY = wmdock->panelOffFpX = G_MININT;
+	wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
+}
+
+
 static void wmdock_properties_radiopaneloff(GtkRadioButton *gtkRadioPanelOff, gpointer user_data)
 {
 	gint _anchorPos = wmdock->anchorPos;
@@ -128,6 +150,7 @@ static void wmdock_properties_radiopaneloff(GtkRadioButton *gtkRadioPanelOff, gp
 	else if(gtkRadioPanelOff == GTK_RADIO_BUTTON(prop.radioPanelOffBR))
 		_anchorPos = ANCHOR_BR;
 
+	wmdock->panelOffFpX = wmdock->panelOffFpY = G_MININT;
 	wmdock_set_new_anchorpos(_anchorPos);
 	wmdock->anchorPos = _anchorPos;
 	wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
@@ -138,25 +161,9 @@ static void wmdock_properties_chkpaneloff(GtkToggleButton *gtkChkPanelOff, gpoin
 {
 	if((rcPanelOff = gtk_toggle_button_get_active(gtkChkPanelOff)) == TRUE) {
 		wmdock->anchorPos = get_default_anchor_postion();
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBL), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBR), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTL), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTR), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffKeepAbove), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffFreePositioning), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffIgnoreOffset), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffPlacement), TRUE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffHint), TRUE);
+		wmdock_set_prop_paneloff(TRUE);
 	} else {
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBL), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBR), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTL), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTR), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffKeepAbove), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffFreePositioning), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffIgnoreOffset), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffPlacement), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffHint), FALSE);
+		wmdock_set_prop_paneloff(FALSE);
 	}
 
 	if(g_list_length(wmdock->dapps)) {
@@ -510,6 +517,7 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkPanelOff, rcPanelOff);
 	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkPanelOffIgnoreOffset, wmdock->propPanelOffIgnoreOffset);
 	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkPanelOffKeepAbove, wmdock->propPanelOffKeepAbove);
+	gtk_toggle_button_set_active((GtkToggleButton *) prop.chkPanelOffFreePositioning, wmdock->propPanelOffFreePositioning);
 
 	gtk_container_add(GTK_CONTAINER(prop.frmGeneral), prop.vboxGeneral);
 	gtk_container_add(GTK_CONTAINER(prop.frmDetect), prop.vboxDetect);
@@ -560,17 +568,11 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 		break;
 	}
 
-	if ( ! IS_PANELOFF(wmdock) ) {
+	if ( rcPanelOff == FALSE ) {
 		/* Disable advanced panel options is the panel used. */
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBL), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffBR), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTL), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.radioPanelOffTR), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffKeepAbove), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffFreePositioning), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.chkPanelOffIgnoreOffset), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffPlacement), FALSE);
-		gtk_widget_set_sensitive(GTK_WIDGET(prop.lblPanelOffHint), FALSE);
+		wmdock_set_prop_paneloff(FALSE);
+	} else {
+		wmdock_set_prop_paneloff(TRUE);
 	}
 
 	/* Fill the dockapp chooser with entries. */
@@ -585,6 +587,7 @@ void wmdock_properties_dialog(XfcePanelPlugin *plugin)
 	g_signal_connect(G_OBJECT(prop.chkPanelOff), "toggled", G_CALLBACK(wmdock_properties_chkpaneloff), NULL);
 	g_signal_connect(G_OBJECT(prop.chkPanelOffIgnoreOffset), "toggled", G_CALLBACK(wmdock_properties_chkpaneloffignoreoffset), NULL);
 	g_signal_connect(G_OBJECT(prop.chkPanelOffKeepAbove), "toggled", G_CALLBACK(wmdock_properties_chkpaneloffkeepabove), NULL);
+	g_signal_connect(G_OBJECT(prop.chkPanelOffFreePositioning), "toggled", G_CALLBACK(wmdock_properties_chkpanelofffreepositioning), NULL);
 	g_signal_connect(G_OBJECT(prop.radioPanelOffTL), "toggled", G_CALLBACK(wmdock_properties_radiopaneloff), NULL);
 	g_signal_connect(G_OBJECT(prop.radioPanelOffTR), "toggled", G_CALLBACK(wmdock_properties_radiopaneloff), NULL);
 	g_signal_connect(G_OBJECT(prop.radioPanelOffBL), "toggled", G_CALLBACK(wmdock_properties_radiopaneloff), NULL);

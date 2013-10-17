@@ -64,18 +64,19 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 		return;
 
 	rcCmds                     = xfce_rc_read_list_entry(rc, RCKEY_CMDLIST, RC_LIST_DELIMITER);
-	wmdock->propDispTile       = xfce_rc_read_bool_entry (rc, RCKEY_DISPTILE, TRUE);
-	wmdock->propDispPropButton = xfce_rc_read_bool_entry (rc, RCKEY_DISPPROPBTN, FALSE);
-	wmdock->propDispAddOnlyWM  = xfce_rc_read_bool_entry (rc, RCKEY_DISPADDONLYWM, TRUE);
+	wmdock->propDispTile       = xfce_rc_read_bool_entry (rc, RCKEY_DISPTILE, RCDEFAULT_DISPTILE);
+	wmdock->propDispPropButton = xfce_rc_read_bool_entry (rc, RCKEY_DISPPROPBTN, RCDEFAULT_DISPPROPBTN);
+	wmdock->propDispAddOnlyWM  = xfce_rc_read_bool_entry (rc, RCKEY_DISPADDONLYWM, RCDEFAULT_DISPADDONLYWM);
 	if(wmdock->filterList) g_free(wmdock->filterList);
 	wmdock->filterList         = g_strdup(xfce_rc_read_entry (rc, RCKEY_DAFILTER, DOCKAPP_FILTER_PATTERN));
-	/* TODO: Set panel off to FALSE. */
-	rcPanelOff                 = wmdock->propPanelOff = xfce_rc_read_bool_entry (rc, RCKEY_PANELOFF, TRUE);
-	wmdock->propPanelOffIgnoreOffset = xfce_rc_read_bool_entry (rc, RCKEY_PANELOFFIGNOREOFFSET, FALSE);
-	wmdock->propPanelOffKeepAbove    = xfce_rc_read_bool_entry (rc, RCKEY_PANELOFFKEEPABOVE, FALSE);
-	wmdock->propPanelOffFreePositioning = xfce_rc_read_bool_entry (rc, RCKEY_PANELOFFFREEPOSITIONING, FALSE);
+	rcPanelOff                 = wmdock->propPanelOff = xfce_rc_read_bool_entry (rc, RCKEY_PANELOFF, RCDEFAULT_PANELOFF);
+	wmdock->propPanelOffIgnoreOffset = xfce_rc_read_bool_entry (rc, RCKEY_PANELOFFIGNOREOFFSET, RCDEFAULT_PANELOFFIGNOREOFFSET);
+	wmdock->propPanelOffKeepAbove    = xfce_rc_read_bool_entry (rc, RCKEY_PANELOFFKEEPABOVE, RCDEFAULT_PANELOFFKEEPABOVE);
+	wmdock->propPanelOffFreePositioning = xfce_rc_read_bool_entry (rc, RCKEY_PANELOFFFREEPOSITIONING, RCDEFAULT_PANELOFFFREEPOSITIONING);
+	wmdock->panelOffFpX        = xfce_rc_read_int_entry(rc, RCKEY_PANELOFFFPX, RCDEFAULT_PANELOFFFPX);
+	wmdock->panelOffFpY        = xfce_rc_read_int_entry(rc, RCKEY_PANELOFFFPY, RCDEFAULT_PANELOFFFPY);
 	glueList                   = IS_PANELOFF(wmdock) ? xfce_rc_read_list_entry(rc, RCKEY_GLUELIST, RC_LIST_DELIMITER) : NULL;
-	wmdock->anchorPos          = xfce_rc_read_int_entry(rc, RCKEY_ANCHORPOS, -1);
+	wmdock->anchorPos          = xfce_rc_read_int_entry(rc, RCKEY_ANCHORPOS, RCDEFAULT_ANCHORPOS);
 	xfce_rc_close (rc);
 
 	if(G_LIKELY(rcCmds != NULL)) {
@@ -209,9 +210,22 @@ void wmdock_write_rc_file (XfcePanelPlugin *plugin)
 		xfce_rc_write_bool_entry (rc, RCKEY_DISPPROPBTN, wmdock->propDispPropButton);
 		xfce_rc_write_bool_entry (rc, RCKEY_DISPADDONLYWM, wmdock->propDispAddOnlyWM);
 		xfce_rc_write_bool_entry (rc, RCKEY_PANELOFF, rcPanelOff);
+		if(rcPanelOff == FALSE) {
+			/* Reset the options to default. */
+			wmdock->propPanelOffFreePositioning = RCDEFAULT_PANELOFFFREEPOSITIONING;
+			wmdock->propPanelOffIgnoreOffset = RCDEFAULT_PANELOFFIGNOREOFFSET;
+			wmdock->propPanelOffKeepAbove = RCDEFAULT_PANELOFFKEEPABOVE;
+		}
 		xfce_rc_write_bool_entry (rc, RCKEY_PANELOFFIGNOREOFFSET, wmdock->propPanelOffIgnoreOffset);
 		xfce_rc_write_bool_entry (rc, RCKEY_PANELOFFKEEPABOVE, wmdock->propPanelOffKeepAbove);
 		xfce_rc_write_bool_entry (rc, RCKEY_PANELOFFFREEPOSITIONING, wmdock->propPanelOffFreePositioning);
+		if(wmdock->propPanelOffFreePositioning == TRUE) {
+			xfce_rc_write_int_entry (rc, RCKEY_PANELOFFFPX, wmdock->panelOffFpX);
+			xfce_rc_write_int_entry (rc, RCKEY_PANELOFFFPY, wmdock->panelOffFpY);
+		} else {
+			xfce_rc_delete_entry(rc, RCKEY_PANELOFFFPX, TRUE);
+			xfce_rc_delete_entry(rc, RCKEY_PANELOFFFPY, TRUE);
+		}
 		xfce_rc_write_int_entry (rc, RCKEY_ANCHORPOS, wmdock->anchorPos);
 		xfce_rc_write_entry(rc, RCKEY_DAFILTER, wmdock->filterList);
 	}

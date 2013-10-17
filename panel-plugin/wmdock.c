@@ -67,21 +67,21 @@ static void wmdock_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation 
 	gtk_widget_show(GTK_WIDGET(wmdock->panelBox));
 	gtk_widget_show(GTK_WIDGET(wmdock->box));
 
-	if( IS_PANELOFF(wmdock) )
+	if( IS_PANELOFF(wmdock) && wmdock->propPanelOffFreePositioning == FALSE )
 		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
 }
 
 
 static void wmdock_resolution_changed (GdkScreen *screen, gpointer data)
 {
-	if( IS_PANELOFF(wmdock) )
+	if( IS_PANELOFF(wmdock) && wmdock->propPanelOffFreePositioning == FALSE )
 		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
 }
 
 
 static void wmdock_monitors_changed (GdkScreen *screen, gpointer data)
 {
-	if( IS_PANELOFF(wmdock) )
+	if( IS_PANELOFF(wmdock) && wmdock->propPanelOffFreePositioning == FALSE )
 		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
 }
 
@@ -97,7 +97,7 @@ static gboolean wmdock_size_changed (XfcePanelPlugin *plugin, int size)
 
 	if(wmdockIcon)
 		wmdock_panel_draw_wmdock_icon(TRUE);
-	if( IS_PANELOFF(wmdock) )
+	if( IS_PANELOFF(wmdock) && wmdock->propPanelOffFreePositioning == FALSE )
 		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp());
 
 	return TRUE;
@@ -127,19 +127,20 @@ static void wmdock_free_data(XfcePanelPlugin *plugin)
 
 static WmdockPlugin *wmdock_plugin_new (XfcePanelPlugin* plugin)
 {
-	wmdock                     = g_new0(WmdockPlugin, 1);
-	wmdock->plugin             = plugin;
-	wmdock->dapps              = NULL;
-	wmdock->propDispTile       = TRUE;
-	wmdock->propDispPropButton = FALSE;
-	wmdock->propDispAddOnlyWM  = TRUE;
-	/* TODO: Set panel off to FALSE. */
-	wmdock->propPanelOff       = TRUE;
-	wmdock->propPanelOffIgnoreOffset = FALSE;
-	wmdock->propPanelOffKeepAbove    = FALSE;
-	wmdock->propPanelOffFreePositioning = FALSE;
-	wmdock->filterList         = g_strdup(DOCKAPP_FILTER_PATTERN);
-	wmdock->anchorPos          = get_default_anchor_postion();
+	wmdock                              = g_new0(WmdockPlugin, 1);
+	wmdock->plugin                      = plugin;
+	wmdock->dapps                       = NULL;
+	wmdock->propDispTile                = RCDEFAULT_DISPTILE;
+	wmdock->propDispPropButton          = RCDEFAULT_DISPPROPBTN;
+	wmdock->propDispAddOnlyWM           = RCDEFAULT_DISPADDONLYWM;
+	wmdock->propPanelOff                = RCDEFAULT_PANELOFF;
+	wmdock->propPanelOffIgnoreOffset    = RCDEFAULT_PANELOFFIGNOREOFFSET;
+	wmdock->propPanelOffKeepAbove       = RCDEFAULT_PANELOFFKEEPABOVE;
+	wmdock->propPanelOffFreePositioning = RCDEFAULT_PANELOFFKEEPABOVE;
+	wmdock->panelOffFpX                 = RCDEFAULT_PANELOFFFPX;
+	wmdock->panelOffFpY                 = RCDEFAULT_PANELOFFFPY;
+	wmdock->filterList                  = g_strdup(DOCKAPP_FILTER_PATTERN);
+	wmdock->anchorPos                   = get_default_anchor_postion();
 
 	wmdock->eventBox = gtk_event_box_new ();
 	gtk_widget_show(GTK_WIDGET(wmdock->eventBox));

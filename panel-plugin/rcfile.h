@@ -32,12 +32,25 @@
 #define RCKEY_PANELOFFIGNOREOFFSET     (const gchar *) "paneloffignoreoffset"
 #define RCKEY_PANELOFFKEEPABOVE        (const gchar *) "paneloffkeepabove"
 #define RCKEY_PANELOFFFREEPOSITIONING  (const gchar *) "panelofffreepositioning"
+#define RCKEY_PANELOFFFPX              (const gchar *) "panelofffpx"
+#define RCKEY_PANELOFFFPY              (const gchar *) "panelofffpy"
 #define RCKEY_DAFILTER                 (const gchar *) "dafilter"
 #define RCKEY_ANCHORPOS                (const gchar *) "anchorpos"
 #define RCKEY_GLUELIST                 (const gchar *) "glues"
 
 #define RC_LIST_DELIMITER   (const gchar *) ";"
 #define RC_GLUE_DELIMITER   (const gchar *) ","
+
+#define RCDEFAULT_DISPTILE                (gboolean) TRUE
+#define RCDEFAULT_DISPPROPBTN             (gboolean) FALSE
+#define RCDEFAULT_DISPADDONLYWM           (gboolean) TRUE
+#define RCDEFAULT_PANELOFF                (gboolean) FALSE
+#define RCDEFAULT_PANELOFFIGNOREOFFSET    (gboolean) FALSE
+#define RCDEFAULT_PANELOFFKEEPABOVE       (gboolean) FALSE
+#define RCDEFAULT_PANELOFFFREEPOSITIONING (gboolean) FALSE
+#define RCDEFAULT_PANELOFFFPX             (gint) G_MININT
+#define RCDEFAULT_PANELOFFFPY             (gint) G_MININT
+#define RCDEFAULT_ANCHORPOS               (gint) -1
 
 /* Prototypes */
 void wmdock_read_rc_file (XfcePanelPlugin *);

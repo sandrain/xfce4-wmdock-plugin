@@ -41,6 +41,7 @@
 #include "debug.h"
 #include "dnd.h"
 #include "misc.h"
+#include "rcfile.h"
 #include "props.h"
 
 #define DEFAULT_XPANEL_NAME "xfce4-panel"
@@ -296,8 +297,12 @@ static void wmdock_dockapp_button_release_handler(GtkWidget *window, GdkEventBut
 		debug("dockapp.c: Replaceable dummy tile found.");
 		wmdock_order_dockapps(wmdock_get_primary_anchor_dockapp() ? wmdock_get_primary_anchor_dockapp() : dapp);
 	} else {
+		if(dapp == wmdock_get_primary_anchor_dockapp())
+			gtk_window_get_position(GTK_WINDOW(dapp->tile), &wmdock->panelOffFpX, &wmdock->panelOffFpY);
 		wmdock_remove_anchors_tile_dummy();
 		wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
+		if(dapp == wmdock_get_primary_anchor_dockapp())
+			wmdock_order_dockapps(dapp);
 	}
 	if(dappDummy) {
 		gtk_widget_hide(dappDummy->tile);
@@ -318,7 +323,7 @@ static void wmdock_dockapp_button_release_handler(GtkWidget *window, GdkEventBut
  */
 static void wmdock_dockapp_motion_notify_handler(GtkWidget *window, GdkEventMotion *ev, DockappNode *dapp)
 {
-	gint gluepos, x, y, posx, posy;
+	gint gluepos, x, y, posx, posy, movex, movey;
 	DockappNode *dappSnap = NULL;
 	GdkModifierType m;
 
@@ -332,7 +337,20 @@ static void wmdock_dockapp_motion_notify_handler(GtkWidget *window, GdkEventMoti
 		gtk_window_get_position(GTK_WINDOW(dapp->tile), &posx, &posy);
 		debug("dockapp.c: Mouse x: %d,  Mouse y: %d,  Dapp x: %d, Dapp y: %d,  Msx: %d,  Msy: %d",
 				x, y, posx, posy, motionstartx, motionstarty);
-		gtk_window_move(GTK_WINDOW(dapp->tile), posx - (motionstartx - x), posy - (motionstarty - y));
+
+		movex = posx - (motionstartx - x);
+		movey = posy - (motionstarty - y);
+		if(wmdock->propPanelOffFreePositioning == TRUE && dapp == wmdock_get_primary_anchor_dockapp()) {
+			if (movex <= 0)
+				movex = 0;
+			if (movex >= gdk_screen_get_width(get_current_gdkscreen()) - DEFAULT_DOCKAPP_WIDTH)
+				movex = gdk_screen_get_width(get_current_gdkscreen()) - DEFAULT_DOCKAPP_WIDTH;
+			if (movey <= 0)
+				movey = 0;
+			if (movey >= gdk_screen_get_height(get_current_gdkscreen()) - DEFAULT_DOCKAPP_HEIGHT)
+				movey = gdk_screen_get_height(get_current_gdkscreen()) - DEFAULT_DOCKAPP_HEIGHT;
+		}
+		gtk_window_move(GTK_WINDOW(dapp->tile), movex, movey);
 	}
 
 	if(dappOnMotion == dapp) {
@@ -854,6 +872,10 @@ GtkWidget *wmdock_create_tile_from_socket(DockappNode *dapp)
 	gtk_widget_set_size_request(GTK_WIDGET(dapp->bg), DEFAULT_DOCKAPP_WIDTH, DEFAULT_DOCKAPP_HEIGHT);
 	gtk_container_add(GTK_CONTAINER(_evbox), GTK_WIDGET(dapp->bg));
 
+	/* Set the background style of the tile window like the XFCE panel. */
+	gtk_widget_set_style(GTK_WIDGET(dapp->evbox), gtk_widget_get_style(GTK_WIDGET(wmdock->plugin)));
+	gtk_widget_set_style(GTK_WIDGET(_evbox), gtk_widget_get_style(GTK_WIDGET(wmdock->plugin)));
+
 	if( IS_PANELOFF(wmdock) ) {
 		/* If propDispPanelOff is true create a separate window with the
 		 * Dockapp in it. It's emulates WindowMaker much more.
@@ -879,9 +901,6 @@ GtkWidget *wmdock_create_tile_from_socket(DockappNode *dapp)
 		/* Hide window from the taskbar and the pager. */
 		gtk_window_set_skip_taskbar_hint(GTK_WINDOW(tile), TRUE);
 		gtk_window_set_skip_pager_hint(GTK_WINDOW(tile), TRUE);
-		/* Set the background style of the tile window like the XFCE panel. */
-		gtk_widget_set_style(GTK_WIDGET(dapp->evbox), gtk_widget_get_style(GTK_WIDGET(wmdock->plugin)));
-		gtk_widget_set_style(GTK_WIDGET(_evbox), gtk_widget_get_style(GTK_WIDGET(wmdock->plugin)));
 
 		gtk_container_add(GTK_CONTAINER(tile), _fixed);
 
@@ -913,9 +932,7 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 	/* Setup the position of the first dockapp. */
 	panelx = panely = plugx = plugy = x = y = 0;
 
-	gtk_window_get_position(
-			GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))),
-			&panelx, &panely);
+	gtk_window_get_position(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))), &panelx, &panely);
 	gdk_window_get_position (GDK_WINDOW (GTK_WIDGET (wmdock->plugin)->window), &plugx, &plugy);
 
 	for(i = 0; prevDapp && i < GLUE_MAX; i++) {
@@ -1019,6 +1036,14 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 				x = y = 0;
 				break;
 			}
+
+			if(wmdock->propPanelOffFreePositioning == TRUE) {
+				/* If panelOffFpX, panelOffFpy uninitialized (G_MININT) set the determined value,
+				 * otherwise set the stored value to x and y.
+				 */
+				x = wmdock->panelOffFpX == RCDEFAULT_PANELOFFFPX ? x : wmdock->panelOffFpX;
+				y = wmdock->panelOffFpY == RCDEFAULT_PANELOFFFPY ? y : wmdock->panelOffFpY;
+			}
 		} /* else */
 	}
 
@@ -1043,9 +1068,7 @@ void wmdock_order_dockapps(DockappNode *dapp)
 		return;
 
 	for(i = 0; i < GLUE_MAX; i++) {
-		if(wmdock->propPanelOffFreePositioning == FALSE ||
-				(wmdock->propPanelOffFreePositioning == TRUE && dapp != wmdock_get_primary_anchor_dockapp()))
-			wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
+		wmdock_set_autoposition_dockapp(dapp, wmdock_get_parent_dockapp(dapp));
 
 		debug("dockapp.c: Order dockapp %s", dapp->name);
 		/* Recurse calling wmdock_order_dockapps, to walk the hole tree. */
