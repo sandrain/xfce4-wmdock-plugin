@@ -258,6 +258,7 @@ int wmdock_get_instance_count()
 	if(!fp)
 		return(-1);
 
+	memset(buf, '\0', BUF_MAX * sizeof(char));
 	strncpy(username, (const char *) g_get_user_name(), BUF_MAX);
 	while(!feof(fp)) {
 		buf[0] = 0;
@@ -286,7 +287,8 @@ void wmdock_panel_draw_wmdock_icon (gboolean redraw)
 	if(redraw == TRUE && wmdockIcon) {
 		gtk_image_set_from_pixbuf (GTK_IMAGE(wmdockIcon), gdkPbIcon);
 	} else {
-		if(wmdockIcon) gtk_widget_destroy(wmdockIcon);
+		if(wmdockIcon)
+			gtk_widget_destroy(wmdockIcon);
 
 		wmdockIcon = gtk_image_new_from_pixbuf (gdkPbIcon);
 		gtk_box_pack_start(GTK_BOX(wmdock->box), GTK_WIDGET(wmdockIcon), FALSE, FALSE, 0);

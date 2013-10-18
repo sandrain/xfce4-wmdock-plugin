@@ -119,6 +119,7 @@ static DockappNode *wmdock_get_snapable_dockapp(DockappNode *dapp, gint *gluepos
 	if( ! IS_PANELOFF(wmdock) )
 		return NULL;
 
+	posx = posy = gluex = gluey = 0;
 	prim = (dapp == wmdock_get_primary_anchor_dockapp()) ? TRUE : FALSE;
 
 	switch(wmdock->anchorPos) {
@@ -452,7 +453,7 @@ DockappNode *wmdock_get_primary_anchor_dockapp()
 				if(dapp2->glue[i] == dapp1)
 					break;
 			}
-			if(dapp2->glue[i] == dapp1)
+			if(i < GLUE_MAX && dapp2->glue[i] == dapp1)
 				break;
 
 			dapps2 = g_list_next(dapps2);
@@ -569,8 +570,12 @@ gboolean wmdock_startup_dockapp(const gchar *cmd)
 
 void wmdock_destroy_dockapp(DockappNode *dapp)
 {
-	debug("dockapp.c: Destroy dockapp %s", dapp->name);
-	XDestroyWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), dapp->i);
+	Display *display = NULL;
+
+	if(dapp && (display = GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()))) {
+		XDestroyWindow(display, dapp->i);
+		debug("dockapp.c: Destroy dockapp %s", dapp->name);
+	}
 }
 
 
@@ -932,7 +937,7 @@ void wmdock_set_autoposition_dockapp(DockappNode *dapp, DockappNode *prevDapp)
 	/* Setup the position of the first dockapp. */
 	panelx = panely = plugx = plugy = x = y = 0;
 
-	gtk_window_get_position(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))), &panelx, &panely);
+	gtk_window_get_position (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))), &panelx, &panely);
 	gdk_window_get_position (GDK_WINDOW (GTK_WIDGET (wmdock->plugin)->window), &plugx, &plugy);
 
 	for(i = 0; prevDapp && i < GLUE_MAX; i++) {

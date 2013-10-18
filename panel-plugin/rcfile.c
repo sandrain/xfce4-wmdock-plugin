@@ -141,12 +141,13 @@ void wmdock_read_rc_file (XfcePanelPlugin *plugin)
 				}
 				g_strfreev(glueInfo);
 			}
-
-			g_strfreev(glueList);
 		}
 
 		g_free(launched);
 	} /* rcCmds != NULL */
+
+	if(glueList)
+		g_strfreev(glueList);
 }
 
 

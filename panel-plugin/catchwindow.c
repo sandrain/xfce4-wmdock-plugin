@@ -114,11 +114,12 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 	h = XGetWMHints(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()),
 			wnck_window_get_xid(w));
 
-	if(!h) return;
+	if(!h)
+		return;
 
 	if(h->initial_state == WithdrawnState ||
-			h->flags == (WindowGroupHint | StateHint | IconWindowHint)
-			|| has_dockapp_hint(w)) {
+			h->flags == (WindowGroupHint | StateHint | IconWindowHint) ||
+			has_dockapp_hint(w) == TRUE) {
 
 		debug("catchwindow.c: new wmapp open");
 		debug("catchwindow.c: New dockapp %s with xid: 0x%x pid: %u arrived sessid: %s",
@@ -149,9 +150,11 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 		}
 
 		if(h->initial_state == WithdrawnState && h->icon_window) {
+			debug("catchwindow.c: Initial_state: %d with icon of window %s", h->initial_state, wnck_window_get_name(w));
 			XUnmapWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), wnck_window_get_xid(w));
 			dapp->i =h->icon_window;
 		} else {
+			debug("catchwindow.c: Initial_state: %d %s of window %s", h->initial_state, h->icon_window ? "with icon" : "no icon", wnck_window_get_name(w));
 			dapp->i = wnck_window_get_xid(w);
 		}
 
@@ -195,7 +198,9 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 		}
 
 		/* Cleanly unmap the original window. */
-		XUnmapWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), dapp->i);
+		/* TODO: Verify is XUnmapWindow always not required.
+		 * XUnmapWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), dapp->i);
+		 */
 
 		if(rcDapp == FALSE) {
 			dapp->tile = wmdock_create_tile_from_socket(dapp);

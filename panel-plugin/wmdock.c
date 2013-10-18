@@ -56,8 +56,7 @@ GdkPixbuf    *gdkPbTileDefault = NULL;
 GdkPixbuf    *gdkPbIcon        = NULL;
 WmdockPlugin *wmdock           = NULL;
 gchar        **rcCmds          = NULL;
-/* TODO: Set panel off to FALSE. */
-gboolean     rcPanelOff        = TRUE;
+gboolean     rcPanelOff        = RCDEFAULT_PANELOFF;
 
 
 static void wmdock_orientation_changed (XfcePanelPlugin *plugin, GtkOrientation orientation, gpointer user_data)
