@@ -106,6 +106,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 	XWindowAttributes attr;
 	DockappNode *dapp      = NULL;
 	gchar *cmd             = NULL;
+	const char *wmclass    = NULL;
 	gboolean rcDapp        = FALSE;
 
 	gdk_error_trap_push();
@@ -116,10 +117,12 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 
 	if(!h)
 		return;
+	wmclass = wnck_window_get_class_group(w) ? wnck_class_group_get_name(wnck_window_get_class_group(w)) : NULL;
 
 	if(h->initial_state == WithdrawnState ||
 			h->flags == (WindowGroupHint | StateHint | IconWindowHint) ||
-			has_dockapp_hint(w) == TRUE) {
+			has_dockapp_hint(w) == TRUE ||
+			(wmclass && !g_strcmp0(wmclass, "DockApp"))) {
 
 		debug("catchwindow.c: new wmapp open");
 		debug("catchwindow.c: New dockapp %s with xid: 0x%x pid: %u arrived sessid: %s",

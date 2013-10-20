@@ -709,7 +709,7 @@ void wmdock_redraw_dockapp(DockappNode *dapp)
 	gtk_widget_unmap (GTK_WIDGET(dapp->s));
 	wmdock_set_tile_background(dapp, gdkPbTileDefault);
 
-	debug("dockapp.c: Dockapp %s redrawed with tile %d", dapp->name, wmdock->propDispTile);
+	debug("dockapp.c: Dockapp %s redrawed with tile %s.", dapp->name, wmdock->propDispTile ? "enabled" : "disabled");
 
 	if(dapp->bg)
 		gdk_window_process_updates(dapp->bg->window, FALSE);
