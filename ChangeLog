@@ -1,3 +1,22 @@
+2013-10-20  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* m4/gettext.m4: New file, from gettext-0.18.1.
+	* m4/iconv.m4: New file, from gettext-0.18.1.
+	* m4/lib-ld.m4: New file, from gettext-0.18.1.
+	* m4/lib-link.m4: New file, from gettext-0.18.1.
+	* m4/lib-prefix.m4: New file, from gettext-0.18.1.
+	* m4/nls.m4: New file, from gettext-0.18.1.
+	* m4/po.m4: New file, from gettext-0.18.1.
+	* m4/progtest.m4: New file, from gettext-0.18.1.
+	* Makefile.am (EXTRA_DIST): Add config.rpath.
+
+2013-10-20	Andre Ellguth <andre at ellguth dot com>
+	* Added a complete new mode without using the Xfce panel (panel off mode).
+	* Added many options for the new panel off mode.
+	* Fixed some background glitches.
+	* Split source into separate files
+	* Many bugfixes and improvments
+
 2011-04-29	Andre Ellguth <ellguth at ibh dot de>
 	* New editable dockapp filter.
 	* Added build support for XFCE 4.8.

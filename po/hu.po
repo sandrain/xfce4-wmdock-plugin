@@ -7,71 +7,138 @@ msgid ""
 msgstr ""
 "Project-Id-Version: xfce4-wmdock-plugin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 20:22+0100\n"
+"POT-Creation-Date: 2013-10-20 22:08+0200\n"
 "PO-Revision-Date: 2009-06-04 01:28+0200\n"
 "Last-Translator: Gabor Kelemen <kelemeng at gnome dot hu>\n"
 "Language-Team: Hungarian <gnome at gnome dot hu>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms:  nplurals=2; plural=(n != 1);\n"
 
-#: panel-plugin/wmdock.c:196
+#: ../panel-plugin/wmdock.c:190
+#, c-format
+msgid "Only a single instance of `%s' can run."
+msgstr ""
+
+#: ../panel-plugin/wmdock.c:193
+msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
+msgstr ""
+
+#: ../panel-plugin/dnd.c:73
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "El kívánja távolítani ezt a dokkalkalmazást: „%s”?"
 
-#: panel-plugin/wmdock.c:398
+#: ../panel-plugin/props.c:93
+msgid "Changes maybe not work properly until you restart XFCE!"
+msgstr ""
+
+#: ../panel-plugin/props.c:170
+msgid "Changes will take effect when you restart XFCE!"
+msgstr ""
+
+#: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
 msgstr "Nem fut dokkalkalmazás!"
 
-#: panel-plugin/wmdock.c:858
-#, c-format
-msgid "Failed to start %s!"
-msgstr "A(z) %s indítása meghiúsult"
-
-#: panel-plugin/wmdock.c:1148
+#. Create the configure dialog.
+#: ../panel-plugin/props.c:415
 msgid "WMdock"
 msgstr "WMdock"
 
-#: panel-plugin/wmdock.c:1151
+#: ../panel-plugin/props.c:418
 msgid "Remove dockapp"
 msgstr "Dokkalkalmazás eltávolítása"
 
-#: panel-plugin/wmdock.c:1167
+#: ../panel-plugin/props.c:434
 msgid "General settings"
 msgstr "Általános beállítások"
 
-#: panel-plugin/wmdock.c:1168
+#: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
 msgstr "Dokkalkalmazás észlelése"
 
-#: panel-plugin/wmdock.c:1216
+#: ../panel-plugin/props.c:436
+#, fuzzy
+msgid "Mode settings"
+msgstr "Általános beállítások"
+
+#: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
 msgstr "Válassza ki a beállítandó dokkalkalmazást:"
 
-#: panel-plugin/wmdock.c:1225
+#: ../panel-plugin/props.c:492
 msgid "Shell command:"
 msgstr "Parancs:"
 
-#: panel-plugin/wmdock.c:1236
+#: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
 msgstr "Csempe megjelenítése a háttérben."
 
-#: panel-plugin/wmdock.c:1237
-msgid ""
-"Display a separate WMdock properties\n"
-"button in the panel."
+#: ../panel-plugin/props.c:504
+#, fuzzy
+msgid "Display a separate WMdock properties button in the panel."
 msgstr ""
 "Önálló WMdock tulajdonságok gomb\n"
 "megjelenítése a panelen."
 
-#: panel-plugin/wmdock.c:1238
-msgid ""
-"Add only dockapps which start with\n"
-"wm* in the name."
+#: ../panel-plugin/props.c:505
+#, fuzzy
+msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
 msgstr ""
 "Csak a wm*-mel kezdődő nevű\n"
 "dokkalkalmazások felvétele."
 
+#: ../panel-plugin/props.c:506
+#, fuzzy
+msgid "Display dockapps in separate windows and not in the panel."
+msgstr ""
+"Önálló WMdock tulajdonságok gomb\n"
+"megjelenítése a panelen."
+
+#: ../panel-plugin/props.c:507
+msgid "Don't use panel size as offset for the first dockapp."
+msgstr ""
+
+#: ../panel-plugin/props.c:508
+msgid "Keep dockapp windows on top."
+msgstr ""
+
+#: ../panel-plugin/props.c:509
+msgid "Enable free positioning of the first dockapp on the screen."
+msgstr ""
+
+#: ../panel-plugin/props.c:538
+msgid ""
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the "
+"plugin\n"
+"to this panel to correct this problem."
+msgstr ""
+
+#: ../panel-plugin/props.c:542
+msgid "Placement:"
+msgstr ""
+
+#: ../panel-plugin/props.c:544
+msgid "Top left"
+msgstr ""
+
+#: ../panel-plugin/props.c:545
+msgid "Top right"
+msgstr ""
+
+#: ../panel-plugin/props.c:546
+msgid "Bottom left"
+msgstr ""
+
+#: ../panel-plugin/props.c:547
+msgid "Bottom right"
+msgstr ""
+
+#: ../panel-plugin/rcfile.c:93
+#, fuzzy, c-format
+msgid "Failed to start `%s'!"
+msgstr "A(z) %s indítása meghiúsult"
