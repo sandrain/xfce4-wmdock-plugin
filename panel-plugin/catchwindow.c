@@ -184,6 +184,7 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 		debug("catchwindow.c: New dockapp %s width: %d height: %d", wnck_window_get_name(w), wi, he);
 
 		gtk_widget_set_size_request(GTK_WIDGET(dapp->s), wi, he);
+		wnck_window_stick (w);
 		wnck_window_set_skip_tasklist (w, TRUE);
 		wnck_window_set_skip_pager (w, TRUE);
 
@@ -199,11 +200,6 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 			gtk_widget_destroy(wmdockIcon);
 			wmdockIcon = NULL;
 		}
-
-		/* Cleanly unmap the original window. */
-		/* TODO: Verify is XUnmapWindow always not required.
-		 * XUnmapWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), dapp->i);
-		 */
 
 		if(rcDapp == FALSE) {
 			dapp->tile = wmdock_create_tile_from_socket(dapp);
@@ -228,6 +224,10 @@ void wmdock_window_open(WnckScreen *s, WnckWindow *w)
 
 		gtk_socket_add_id(dapp->s, dapp->i);
 		gtk_widget_show_all(GTK_WIDGET(dapp->tile));
+
+		/* Cleanly unmap the original window. */
+		if(h->initial_state == WithdrawnState)
+			XUnmapWindow(GDK_DISPLAY_XDISPLAY(get_current_gdkdisplay()), wnck_window_get_xid(w));
 
 		g_signal_connect(dapp->s, "plug-removed", G_CALLBACK(wmdock_dapp_closed), dapp);
 
