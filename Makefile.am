@@ -10,7 +10,7 @@ AUTOMAKE_OPTIONS =							\
 distclean-local:
 	rm -rf *.cache *~ .project .settings .cdtproject
 
-EXTRA_DIST = config.rpath m4/ChangeLog 								\
+EXTRA_DIST = config.rpath  config.rpath m4/ChangeLog 								\
 	intltool-extract.in						\
 	intltool-merge.in						\
 	intltool-update.in

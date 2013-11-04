@@ -1,3 +1,10 @@
+2013-10-20	Andre Ellguth <andre at ellguth dot com>
+	* Added a complete new mode without using the Xfce panel (panel off mode).
+	* Added many options for the new panel off mode.
+	* Fixed some background glitches.
+	* Split source into separate files
+	* Many bugfixes and improvments
+
 2011-04-29	Andre Ellguth <ellguth at ibh dot de>
 	* New editable dockapp filter.
 	* Added build support for XFCE 4.8.

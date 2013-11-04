@@ -2,7 +2,22 @@ plugindir = $(libexecdir)/xfce4/panel-plugins
 plugin_PROGRAMS = xfce4-wmdock-plugin
 
 xfce4_wmdock_plugin_SOURCES =						\
+	catchwindow.h							\
+	catchwindow.c							\
+	debug.h								\
+	debug.c								\
+	dnd.h								\
+	dnd.c								\
+	dockapp.h							\
+	dockapp.c							\
+	misc.h								\
+	misc.c								\
+	props.h								\
+	props.c								\
+	rcfile.h							\
+	rcfile.c							\
 	wmdock.h							\
+	extern.h							\
 	xfce4-wmdock-plugin.xpm						\
 	tile.xpm							\
 	wmdock.c

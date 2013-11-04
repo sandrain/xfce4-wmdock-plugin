@@ -1,9 +1,7 @@
 /* wmdock xfce4 plugin by Andre Ellguth
  *
- * $Id$
- *
  * Authors:
- *   Andre Ellguth <ellguth@ibh.de>
+ *   Andre Ellguth <andre@ellguth.com>
  *
  * License:
  *   This program is free software; you can redistribute it and/or modify
@@ -30,31 +28,44 @@
 #define WNCK_I_KNOW_THIS_IS_UNSTABLE
 #include <libwnck/libwnck.h>
 
-typedef struct _dockapp {
- GtkSocket       *s;
- GdkNativeWindow i;
- GtkWidget       *bg;
- GtkWidget       *tile;
- gchar           *name;
- gchar           *cmd;
-} DockappNode;
+typedef enum {
+	ANCHOR_TL,
+	ANCHOR_TR,
+	ANCHOR_BL,
+	ANCHOR_BR
+} AnchorPostion;
 
 typedef struct {
- XfcePanelPlugin *plugin;
+ XfcePanelPlugin     *plugin;
 
- GtkWidget       *eventBox;
+ GtkWidget           *eventBox;
 	
  /* Plugin specific definitions */
- GtkWidget       *align;
- GtkWidget       *box;
- GtkWidget       *panelBox;
+ GtkWidget           *align;
+ GtkWidget           *box;
+ GtkWidget           *panelBox;
 	
- gboolean        propDispTile;
- gboolean        propDispPropButton;
- gboolean        propDispAddOnlyWM;
- gchar           *filterList;
+ gboolean            propDispTile;
+ gboolean            propDispPropButton;
+ gboolean            propDispAddOnlyWM;
+ gboolean            propPanelOff;
+ gboolean            propPanelOffIgnoreOffset;
+ gboolean            propPanelOffKeepAbove;
+ gboolean            propPanelOffFreePositioning;
+ gint                panelOffFpX;
+ gint                panelOffFpY;
+ AnchorPostion       anchorPos;
+ gchar               *filterList;
 
- GList           *dapps;
+ GList               *dapps;
 } WmdockPlugin;
+
+#define BUF_MAX 4096
+#define DEFAULT_DOCKAPP_WIDTH  64
+#define DEFAULT_DOCKAPP_HEIGHT 64
+/* Default filter for dockapps. All dockapps starting with "wm" or "as". */
+#define DOCKAPP_FILTER_PATTERN "^wm;^as"
+
+#define IS_PANELOFF(__wmdock) (__wmdock->propPanelOff == TRUE)
 
 #endif /* __WMDOCK_H__ */
