@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-04 18:31+0100\n"
-"PO-Revision-Date: 2013-11-05 04:11+0000\n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2013-11-05 18:48+0000\n"
 "Last-Translator: Pablo Lezaeta <prflr88@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/xfce/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgid "No dockapp is running!"
 msgstr "Ninguna aplicación dock se está ejecutando!"
 
 #. Create the configure dialog.
-#: ../panel-plugin/props.c:415
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
 msgid "WMdock"
 msgstr "WMdock"
 
@@ -131,3 +131,7 @@ msgstr "Abajo a la derecha"
 #, c-format
 msgid "Failed to start `%s'!"
 msgstr "¡Error al iniciar `%s'!"
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr "Complemento para las aplicaciones dock de WindowMaker"
