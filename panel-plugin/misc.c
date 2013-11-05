@@ -325,7 +325,7 @@ void wmdock_msg_dialog(GtkMessageType type, const gchar *fmt, ...)
 	va_end(args);
 
 	gtkDlg = gtk_message_dialog_new(GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (wmdock->plugin))),
-			GTK_DIALOG_DESTROY_WITH_PARENT, type, GTK_BUTTONS_OK, msg);
+			GTK_DIALOG_DESTROY_WITH_PARENT, type, GTK_BUTTONS_OK, "%s", msg);
 	g_signal_connect (gtkDlg, "response", G_CALLBACK (wmdock_msg_dialog_response), NULL);
 	gtk_dialog_run (GTK_DIALOG(gtkDlg));
 }

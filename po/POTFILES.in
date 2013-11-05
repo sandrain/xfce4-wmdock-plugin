@@ -16,3 +16,4 @@ panel-plugin/props.h
 panel-plugin/rcfile.c
 panel-plugin/rcfile.h
 panel-plugin/wmdock.c
+panel-plugin/wmdock.desktop.in.in
