@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-13 22:15+0200\n"
-"PO-Revision-Date: 2013-09-11 12:30+0000\n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2013-11-12 08:51+0000\n"
 "Last-Translator: Necdet Yücel <necdetyucel@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/xfce/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -19,57 +19,120 @@ msgstr ""
 "Language: tr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: ../panel-plugin/wmdock.c:246
+#: ../panel-plugin/wmdock.c:190
+#, c-format
+msgid "Only a single instance of `%s' can run."
+msgstr "`%s' için sadece tek bir süreç çalışabilir."
+
+#: ../panel-plugin/wmdock.c:193
+msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
+msgstr "Sadece tek bir `xfce4-wmdock-plugin' çalışabilir."
+
+#: ../panel-plugin/dnd.c:73
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "\"%s\" dok uygulamasını kaldırmak istiyor musunuz?"
 
-#: ../panel-plugin/wmdock.c:448
+#: ../panel-plugin/props.c:93
+msgid "Changes maybe not work properly until you restart XFCE!"
+msgstr "Değişiklikler XFCE yeniden başlatılana kadar düzgün çalışmayabilir!"
+
+#: ../panel-plugin/props.c:170
+msgid "Changes will take effect when you restart XFCE!"
+msgstr "Değişiklikler XFCE'yi yeniden başlattığınızda geçerli olacaktır!"
+
+#: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
 msgstr "Çalışan dok uygulaması yok!"
 
-#: ../panel-plugin/wmdock.c:907
-#, c-format
-msgid "Failed to start %s!"
-msgstr "%s başlatılamadı!"
-
 #. Create the configure dialog.
-#: ../panel-plugin/wmdock.c:1211
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
 msgid "WMdock"
 msgstr "WMdock"
 
-#: ../panel-plugin/wmdock.c:1214
+#: ../panel-plugin/props.c:418
 msgid "Remove dockapp"
 msgstr "Dok uygulamasını kaldır"
 
-#: ../panel-plugin/wmdock.c:1230
+#: ../panel-plugin/props.c:434
 msgid "General settings"
 msgstr "Genel ayarlar"
 
-#: ../panel-plugin/wmdock.c:1231
+#: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
 msgstr "Dok uygulaması tespiti"
 
-#: ../panel-plugin/wmdock.c:1279
+#: ../panel-plugin/props.c:436
+msgid "Mode settings"
+msgstr "Mod ayarları"
+
+#: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
 msgstr "Yapılandırmak için dok uygulaması seçin:"
 
-#: ../panel-plugin/wmdock.c:1288
+#: ../panel-plugin/props.c:492
 msgid "Shell command:"
 msgstr "Kabuk komutu:"
 
-#: ../panel-plugin/wmdock.c:1299
+#: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
 msgstr "Arka planı görüntüle."
 
-#: ../panel-plugin/wmdock.c:1300
-msgid ""
-"Display a separate WMdock properties\n"
-"button in the panel."
-msgstr "Panelde ayrı bir WMdock özellikleri\ndüğmesi görüntüle."
+#: ../panel-plugin/props.c:504
+msgid "Display a separate WMdock properties button in the panel."
+msgstr "Panelde ayrı bir WMdock özellikleri düğmesi göster."
 
-#: ../panel-plugin/wmdock.c:1301
+#: ../panel-plugin/props.c:505
+msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
+msgstr ""
+
+#: ../panel-plugin/props.c:506
+msgid "Display dockapps in separate windows and not in the panel."
+msgstr ""
+
+#: ../panel-plugin/props.c:507
+msgid "Don't use panel size as offset for the first dockapp."
+msgstr ""
+
+#: ../panel-plugin/props.c:508
+msgid "Keep dockapp windows on top."
+msgstr "Dok uygulama penceresini üstte tut."
+
+#: ../panel-plugin/props.c:509
+msgid "Enable free positioning of the first dockapp on the screen."
+msgstr "Ekrandaki ilk dok uygulamasının serbest konumlanmasını etkinleştir."
+
+#: ../panel-plugin/props.c:538
 msgid ""
-"Add only dockapps which start with\n"
-"pattern in list. (e.g.: ^wm;^as)"
-msgstr "Sadece listedeki gibi bir desenle başlayan\nuygulamaları ekle. (örneğin.: ^wm;^as)"
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
+"to this panel to correct this problem."
+msgstr ""
+
+#: ../panel-plugin/props.c:542
+msgid "Placement:"
+msgstr "Yerleşim:"
+
+#: ../panel-plugin/props.c:544
+msgid "Top left"
+msgstr "Sol üst"
+
+#: ../panel-plugin/props.c:545
+msgid "Top right"
+msgstr "Sağ üst"
+
+#: ../panel-plugin/props.c:546
+msgid "Bottom left"
+msgstr "Sol alt"
+
+#: ../panel-plugin/props.c:547
+msgid "Bottom right"
+msgstr "Sağ alt"
+
+#: ../panel-plugin/rcfile.c:93
+#, c-format
+msgid "Failed to start `%s'!"
+msgstr "`%s' başlatılamadı!"
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr "WindowMaker dok uygulamaları için Eklenti"
