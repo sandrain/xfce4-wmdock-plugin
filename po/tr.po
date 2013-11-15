@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2013-11-12 08:51+0000\n"
+"PO-Revision-Date: 2013-11-15 10:08+0000\n"
 "Last-Translator: Necdet Yücel <necdetyucel@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/projects/p/xfce/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -84,15 +84,15 @@ msgstr "Panelde ayrı bir WMdock özellikleri düğmesi göster."
 
 #: ../panel-plugin/props.c:505
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr ""
+msgstr "Sadece listede bulunan desenlerle başlayan dok uygulamaları. (örneğin: ^wm;^as)"
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr ""
+msgstr "Dok uygulamalarını panelde değil ayrı pencerelerde görüntüle."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr ""
+msgstr "İlk dok uygulaması için kısıtlayıcı olarak panel boyutunu kullanmayın."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
@@ -106,7 +106,7 @@ msgstr "Ekrandaki ilk dok uygulamasının serbest konumlanmasını etkinleştir.
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr ""
+msgstr "İpucu: İlk dok uygulaması XFCE paneli tarafından kaplanırsa eklentiyi\nbu panel sürükleyerek problem çözmeye çalışın."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
