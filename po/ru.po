@@ -4,13 +4,14 @@
 # 
 # Translators:
 # shlyapugin <shlyapugin@gmail.com>, 2013
+# Velisarus <velisarus@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-13 22:15+0200\n"
-"PO-Revision-Date: 2013-07-28 05:08+0000\n"
-"Last-Translator: shlyapugin <shlyapugin@gmail.com>\n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2013-11-30 13:44+0000\n"
+"Last-Translator: Velisarus <velisarus@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/projects/p/xfce/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,57 +19,120 @@ msgstr ""
 "Language: ru\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../panel-plugin/wmdock.c:246
+#: ../panel-plugin/wmdock.c:190
+#, c-format
+msgid "Only a single instance of `%s' can run."
+msgstr "Может быть запущен только один экземпляр `%s'."
+
+#: ../panel-plugin/wmdock.c:193
+msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
+msgstr "Может быть запущен только один экземпляр `xfce4-wmdock-plugin'."
+
+#: ../panel-plugin/dnd.c:73
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "Вы хотите удалить апплет \"%s\"?"
 
-#: ../panel-plugin/wmdock.c:448
+#: ../panel-plugin/props.c:93
+msgid "Changes maybe not work properly until you restart XFCE!"
+msgstr "Возможно понадобится перезапустить XFCE для того,\nчтобы изменения применились правильно."
+
+#: ../panel-plugin/props.c:170
+msgid "Changes will take effect when you restart XFCE!"
+msgstr "Изменения вступят в силу после перезапуска XFCE."
+
+#: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
 msgstr "Апплеты не запущены!"
 
-#: ../panel-plugin/wmdock.c:907
-#, c-format
-msgid "Failed to start %s!"
-msgstr "Ошибка запуска %s!"
-
 #. Create the configure dialog.
-#: ../panel-plugin/wmdock.c:1211
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
 msgid "WMdock"
 msgstr "WMdock"
 
-#: ../panel-plugin/wmdock.c:1214
+#: ../panel-plugin/props.c:418
 msgid "Remove dockapp"
 msgstr "Удалить апплет"
 
-#: ../panel-plugin/wmdock.c:1230
+#: ../panel-plugin/props.c:434
 msgid "General settings"
 msgstr "Основные настройки"
 
-#: ../panel-plugin/wmdock.c:1231
+#: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
 msgstr "Обнаружение апплетов"
 
-#: ../panel-plugin/wmdock.c:1279
+#: ../panel-plugin/props.c:436
+msgid "Mode settings"
+msgstr "Настройки режима"
+
+#: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
 msgstr "Выберите апплет для настройки:"
 
-#: ../panel-plugin/wmdock.c:1288
+#: ../panel-plugin/props.c:492
 msgid "Shell command:"
 msgstr "Команда оболочки:"
 
-#: ../panel-plugin/wmdock.c:1299
+#: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
 msgstr "Расположить черепицей на заднем плане."
 
-#: ../panel-plugin/wmdock.c:1300
-msgid ""
-"Display a separate WMdock properties\n"
-"button in the panel."
-msgstr "Показать отдельную кнопку WMdock\nна панели."
+#: ../panel-plugin/props.c:504
+msgid "Display a separate WMdock properties button in the panel."
+msgstr "Отображать на панели отдельную кнопку настроек WMdock."
 
-#: ../panel-plugin/wmdock.c:1301
+#: ../panel-plugin/props.c:505
+msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
+msgstr "Добавлять только апплеты, которые начинаются с паттерна из списка (например: ^wm;^as)"
+
+#: ../panel-plugin/props.c:506
+msgid "Display dockapps in separate windows and not in the panel."
+msgstr "Отображать апплеты в отдельных окнах, а не на панели."
+
+#: ../panel-plugin/props.c:507
+msgid "Don't use panel size as offset for the first dockapp."
+msgstr "Не использовать размер панели как отступ для первого апплета."
+
+#: ../panel-plugin/props.c:508
+msgid "Keep dockapp windows on top."
+msgstr "Показывать окна апплетов поверх всех."
+
+#: ../panel-plugin/props.c:509
+msgid "Enable free positioning of the first dockapp on the screen."
+msgstr "Включить свободное позиционирование для первого апплета на экране."
+
+#: ../panel-plugin/props.c:538
 msgid ""
-"Add only dockapps which start with\n"
-"pattern in list. (e.g.: ^wm;^as)"
-msgstr "Добавить только те апплеты, начало\nназваний которых соответствует шаблону\nиз списка (например: ^wm;^as)."
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
+"to this panel to correct this problem."
+msgstr "Совет: если первый апплет перекрывается панелью XFCE, попробуйте\nсдвинуть плагин к этой панели, чтобы исправить эту проблему."
+
+#: ../panel-plugin/props.c:542
+msgid "Placement:"
+msgstr "Размещение:"
+
+#: ../panel-plugin/props.c:544
+msgid "Top left"
+msgstr "Вверху слева"
+
+#: ../panel-plugin/props.c:545
+msgid "Top right"
+msgstr "Вверху справа"
+
+#: ../panel-plugin/props.c:546
+msgid "Bottom left"
+msgstr "Внизу слева"
+
+#: ../panel-plugin/props.c:547
+msgid "Bottom right"
+msgstr "Внизу справа"
+
+#: ../panel-plugin/rcfile.c:93
+#, c-format
+msgid "Failed to start `%s'!"
+msgstr "Не удалось запустить `%s'!"
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr "Плагин для апплетов WindowMaker"
