@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Cedric31 <cvalmary@yahoo.fr>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2013-12-07 10:54+0000\n"
+"Last-Translator: Cedric31 <cvalmary@yahoo.fr>\n"
+"Language-Team: Occitan (post 1500) (http://www.transifex.com/projects/p/xfce/language/oc/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: oc\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: ../panel-plugin/wmdock.c:190
+#, c-format
+msgid "Only a single instance of `%s' can run."
+msgstr "Una sola instància de « %s » se pòt executar."
+
+#: ../panel-plugin/wmdock.c:193
+msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
+msgstr "Una sola instància de « xfce4-wmdock-plugin » se pòt executar."
+
+#: ../panel-plugin/dnd.c:73
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "Volètz levar l'aplicacion ancorabla « %s » ?"
+
+#: ../panel-plugin/props.c:93
+msgid "Changes maybe not work properly until you restart XFCE!"
+msgstr "Es possible que los cambiaments foncionen pas corrèctament quand reaviaretz XFCE !"
+
+#: ../panel-plugin/props.c:170
+msgid "Changes will take effect when you restart XFCE!"
+msgstr "Los cambiaments prendràn efièch quand reaviaretz XFCE !"
+
+#: ../panel-plugin/props.c:386
+msgid "No dockapp is running!"
+msgstr "Pas d'aplicacion ancorabla en foncionament !"
+
+#. Create the configure dialog.
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
+msgid "WMdock"
+msgstr "WMdock"
+
+#: ../panel-plugin/props.c:418
+msgid "Remove dockapp"
+msgstr "Levar l'aplicacion ancorabla !"
+
+#: ../panel-plugin/props.c:434
+msgid "General settings"
+msgstr "Paramètres generals"
+
+#: ../panel-plugin/props.c:435
+msgid "Dockapp detection"
+msgstr "Deteccion d'aplicacions ancorablas !"
+
+#: ../panel-plugin/props.c:436
+msgid "Mode settings"
+msgstr "Paramètres mòde"
+
+#: ../panel-plugin/props.c:483
+msgid "Select dockapp to configure:"
+msgstr "Seleccionar l'aplicacion ancorabla de configurar :"
+
+#: ../panel-plugin/props.c:492
+msgid "Shell command:"
+msgstr "Comanda de l'interpretador de comanda :"
+
+#: ../panel-plugin/props.c:503
+msgid "Display tile in the background."
+msgstr "Afichar los carrèus en rèire plan."
+
+#: ../panel-plugin/props.c:504
+msgid "Display a separate WMdock properties button in the panel."
+msgstr "Afichar un boton proprietats WMdock separat dins lo panèl."
+
+#: ../panel-plugin/props.c:505
+msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
+msgstr "Apondre solament las aplicacions ancorablas que començan amb lo modèl dins la lista. (per ex. : ^ wm; ^ as)"
+
+#: ../panel-plugin/props.c:506
+msgid "Display dockapps in separate windows and not in the panel."
+msgstr "Afichar las aplicacions ancorablas dins de fenèstras separadas e non pas dins lo panèl."
+
+#: ../panel-plugin/props.c:507
+msgid "Don't use panel size as offset for the first dockapp."
+msgstr "Utilizar pas la talha del panèl coma compensacion per la primièra aplicacion ancorabla."
+
+#: ../panel-plugin/props.c:508
+msgid "Keep dockapp windows on top."
+msgstr "Gardar las fenèstras de las aplicacions ancorablas en dessús."
+
+#: ../panel-plugin/props.c:509
+msgid "Enable free positioning of the first dockapp on the screen."
+msgstr "Permetre un posicionament liure de la primièra aplicacion ancorabla sus l'ecran."
+
+#: ../panel-plugin/props.c:538
+msgid ""
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
+"to this panel to correct this problem."
+msgstr "Astúcia : Es la primièra aplicacion ancorabla cobèrta per un panèl XFCE, ensajatz de desplaçar l'empeuton\nd'aqueste panèl per corregir aqueste problèma."
+
+#: ../panel-plugin/props.c:542
+msgid "Placement:"
+msgstr "Plaçament :"
+
+#: ../panel-plugin/props.c:544
+msgid "Top left"
+msgstr "Amont a esquèrra"
+
+#: ../panel-plugin/props.c:545
+msgid "Top right"
+msgstr "Amont a drecha"
+
+#: ../panel-plugin/props.c:546
+msgid "Bottom left"
+msgstr "Aval a esquèrra"
+
+#: ../panel-plugin/props.c:547
+msgid "Bottom right"
+msgstr "Aval a drecha"
+
+#: ../panel-plugin/rcfile.c:93
+#, c-format
+msgid "Failed to start `%s'!"
+msgstr "Impossible d'aviar « %s » !"
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr "Empeuton per aplicacions ancorablas WindowMaker "
