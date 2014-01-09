@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Walter Cheuk <wwycheuk@gmail.com>, 2013
+# Walter Cheuk <wwycheuk@gmail.com>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2013-12-25 02:20+0000\n"
+"PO-Revision-Date: 2014-01-09 14:41+0000\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/xfce/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -75,15 +75,15 @@ msgstr "Shell 指令："
 
 #: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
-msgstr "於背景顯示標題。"
+msgstr "於背景顯示磁磚。"
 
 #: ../panel-plugin/props.c:504
 msgid "Display a separate WMdock properties button in the panel."
-msgstr "在面板顯示獨立的 WMdock 屬性。"
+msgstr "在面板顯示獨立的 WMdock 屬性按鈕。"
 
 #: ../panel-plugin/props.c:505
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr ""
+msgstr "僅加入以以下式樣清單開首的 dockapp。(例如：^wm;^as)"
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
