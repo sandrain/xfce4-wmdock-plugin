@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2014-01-09 14:41+0000\n"
+"PO-Revision-Date: 2014-01-10 14:03+0000\n"
 "Last-Translator: Walter Cheuk <wwycheuk@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/xfce/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr "您想要移除 dockapp「%s」嗎？"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
-msgstr "Xfce 重新啟動之後變更才能正常生效！"
+msgstr "Xfce 重新啟動之後變更才可能正常生效！"
 
 #: ../panel-plugin/props.c:170
 msgid "Changes will take effect when you restart XFCE!"
@@ -87,11 +87,11 @@ msgstr "僅加入以以下式樣清單開首的 dockapp。(例如：^wm;^as)"
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr "不在面板，而是以獨立視窗顯示 dockapps。"
+msgstr "不在面板，而是以獨立視窗顯示 dockapp。"
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr ""
+msgstr "首個 dockapp 不以面板大小作為偏移值。"
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
@@ -134,4 +134,4 @@ msgstr "未能啟動「%s」！"
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr ""
+msgstr "用於 WindowMaker dockapp 的插件"
