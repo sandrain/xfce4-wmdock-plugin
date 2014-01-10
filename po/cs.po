@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Alois Nešpor <info@aloisnespor.info>, 2013
+# Franti3ek <frantisek.komarek@gmail.com>, 2014
 # Michal Várady <miko.vaji@gmail.com>, 2009
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-13 22:15+0200\n"
-"PO-Revision-Date: 2013-08-24 06:37+0000\n"
-"Last-Translator: Alois Nešpor <info@aloisnespor.info>\n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2014-01-10 15:52+0000\n"
+"Last-Translator: Franti3ek <frantisek.komarek@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/xfce/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,57 +20,120 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: ../panel-plugin/wmdock.c:246
+#: ../panel-plugin/wmdock.c:190
+#, c-format
+msgid "Only a single instance of `%s' can run."
+msgstr ""
+
+#: ../panel-plugin/wmdock.c:193
+msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
+msgstr ""
+
+#: ../panel-plugin/dnd.c:73
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "Chcete odebrat dokovanou aplikaci \"%s\"?"
 
-#: ../panel-plugin/wmdock.c:448
+#: ../panel-plugin/props.c:93
+msgid "Changes maybe not work properly until you restart XFCE!"
+msgstr "Změny nemusí pracovat správně dokud nerestartujete XFCE!"
+
+#: ../panel-plugin/props.c:170
+msgid "Changes will take effect when you restart XFCE!"
+msgstr "Změny se projeví po restartu XFCE!"
+
+#: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
 msgstr "Není spuštěna žádná dokovaná aplikace."
 
-#: ../panel-plugin/wmdock.c:907
-#, c-format
-msgid "Failed to start %s!"
-msgstr "Spuštění aplikace %s se nezdařilo."
-
 #. Create the configure dialog.
-#: ../panel-plugin/wmdock.c:1211
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
 msgid "WMdock"
 msgstr "WMdock"
 
-#: ../panel-plugin/wmdock.c:1214
+#: ../panel-plugin/props.c:418
 msgid "Remove dockapp"
 msgstr "Odebrat dokovanou aplikaci"
 
-#: ../panel-plugin/wmdock.c:1230
+#: ../panel-plugin/props.c:434
 msgid "General settings"
 msgstr "Obecné nastavení"
 
-#: ../panel-plugin/wmdock.c:1231
+#: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
 msgstr "Detekce dokované aplikace"
 
-#: ../panel-plugin/wmdock.c:1279
+#: ../panel-plugin/props.c:436
+msgid "Mode settings"
+msgstr ""
+
+#: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
 msgstr "Vyberte dokovanou aplikaci k nastavení:"
 
-#: ../panel-plugin/wmdock.c:1288
+#: ../panel-plugin/props.c:492
 msgid "Shell command:"
 msgstr "Příkaz pro příkazový řádek:"
 
-#: ../panel-plugin/wmdock.c:1299
+#: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
 msgstr "Zobrazovat dlaždice na pozadí."
 
-#: ../panel-plugin/wmdock.c:1300
-msgid ""
-"Display a separate WMdock properties\n"
-"button in the panel."
-msgstr "Zobrazovat oddělené tlačítko vlastnosti\naplikace WMdock na panelu."
+#: ../panel-plugin/props.c:504
+msgid "Display a separate WMdock properties button in the panel."
+msgstr "Zobrazovat oddělené tlačítko vlastností\naplikace WMdock na panelu."
 
-#: ../panel-plugin/wmdock.c:1301
+#: ../panel-plugin/props.c:505
+msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
+msgstr "Přidat pouze aplikace, které se shodují se vzorem v seznamu. (např.: ^ wm; ^ as)"
+
+#: ../panel-plugin/props.c:506
+msgid "Display dockapps in separate windows and not in the panel."
+msgstr "Zobrtazovat dokované aplikace v samostatných oknech a ne na panelu"
+
+#: ../panel-plugin/props.c:507
+msgid "Don't use panel size as offset for the first dockapp."
+msgstr ""
+
+#: ../panel-plugin/props.c:508
+msgid "Keep dockapp windows on top."
+msgstr ""
+
+#: ../panel-plugin/props.c:509
+msgid "Enable free positioning of the first dockapp on the screen."
+msgstr ""
+
+#: ../panel-plugin/props.c:538
 msgid ""
-"Add only dockapps which start with\n"
-"pattern in list. (e.g.: ^wm;^as)"
-msgstr "Přidat pouze aplikace, které se shodují se ⏎\nvzorem v seznamu. (např.: ^ wm; ^ as)"
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
+"to this panel to correct this problem."
+msgstr ""
+
+#: ../panel-plugin/props.c:542
+msgid "Placement:"
+msgstr ""
+
+#: ../panel-plugin/props.c:544
+msgid "Top left"
+msgstr ""
+
+#: ../panel-plugin/props.c:545
+msgid "Top right"
+msgstr ""
+
+#: ../panel-plugin/props.c:546
+msgid "Bottom left"
+msgstr ""
+
+#: ../panel-plugin/props.c:547
+msgid "Bottom right"
+msgstr ""
+
+#: ../panel-plugin/rcfile.c:93
+#, c-format
+msgid "Failed to start `%s'!"
+msgstr ""
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr ""
