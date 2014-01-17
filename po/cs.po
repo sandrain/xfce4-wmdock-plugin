@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2014-01-10 15:52+0000\n"
+"PO-Revision-Date: 2014-01-17 15:09+0000\n"
 "Last-Translator: Franti3ek <frantisek.komarek@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/xfce/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -23,11 +23,11 @@ msgstr ""
 #: ../panel-plugin/wmdock.c:190
 #, c-format
 msgid "Only a single instance of `%s' can run."
-msgstr ""
+msgstr "Může být spuštěna pouze jedna instance`%s'"
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
-msgstr ""
+msgstr "Může být spuštěna pouze jedna instance `xfce4-wmdock-plugin'"
 
 #: ../panel-plugin/dnd.c:73
 #, c-format
@@ -97,7 +97,7 @@ msgstr ""
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr ""
+msgstr "Zobrazovat okno aplikace na vrchu"
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
@@ -111,28 +111,28 @@ msgstr ""
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
-msgstr ""
+msgstr "Umístění:"
 
 #: ../panel-plugin/props.c:544
 msgid "Top left"
-msgstr ""
+msgstr "Vlevo nahoře "
 
 #: ../panel-plugin/props.c:545
 msgid "Top right"
-msgstr ""
+msgstr "Vpravo nahoře"
 
 #: ../panel-plugin/props.c:546
 msgid "Bottom left"
-msgstr ""
+msgstr "Vlevo dole"
 
 #: ../panel-plugin/props.c:547
 msgid "Bottom right"
-msgstr ""
+msgstr "Vpravo dole"
 
 #: ../panel-plugin/rcfile.c:93
 #, c-format
 msgid "Failed to start `%s'!"
-msgstr ""
+msgstr "Spuštění aplikace %s se nezdařilo."
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
