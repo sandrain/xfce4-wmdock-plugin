@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2014-01-17 15:09+0000\n"
+"PO-Revision-Date: 2014-01-18 16:40+0000\n"
 "Last-Translator: Franti3ek <frantisek.komarek@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/xfce/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,7 @@ msgstr "Detekce dokované aplikace"
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
-msgstr ""
+msgstr "Nastavení módu"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
@@ -89,11 +89,11 @@ msgstr "Přidat pouze aplikace, které se shodují se vzorem v seznamu. (např.:
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr "Zobrtazovat dokované aplikace v samostatných oknech a ne na panelu"
+msgstr "Zobrazovat dokované aplikace v oddělených oknech a ne na panelu."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr ""
+msgstr "Nepoužívat velikost panelu jako odsazení pro první dokovanou aplikaci."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
@@ -101,7 +101,7 @@ msgstr "Zobrazovat okno aplikace na vrchu"
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr ""
+msgstr "Povolit libovolné umístění první aplikace na obrazovce."
 
 #: ../panel-plugin/props.c:538
 msgid ""
@@ -136,4 +136,4 @@ msgstr "Spuštění aplikace %s se nezdařilo."
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr ""
+msgstr "Zásuvný modul pro WindowMaker aplikace"
