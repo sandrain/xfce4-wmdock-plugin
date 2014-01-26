@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Andhika Padmawan <andhika.padmawan@gmail.com>, 2009
+# padmawan <andhika.padmawan@gmail.com>, 2009,2014
 # Mohamad Hasan Al Banna, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-13 22:15+0200\n"
-"PO-Revision-Date: 2013-08-05 14:27+0000\n"
-"Last-Translator: Mohamad Hasan Al Banna\n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2014-01-26 01:56+0000\n"
+"Last-Translator: padmawan <andhika.padmawan@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/projects/p/xfce/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,57 +19,120 @@ msgstr ""
 "Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: ../panel-plugin/wmdock.c:246
+#: ../panel-plugin/wmdock.c:190
+#, c-format
+msgid "Only a single instance of `%s' can run."
+msgstr "Hanya satu instansi `%s' yang dapat berjalan."
+
+#: ../panel-plugin/wmdock.c:193
+msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
+msgstr "Hanya satu instansi `xfce4-wmdock-plugin' yang dapat berjalan."
+
+#: ../panel-plugin/dnd.c:73
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "Anda ingin menghapus dockapp \"%s\"?"
 
-#: ../panel-plugin/wmdock.c:448
+#: ../panel-plugin/props.c:93
+msgid "Changes maybe not work properly until you restart XFCE!"
+msgstr "Perubahan tidak akan berjalan hingga anda hidupkan ulang XFCE!"
+
+#: ../panel-plugin/props.c:170
+msgid "Changes will take effect when you restart XFCE!"
+msgstr "Perubahan akan dilakukan ketika anda hidupkan ulang XFCE!"
+
+#: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
 msgstr "Tak ada dockapp yang berjalan!"
 
-#: ../panel-plugin/wmdock.c:907
-#, c-format
-msgid "Failed to start %s!"
-msgstr "Gagal menjalankan %s!"
-
 #. Create the configure dialog.
-#: ../panel-plugin/wmdock.c:1211
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
 msgid "WMdock"
 msgstr "WMdock"
 
-#: ../panel-plugin/wmdock.c:1214
+#: ../panel-plugin/props.c:418
 msgid "Remove dockapp"
 msgstr "Hapus dockapp"
 
-#: ../panel-plugin/wmdock.c:1230
+#: ../panel-plugin/props.c:434
 msgid "General settings"
 msgstr "Pengaturan umum"
 
-#: ../panel-plugin/wmdock.c:1231
+#: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
 msgstr "Deteksi dockapp"
 
-#: ../panel-plugin/wmdock.c:1279
+#: ../panel-plugin/props.c:436
+msgid "Mode settings"
+msgstr "Pengaturan mode"
+
+#: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
 msgstr "Pilih dockapp yang ingin diatur:"
 
-#: ../panel-plugin/wmdock.c:1288
+#: ../panel-plugin/props.c:492
 msgid "Shell command:"
 msgstr "Perintah shell:"
 
-#: ../panel-plugin/wmdock.c:1299
+#: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
 msgstr "Tampilkan judul di latar belakang."
 
-#: ../panel-plugin/wmdock.c:1300
-msgid ""
-"Display a separate WMdock properties\n"
-"button in the panel."
-msgstr "Tampilkan tombol properti WMdock yang\nterpisah di panel."
+#: ../panel-plugin/props.c:504
+msgid "Display a separate WMdock properties button in the panel."
+msgstr "Tampilkan tombol properti WMdock yang terpisah di panel."
 
-#: ../panel-plugin/wmdock.c:1301
+#: ../panel-plugin/props.c:505
+msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
+msgstr "Tambahkan hanya dockapps yang dimulai dengan\npola di daftar. (contoh:^wm;^as)"
+
+#: ../panel-plugin/props.c:506
+msgid "Display dockapps in separate windows and not in the panel."
+msgstr "Tampilkan dockapps di jendela terpisah dan bukan di panel."
+
+#: ../panel-plugin/props.c:507
+msgid "Don't use panel size as offset for the first dockapp."
+msgstr "Jangan gunakan ukuran panel sebagai ofset untuk dockapp pertama."
+
+#: ../panel-plugin/props.c:508
+msgid "Keep dockapp windows on top."
+msgstr "Jaga jendela dockapp di atas."
+
+#: ../panel-plugin/props.c:509
+msgid "Enable free positioning of the first dockapp on the screen."
+msgstr "Aktifkan penempatan bebas untuk dockapp pertama di layar."
+
+#: ../panel-plugin/props.c:538
 msgid ""
-"Add only dockapps which start with\n"
-"pattern in list. (e.g.: ^wm;^as)"
-msgstr "Tambahkan hanya dockapps dimana dimulai dengan\npola di dafrar. (contoh:^wm;^as)"
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
+"to this panel to correct this problem."
+msgstr "Petunjuk: Ini adalah dockapp pertama yang dilindungi panel XFCE, silakan coba memindahkan plugin\nke panel ini untuk memecahkan masalah ini."
+
+#: ../panel-plugin/props.c:542
+msgid "Placement:"
+msgstr "Penempatan:"
+
+#: ../panel-plugin/props.c:544
+msgid "Top left"
+msgstr "Kiri atas"
+
+#: ../panel-plugin/props.c:545
+msgid "Top right"
+msgstr "Kanan atas"
+
+#: ../panel-plugin/props.c:546
+msgid "Bottom left"
+msgstr "Kiri bawah"
+
+#: ../panel-plugin/props.c:547
+msgid "Bottom right"
+msgstr "Kanan bawah"
+
+#: ../panel-plugin/rcfile.c:93
+#, c-format
+msgid "Failed to start `%s'!"
+msgstr "Gagal menjalankan `%s'!"
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr "Plugin untuk dockapp WindoMaker"
