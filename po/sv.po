@@ -1,29 +1,31 @@
-# Swedish translation for xfce4-wmdock-plugin.
-# Copyright (C) 2008 Free Software Foundation, Inc.
-# This file is distributed under the same license as the xfce4-wmdock-plugin package.
-# Daniel Nylander <po@danielnylander.se>, 2008.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Daniel Nylander <po@danielnylander.se>, 2008
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-wmdock-plugin\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-20 22:08+0200\n"
-"PO-Revision-Date: 2009-12-16 18:01+0100\n"
-"Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
-"Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
-"Language: sv\n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2014-02-09 10:39+0000\n"
+"Last-Translator: PavelNicklasson <pavelnicklasson@bahnhof.se>\n"
+"Language-Team: Swedish (http://www.transifex.com/projects/p/xfce/language/sv/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: sv\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-plugin/wmdock.c:190
 #, c-format
 msgid "Only a single instance of `%s' can run."
-msgstr ""
+msgstr "Bara en enda instans av `%s' kan köras."
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
-msgstr ""
+msgstr "Bara en enda instans av `xfce4-wmdock-plugin' kan köras."
 
 #: ../panel-plugin/dnd.c:73
 #, c-format
@@ -32,18 +34,18 @@ msgstr "Vill du ta bort dockprogrammet \"%s\"?"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
-msgstr ""
+msgstr "Ändringar kanske inte fungerar ordentligt förrän du startar om XFCE!"
 
 #: ../panel-plugin/props.c:170
 msgid "Changes will take effect when you restart XFCE!"
-msgstr ""
+msgstr "Ändringar kommer att träda i effekt då du startar om XFCE!"
 
 #: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
 msgstr "Inget dockprogram körs!"
 
 #. Create the configure dialog.
-#: ../panel-plugin/props.c:415
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
 msgid "WMdock"
 msgstr "WMdock"
 
@@ -60,9 +62,8 @@ msgid "Dockapp detection"
 msgstr "Identifiera dockprogram"
 
 #: ../panel-plugin/props.c:436
-#, fuzzy
 msgid "Mode settings"
-msgstr "Allmänna inställningar"
+msgstr "Lägesinställningar"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
@@ -77,66 +78,60 @@ msgid "Display tile in the background."
 msgstr "Visa bricka i bakgrunden."
 
 #: ../panel-plugin/props.c:504
-#, fuzzy
 msgid "Display a separate WMdock properties button in the panel."
-msgstr ""
-"Visa en separat knapp för WMdock-\n"
-"egenskaper i panelen."
+msgstr "Visar en separat WMdock-egenskaper knapp i panelen."
 
 #: ../panel-plugin/props.c:505
-#, fuzzy
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr ""
-"Lägg endast till dockprogram som börjar\n"
-"med wm* i namnet."
+msgstr "Lägg bara till dockapps som startar med mönster i listan. (e.g.: ^wm;^as)"
 
 #: ../panel-plugin/props.c:506
-#, fuzzy
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr ""
-"Visa en separat knapp för WMdock-\n"
-"egenskaper i panelen."
+msgstr "Visa dockapps i separata fönster och inte i panelen."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr ""
+msgstr "Använd inte panelstorlek som motvikt för den första dockappen."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr ""
+msgstr "Behåll dockapp-fönster överst."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr ""
+msgstr "Aktivera fri placering av den första dockappen på skärmen."
 
 #: ../panel-plugin/props.c:538
 msgid ""
-"Hint: Is the first dockapp covered by a XFCE panel, please try to move the "
-"plugin\n"
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr ""
+msgstr "Tips: Om den första dockappen täcks av en XFCE-panel, försök att flytta insticksprogrammet\nmot denna panel för att rätta till problemet."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
-msgstr ""
+msgstr "Placering"
 
 #: ../panel-plugin/props.c:544
 msgid "Top left"
-msgstr ""
+msgstr "Överst till vänster"
 
 #: ../panel-plugin/props.c:545
 msgid "Top right"
-msgstr ""
+msgstr "Överst till höger"
 
 #: ../panel-plugin/props.c:546
 msgid "Bottom left"
-msgstr ""
+msgstr "Nederst till vänster"
 
 #: ../panel-plugin/props.c:547
 msgid "Bottom right"
-msgstr ""
+msgstr "Nederst till höger"
 
 #: ../panel-plugin/rcfile.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to start `%s'!"
-msgstr "Misslyckades med att starta %s!"
+msgstr "Kunde inte starta `%s'!"
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr "Insticksprogram för WindowMaker dockapps"
