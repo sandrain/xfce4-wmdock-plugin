@@ -4,14 +4,14 @@
 # 
 # Translators:
 # elder <elderlinx@riseup.net>, 2013
-# Piotr Strębski <strebski@o2.pl>, 2013
+# Piotr Strębski <strebski@o2.pl>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2013-12-05 10:04+0000\n"
-"Last-Translator: elder <elderlinx@riseup.net>\n"
+"PO-Revision-Date: 2014-02-10 07:24+0000\n"
+"Last-Translator: Piotr Strębski <strebski@o2.pl>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/xfce/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,7 +64,7 @@ msgstr "Wykrycie programu doku"
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
-msgstr ""
+msgstr "Ustawienia trybu"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
@@ -80,33 +80,33 @@ msgstr "Wyświetlaj kafelki w tle."
 
 #: ../panel-plugin/props.c:504
 msgid "Display a separate WMdock properties button in the panel."
-msgstr ""
+msgstr "Wyświetlaj na panelu oddzielny przycisk właściwości WMdock."
 
 #: ../panel-plugin/props.c:505
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr ""
+msgstr "Dodaj tylko programy doku, które zaczynają się od wzoru na liście (np.: ^wm;^as)."
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr ""
+msgstr "Wyświetlaj programy doku w oddzielnych oknach, a nie na panelu."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr ""
+msgstr "Nie używaj wielkości panelu jako wyrównania dla pierwszego programu doku."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr ""
+msgstr "Utrzymuj okna programów doku na wierzchu."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr ""
+msgstr "Włącz dowolne pozycjonowanie pierwszego programu doku na ekranie."
 
 #: ../panel-plugin/props.c:538
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr ""
+msgstr "Wskazówka: Jeśli pierwszy program doku jest zakrywany przez panel XFCE, proszę spróbować przenieść wtyczkę\nna ten panel, by poprawić ten problem."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
@@ -135,4 +135,4 @@ msgstr "Błąd przy uruchamianiu %s!"
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr ""
+msgstr "Wtyczka dla programów doku WindowMaker"
