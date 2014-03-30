@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2014-03-22 11:41+0000\n"
+"PO-Revision-Date: 2014-03-30 17:41+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/xfce/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -35,11 +35,11 @@ msgstr "¿Quiere quitar la applicacion dock \"%s\"?"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
-msgstr "¡Los cambios no funcionarán correctamente hasta que reinicie Xfce!."
+msgstr "Los cambios no funcionarán correctamente hasta que reinicie Xfce."
 
 #: ../panel-plugin/props.c:170
 msgid "Changes will take effect when you restart XFCE!"
-msgstr "¡Los cambios surtirán efecto tras el reinicio de Xfce!"
+msgstr "Los cambios surtirán efecto tras el reinicio de Xfce."
 
 #: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
@@ -64,7 +64,7 @@ msgstr "Detección de aplicaciones dock"
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
-msgstr "Modo de configuración"
+msgstr "Configuración de modo"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
@@ -72,7 +72,7 @@ msgstr "Seleccione la aplicación dock para configurar:"
 
 #: ../panel-plugin/props.c:492
 msgid "Shell command:"
-msgstr "Interprete de órdenes:"
+msgstr "Orden de consola:"
 
 #: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
