@@ -6,13 +6,14 @@
 # Chipong <chipong.luo@yahoo.com>, 2011-2013
 # greensea <gs@bbxy.net>, 2013
 # Hunt Xu <huntxu@live.cn>, 2008-2009
+# xiaobo zhou <zhouxiaobo.500@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2013-12-02 06:54+0000\n"
-"Last-Translator: greensea <gs@bbxy.net>\n"
+"PO-Revision-Date: 2014-04-11 13:31+0000\n"
+"Last-Translator: xiaobo zhou <zhouxiaobo.500@gmail.com>\n"
 "Language-Team: Chinese (China) (http://www.transifex.com/projects/p/xfce/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -65,7 +66,7 @@ msgstr "检测 Dockapp"
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
-msgstr ""
+msgstr "模式设置"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
@@ -85,7 +86,7 @@ msgstr "在面板上显示分离的 WMdock 属性按钮"
 
 #: ../panel-plugin/props.c:505
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr ""
+msgstr "仅添加以列表中的型开头的\ndockapp (比如： ^wm;^as)"
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
