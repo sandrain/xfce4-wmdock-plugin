@@ -1,49 +1,52 @@
-# xfce4-wmdock-plugin Asturian language
-# Copyright (C) 2008 Andre Ellguth
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Andre Ellguth <ellguth@ibh.de>, 2008.
-#
+# 
+# Translators:
+# Andre Ellguth <ellguth@ibh.de>, 2008
+# Tornes Llume <l.lumex03.tornes@gmail.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-wmdock-plugin 0.2.0\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-20 22:08+0200\n"
-"PO-Revision-Date: 2009-07-13 20:01+0100\n"
-"Last-Translator: Marcos Antonio Alvarez Costales <marcoscostales@gmail.com>\n"
-"Language-Team: Asturian Team <alministradores@softastur.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2014-04-14 23:35+0000\n"
+"Last-Translator: Tornes Llume <l.lumex03.tornes@gmail.com>\n"
+"Language-Team: Asturian (http://www.transifex.com/projects/p/xfce/language/ast/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: ast\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-plugin/wmdock.c:190
 #, c-format
 msgid "Only a single instance of `%s' can run."
-msgstr ""
+msgstr "Namái pue executase una instancia de `%s'."
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
-msgstr ""
+msgstr "Namái pue executase una instancia de `xfce4-wmdock-plugin'."
 
 #: ../panel-plugin/dnd.c:73
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr "¿Quieres desaniciar el dock \"%s\"?"
+msgstr "¿Quies desaniciar el dock \"%s\"?"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
-msgstr ""
+msgstr "¡Estes camudancies quiciabes nun furrulen bien fasta que reaniciaes XFCE!"
 
 #: ../panel-plugin/props.c:170
 msgid "Changes will take effect when you restart XFCE!"
-msgstr ""
+msgstr "¡Les camudancies fadrán efeutu cuando reanicies XFCE!"
 
 #: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
-msgstr "¡El dock nun ta executándose!"
+msgstr "¡Nun ta executandose dengún dock!"
 
 #. Create the configure dialog.
-#: ../panel-plugin/props.c:415
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
 msgid "WMdock"
 msgstr "WMdock"
 
@@ -53,20 +56,19 @@ msgstr "Desaniciar dock"
 
 #: ../panel-plugin/props.c:434
 msgid "General settings"
-msgstr "Axustes Xenerales"
+msgstr "Axustes xenerales"
 
 #: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
-msgstr "Deteición Dock"
+msgstr "Deteición del dock"
 
 #: ../panel-plugin/props.c:436
-#, fuzzy
 msgid "Mode settings"
-msgstr "Axustes Xenerales"
+msgstr "Axustes de mou"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
-msgstr "Seleicionar dock pa configurar:"
+msgstr "Esbillar dock pa configurar:"
 
 #: ../panel-plugin/props.c:492
 msgid "Shell command:"
@@ -74,28 +76,19 @@ msgstr "Comandu Shell:"
 
 #: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
-msgstr "Amosar en mosaicu nel fondu."
+msgstr "Amosar mosaicu nel fondu."
 
 #: ../panel-plugin/props.c:504
-#, fuzzy
 msgid "Display a separate WMdock properties button in the panel."
-msgstr ""
-"Amosar propiedaes de WMdock separtaes\n"
-"nún botón nel panel."
+msgstr "Amosar un botón de propiedaes WMdock separtáu nel panel."
 
 #: ../panel-plugin/props.c:505
-#, fuzzy
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr ""
-"Amestar namái dock cuando anicie con\n"
-"wm* nel nome."
+msgstr "Amestar namái docks que s'anicien col patrón na llista (exem.: ^wm;^as)"
 
 #: ../panel-plugin/props.c:506
-#, fuzzy
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr ""
-"Amosar propiedaes de WMdock separtaes\n"
-"nún botón nel panel."
+msgstr "Amosar dock en ventanes separtaes y non nel panel."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
@@ -103,18 +96,17 @@ msgstr ""
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr ""
+msgstr "Caltener la ventana del dock arriba."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr ""
+msgstr "Habilitar posicionamientu llibre del primer dock na pantalla."
 
 #: ../panel-plugin/props.c:538
 msgid ""
-"Hint: Is the first dockapp covered by a XFCE panel, please try to move the "
-"plugin\n"
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr ""
+msgstr "Conseyu: Ye'l primer dock cubiertu por un panel XFCE, por favor intenta mover el complementu\na esti panel pa iguar esti problema."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
@@ -137,6 +129,10 @@ msgid "Bottom right"
 msgstr ""
 
 #: ../panel-plugin/rcfile.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to start `%s'!"
-msgstr "¡Falló al aniciar %s!"
+msgstr ""
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr ""
