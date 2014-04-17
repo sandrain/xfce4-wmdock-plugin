@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2014-04-14 23:35+0000\n"
+"PO-Revision-Date: 2014-04-17 16:42+0000\n"
 "Last-Translator: Tornes Llume <l.lumex03.tornes@gmail.com>\n"
 "Language-Team: Asturian (http://www.transifex.com/projects/p/xfce/language/ast/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr "Namái pue executase una instancia de `xfce4-wmdock-plugin'."
 #: ../panel-plugin/dnd.c:73
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr "¿Quies desaniciar el dock \"%s\"?"
+msgstr "¿Quies desaniciar la barra d'anclaxe \"%s\"?"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
@@ -43,7 +43,7 @@ msgstr "¡Les camudancies fadrán efeutu cuando reanicies XFCE!"
 
 #: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
-msgstr "¡Nun ta executandose dengún dock!"
+msgstr "¡Nun ta executandose denguna barra d'anclaxe!"
 
 #. Create the configure dialog.
 #: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
@@ -52,7 +52,7 @@ msgstr "WMdock"
 
 #: ../panel-plugin/props.c:418
 msgid "Remove dockapp"
-msgstr "Desaniciar dock"
+msgstr "Desaniciar barra d'anclaxe"
 
 #: ../panel-plugin/props.c:434
 msgid "General settings"
@@ -60,7 +60,7 @@ msgstr "Axustes xenerales"
 
 #: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
-msgstr "Deteición del dock"
+msgstr "Deteición de la barra d'anclaxe"
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
@@ -68,7 +68,7 @@ msgstr "Axustes de mou"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
-msgstr "Esbillar dock pa configurar:"
+msgstr "Esbillar barra d'anclaxe pa configurar:"
 
 #: ../panel-plugin/props.c:492
 msgid "Shell command:"
@@ -84,11 +84,11 @@ msgstr "Amosar un botón de propiedaes WMdock separtáu nel panel."
 
 #: ../panel-plugin/props.c:505
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr "Amestar namái docks que s'anicien col patrón na llista (exem.: ^wm;^as)"
+msgstr "Amestar namái barres d'anclaxe que s'anicien col patrón na llista (exem.: ^wm;^as)"
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr "Amosar dock en ventanes separtaes y non nel panel."
+msgstr "Amosar barres d'anclaxe en ventanes separtaes y non nel panel."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
@@ -96,17 +96,17 @@ msgstr ""
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr "Caltener la ventana del dock arriba."
+msgstr "Caltener la ventana de la barra d'anclaxe arriba."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr "Habilitar posicionamientu llibre del primer dock na pantalla."
+msgstr "Habilitar posicionamientu llibre de la primer barra d'anclaxe na pantalla."
 
 #: ../panel-plugin/props.c:538
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr "Conseyu: Ye'l primer dock cubiertu por un panel XFCE, por favor intenta mover el complementu\na esti panel pa iguar esti problema."
+msgstr "Conseyu: Ye la primer barra d'anclaxe cubierta por un panel XFCE, por favor intenta mover el complementu\na esti panel pa iguar esti problema."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
@@ -135,4 +135,4 @@ msgstr ""
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr ""
+msgstr "Complementu pa les barres d'anclaxe WindowMaker"
