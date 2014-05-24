@@ -5,6 +5,7 @@
 # Translators:
 # Andre Ellguth <ellguth@ibh.de>, 2008
 # Fabian Nowak <timystery@arcor.de>, 2010
+# gem <eckert.georg@gmx.de>, 2014
 # Mario Blättermann <mario.blaettermann@gmail.com>, 2012
 # to_ba, 2014
 msgid ""
@@ -12,9 +13,9 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2014-02-12 14:43+0000\n"
-"Last-Translator: to_ba\n"
-"Language-Team: German (http://www.transifex.com/projects/p/xfce/language/de/)\n"
+"PO-Revision-Date: 2014-05-24 09:41+0000\n"
+"Last-Translator: gem <eckert.georg@gmx.de>\n"
+"Language-Team: German (http://www.transifex.com/projects/p/xfce-panel-plugins/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -86,29 +87,29 @@ msgstr "Einen separaten WMdock-Einstellungsknopf in der Leiste anzeigen."
 
 #: ../panel-plugin/props.c:505
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr ""
+msgstr "Nur Dockapps hinzufügen, die mit Muster aus Liste anfangen. (z.B.: ^wm;^as)"
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr ""
+msgstr "Dockapps in eigenen Fenstern statt in der Leiste anzeigen."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr ""
+msgstr "Leistengröße nicht als Abstand für erste Dockapp nutzen."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr ""
+msgstr "Dockapp-Fenster im Vordergrund halten."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr ""
+msgstr "Freie Anordnung der ersten Dockapp auf dem Bildschirm erlauben."
 
 #: ../panel-plugin/props.c:538
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr ""
+msgstr "Hinweis: Sollte die erste Dockapp von einer XFCE-Leiste verdeckt werden, versuchen Sie das Plugin in die Leiste zu verschieben, um das Problem zu beheben."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
@@ -116,19 +117,19 @@ msgstr "Platzierung:"
 
 #: ../panel-plugin/props.c:544
 msgid "Top left"
-msgstr ""
+msgstr "Oben links"
 
 #: ../panel-plugin/props.c:545
 msgid "Top right"
-msgstr ""
+msgstr "Oben rechts"
 
 #: ../panel-plugin/props.c:546
 msgid "Bottom left"
-msgstr ""
+msgstr "Unten links"
 
 #: ../panel-plugin/props.c:547
 msgid "Bottom right"
-msgstr ""
+msgstr "Unten rechts"
 
 #: ../panel-plugin/rcfile.c:93
 #, c-format
@@ -137,4 +138,4 @@ msgstr "Fehler beim Starten von »%s«!"
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr ""
+msgstr "Plugin für WindowMaker-Dockapps"
