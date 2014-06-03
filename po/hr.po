@@ -1,0 +1,138 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# schizo <eveskovic@gmail.com>, 2014
+# Ivica  Kolić <ikoli@yahoo.com>, 2013
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2014-06-03 21:41+0000\n"
+"Last-Translator: schizo <eveskovic@gmail.com>\n"
+"Language-Team: Croatian (http://www.transifex.com/projects/p/xfce-panel-plugins/language/hr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hr\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: ../panel-plugin/wmdock.c:190
+#, c-format
+msgid "Only a single instance of `%s' can run."
+msgstr "Samo jedna instanca `%s' može biti pokrenuta."
+
+#: ../panel-plugin/wmdock.c:193
+msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
+msgstr "Samo jedna instanca `xfce4-wmdock-plugin' može biti pokrenuta."
+
+#: ../panel-plugin/dnd.c:73
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "Želite li ukloniti usidrenu aplikaciju \"%s\"?"
+
+#: ../panel-plugin/props.c:93
+msgid "Changes maybe not work properly until you restart XFCE!"
+msgstr "Promijene možda neće biti vidljive dok ponovno ne pokrenete XFCE!"
+
+#: ../panel-plugin/props.c:170
+msgid "Changes will take effect when you restart XFCE!"
+msgstr "Promijene će biti vidljive kada ponovno pokrenete XFCE!"
+
+#: ../panel-plugin/props.c:386
+msgid "No dockapp is running!"
+msgstr "Nijedna usidrena aplikacija nije pokrenuta!"
+
+#. Create the configure dialog.
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
+msgid "WMdock"
+msgstr "WMdock"
+
+#: ../panel-plugin/props.c:418
+msgid "Remove dockapp"
+msgstr "Ukloni usidrenu aplikaciju"
+
+#: ../panel-plugin/props.c:434
+msgid "General settings"
+msgstr "Opće postavke"
+
+#: ../panel-plugin/props.c:435
+msgid "Dockapp detection"
+msgstr "Otkrivanje usidrene aplikacije"
+
+#: ../panel-plugin/props.c:436
+msgid "Mode settings"
+msgstr "Postavke načina"
+
+#: ../panel-plugin/props.c:483
+msgid "Select dockapp to configure:"
+msgstr "Odaberite usidrenu aplikaciju radi konfiguriranja:"
+
+#: ../panel-plugin/props.c:492
+msgid "Shell command:"
+msgstr "Naredba ljuske:"
+
+#: ../panel-plugin/props.c:503
+msgid "Display tile in the background."
+msgstr "Pokazuj pločicu u pozadini."
+
+#: ../panel-plugin/props.c:504
+msgid "Display a separate WMdock properties button in the panel."
+msgstr "Pokazuj odvojeni gumb WMdock svojstava na ploči."
+
+#: ../panel-plugin/props.c:505
+msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
+msgstr "Dodaj samo usidrene aplikacije koje počinju s uzorkom na listi. (npr.: ^wm;^as)"
+
+#: ../panel-plugin/props.c:506
+msgid "Display dockapps in separate windows and not in the panel."
+msgstr "Pokazuj usidrene aplikacije u zasebnim prozorima, a ne na ploči."
+
+#: ../panel-plugin/props.c:507
+msgid "Don't use panel size as offset for the first dockapp."
+msgstr "Ne koristi veličinu ploče kao pomak za prvu usidrenu aplikaciju."
+
+#: ../panel-plugin/props.c:508
+msgid "Keep dockapp windows on top."
+msgstr "Prozori usidrenih aplikacija na vrhu."
+
+#: ../panel-plugin/props.c:509
+msgid "Enable free positioning of the first dockapp on the screen."
+msgstr "Omogući slobodno postavljanje prve usidrene aplikacije na zaslonu."
+
+#: ../panel-plugin/props.c:538
+msgid ""
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
+"to this panel to correct this problem."
+msgstr "Savjet: Ako je prva usidrena aplikacija prekrivena pločom, probajte premjestiti\ndodatak na ovu ploču kako bi rješili problem."
+
+#: ../panel-plugin/props.c:542
+msgid "Placement:"
+msgstr "Smještaj:"
+
+#: ../panel-plugin/props.c:544
+msgid "Top left"
+msgstr "Gore lijevo"
+
+#: ../panel-plugin/props.c:545
+msgid "Top right"
+msgstr "Gore desno"
+
+#: ../panel-plugin/props.c:546
+msgid "Bottom left"
+msgstr "Dolje lijevo"
+
+#: ../panel-plugin/props.c:547
+msgid "Bottom right"
+msgstr "Dolje desno"
+
+#: ../panel-plugin/rcfile.c:93
+#, c-format
+msgid "Failed to start `%s'!"
+msgstr "Neuspjelo pokretanje `%s'!"
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr "Dodatak za WindowMaker usidrene aplikacije"
