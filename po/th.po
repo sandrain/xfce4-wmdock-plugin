@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Theppitak Karoonboonyanan <theppitak@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2015-02-19 08:46+0000\n"
+"Last-Translator: Theppitak Karoonboonyanan <theppitak@gmail.com>\n"
+"Language-Team: Thai (http://www.transifex.com/projects/p/xfce-panel-plugins/language/th/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../panel-plugin/wmdock.c:190
+#, c-format
+msgid "Only a single instance of `%s' can run."
+msgstr "`%s' สามารถเปิดทำงานได้ทีละตัวเท่านั้น"
+
+#: ../panel-plugin/wmdock.c:193
+msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
+msgstr "`xfce4-wmdock-plugin' สามารถเปิดทำงานได้ทีละตัวเท่านั้น"
+
+#: ../panel-plugin/dnd.c:73
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "คุณต้องการลบ dockapp \"%s\" ออกหรือไม่?"
+
+#: ../panel-plugin/props.c:93
+msgid "Changes maybe not work properly until you restart XFCE!"
+msgstr "การเปลี่ยนแปลงต่างๆ อาจยังไม่มีผลเต็มที่จนกว่าคุณจะเริ่มเปิด XFCE ใหม่!"
+
+#: ../panel-plugin/props.c:170
+msgid "Changes will take effect when you restart XFCE!"
+msgstr "การเปลี่ยนแปลงต่างๆ จะมีผลเมื่อคุณเริ่มเปิด XFCE ใหม่!"
+
+#: ../panel-plugin/props.c:386
+msgid "No dockapp is running!"
+msgstr "ไม่มี dockapp ทำงานอยู่!"
+
+#. Create the configure dialog.
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
+msgid "WMdock"
+msgstr "WMdock"
+
+#: ../panel-plugin/props.c:418
+msgid "Remove dockapp"
+msgstr "ลบ dockapp ออก"
+
+#: ../panel-plugin/props.c:434
+msgid "General settings"
+msgstr "ค่าตั้งทั่วไป"
+
+#: ../panel-plugin/props.c:435
+msgid "Dockapp detection"
+msgstr "การตรวจหา Dockapp"
+
+#: ../panel-plugin/props.c:436
+msgid "Mode settings"
+msgstr "ค่าตั้งโหมด"
+
+#: ../panel-plugin/props.c:483
+msgid "Select dockapp to configure:"
+msgstr "เลือก dockapp ที่จะตั้งค่า:"
+
+#: ../panel-plugin/props.c:492
+msgid "Shell command:"
+msgstr "คำสั่งเชลล์:"
+
+#: ../panel-plugin/props.c:503
+msgid "Display tile in the background."
+msgstr "แสดงพื้นหลังเป็นแผ่นกระเบื้อง"
+
+#: ../panel-plugin/props.c:504
+msgid "Display a separate WMdock properties button in the panel."
+msgstr "แสดงปุ่มตั้งค่า WMdock แยกต่างหากในพาเนล"
+
+#: ../panel-plugin/props.c:505
+msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
+msgstr "เพิ่มเฉพาะ dockapp ที่ขึ้นต้นด้วยรูปแบบนี้ในรายการ (เช่น: ^wm;^as)"
+
+#: ../panel-plugin/props.c:506
+msgid "Display dockapps in separate windows and not in the panel."
+msgstr "แสดง dockapp ต่างๆ ในหน้าต่างแยก ไม่ใช่บนพาเนล"
+
+#: ../panel-plugin/props.c:507
+msgid "Don't use panel size as offset for the first dockapp."
+msgstr "ไม่ใช้ขนาดพาเนลเป็นออฟเซตสำหรับ dockapp ตัวแรก"
+
+#: ../panel-plugin/props.c:508
+msgid "Keep dockapp windows on top."
+msgstr "ยกหน้าต่าง dockapp ขึ้นมาระดับบนสุด"
+
+#: ../panel-plugin/props.c:509
+msgid "Enable free positioning of the first dockapp on the screen."
+msgstr "เปิดใช้การวางตำแหน่ง dockapp ตัวแรกอย่างอิสระบนหน้าจอ"
+
+#: ../panel-plugin/props.c:538
+msgid ""
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
+"to this panel to correct this problem."
+msgstr "คำแนะนำ: dockapp ตัวแรกถูกพาเนลของ XFCE บังอยู่หรือไม่?\nกรุณาย้ายปลั๊กอินมาที่พาเนลนี้เพื่อตรวจดูและแก้ปัญหา"
+
+#: ../panel-plugin/props.c:542
+msgid "Placement:"
+msgstr "ตำแหน่งการวาง:"
+
+#: ../panel-plugin/props.c:544
+msgid "Top left"
+msgstr "บนซ้าย"
+
+#: ../panel-plugin/props.c:545
+msgid "Top right"
+msgstr "บนขวา"
+
+#: ../panel-plugin/props.c:546
+msgid "Bottom left"
+msgstr "ล่างซ้าย"
+
+#: ../panel-plugin/props.c:547
+msgid "Bottom right"
+msgstr "ล่างขวา"
+
+#: ../panel-plugin/rcfile.c:93
+#, c-format
+msgid "Failed to start `%s'!"
+msgstr "เรียกทำงาน `%s' ไม่สำเร็จ!"
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr "ปลั๊กอินสำหรับ dockapp ของ WindowMaker"
