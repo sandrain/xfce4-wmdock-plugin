@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Georgi Georgiev <georgiev_1994@abv.bg>, 2015
+# Lyubomir Vasilev, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2015-02-13 17:11+0000\n"
-"Last-Translator: Georgi Georgiev <georgiev_1994@abv.bg>\n"
+"PO-Revision-Date: 2015-02-23 16:20+0000\n"
+"Last-Translator: Lyubomir Vasilev\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/xfce-panel-plugins/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,16 +22,16 @@ msgstr ""
 #: ../panel-plugin/wmdock.c:190
 #, c-format
 msgid "Only a single instance of `%s' can run."
-msgstr "Само единична инстанция на `%s' може да работи."
+msgstr "Може да работи само едно копие на „%s“."
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
-msgstr "Само единична инстанция на `xfce4-wmdock-plugin' може да работи."
+msgstr "Може да работи само едно копие на „xfce4-wmdock-plugin“."
 
 #: ../panel-plugin/dnd.c:73
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr "Искате ли да премахнете док приложението \"%s\"?"
+msgstr "Искате ли да премахнете приложението за панела „%s“?"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
@@ -105,7 +106,7 @@ msgstr "Разреши свободно позициониране на първ
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr "Съвет: Ако първото док приложение е закрито от панел на XFCE, моля\nпреместете плъгина върху този панел за да го коригирате."
+msgstr "Съвет: Ако първото приложение за панела е закрито от панел на Xfce, моля,\nпреместете добавката на този панел, за да оправите проблема."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
@@ -130,8 +131,8 @@ msgstr "Долу в дясно"
 #: ../panel-plugin/rcfile.c:93
 #, c-format
 msgid "Failed to start `%s'!"
-msgstr "Неуспешно стартиране на `%s'!"
+msgstr "Неуспешно стартиране на „%s“!"
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr "Плъгин за док приложения на WindowMaker"
+msgstr "Добавка за приложения за панел на WindowMaker"
