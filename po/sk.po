@@ -1,72 +1,138 @@
-# Slovak translations for xfce4-wmdock-plugin package
-# Copyright (C) 2011 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the xfce4-wmdock-plugin package.
-# Tomáš Vadina <kyberdev@gmail.com>, 2011.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Slavko <linux@slavino.sk>, 2015
+# Tomáš Vadina <tomasvadina+transifex@cryptolab.net>, 2011
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-wmdock-plugin\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-01-26 20:22+0100\n"
-"PO-Revision-Date: 2011-08-04 09:20+0200\n"
-"Last-Translator: Tomáš Vadina <kyberdev@gmail.com>\n"
-"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2015-02-26 15:56+0000\n"
+"Last-Translator: Slavko <linux@slavino.sk>\n"
+"Language-Team: Slovak (http://www.transifex.com/projects/p/xfce-panel-plugins/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: sk\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: panel-plugin/wmdock.c:196
+#: ../panel-plugin/wmdock.c:190
+#, c-format
+msgid "Only a single instance of `%s' can run."
+msgstr "Možno spustiť len jednu inštanciu „%s”."
+
+#: ../panel-plugin/wmdock.c:193
+msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
+msgstr "Môže byť spustená len jedna inštancia „xfce4-wmdock-plugin”."
+
+#: ../panel-plugin/dnd.c:73
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
 msgstr "Želáte si odobrať dokovaciu aplikáciu \"%s\"?"
 
-#: panel-plugin/wmdock.c:398
+#: ../panel-plugin/props.c:93
+msgid "Changes maybe not work properly until you restart XFCE!"
+msgstr "Zmeny nemusia pracovať správne, kým nereštartujete Xfce!"
+
+#: ../panel-plugin/props.c:170
+msgid "Changes will take effect when you restart XFCE!"
+msgstr "Zmeny sa prejavia po reštarte Xfce!"
+
+#: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
 msgstr "Nie je spustená žiadna dokovacia aplikácia!"
 
-#: panel-plugin/wmdock.c:858
-#, c-format
-msgid "Failed to start %s!"
-msgstr "Spustenie aplikácie %s zlyhalo!"
-
-#: panel-plugin/wmdock.c:1148
+#. Create the configure dialog.
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
 msgid "WMdock"
 msgstr "WMdock"
 
-#: panel-plugin/wmdock.c:1151
+#: ../panel-plugin/props.c:418
 msgid "Remove dockapp"
 msgstr "Odobrať dokovaciu aplikáciu"
 
-#: panel-plugin/wmdock.c:1167
+#: ../panel-plugin/props.c:434
 msgid "General settings"
 msgstr "Všeobecné nastavenia"
 
-#: panel-plugin/wmdock.c:1168
+#: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
 msgstr "Vyhľadávanie dokovacej aplikácie"
 
-#: panel-plugin/wmdock.c:1216
+#: ../panel-plugin/props.c:436
+msgid "Mode settings"
+msgstr "Nastavenia režimu"
+
+#: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
 msgstr "Vyberte si dokovaciu aplikáciu pre nastavenie:"
 
-#: panel-plugin/wmdock.c:1225
+#: ../panel-plugin/props.c:492
 msgid "Shell command:"
 msgstr "Príkaz interpretera: "
 
-#: panel-plugin/wmdock.c:1236
+#: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
 msgstr "Zobraziť dlaždice na pozadí."
 
-#: panel-plugin/wmdock.c:1237
-msgid ""
-"Display a separate WMdock properties\n"
-"button in the panel."
-msgstr "Zobraziť oddelené tlačidlo vlastností aplikácie WMdock na paneli."
+#: ../panel-plugin/props.c:504
+msgid "Display a separate WMdock properties button in the panel."
+msgstr "Na paneli zobraziť samostatné tlačidlo Vlastnosti WMdock."
 
-#: panel-plugin/wmdock.c:1238
+#: ../panel-plugin/props.c:505
+msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
+msgstr "Pridať len dokovaciu aplikácie, ktoré začínajú vzorom zo zoznamu. (napr.: ^wm;^as)"
+
+#: ../panel-plugin/props.c:506
+msgid "Display dockapps in separate windows and not in the panel."
+msgstr "Zobraziť dokovacie aplikácie v samostatných oknách a nie v paneli."
+
+#: ../panel-plugin/props.c:507
+msgid "Don't use panel size as offset for the first dockapp."
+msgstr "Nepoužívať veľkosť panela ako posun prvej dokovacej aplikácie."
+
+#: ../panel-plugin/props.c:508
+msgid "Keep dockapp windows on top."
+msgstr "Umiestniť okná dokovacých aplikácií nad ostatnými."
+
+#: ../panel-plugin/props.c:509
+msgid "Enable free positioning of the first dockapp on the screen."
+msgstr "Zapnúť voľné umiestňovanie prvej dokovacej aplikácie na obrazovke."
+
+#: ../panel-plugin/props.c:538
 msgid ""
-"Add only dockapps which start with\n"
-"wm* in the name."
-msgstr "Pridať iba dokovacie aplikácie s názvom začínajúcim na wm*."
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
+"to this panel to correct this problem."
+msgstr "Rada: Je prvá dokovacia aplikácia pokrytá panelom Xfce, prosím, skúste presunúť\nzásuvný modul na tento panel, čo by malo vyriešiť problém."
+
+#: ../panel-plugin/props.c:542
+msgid "Placement:"
+msgstr "Umiestnenie:"
+
+#: ../panel-plugin/props.c:544
+msgid "Top left"
+msgstr "Vľavo  hore"
+
+#: ../panel-plugin/props.c:545
+msgid "Top right"
+msgstr "Vpravo hore"
+
+#: ../panel-plugin/props.c:546
+msgid "Bottom left"
+msgstr "Vľavo dole"
+
+#: ../panel-plugin/props.c:547
+msgid "Bottom right"
+msgstr "Vpravo dole"
+
+#: ../panel-plugin/rcfile.c:93
+#, c-format
+msgid "Failed to start `%s'!"
+msgstr "Spustenie aplikácie „%s” zlyhalo!"
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr "Zásuvný modul na dokovatľné miniaplikácie pre WindowMaker"
