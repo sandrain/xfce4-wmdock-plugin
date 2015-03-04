@@ -3,16 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Adolfo Jayme Barrientos <fitoschido@ubuntu.com>, 2014
-# Pablo Lezaeta <prflr88@gmail.com>, 2013
+# Adolfo Jayme Barrientos, 2014
+# Adolfo Jayme Barrientos, 2014
+# Pablo Roberto Francisco Lezaeta Reyes <prflr88@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2014-03-30 17:41+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fitoschido@ubuntu.com>\n"
-"Language-Team: Spanish (http://www.transifex.com/projects/p/xfce/language/es/)\n"
+"PO-Revision-Date: 2015-03-04 20:55+0000\n"
+"Last-Translator: Manolo Díaz <diaz.manolo@gmail.com>\n"
+"Language-Team: Spanish (http://www.transifex.com/projects/p/xfce-panel-plugins/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +32,7 @@ msgstr "Solo se puede ejecutar una instancia de «xfce4-wmdock-plugin»."
 #: ../panel-plugin/dnd.c:73
 #, c-format
 msgid "Do you want remove the dockapp \"%s\"?"
-msgstr "¿Quiere quitar la applicacion dock \"%s\"?"
+msgstr "¿Quiere quitar la aplicación de muelle «%s»?"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
@@ -43,7 +44,7 @@ msgstr "Los cambios surtirán efecto tras el reinicio de Xfce."
 
 #: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
-msgstr "Ninguna aplicación dock se está ejecutando!"
+msgstr "¡Ninguna aplicación de muelle se está ejecutando!"
 
 #. Create the configure dialog.
 #: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
@@ -52,7 +53,7 @@ msgstr "WMdock"
 
 #: ../panel-plugin/props.c:418
 msgid "Remove dockapp"
-msgstr "Quitar aplicación dock"
+msgstr "Quitar la aplicación de muelle"
 
 #: ../panel-plugin/props.c:434
 msgid "General settings"
@@ -60,7 +61,7 @@ msgstr "Configuración general"
 
 #: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
-msgstr "Detección de aplicaciones dock"
+msgstr "Detección de aplicaciones de muelle"
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
@@ -68,7 +69,7 @@ msgstr "Configuración de modo"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
-msgstr "Seleccione la aplicación dock para configurar:"
+msgstr "Seleccione la aplicación de muelle a configurar:"
 
 #: ../panel-plugin/props.c:492
 msgid "Shell command:"
@@ -80,33 +81,33 @@ msgstr "Mostrar cuadrícula en el fondo."
 
 #: ../panel-plugin/props.c:504
 msgid "Display a separate WMdock properties button in the panel."
-msgstr "Mostrar un botón de propiedades WMdock separada en el panel."
+msgstr "Mostrar un botón de propiedades WMdock separadas en el panel."
 
 #: ../panel-plugin/props.c:505
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr "Agregar solamente las aplicaciones dock que comienzan con un patrón en la lista (por ejemplo: ^wm; ^as)."
+msgstr "Agregar solamente las aplicaciones de muelle que comienzan con un patrón en la lista (por ejemplo: ^wm; ^as)."
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr "Muestra las aplicaciones dock en ventanas separadas y no en el panel."
+msgstr "Muestra las aplicaciones de muelle en ventanas separadas y no en el panel."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr "No utilice el tamaño del panel como compensación para la primera aplicación dock."
+msgstr "No utilice el tamaño del panel como compensación para la primera aplicación de muelle."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr "Mantener la ventana de la aplicación dock por encima."
+msgstr "Mantener la ventana de la aplicación de muelle por encima."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr "Habilitar el posicionamiento libre en la primera aplicación dock en pantalla."
+msgstr "Habilitar el posicionamiento libre en la primera aplicación de muelle en pantalla."
 
 #: ../panel-plugin/props.c:538
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr "Sugerencia: Si es la primera aplicación dock cubierta por el panel XFCE,\npor favor, trate de mover el complemento a este panel para corregir el problema."
+msgstr "Sugerencia: Si es la primera aplicación de muelle cubierta por el panel XFCE,\npor favor, trate de mover el complemento a este panel para corregir el problema."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
@@ -135,4 +136,4 @@ msgstr "No se pudo iniciar «%s»."
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr "Complemento para las aplicaciones dock de WindowMaker"
+msgstr "Complemento para las aplicaciones de muelle de «WindowMaker»"
