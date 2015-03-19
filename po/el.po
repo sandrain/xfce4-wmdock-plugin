@@ -1,19 +1,22 @@
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Efstathios Iosifidis <iefstathios@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: xfce4-wmdock-plugin\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-20 22:08+0200\n"
-"PO-Revision-Date: \n"
-"Last-Translator: George Vasilakos <forfolias@linuxteam.cs.teilar.gr>\n"
-"Language-Team: Greek <nls@tux.hellug.gr>\n"
-"Language: el\n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2015-03-19 00:12+0000\n"
+"Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>\n"
+"Language-Team: Greek (http://www.transifex.com/projects/p/xfce-panel-plugins/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: el\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Language: Greek\n"
-"X-Poedit-Country: GREECE\n"
 
 #: ../panel-plugin/wmdock.c:190
 #, c-format
@@ -31,7 +34,7 @@ msgstr "Θέλετε αφαιρέσετε το την προσάρτηση \"%s\
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
-msgstr ""
+msgstr "Οι αλλαγές μπορεί να μην λειτουργούν σωστά μέχρι την επανεκκίνηση του XFCE!"
 
 #: ../panel-plugin/props.c:170
 msgid "Changes will take effect when you restart XFCE!"
@@ -42,7 +45,7 @@ msgid "No dockapp is running!"
 msgstr "Δεν τρέχει κάποια προσάρτηση!"
 
 #. Create the configure dialog.
-#: ../panel-plugin/props.c:415
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
 msgid "WMdock"
 msgstr "WMdock"
 
@@ -59,9 +62,8 @@ msgid "Dockapp detection"
 msgstr "Ανίχνευση προσαρτήσεων"
 
 #: ../panel-plugin/props.c:436
-#, fuzzy
 msgid "Mode settings"
-msgstr "Γενικές ρυθμίσεις"
+msgstr ""
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
@@ -76,25 +78,16 @@ msgid "Display tile in the background."
 msgstr "Εμφάνιση στο παρασκήνιο."
 
 #: ../panel-plugin/props.c:504
-#, fuzzy
 msgid "Display a separate WMdock properties button in the panel."
 msgstr ""
-"Εμφάνιση ξεχωριστού κουμπιού ιδιοτήτων\n"
-"του WMdock στο ταμπλό."
 
 #: ../panel-plugin/props.c:505
-#, fuzzy
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
 msgstr ""
-"Προσθήκη μόνο προσαρτήσεων που αρχίζουν με \n"
-"wm* στο όνομα."
 
 #: ../panel-plugin/props.c:506
-#, fuzzy
 msgid "Display dockapps in separate windows and not in the panel."
 msgstr ""
-"Εμφάνιση ξεχωριστού κουμπιού ιδιοτήτων\n"
-"του WMdock στο ταμπλό."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
@@ -110,8 +103,7 @@ msgstr ""
 
 #: ../panel-plugin/props.c:538
 msgid ""
-"Hint: Is the first dockapp covered by a XFCE panel, please try to move the "
-"plugin\n"
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
 msgstr ""
 
@@ -121,21 +113,25 @@ msgstr ""
 
 #: ../panel-plugin/props.c:544
 msgid "Top left"
-msgstr ""
+msgstr "Πάνω αριστερά"
 
 #: ../panel-plugin/props.c:545
 msgid "Top right"
-msgstr ""
+msgstr "Πάνω δεξιά"
 
 #: ../panel-plugin/props.c:546
 msgid "Bottom left"
-msgstr ""
+msgstr "Κάτω αριστερά"
 
 #: ../panel-plugin/props.c:547
 msgid "Bottom right"
-msgstr ""
+msgstr "Κάτω δεξιά"
 
 #: ../panel-plugin/rcfile.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to start `%s'!"
-msgstr "Αποτυχία εκκίνησης του %s!"
+msgstr ""
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr ""
