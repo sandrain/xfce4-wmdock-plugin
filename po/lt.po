@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2015-03-17 15:47+0000\n"
+"PO-Revision-Date: 2015-03-27 12:20+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/xfce-panel-plugins/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -22,11 +22,11 @@ msgstr ""
 #: ../panel-plugin/wmdock.c:190
 #, c-format
 msgid "Only a single instance of `%s' can run."
-msgstr ""
+msgstr "Gali būti vykdomas tik vienas `%s' egzempliorius."
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
-msgstr ""
+msgstr "Gali būti vykdomas tik vienas `xfce4-wmdock-plugin' egzempliorius."
 
 #: ../panel-plugin/dnd.c:73
 #, c-format
