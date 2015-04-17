@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2015-03-27 12:20+0000\n"
+"PO-Revision-Date: 2015-04-17 09:46+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/xfce-panel-plugins/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr "Ar norite pašalinti skydelio programą „%s“?"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
-msgstr ""
+msgstr "Pakeitimai gali veikti ne visai teisingai tol, kol nepaleisite iš naujo XFCE!"
 
 #: ../panel-plugin/props.c:170
 msgid "Changes will take effect when you restart XFCE!"
@@ -114,19 +114,19 @@ msgstr ""
 
 #: ../panel-plugin/props.c:544
 msgid "Top left"
-msgstr ""
+msgstr "Viršuje kairėje"
 
 #: ../panel-plugin/props.c:545
 msgid "Top right"
-msgstr ""
+msgstr "Viršuje dešinėje"
 
 #: ../panel-plugin/props.c:546
 msgid "Bottom left"
-msgstr ""
+msgstr "Apačioje kairėje"
 
 #: ../panel-plugin/props.c:547
 msgid "Bottom right"
-msgstr ""
+msgstr "Apačioje dešinėje"
 
 #: ../panel-plugin/rcfile.c:93
 #, c-format
