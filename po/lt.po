@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2015-04-28 21:11+0000\n"
+"PO-Revision-Date: 2015-07-01 08:55+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian (http://www.transifex.com/projects/p/xfce-panel-plugins/language/lt/)\n"
 "MIME-Version: 1.0\n"
@@ -84,7 +84,7 @@ msgstr "Rodyti skydelyje atskirą WMdock savybių mygtuką."
 
 #: ../panel-plugin/props.c:505
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr ""
+msgstr "Pridėti tik tas skydelio programas, kurių pavadinimai prasideda šablonu iš sąrašo. (pvz.: ^wm;^as)"
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
@@ -92,7 +92,7 @@ msgstr "Rodyti skydelio programas atskiruose languose, o ne skydelyje."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr ""
+msgstr "Nenaudoti skydelio dydžio, kaip poslinkio pirmai skydelio programai."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
@@ -100,13 +100,13 @@ msgstr "Išlaikyti skydelio programų langus viršuje."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr ""
+msgstr "Įjungti laisvą pirmos skydelio programos išdėstymą ekrane."
 
 #: ../panel-plugin/props.c:538
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr ""
+msgstr "Patarimas: Jei pirma skydelio programa yra uždengta XFCE skydeliu, pabandykite\nperkelti įskiepį į šį skydelį, kad ištaisytumėte šią problemą."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
@@ -135,4 +135,4 @@ msgstr "Nepavyko paleisti `%s'!"
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr ""
+msgstr "Įskiepis, skirtas WindowMaker skydelio programoms"
