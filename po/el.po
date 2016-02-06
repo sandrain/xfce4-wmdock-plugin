@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Apostolos Papadimitriu <apostolos.papadimitriu@gmail.com>, 2016
 # Efstathios Iosifidis <iefstathios@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2015-03-19 09:24+0000\n"
-"Last-Translator: Efstathios Iosifidis <iefstathios@gmail.com>\n"
-"Language-Team: Greek (http://www.transifex.com/projects/p/xfce-panel-plugins/language/el/)\n"
+"PO-Revision-Date: 2016-02-06 18:57+0000\n"
+"Last-Translator: Apostolos Papadimitriu <apostolos.papadimitriu@gmail.com>\n"
+"Language-Team: Greek (http://www.transifex.com/xfce/xfce-panel-plugins/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,7 +39,7 @@ msgstr "Οι αλλαγές μπορεί να μην λειτουργούν σω
 
 #: ../panel-plugin/props.c:170
 msgid "Changes will take effect when you restart XFCE!"
-msgstr ""
+msgstr "Οι αλλαγές θα εφαρμοστούν μετά την επανεκκίνηση του Xfce!"
 
 #: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
@@ -63,7 +64,7 @@ msgstr "Ανίχνευση προσαρτήσεων"
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
-msgstr ""
+msgstr "Ρυθμίσεις κατάστασης λειτουργίας"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
@@ -87,7 +88,7 @@ msgstr ""
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr ""
+msgstr "Εμφάνιση των εφαρμογών εικονιδίων σε ξεχωριστό παράθυρο και όχι στο ταμπλό."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
@@ -95,7 +96,7 @@ msgstr ""
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr ""
+msgstr "Να διατηρούνται τα παράθυρα των εφαρμογών εικονιδίων στην επιφάνεια."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
@@ -109,7 +110,7 @@ msgstr ""
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
-msgstr ""
+msgstr "Τοποθέτηση:"
 
 #: ../panel-plugin/props.c:544
 msgid "Top left"
@@ -134,4 +135,4 @@ msgstr "Αποτυχία εκκίνησης `%s'!"
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr ""
+msgstr "Πρόσθετο για εφαρμογές εικονιδίων του WindowMaker"
