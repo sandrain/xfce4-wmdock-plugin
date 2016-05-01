@@ -5,13 +5,14 @@
 # Translators:
 # Harald Servat <redcrash@gmail.com>, 2009
 # Davidmp <medipas@gmail.com>, 2016
+# Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2016-04-05 15:50+0000\n"
-"Last-Translator: Davidmp <medipas@gmail.com>\n"
+"PO-Revision-Date: 2016-05-01 21:29+0000\n"
+"Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce-panel-plugins/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +27,7 @@ msgstr "Només es pot executar una sola instància de \"%s\"."
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
-msgstr "Només es pot executar una sola instància de l'xfce4-wmdock-plugin."
+msgstr "Només es pot executar una sola instància de xfce4-wmdock-plugin."
 
 #: ../panel-plugin/dnd.c:73
 #, c-format
@@ -35,11 +36,11 @@ msgstr "Voleu eliminar l'aplicació amarrada \"%s\"?"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
-msgstr "Pot ser que els canvis no funcionin correctament fins que no reinicieu l'XFCE!"
+msgstr "Pot ser que els canvis no funcionin correctament fins que no reinicieu XFCE!"
 
 #: ../panel-plugin/props.c:170
 msgid "Changes will take effect when you restart XFCE!"
-msgstr "Els canvis tindran efecte quan reinicieu l'XFCE!"
+msgstr "Els canvis tindran efecte quan reinicieu XFCE!"
 
 #: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
@@ -92,7 +93,7 @@ msgstr "Mostra les aplicacions en finestres separades i no al plafó."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr "No usis la mida del plafó com a compensació per a la primera aplicació."
+msgstr "No utilitzis la mida del plafó com a desplaçament per a la primera aplicació acoblada."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
@@ -106,7 +107,7 @@ msgstr "Habilita el posicionament lliure per a la primera aplicació a la pantal
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr "Consell: si la primera aplicació està tapada per un plafó de l'XFCE, si us plau, intenteu moure el connector\nal plafó per corregir el problema."
+msgstr "Consell: si la primera aplicació acoblada està tapada per un plafó de XFCE, intenteu\nmoure el connector a aquest plafó per corregir aquest problema."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
