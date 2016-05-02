@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2016-05-01 21:29+0000\n"
+"PO-Revision-Date: 2016-05-02 13:03+0000\n"
 "Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce-panel-plugins/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr "Eliminar l'aplicació amarrada"
 
 #: ../panel-plugin/props.c:434
 msgid "General settings"
-msgstr "Configuració general"
+msgstr "Ajusts generals"
 
 #: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
@@ -65,7 +65,7 @@ msgstr "Detecció d'aplicacions "
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
-msgstr "Paràmetres del mode"
+msgstr "Ajusts del mode"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
