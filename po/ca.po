@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2016-05-02 21:07+0000\n"
+"PO-Revision-Date: 2016-05-03 21:32+0000\n"
 "Last-Translator: Robert Antoni Buj i Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce-panel-plugins/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -44,7 +44,7 @@ msgstr "Els canvis tindran efecte quan reinicieu XFCE!"
 
 #: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
-msgstr "No hi ha aplicacions amarrades!"
+msgstr "No hi ha aplicacions acoblades en execució!"
 
 #. Create the configure dialog.
 #: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
@@ -53,7 +53,7 @@ msgstr "WMdock"
 
 #: ../panel-plugin/props.c:418
 msgid "Remove dockapp"
-msgstr "Eliminar l'aplicació amarrada"
+msgstr "Eliminar l'aplicació acoblada"
 
 #: ../panel-plugin/props.c:434
 msgid "General settings"
@@ -61,7 +61,7 @@ msgstr "Ajusts generals"
 
 #: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
-msgstr "Detecció d'aplicacions "
+msgstr "Detecció d'aplicacions acoblades"
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
@@ -69,7 +69,7 @@ msgstr "Ajusts del mode"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
-msgstr "Trieu l'aplicació amarrada per a configurar:"
+msgstr "Seleccioneu l'aplicació acoblada a configurar:"
 
 #: ../panel-plugin/props.c:492
 msgid "Shell command:"
@@ -85,11 +85,11 @@ msgstr "Mostra un botó separat per a les propietats de WMdock al plafó."
 
 #: ../panel-plugin/props.c:505
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr "Afegeix només aplicacions que comencin amb un patró de la llista (p. e.: ^wm;^as)"
+msgstr "Afegeix únicament aplicacions acoblades que comencin amb el patró a la llista (p. ex.: ^wm;^as)"
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr "Mostra les aplicacions en finestres separades i no al plafó."
+msgstr "Mostra les aplicacions acoblades en finestres separades i no al plafó."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
@@ -97,11 +97,11 @@ msgstr "No utilitzis la mida del plafó com a desplaçament per a la primera apl
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr "Mantén les finestres de les aplicacions a dalt."
+msgstr "Mantén les finestres de les aplicacions acoblades a dalt."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr "Habilita el posicionament lliure per a la primera aplicació a la pantalla."
+msgstr "Habilita el posicionament lliure de la primera aplicació acoblada a la pantalla."
 
 #: ../panel-plugin/props.c:538
 msgid ""
@@ -136,4 +136,4 @@ msgstr "Ha fallat l'inici de «%s»!"
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr "Connector per a les aplicacions de WindowMaker"
+msgstr "Connector per a les aplicacions acoblades de WindowMaker"
