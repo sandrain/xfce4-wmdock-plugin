@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2017-09-30 14:21+0000\n"
+"PO-Revision-Date: 2017-09-30 19:13+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce-panel-plugins/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -23,11 +23,11 @@ msgstr ""
 #: ../panel-plugin/wmdock.c:190
 #, c-format
 msgid "Only a single instance of `%s' can run."
-msgstr "Der kan kun køre én instans af `%s'."
+msgstr "Der kan kun køre én instans af \"%s\"."
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
-msgstr "Der kan kun køre én instans af `xfce4-wmdock-plugin'."
+msgstr "Der kan kun køre én instans af \"xfce4-wmdock-plugin\"."
 
 #: ../panel-plugin/dnd.c:73
 #, c-format
@@ -132,7 +132,7 @@ msgstr "Nederst til højre"
 #: ../panel-plugin/rcfile.c:93
 #, c-format
 msgid "Failed to start `%s'!"
-msgstr "Kunne ikke starte `%s'!"
+msgstr "Kunne ikke starte \"%s\"!"
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
