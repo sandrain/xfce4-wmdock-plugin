@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2017-09-30 19:13+0000\n"
+"PO-Revision-Date: 2017-11-01 16:45+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce-panel-plugins/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgstr "Tilstandsindstillinger"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
-msgstr "Vælg dokprogram til at indstille:"
+msgstr "Vælg dokprogram som skal konfigureres:"
 
 #: ../panel-plugin/props.c:492
 msgid "Shell command:"
@@ -136,4 +136,4 @@ msgstr "Kunne ikke starte \"%s\"!"
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr "Plugin for WindowMaker-dokprogrammer"
+msgstr "Plugin til WindowMaker-dokprogrammer"
