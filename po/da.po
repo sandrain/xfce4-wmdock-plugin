@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2017-11-01 16:45+0000\n"
+"PO-Revision-Date: 2017-11-01 18:10+0000\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish (http://www.transifex.com/xfce/xfce-panel-plugins/language/da/)\n"
 "MIME-Version: 1.0\n"
@@ -61,7 +61,7 @@ msgstr "Generelle indstillinger"
 
 #: ../panel-plugin/props.c:435
 msgid "Dockapp detection"
-msgstr "Dokprogramgenkeldelse"
+msgstr "Registrering af dokprogram"
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
@@ -93,21 +93,21 @@ msgstr "Vis dokprogrammer i separate vinduer, og ikke i panelet."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr "Brug ikke panelstørrelse som afsæt i første dokprogram."
+msgstr "Brug ikke panelstørrelse som forskydning til det første dokprogram."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr "Bevar vinduer for dokprogrammer øverst."
+msgstr "Bevar dokprogrammer-vinduer øverst."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr "Aktivér fri placering for det første dokprogram på skærmen."
+msgstr "Aktivér fri placering af det første dokprogram på skærmen."
 
 #: ../panel-plugin/props.c:538
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr "Tip: Hvis det første dokprogram er dækket af et XFCE-panel, så forsøg venligst at flytte\npluginet til dette panel, for at rette dette problem."
+msgstr "Tip: Hvis det første dokprogram er dækket af et XFCE-panel, så prøv venligst at flytte\npluginet til dette panel, for at rette problemet."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
