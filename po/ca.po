@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2017-12-14 08:35+0000\n"
+"PO-Revision-Date: 2017-12-14 12:26+0000\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce-panel-plugins/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "Només es pot executar una sola instància de «%s»."
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
-msgstr "Només es pot executar una sola instància de xfce4-wmdock-plugin."
+msgstr "Només es pot executar una sola instància de  «xfce4-wmdock-plugin»."
 
 #: ../panel-plugin/dnd.c:73
 #, c-format
@@ -54,7 +54,7 @@ msgstr "WMdock"
 
 #: ../panel-plugin/props.c:418
 msgid "Remove dockapp"
-msgstr "Eliminar l'aplicació acoblada"
+msgstr "Suprimeix l'aplicació acoblada"
 
 #: ../panel-plugin/props.c:434
 msgid "General settings"
@@ -78,7 +78,7 @@ msgstr "Ordre del shell:"
 
 #: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
-msgstr "Mostrar un mosaic al fons."
+msgstr "Mostra un mosaic al fons."
 
 #: ../panel-plugin/props.c:504
 msgid "Display a separate WMdock properties button in the panel."
