@@ -5,13 +5,14 @@
 # Translators:
 # Harald Servat <redcrash@gmail.com>, 2009
 # Davidmp <medipas@gmail.com>, 2016
+# Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2017
 # Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2017-09-19 18:06+0000\n"
+"PO-Revision-Date: 2017-12-14 08:35+0000\n"
 "Last-Translator: Robert Antoni Buj Gelonch <rbuj@fedoraproject.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/xfce/xfce-panel-plugins/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +74,7 @@ msgstr "Seleccioneu l'aplicació acoblada a configurar:"
 
 #: ../panel-plugin/props.c:492
 msgid "Shell command:"
-msgstr "Comandes per a l'interpretes de comandes:"
+msgstr "Ordre del shell:"
 
 #: ../panel-plugin/props.c:503
 msgid "Display tile in the background."
