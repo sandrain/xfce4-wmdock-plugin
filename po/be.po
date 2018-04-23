@@ -1,0 +1,136 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: Xfce Panel Plugins\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2018-04-23 18:26+0000\n"
+"Last-Translator: Zmicer Turok <zmicerturok@gmail.com>\n"
+"Language-Team: Belarusian (http://www.transifex.com/xfce/xfce-panel-plugins/language/be/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: be\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: ../panel-plugin/wmdock.c:190
+#, c-format
+msgid "Only a single instance of `%s' can run."
+msgstr "Можа быць запушчаны толькі адзін асобнік `%s'."
+
+#: ../panel-plugin/wmdock.c:193
+msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
+msgstr "Можа быць запушчаны толькі адзін асобнік `xfce4-wmdock-plugin'."
+
+#: ../panel-plugin/dnd.c:73
+#, c-format
+msgid "Do you want remove the dockapp \"%s\"?"
+msgstr "Хочаце выдаліць аплет \"%s\"?"
+
+#: ../panel-plugin/props.c:93
+msgid "Changes maybe not work properly until you restart XFCE!"
+msgstr "Магчыма, змены набудуць моц толькі пасля перазапуску XFCE!"
+
+#: ../panel-plugin/props.c:170
+msgid "Changes will take effect when you restart XFCE!"
+msgstr "Змены набудуць моц пасля перезапуску XFCE!"
+
+#: ../panel-plugin/props.c:386
+msgid "No dockapp is running!"
+msgstr "Аплеты не запушчаны!"
+
+#. Create the configure dialog.
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
+msgid "WMdock"
+msgstr "WMdock"
+
+#: ../panel-plugin/props.c:418
+msgid "Remove dockapp"
+msgstr "Выдаліць аплет"
+
+#: ../panel-plugin/props.c:434
+msgid "General settings"
+msgstr "Асноўныя налады"
+
+#: ../panel-plugin/props.c:435
+msgid "Dockapp detection"
+msgstr "Выяўленне аплетаў"
+
+#: ../panel-plugin/props.c:436
+msgid "Mode settings"
+msgstr "Налады рэжыму"
+
+#: ../panel-plugin/props.c:483
+msgid "Select dockapp to configure:"
+msgstr "Абярыце аплет для наладкі:"
+
+#: ../panel-plugin/props.c:492
+msgid "Shell command:"
+msgstr "Загад абалонкі:"
+
+#: ../panel-plugin/props.c:503
+msgid "Display tile in the background."
+msgstr "Размясціць асобнымі вокнамі на заднім плане."
+
+#: ../panel-plugin/props.c:504
+msgid "Display a separate WMdock properties button in the panel."
+msgstr "Адлюстроўваць на панэлі асобную кнопку ўласцівасцяў WMdock."
+
+#: ../panel-plugin/props.c:505
+msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
+msgstr "Дадаваць толькі аплеты, што пачынаюцца з шаблону са спіса.  (напрыклад: ^wm;^as)"
+
+#: ../panel-plugin/props.c:506
+msgid "Display dockapps in separate windows and not in the panel."
+msgstr "Адлюстроўваць аплеты ў асобных вокнах, а не на панэлі."
+
+#: ../panel-plugin/props.c:507
+msgid "Don't use panel size as offset for the first dockapp."
+msgstr "Не выкарыстоўваць памер панэлі як водступ для першага аплета."
+
+#: ../panel-plugin/props.c:508
+msgid "Keep dockapp windows on top."
+msgstr "Трымаць вокны аплетаў наверсе."
+
+#: ../panel-plugin/props.c:509
+msgid "Enable free positioning of the first dockapp on the screen."
+msgstr "Уключыць вольнае размяшчэнне першага аплета на экране."
+
+#: ../panel-plugin/props.c:538
+msgid ""
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
+"to this panel to correct this problem."
+msgstr "Парада: калі першы аплет перакрываецца панэллю XFCE, паспрабуйце пасунуць убудову\n у бок панэлі, каб вырашыць гэтую праблему."
+
+#: ../panel-plugin/props.c:542
+msgid "Placement:"
+msgstr "Размяшчэнне:"
+
+#: ../panel-plugin/props.c:544
+msgid "Top left"
+msgstr "Зверху злева"
+
+#: ../panel-plugin/props.c:545
+msgid "Top right"
+msgstr "Зверху зправа"
+
+#: ../panel-plugin/props.c:546
+msgid "Bottom left"
+msgstr "Знізу злева"
+
+#: ../panel-plugin/props.c:547
+msgid "Bottom right"
+msgstr "Знізу зправа"
+
+#: ../panel-plugin/rcfile.c:93
+#, c-format
+msgid "Failed to start `%s'!"
+msgstr "Не атрымалася запусціць `%s'!"
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr "Убудова для аплетаў WindowMaker"
