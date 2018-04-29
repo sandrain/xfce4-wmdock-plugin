@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
+# Balázs Meskó <meskobalazs@gmail.com>, 2018
 # Benedek Imre <nucleo@indamail.hu>, 2013
 # Gabor Kelemen <kelemeng at gnome dot hu>, 2009
 # gyeben <gyonkibendeguz@gmail.com>, 2016
@@ -12,8 +13,8 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2017-09-19 18:07+0000\n"
-"Last-Translator: gyeben <gyonkibendeguz@gmail.com>\n"
+"PO-Revision-Date: 2018-04-29 10:19+0000\n"
+"Last-Translator: Balázs Meskó <meskobalazs@gmail.com>\n"
 "Language-Team: Hungarian (http://www.transifex.com/xfce/xfce-panel-plugins/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +25,7 @@ msgstr ""
 #: ../panel-plugin/wmdock.c:190
 #, c-format
 msgid "Only a single instance of `%s' can run."
-msgstr "Csak egy '%s' példány futhat."
+msgstr "Csak egy „%s” példány futhat."
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
@@ -90,25 +91,25 @@ msgstr "Csak a listán szereplő mintával (pl.: ^wm; ^as) kezdődő dokkalkalma
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr "Dokkal"
+msgstr "Dokkalkalmazások megjelenítése külön ablakban, és nem a panelen."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr ""
+msgstr "Ne használja a panel méretét eltolásként az első dokkalkalmazáshoz."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr ""
+msgstr "A dokkalkalmazás ablakok legyenek mindig felül."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr ""
+msgstr "Az első dokkalkalmazás szabad pozicionálásának engedélyezése."
 
 #: ../panel-plugin/props.c:538
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr ""
+msgstr "Tipp: Ha az első dokkalkalmazást lefedi az XFCE panel, akkor a probléma megoldásához próbálja erre a panelre mozgatni a bővítményt."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
