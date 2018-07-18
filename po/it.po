@@ -5,12 +5,13 @@
 # Translators:
 # Cristian Marchi <cri.penta@gmail.com>, 2010,2013
 # Edoardo Maria Elidoro <edoardo.elidoro@gmail.com>, 2013
+# Emanuele Petriglia <inbox@emanuelepetriglia.me>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2018-07-11 15:09+0000\n"
+"PO-Revision-Date: 2018-07-18 11:54+0000\n"
 "Last-Translator: Emanuele Petriglia <inbox@emanuelepetriglia.me>\n"
 "Language-Team: Italian (http://www.transifex.com/xfce/xfce-panel-plugins/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -22,11 +23,11 @@ msgstr ""
 #: ../panel-plugin/wmdock.c:190
 #, c-format
 msgid "Only a single instance of `%s' can run."
-msgstr "Può essere eseguita una sola istanza di \"%s\""
+msgstr "Può essere eseguita una sola istanza di '%s'."
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
-msgstr "Può essere eseguita una sola istanza di \"xfce4-wmdock-plugin\""
+msgstr "Può essere eseguita una sola istanza di \"xfce4-wmdock-plugin\"."
 
 #: ../panel-plugin/dnd.c:73
 #, c-format
@@ -35,11 +36,11 @@ msgstr "Rimuovere la dockapp \"%s\"?"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
-msgstr "Le modifiche potrebbero non essere applicate correttamente fino al prossimo riavvio di XFCE"
+msgstr "Le modifiche potrebbero non essere applicate correttamente fino al prossimo riavvio di Xfce!"
 
 #: ../panel-plugin/props.c:170
 msgid "Changes will take effect when you restart XFCE!"
-msgstr "I cambiamenti saranno applicato al riavvio di XFCE"
+msgstr "I cambiamenti saranno applicato al riavvio di Xfce!"
 
 #: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
@@ -64,7 +65,7 @@ msgstr "Ricerca dockapp"
 
 #: ../panel-plugin/props.c:436
 msgid "Mode settings"
-msgstr "Imostazioni modalità"
+msgstr "Impostazioni modalità"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
@@ -84,7 +85,7 @@ msgstr "Visualizza un pulsante delle proprietà di WMdock separato sul pannello.
 
 #: ../panel-plugin/props.c:505
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr "Aggiungi solo le dockapp il cui nome inizia con lo schema nell'elenco (per esempio ^wm;^as)"
+msgstr "Aggiungi solo le dockapp il cui nome inizia con lo schema nell'elenco (per esempio ^wm;^as)."
 
 #: ../panel-plugin/props.c:506
 msgid "Display dockapps in separate windows and not in the panel."
@@ -106,7 +107,7 @@ msgstr "Abilita la disposizione libera della prima dockapp sullo schermo."
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr "Suggerimento: è la prima dockapp coperta dal apnnello di XFCE; cercare di \nspostare il plugin in questo pannello per correggere il problema."
+msgstr "Suggerimento: è la prima dockapp coperta dal pannello di Xfce; cercare di \nspostare il componente aggiuntivo in questo pannello per correggere il problema."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
@@ -114,7 +115,7 @@ msgstr "Posizione:"
 
 #: ../panel-plugin/props.c:544
 msgid "Top left"
-msgstr "In alto a sinsitra"
+msgstr "In alto a sinistra"
 
 #: ../panel-plugin/props.c:545
 msgid "Top right"
@@ -131,8 +132,8 @@ msgstr "In basso a destra"
 #: ../panel-plugin/rcfile.c:93
 #, c-format
 msgid "Failed to start `%s'!"
-msgstr "Impossibile avviare \"%s\""
+msgstr "Impossibile avviare '%s'!"
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr "Plugin per le dockapp di WindowMaker"
+msgstr "Componente aggiuntivo per le dockapp di WindowMaker"
