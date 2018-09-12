@@ -1,34 +1,32 @@
-# Galician translation of xfce4-wmdock-plugin
-# Copyright (C) 2008-2009 Leandro Regueiro
-# This file is distributed under the same license as the xfce package.
-#
-# Leandro Regueiro <leandro.regueiro@gmail.com>, 2009.
-#
-# Proxecto Trasno - Adaptación do software libre á lingua galega:  Se desexas
-# colaborar connosco, podes atopar máis información en <http://trasno.net>
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Daniel Muñiz Fontoira <dani@damufo.com>, 2018
+# Leandro Regueiro <leandro.regueiro@gmail.com>, 2009
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-10-20 22:08+0200\n"
-"PO-Revision-Date: 2009-08-19 16:08+0100\n"
-"Last-Translator: Leandro Regueiro <leandro.regueiro@gmail.com>\n"
-"Language-Team: Galician <proxecto@trasno.net>\n"
-"Language: gl\n"
+"POT-Creation-Date: 2013-11-05 12:31+0100\n"
+"PO-Revision-Date: 2018-09-12 15:18+0000\n"
+"Last-Translator: Daniel Muñiz Fontoira <dani@damufo.com>\n"
+"Language-Team: Galician (http://www.transifex.com/xfce/xfce-panel-plugins/language/gl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"Language: gl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../panel-plugin/wmdock.c:190
 #, c-format
 msgid "Only a single instance of `%s' can run."
-msgstr ""
+msgstr "Só pode executar unha única instancia de «%s»."
 
 #: ../panel-plugin/wmdock.c:193
 msgid "Only a single instance of `xfce4-wmdock-plugin' can run."
-msgstr ""
+msgstr "Só pode executar unha única instancia de «xfce4-wmdock-plugin»."
 
 #: ../panel-plugin/dnd.c:73
 #, c-format
@@ -37,18 +35,18 @@ msgstr "Desexa eliminar o ancorábel \"%s\"?"
 
 #: ../panel-plugin/props.c:93
 msgid "Changes maybe not work properly until you restart XFCE!"
-msgstr ""
+msgstr "Os cambios poden non funcionar correctamente até que reinicie o XFCE!"
 
 #: ../panel-plugin/props.c:170
 msgid "Changes will take effect when you restart XFCE!"
-msgstr ""
+msgstr "Os cambios terán efecto cando reinicie o XFCE!"
 
 #: ../panel-plugin/props.c:386
 msgid "No dockapp is running!"
 msgstr "Non se está executando ningún ancorábel!"
 
 #. Create the configure dialog.
-#: ../panel-plugin/props.c:415
+#: ../panel-plugin/props.c:415 ../panel-plugin/wmdock.desktop.in.in.h:1
 msgid "WMdock"
 msgstr "WMdock"
 
@@ -65,9 +63,8 @@ msgid "Dockapp detection"
 msgstr "Detección de ancorábeis"
 
 #: ../panel-plugin/props.c:436
-#, fuzzy
 msgid "Mode settings"
-msgstr "Configuración xeral"
+msgstr "Configuración do modo"
 
 #: ../panel-plugin/props.c:483
 msgid "Select dockapp to configure:"
@@ -82,42 +79,32 @@ msgid "Display tile in the background."
 msgstr "Mostrar mosaico no fondo."
 
 #: ../panel-plugin/props.c:504
-#, fuzzy
 msgid "Display a separate WMdock properties button in the panel."
-msgstr ""
-"Mostra un botón aparte para as\n"
-"propiedades de WMdock no panel."
+msgstr "Amosar un botón de propiedades «WMdock» separado no panel."
 
 #: ../panel-plugin/props.c:505
-#, fuzzy
 msgid "Add only dockapps which start with pattern in list. (e.g.: ^wm;^as)"
-msgstr ""
-"Engadir só ancorábeis cuxo nome\n"
-"comece por wm*."
+msgstr "Engade só os aplicativos de doca que comezan co padrón na lista (p. ex.: ^wm;^as)"
 
 #: ../panel-plugin/props.c:506
-#, fuzzy
 msgid "Display dockapps in separate windows and not in the panel."
-msgstr ""
-"Mostra un botón aparte para as\n"
-"propiedades de WMdock no panel."
+msgstr "Amosar os aplicativos de doca en xanelas separadas e non no panel."
 
 #: ../panel-plugin/props.c:507
 msgid "Don't use panel size as offset for the first dockapp."
-msgstr ""
+msgstr "Non empregar o tamaño do panel como posición para o primeiro aplicativo de doca."
 
 #: ../panel-plugin/props.c:508
 msgid "Keep dockapp windows on top."
-msgstr ""
+msgstr "Manter enriba o aplicativo de doca."
 
 #: ../panel-plugin/props.c:509
 msgid "Enable free positioning of the first dockapp on the screen."
-msgstr ""
+msgstr "Activar o posicionamento libre do primeiro aplicativo de doca na pantalla."
 
 #: ../panel-plugin/props.c:538
 msgid ""
-"Hint: Is the first dockapp covered by a XFCE panel, please try to move the "
-"plugin\n"
+"Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
 msgstr ""
 
@@ -142,6 +129,10 @@ msgid "Bottom right"
 msgstr ""
 
 #: ../panel-plugin/rcfile.c:93
-#, fuzzy, c-format
+#, c-format
 msgid "Failed to start `%s'!"
-msgstr "Fallo ao iniciar %s!"
+msgstr ""
+
+#: ../panel-plugin/wmdock.desktop.in.in.h:2
+msgid "Plugin for WindowMaker dockapps"
+msgstr ""
