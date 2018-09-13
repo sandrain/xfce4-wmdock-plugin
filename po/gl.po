@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Xfce Panel Plugins\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-05 12:31+0100\n"
-"PO-Revision-Date: 2018-09-12 15:18+0000\n"
+"PO-Revision-Date: 2018-09-13 07:32+0000\n"
 "Last-Translator: Daniel Muñiz Fontoira <dani@damufo.com>\n"
 "Language-Team: Galician (http://www.transifex.com/xfce/xfce-panel-plugins/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -106,33 +106,33 @@ msgstr "Activar o posicionamento libre do primeiro aplicativo de doca na pantall
 msgid ""
 "Hint: Is the first dockapp covered by a XFCE panel, please try to move the plugin\n"
 "to this panel to correct this problem."
-msgstr ""
+msgstr "Consello: sendo o primeiro aplicativo de doca cuberto por un panel XFCE, intente mover o engadido\n a este panel para corrixir este problema."
 
 #: ../panel-plugin/props.c:542
 msgid "Placement:"
-msgstr ""
+msgstr "Posición:"
 
 #: ../panel-plugin/props.c:544
 msgid "Top left"
-msgstr ""
+msgstr "Enriba á esquerda"
 
 #: ../panel-plugin/props.c:545
 msgid "Top right"
-msgstr ""
+msgstr "Enriba á dereita"
 
 #: ../panel-plugin/props.c:546
 msgid "Bottom left"
-msgstr ""
+msgstr "Embaixo á esquerda"
 
 #: ../panel-plugin/props.c:547
 msgid "Bottom right"
-msgstr ""
+msgstr "Embaixo á dereita"
 
 #: ../panel-plugin/rcfile.c:93
 #, c-format
 msgid "Failed to start `%s'!"
-msgstr ""
+msgstr "No se puido iniciar «%s»."
 
 #: ../panel-plugin/wmdock.desktop.in.in.h:2
 msgid "Plugin for WindowMaker dockapps"
-msgstr ""
+msgstr "Engadido para os aplicativos de doca do «WindowMaker»"
